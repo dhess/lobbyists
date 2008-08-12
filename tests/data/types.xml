@@ -1,0 +1,113 @@
+<PublicFilings>
+
+  <!-- One Filing for each valid Type value -->
+
+  <Filing ID="E5857A8B-C78A-42AB-B8E9-032AF4842C73" Year="2008" Received="2008-07-18T16:31:30" Amount="70000" Type="FIRST QUARTER AMENDMENT" Period="1st Quarter (Jan 1 - Mar 31)">
+  </Filing>
+
+  <Filing ID="FE2A0EF2-2E78-457B-BD18-046FBDA102C7" Year="2008" Received="2008-07-11T15:49:52" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+  </Filing>
+
+  <Filing ID="68EBB384-5B72-4987-A028-2DFBE4AF6D0A" Year="2008" Received="2008-07-17T11:20:34" Amount="6000" Type="FIRST QUARTER TERMINATION" Period="1st Quarter (Jan 1 - Mar 31)">
+  </Filing>
+
+  <Filing ID="0E781869-DE6E-433A-BE8B-3481E38810B8" Year="2008" Received="2008-07-11T16:17:59" Amount="30000" Type="FIRST QUARTER TERMINATION AMENDMENT" Period="1st Quarter (Jan 1 - Mar 31)">
+  </Filing>
+
+  <Filing ID="1A47D643-4777-4270-AAA4-AF998C965E48" Year="2007" Received="2008-03-17T17:45:02" Amount="70000" Type="FOURTH QUARTER AMENDMENT" Period="4th Quarter (Oct 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="F219DA64-4F6C-4518-8873-DADDE53728C9" Year="2008" Received="2008-04-15T14:15:56" Amount="40000" Type="FOURTH QUARTER REPORT" Period="4th Quarter (Oct 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="D488BE0B-6DC7-433D-B0E0-D71BAC864571" Year="2008" Received="2008-03-07T10:00:38" Type="FOURTH QUARTER TERMINATION" Period="4th Quarter (Oct 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="8A59C334-E26E-4442-BAB6-0B5ADCF93F94" Year="1999" Received="1999-08-13T00:00:00" Amount="60000" Type="MID-YEAR (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="6A2C1DEE-1672-4194-8C76-B4CD43EDDEDB" Year="1999" Received="1999-08-09T00:00:00" Amount="0" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+    
+  <Filing ID="7961A624-7224-4835-832E-EC3BCA8E66EF" Year="1999" Received="1999-12-27T00:00:00" Type="MID-YEAR AMENDMENT (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="DD9BD48E-59D6-4AE3-88AE-5A3CD79B014E" Year="2003" Received="2004-01-05T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="87FF6D03-8663-411E-8784-4C8325A257CA" Year="2003" Received="2003-03-21T00:00:00" Amount="20000" Type="MID-YEAR TERMINATION" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="D6491C4B-7C2D-443E-95F5-2CD43EA08888" Year="2003" Received="2003-03-26T00:00:00" Amount="0" Type="MID-YEAR TERMINATION (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="DC179A14-EFD2-4F6B-AD3A-27F6974B398F" Year="2003" Received="2003-02-24T00:00:00" Amount="100000" Type="MID-YEAR TERMINATION AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  
+  <Filing ID="DA0990B8-726B-4013-B340-1A44CBA67634" Year="2002" Received="2003-02-19T00:00:00" Amount="0" Type="MID-YEAR TERMINATION AMENDMENT (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="666BB52D-7B0C-40F7-83B9-5ED9C92B97AD" Year="2002" Received="2004-04-12T00:00:00" Type="MID-YEAR TERMINATION LETTER" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="0F840E2B-E9E7-439E-802D-617AD7CB8F29" Year="2005" Received="2006-01-25T00:00:00" Type="MISC TERM" Period="UNDETERMINED">
+  </Filing>
+
+  <Filing ID="19B38737-5F08-405B-8933-FB3D15EFF1EE" Year="2004" Received="2004-03-23T00:00:00" Type="MISC. DOC" Period="UNDETERMINED"> 
+  </Filing>
+
+  <Filing ID="28F649F4-903E-40CE-A7EF-113C3791A05F" Year="2001" Received="2001-02-14T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+  </Filing>
+
+  <Filing ID="64EE7F0D-4E82-4C8D-B2AC-F4128A90B033" Year="1999" Received="1999-03-02T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+  </Filing>
+
+  <Filing ID="B2BEA33F-7B4C-4E50-95AB-3F7DE8426A59" Year="2008" Received="2008-07-17T10:40:37" Type="SECOND QUARTER AMENDMENT" Period="2nd Quarter (Apr 1 - June 30)">
+  </Filing>
+
+  <Filing ID="CE7DF2DF-3AFC-4BCA-9FDC-3F8FAE53E812" Year="2008" Received="2008-07-08T19:35:35" Amount="90000" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+  </Filing>
+
+  <Filing ID="0B596CA7-3ADC-475C-B8D6-3F7D7B2286BB" Year="2008" Received="2008-07-10T11:24:11" Type="SECOND QUARTER TERMINATION" Period="2nd Quarter (Apr 1 - June 30)">
+  </Filing>
+
+  <Filing ID="CFD5EBE9-E4D3-47F2-8B10-56FE0535ADAA" Year="2008" Received="2008-07-18T17:18:22" Type="SECOND QUARTER TERMINATION AMENDMENT" Period="2nd Quarter (Apr 1 - June 30)">
+  </Filing>
+
+  <Filing ID="2B1526CF-DDFA-47DD-BFD3-D52319CBB085" Year="2008" Received="2008-07-16T10:04:53" Type="THIRD QUARTER AMENDMENT" Period="3rd Quarter (July 1 - Sep 30)">
+  </Filing>
+
+  <Filing ID="F0DCE4D9-DB4D-44C7-8129-30DCC854447D" Year="2008" Received="2008-07-15T09:54:30" Type="THIRD QUARTER REPORT" Period="3rd Quarter (July 1 - Sep 30)">
+  </Filing>
+
+  <Filing ID="49FD659D-841F-436E-A6B5-871292AB77E0" Year="2008" Received="2008-07-08T17:51:26" Type="THIRD QUARTER TERMINATION" Period="3rd Quarter (July 1 - Sep 30)">
+  </Filing>
+
+  <Filing ID="CCDB2C62-93E4-4DC3-915B-16C92E7DAAC9" Year="1999" Received="2000-02-11T00:00:00" Type="YEAR-END (NO ACTIVITY)" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="C385C83E-F0A9-47B0-B922-8AC2E91AFFEC" Year="2007" Received="2008-07-17T12:52:46" Type="YEAR-END AMENDMENT" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="ED1B309C-42D4-499E-A30D-B7BD5500662B" Year="2000" Received="2001-06-25T00:00:00" Amount="0" Type="YEAR-END AMENDMENT (NO ACTIVITY)" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="64DA0647-6FFD-48C8-B558-C2AB3B88E034" Year="2007" Received="2008-07-16T16:23:04" Amount="30000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="579B1110-C307-4BDC-972C-A59707624771" Year="2007" Received="2008-07-11T14:22:51" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="DC20B05D-40D7-40C0-A183-8867B1F9FD28" Year="1999" Received="2000-02-14T00:00:00" Type="YEAR-END TERMINATION (NO ACTIVITY)" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="94BDBF44-F819-450E-8B8C-AAC00975C0A0" Year="2007" Received="2008-07-18T13:17:50" Type="YEAR-END TERMINATION AMENDMENT" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+  <Filing ID="C353F282-13C1-4DE0-B4E8-FA0E31BEBAB7" Year="2004" Received="2005-08-03T00:00:00" Amount="0" Type="YEAR-END TERMINATION AMENDMENT (NO ACTIVITY)" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+
+<Filing ID="1EC3E96B-5B9D-4D0F-8061-1439D9214744" Year="1999" Received="2007-07-16T00:00:00" Type="YEAR-END TERMINATION LETTER" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+  
+</PublicFilings>
