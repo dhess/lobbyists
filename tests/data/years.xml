@@ -1,0 +1,11 @@
+<PublicFilings>
+
+  <!-- A couple of example years -->
+
+  <Filing ID="12B45653-7326-4803-8B86-7538D7CA65AA" Year="1999" Received="2008-03-05T00:00:00" Amount="40000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  
+  <Filing ID="BEE00319-9EC2-4ECF-89F7-75A6436433F1" Year="2008" Received="2008-03-12T15:00:56" Type="REGISTRATION" Period="UNDETERMINED">
+  </Filing>
+
+</PublicFilings>

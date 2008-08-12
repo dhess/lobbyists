@@ -34,6 +34,19 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(f['id'], 'D48A20C9-211C-43B1-BBD1-001B075854BA')        
         self.failUnlessEqual(len(filings), 0)
         
+    def test_parse_filings_year(self):        
+        filings = [x for x in lobbyists.parse_filings(util.years_doc())]
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'BEE00319-9EC2-4ECF-89F7-75A6436433F1')
+        self.failUnlessEqual(f['year'], 2008)
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '12B45653-7326-4803-8B86-7538D7CA65AA')
+        self.failUnlessEqual(f['year'], 1999)
+
+        self.failUnlessEqual(len(filings), 0)
+
     def test_parse_filings_period(self):        
         filings = [x for x in lobbyists.parse_filings(util.periods_doc())]
 
