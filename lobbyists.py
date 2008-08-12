@@ -25,7 +25,7 @@ def identity(x):
 
 def amount(x):
     if x == '':
-        return 0
+        return x
     else:
         return int(x)
     
