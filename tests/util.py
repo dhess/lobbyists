@@ -20,20 +20,23 @@
 
 import os.path
 
+def testpath(basename):
+    return os.path.join('tests', 'data', basename)
+
 def ids_doc():
-    return os.path.join('tests', 'data', 'ids.xml')
+    return testpath('ids.xml')
 
 def years_doc():
-    return os.path.join('tests', 'data', 'years.xml')
+    return testpath('years.xml')
 
 def filing_dates_doc():
-    return os.path.join('tests', 'data', 'filing_dates.xml')
+    return testpath('filing_dates.xml')
 
 def amounts_doc():
-    return os.path.join('tests', 'data', 'amounts.xml')
+    return testpath('amounts.xml')
 
 def periods_doc():
-    return os.path.join('tests', 'data', 'periods.xml')
+    return testpath('periods.xml')
 
 def types_doc():
-    return os.path.join('tests', 'data', 'types.xml')
+    return testpath('types.xml')
