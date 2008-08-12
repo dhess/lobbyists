@@ -104,11 +104,11 @@ def normalize(record, default='unspecified', exceptions=normalize_exceptions):
     default normalized value.
 
     """
-    def norm(k, v):
+    def norm((k, v)):
         if v == '':
             if k in exceptions:
                 return k, exceptions[k]
             else:
                 return k, default
         return k, v
-    return dict(map(norm, record))
+    return dict(map(norm, record.items()))
