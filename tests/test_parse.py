@@ -25,7 +25,7 @@ import util
 
 class TestParse(unittest.TestCase):
     def test_parse_filings_id(self):
-        filings = [x for x in lobbyists.parse_filings(util.ids_doc())]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('ids.xml'))]
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], '5F787E27-BBF1-45A5-8392-FFF93CCA2746')
@@ -35,7 +35,7 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(len(filings), 0)
         
     def test_parse_filings_year(self):        
-        filings = [x for x in lobbyists.parse_filings(util.years_doc())]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('years.xml'))]
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], 'BEE00319-9EC2-4ECF-89F7-75A6436433F1')
@@ -48,7 +48,7 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(len(filings), 0)
 
     def test_parse_filings_filing_date(self):        
-        filings = [x for x in lobbyists.parse_filings(util.filing_dates_doc())]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('filing_dates.xml'))]
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], '355A164F-AC36-47EC-AD84-0D4DC2CD579E')
@@ -61,7 +61,7 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(len(filings), 0)
 
     def test_parse_filings_amount(self):        
-        filings = [x for x in lobbyists.parse_filings(util.amounts_doc())]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('amounts.xml'))]
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], 'BAA88635-8674-4DF8-8825-2B0B3D8B4554') 
@@ -90,7 +90,7 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(len(filings), 0)
 
     def test_parse_filings_period(self):        
-        filings = [x for x in lobbyists.parse_filings(util.periods_doc())]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('periods.xml'))]
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], '5B0FD8D4-8718-44D1-B811-0E65BF87D11B')
@@ -123,7 +123,7 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(len(filings), 0)
 
     def test_parse_filings_type(self):
-        filings = [x for x in lobbyists.parse_filings(util.types_doc())]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('types.xml'))]
         
         f = filings.pop()
         self.failUnlessEqual(f['id'], '1EC3E96B-5B9D-4D0F-8061-1439D9214744')
