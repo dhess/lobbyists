@@ -81,7 +81,7 @@ normalize_exceptions = {
     }
 
 def normalize(record, default='unspecified', exceptions=normalize_exceptions):
-    """Normalize a record.
+    """Return a normalized copy of record.
 
     Records in the LD-1/LD-2 database are frequently missing
     information. For example, a quarterly report might not specify
@@ -90,18 +90,20 @@ def normalize(record, default='unspecified', exceptions=normalize_exceptions):
     represented by the parse_* functions as keys whose values are
     the empty string ('').
 
-    For each key in a record whose value is '', this function replaces
-    that value with a more meaningful value; e.g., replace the
-    key-value pair 'amount': '' with 'amount': -1.
+    This function returns a copy of a given record, except that for
+    each key in the record whose value is '', this function replaces
+    that value in the returned record with a more meaningful value;
+    e.g., replace the key-value pair 'amount': '' with 'amount': -1.
     
-    record - The record to normalize (a dictionary).
+    record - The record to normalize (a dictionary). This record is
+    not modified.
 
     default - The default normalized value.
 
     exceptions - A mapping of special keys and their normalized
-    values. If a key whose value in the record is unspecified is found
-    in this mapping, use the coresponding value rather than the
-    default normalized value.
+    values. If a key whose value in record is unspecified is found in
+    this mapping, use the coresponding value rather than the default
+    normalized value.
 
     """
     def norm((k, v)):
