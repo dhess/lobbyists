@@ -22,21 +22,3 @@ import os.path
 
 def testpath(basename):
     return os.path.join('tests', 'data', basename)
-
-def ids_doc():
-    return testpath('ids.xml')
-
-def years_doc():
-    return testpath('years.xml')
-
-def filing_dates_doc():
-    return testpath('filing_dates.xml')
-
-def amounts_doc():
-    return testpath('amounts.xml')
-
-def periods_doc():
-    return testpath('periods.xml')
-
-def types_doc():
-    return testpath('types.xml')
