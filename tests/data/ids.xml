@@ -1,0 +1,11 @@
+<PublicFilings>
+
+  <!-- A few example IDs -->
+
+  <Filing ID="D48A20C9-211C-43B1-BBD1-001B075854BA" Year="2007" Received="2008-03-19T23:04:03" Amount="33914" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  
+  <Filing ID="5F787E27-BBF1-45A5-8392-FFF93CCA2746" Year="2008" Received="2008-03-27T16:30:23" Amount="5000" Type="FIRST QUARTER TERMINATION" Period="1st Quarter (Jan 1 - Mar 31)">
+  </Filing>
+
+</PublicFilings>

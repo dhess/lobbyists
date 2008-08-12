@@ -20,6 +20,9 @@
 
 import os.path
 
+def ids_doc():
+    return os.path.join('tests', 'data', 'ids.xml')
+
 def periods_doc():
     return os.path.join('tests', 'data', 'periods.xml')
 

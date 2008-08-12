@@ -24,6 +24,16 @@ import lobbyists
 import util
 
 class TestParse(unittest.TestCase):
+    def test_parse_filings_id(self):
+        filings = [x for x in lobbyists.parse_filings(util.ids_doc())]
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '5F787E27-BBF1-45A5-8392-FFF93CCA2746')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D48A20C9-211C-43B1-BBD1-001B075854BA')        
+        self.failUnlessEqual(len(filings), 0)
+        
     def test_parse_filings_period(self):        
         filings = [x for x in lobbyists.parse_filings(util.periods_doc())]
 
