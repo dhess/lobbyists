@@ -77,7 +77,7 @@ def parse_filings(doc):
 
 
 normalize_exceptions = {
-    'amount': -1
+    'amount': None
     }
 
 def normalize(record, default='unspecified', exceptions=normalize_exceptions):
@@ -93,7 +93,7 @@ def normalize(record, default='unspecified', exceptions=normalize_exceptions):
     This function returns a copy of a given record, except that for
     each key in the record whose value is '', this function replaces
     that value in the returned record with a more meaningful value;
-    e.g., replace the key-value pair 'amount': '' with 'amount': -1.
+    e.g., replace the key-value pair 'amount': '' with 'amount': None.
     
     record - The record to normalize (a dictionary). This record is
     not modified.
