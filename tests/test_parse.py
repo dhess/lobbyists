@@ -60,6 +60,35 @@ class TestParse(unittest.TestCase):
 
         self.failUnlessEqual(len(filings), 0)
 
+    def test_parse_filings_amount(self):        
+        filings = [x for x in lobbyists.parse_filings(util.amounts_doc())]
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'BAA88635-8674-4DF8-8825-2B0B3D8B4554') 
+        self.failUnlessEqual(f['amount'], 108000)
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '9648F901-BA48-4EE5-BE8B-01D5551BFDA1') 
+        self.failUnlessEqual(f['amount'], 20000)
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '8F21CC08-E136-4A42-A51D-25FE3B6CC303') 
+        self.failUnlessEqual(f['amount'], 0)
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'DE669D92-0620-4257-8B0C-01922EA0A226') 
+        self.failUnlessEqual(f['amount'], '')  # '' means unspecified amount
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '5DA4C8F8-4E2D-4EE1-895C-00369A8222FB') 
+        self.failUnlessEqual(f['amount'], '')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'DB4CCA2C-1E51-46A7-8800-00201697E905') 
+        self.failUnlessEqual(f['amount'], '')
+
+        self.failUnlessEqual(len(filings), 0)
+
     def test_parse_filings_period(self):        
         filings = [x for x in lobbyists.parse_filings(util.periods_doc())]
 

@@ -29,6 +29,9 @@ def years_doc():
 def filing_dates_doc():
     return os.path.join('tests', 'data', 'filing_dates.xml')
 
+def amounts_doc():
+    return os.path.join('tests', 'data', 'amounts.xml')
+
 def periods_doc():
     return os.path.join('tests', 'data', 'periods.xml')
 

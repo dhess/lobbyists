@@ -1,0 +1,25 @@
+<PublicFilings>
+
+  <!-- Example amounts -->
+
+  <!-- Registration records never specify an amount. -->
+  <Filing ID="DB4CCA2C-1E51-46A7-8800-00201697E905" Year="2008" Received="2008-03-10T18:41:34" Type="REGISTRATION" Period="UNDETERMINED">
+  </Filing>
+
+  <!-- Some other types of records occasionally omit the amount, too. -->
+  <Filing ID="5DA4C8F8-4E2D-4EE1-895C-00369A8222FB" Year="1999" Received="1999-12-15T00:00:00" Type="MID-YEAR TERMINATION AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  <Filing ID="DE669D92-0620-4257-8B0C-01922EA0A226" Year="1999" Received="1999-11-12T00:00:00" Type="MID-YEAR (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <!-- Sometimes records report a zero amount. -->
+  <Filing ID="8F21CC08-E136-4A42-A51D-25FE3B6CC303" Year="2006" Received="2008-03-14T00:00:00" Amount="0" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <!-- But most report a non-zero amount. -->
+  <Filing ID="9648F901-BA48-4EE5-BE8B-01D5551BFDA1" Year="2003" Received="2004-03-03T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+  </Filing>
+  <Filing ID="BAA88635-8674-4DF8-8825-2B0B3D8B4554" Year="2005" Received="2008-03-25T17:24:50" Amount="108000" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  
+</PublicFilings>
