@@ -77,15 +77,15 @@ class TestParse(unittest.TestCase):
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], 'DE669D92-0620-4257-8B0C-01922EA0A226') 
-        self.failUnlessEqual(f['amount'], '')  # '' means unspecified amount
+        self.failUnlessEqual(f['amount'], None)  # None means unspecified amount
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], '5DA4C8F8-4E2D-4EE1-895C-00369A8222FB') 
-        self.failUnlessEqual(f['amount'], '')
+        self.failUnlessEqual(f['amount'], None)
 
         f = filings.pop()
         self.failUnlessEqual(f['id'], 'DB4CCA2C-1E51-46A7-8800-00201697E905') 
-        self.failUnlessEqual(f['amount'], '')
+        self.failUnlessEqual(f['amount'], None)
 
         self.failUnlessEqual(len(filings), 0)
 

@@ -26,7 +26,7 @@ def identity(x):
 
 def amount(x):
     if x == '':
-        return x
+        return None
     else:
         return int(x)
     
@@ -77,46 +77,6 @@ def parse_filings(doc):
             yield filing
 
 
-normalize_exceptions = {
-    'amount': None
-    }
-
-def normalize(record, default='unspecified', exceptions=normalize_exceptions):
-    """Return a normalized copy of record.
-
-    Records in the LD-1/LD-2 database are frequently missing
-    information. For example, a quarterly report might not specify
-    which individual lobbyists participated in lobbying activity
-    during that quarter. Missing fields in these records are
-    represented by the parse_* functions as keys whose values are
-    the empty string ('').
-
-    This function returns a copy of a given record, except that for
-    each key in the record whose value is '', this function replaces
-    that value in the returned record with a more meaningful value;
-    e.g., replace the key-value pair 'amount': '' with 'amount': None.
-    
-    record - The record to normalize (a dictionary). This record is
-    not modified.
-
-    default - The default normalized value.
-
-    exceptions - A mapping of special keys and their normalized
-    values. If a key whose value in record is unspecified is found in
-    this mapping, use the coresponding value rather than the default
-    normalized value.
-
-    """
-    def norm((k, v)):
-        if v == '':
-            if k in exceptions:
-                return k, exceptions[k]
-            else:
-                return k, default
-        return k, v
-    return dict(map(norm, record.items()))
-
-
 def import_filings(con, filings):
     """Import filings into an sqlite3 database.
 
@@ -128,10 +88,9 @@ def import_filings(con, filings):
     
     con - A Connection object for the sqlite3 database.
 
-    filings - A sequence of filing dictionaries. The dictionary must
+    filings - A sequence of filing dictionaries. Each dictionary must
     have the following keys: 'id', 'type', 'year', 'period',
-    'filing_date' and 'amount'. You can guarantee that property by
-    calling normalize on each dictionary returned by parse_filings.
+    'filing_date' and 'amount'.
 
     Returns True.
     

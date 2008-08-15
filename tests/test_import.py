@@ -26,8 +26,7 @@ import util
 
 class TestImport(unittest.TestCase):
     def test_import_filings(self):
-        filings = [lobbyists.normalize(x) for x in \
-                       lobbyists.parse_filings(util.testpath('filings.xml'))]
+        filings = [x for x in lobbyists.parse_filings(util.testpath('filings.xml'))]
         con = sqlite3.connect(':memory:')
         con.executescript(util.sqlscript('filings.sql'))
         self.failUnless(lobbyists.import_filings(con, filings))
