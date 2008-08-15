@@ -22,3 +22,7 @@ import os.path
 
 def testpath(basename):
     return os.path.join('tests', 'data', basename)
+
+def sqlscript(basename):
+    f = open(basename)
+    return ''.join(f.readlines())

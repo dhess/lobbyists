@@ -17,6 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 import xml.dom.pulldom
+import sqlite3
 
 # Attribute parsers.
 
@@ -114,3 +115,28 @@ def normalize(record, default='unspecified', exceptions=normalize_exceptions):
                 return k, default
         return k, v
     return dict(map(norm, record.items()))
+
+
+def import_filings(con, filings):
+    """Import filings into an sqlite3 database.
+
+    The sqlite3 database is assumed to have a table named "filing"
+    with the following column names: "id", "type", "year", "period",
+    "filing_date" and "amount". The type of each column should be
+    compatible with the Python type of the corresponding value in
+    the filing dictionaries.
+    
+    con - A Connection object for the sqlite3 database.
+
+    filings - A sequence of filing dictionaries. The dictionary must
+    have the following keys: 'id', 'type', 'year', 'period',
+    'filing_date' and 'amount'. You can guarantee that property by
+    calling normalize on each dictionary returned by parse_filings.
+
+    Returns True.
+    
+    """
+    con.executemany('INSERT INTO filing VALUES(\
+                       :id, :type, :year, :period, :filing_date, :amount)',
+                    filings)
+    return True

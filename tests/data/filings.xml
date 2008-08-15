@@ -1,0 +1,21 @@
+<PublicFilings>
+
+  <!-- Some representative Filing elements, including a couple with an
+       unspecified Amount attribute. -->
+
+  <Filing ID="D48A20C9-211C-43B1-BBD1-001B075854BA" Year="2007" Received="2008-03-19T23:04:03" Amount="33914" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  
+  <Filing ID="5F787E27-BBF1-45A5-8392-FFF93CCA2746" Year="2008" Received="2008-03-27T16:30:23" Amount="5000" Type="FIRST QUARTER TERMINATION" Period="1st Quarter (Jan 1 - Mar 31)">
+  </Filing>
+
+  <Filing ID="DB4CCA2C-1E51-46A7-8800-00201697E905" Year="2008" Received="2008-03-10T18:41:34" Type="REGISTRATION" Period="UNDETERMINED">
+  </Filing>
+
+  <Filing ID="5DA4C8F8-4E2D-4EE1-895C-00369A8222FB" Year="1999" Received="1999-12-15T00:00:00" Type="MID-YEAR TERMINATION AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="8F21CC08-E136-4A42-A51D-25FE3B6CC303" Year="2006" Received="2008-03-14T00:00:00" Amount="0" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+  
+</PublicFilings>
