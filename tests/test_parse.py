@@ -23,8 +23,8 @@ import unittest
 import lobbyists
 import util
 
-class TestParse(unittest.TestCase):
-    def test_parse_filings_id(self):
+class TestParseFilings(unittest.TestCase):
+    def test_id(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('ids.xml'))]
 
         f = filings.pop()
@@ -34,7 +34,7 @@ class TestParse(unittest.TestCase):
         self.failUnlessEqual(f['id'], 'D48A20C9-211C-43B1-BBD1-001B075854BA')        
         self.failUnlessEqual(len(filings), 0)
         
-    def test_parse_filings_year(self):        
+    def test_year(self):        
         filings = [x for x in lobbyists.parse_filings(util.testpath('years.xml'))]
 
         f = filings.pop()
@@ -47,7 +47,7 @@ class TestParse(unittest.TestCase):
 
         self.failUnlessEqual(len(filings), 0)
 
-    def test_parse_filings_filing_date(self):        
+    def test_filing_date(self):        
         filings = [x for x in lobbyists.parse_filings(util.testpath('filing_dates.xml'))]
 
         f = filings.pop()
@@ -60,7 +60,7 @@ class TestParse(unittest.TestCase):
 
         self.failUnlessEqual(len(filings), 0)
 
-    def test_parse_filings_amount(self):        
+    def test_amount(self):        
         filings = [x for x in lobbyists.parse_filings(util.testpath('amounts.xml'))]
 
         f = filings.pop()
@@ -89,7 +89,7 @@ class TestParse(unittest.TestCase):
 
         self.failUnlessEqual(len(filings), 0)
 
-    def test_parse_filings_period(self):        
+    def test_period(self):        
         filings = [x for x in lobbyists.parse_filings(util.testpath('periods.xml'))]
 
         f = filings.pop()
@@ -122,7 +122,7 @@ class TestParse(unittest.TestCase):
         
         self.failUnlessEqual(len(filings), 0)
 
-    def test_parse_filings_type(self):
+    def test_type(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('types.xml'))]
         
         f = filings.pop()
