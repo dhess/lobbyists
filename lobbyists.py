@@ -48,16 +48,60 @@ def period(x):
     #else:
     #    return 'unknown (%s)' % x
     return periods[x]
-    
 
-filing_attrs = {
-    'ID': ('id', identity),
-    'Year': ('year', int),
-    'Received': ('filing_date', identity),
-    'Amount': ('amount', amount),
-    'Type': ('type', identity),
-    'Period': ('period', period)
-    }
+def optional(x):
+    """Returns identity if specified, None if not."""
+    if x == '':
+        return None
+    else:
+        return identity(x)
+
+
+def filings(doc):
+    """The sequence of all Filing elements in a lobbyist database.
+
+    doc - The XML document. Can be a filename, a URL or anything else
+    that xml.dom.pulldom.parse takes as an argument.
+
+    Yields a sequence of expanded DOM Filing elements.
+
+    """
+    dom = xml.dom.pulldom.parse(doc)
+    for event, node in dom:
+        if event == 'START_ELEMENT' and node.nodeName == 'Filing':
+            dom.expandNode(node)
+            yield node
+            
+
+def parse_element(elt, attrs):
+    """Return the attributes of a DOM element as a sequence of pairs.
+
+    elt - The DOM element.
+
+    attrs - A sequence of tuples of 3 items each. The first item is
+    the attribute name (a string). The second is the identifier
+    associated with the parsed attribute value in the yielded
+    pair. The third is the parsing function. It's applied to the
+    attribute's DOM value, and its output is stored with the
+    identifier in the yielded pair.
+
+    Note that attributes which don't appear in the DOM are given to
+    the attribute parser as the empty string ('').
+
+    Yields a sequence of (identifier, value) pairs.
+
+    """
+    for name, id, parse in attrs:
+        yield (id, parse(elt.getAttribute(name)))
+
+
+filing_attrs = [('ID', 'id', identity),
+                ('Year', 'year', int),
+                ('Received', 'filing_date', identity),
+                ('Amount', 'amount', amount),
+                ('Type', 'type', identity),
+                ('Period', 'period', period)]
+
 
 def parse_filings(doc):
     """Iterate over all filing records in a lobbyist database.
@@ -68,13 +112,8 @@ def parse_filings(doc):
     Yields a sequence of dictionaries, one per filing record.
 
     """
-    dom = xml.dom.pulldom.parse(doc)
-    for event, node in dom:
-        if event == 'START_ELEMENT' and node.nodeName == 'Filing':
-            filing = {}
-            for attr, (id, parse) in filing_attrs.items():
-                filing[id] = parse(node.getAttribute(attr))
-            yield filing
+    for elt in filings(doc):
+        yield dict(parse_element(elt, filing_attrs))
 
 
 def import_filings(con, filings):
