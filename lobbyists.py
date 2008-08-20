@@ -104,7 +104,7 @@ filing_attrs = [('ID', 'id', identity),
 
 
 def parse_filings(doc):
-    """Iterate over all filing records in a lobbyist database.
+    """Parse all filing records in a lobbyist database.
 
     doc - The database to parse. Can be a filename, a URL or anything
     else that xml.dom.pulldom.parse takes as an argument.
