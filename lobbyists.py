@@ -102,43 +102,22 @@ def parse_attrs(elt, attrs):
         yield (id, parse(elt.getAttribute(name)))
 
 
-def parse_element(id, elt, attrs):
-    """Parse a leaf element (no children).
+def parse_registrant(elt):
+    """Parse a Registrant DOM element.
 
-    id - The identifier to be associated with the parsed attributes,
-    probably some variant of the element's name (e.g, 'registrant').
+    elt - The Registrant DOM element.
 
-    elt - The element whose attributes are to be parsed.
-
-    attrs - The attribute parser sequence. See parse_attrs.
-
-    Returns a list with one item, a pair formed from the given id and
-    the parsed attributes of the given element.
+    Returns a list with one item, a pair whose first item is the
+    string 'registrant' and whose second item is the dictionary of
+    parsed attributes.
 
     """
-    # Parent expects a sequence.
-    return [(id, dict(parse_attrs(elt, attrs)))]
+    # Caller expects a sequence.
+    return [('registrant', dict(parse_attrs(elt, registrant_attrs)))]
+    
 
-
-def make_element_parser(elt, parsers):
-    """A parser function constructor.
-
-    elt - The element to be parsed.
-
-    parsers - A mapping whose keys are element tag names (e.g.,
-    'Registrant') and whose values are tuples of 3 items. The first
-    item is an identifier to be associated with the parsed element
-    (e.g., 'registrant'). The second item is the element parser, a
-    function of 3 arguments.... (Defer the remaining description until
-    later, it's likely to change.)
-
-    Returns a function of no arguments which, when called, returns a
-    list of (identifer, value) pairs containing the parsed contents of
-    the element.
-
-    """
-    id, parser, attrs = parsers[elt.tagName]
-    return lambda: parser(id, elt, attrs)
+def element_name(elt):
+    return elt.tagName
 
 
 filing_attrs = [('ID', 'id', identity),
@@ -156,7 +135,7 @@ registrant_attrs = [('Address', 'address', optional),
                     ('RegistrantPPBCountry', 'ppb_country', identity)]
 
 subelt_parsers = {
-    'Registrant': ('registrant', parse_element, registrant_attrs)
+    'Registrant': parse_registrant
     }
 
 def parse_filings(doc):
@@ -171,8 +150,8 @@ def parse_filings(doc):
     for filing_elt in filings(doc):
         filing = dict(parse_attrs(filing_elt, filing_attrs))
         for elt in child_elements(filing_elt):
-            parser = make_element_parser(elt, subelt_parsers)
-            filing.update(parser())
+            parser = subelt_parsers[element_name(elt)]
+            filing.update(parser(elt))
         yield filing
 
 
