@@ -271,5 +271,28 @@ class TestParseFilings(unittest.TestCase):
         
         self.failUnlessEqual(len(filings), 0)
 
+class TestParseRegistrants(unittest.TestCase):
+    def test_address(self):
+        filings = [x for x in lobbyists.parse_filings(util.testpath('registrant_addrs.xml'))]
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D4AFC576-0B22-4CE7-B595-141BE8ABC8DC')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['address'], None)
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'CD6A4955-8D7B-44C4-A3E4-00603FAC03A3')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['address'],
+                             '101 Constitution Avenue, NW\r\nSuite 600 West\r\nWashington, DC 20001')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D97EF71E-9062-42A9-9510-00048B943421')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['address'],
+                             '8 HERBERT STREET\r\nALEXANDRIA, VA 22305')
+
+        self.failUnlessEqual(len(filings), 0)
+
 if __name__ == '__main__':
     unittest.main()

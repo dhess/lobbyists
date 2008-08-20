@@ -73,8 +73,15 @@ def filings(doc):
             yield node
             
 
-def parse_element(elt, attrs):
-    """Return the attributes of a DOM element as a sequence of pairs.
+def child_elements(elt):
+    """Yield a sequence of child elements of the given DOM element."""
+    for child in elt.childNodes:
+        if child.nodeType == xml.dom.Node.ELEMENT_NODE:
+            yield child
+            
+        
+def parse_attrs(elt, attrs):
+    """Parse the attributes of a DOM element into a sequence of pairs.
 
     elt - The DOM element.
 
@@ -95,6 +102,45 @@ def parse_element(elt, attrs):
         yield (id, parse(elt.getAttribute(name)))
 
 
+def parse_element(id, elt, attrs):
+    """Parse a leaf element (no children).
+
+    id - The identifier to be associated with the parsed attributes,
+    probably some variant of the element's name (e.g, 'registrant').
+
+    elt - The element whose attributes are to be parsed.
+
+    attrs - The attribute parser sequence. See parse_attrs.
+
+    Returns a list with one item, a pair formed from the given id and
+    the parsed attributes of the given element.
+
+    """
+    # Parent expects a sequence.
+    return [(id, dict(parse_attrs(elt, attrs)))]
+
+
+def make_element_parser(elt, parsers):
+    """A parser function constructor.
+
+    elt - The element to be parsed.
+
+    parsers - A mapping whose keys are element tag names (e.g.,
+    'Registrant') and whose values are tuples of 3 items. The first
+    item is an identifier to be associated with the parsed element
+    (e.g., 'registrant'). The second item is the element parser, a
+    function of 3 arguments.... (Defer the remaining description until
+    later, it's likely to change.)
+
+    Returns a function of no arguments which, when called, returns a
+    list of (identifer, value) pairs containing the parsed contents of
+    the element.
+
+    """
+    id, parser, attrs = parsers[elt.tagName]
+    return lambda: parser(id, elt, attrs)
+
+
 filing_attrs = [('ID', 'id', identity),
                 ('Year', 'year', int),
                 ('Received', 'filing_date', identity),
@@ -102,6 +148,16 @@ filing_attrs = [('ID', 'id', identity),
                 ('Type', 'type', identity),
                 ('Period', 'period', period)]
 
+registrant_attrs = [('Address', 'address', optional),
+                    ('GeneralDescription', 'description', optional),
+                    ('RegistrantCountry', 'country', identity),
+                    ('RegistrantID', 'senate_id', int),
+                    ('RegistrantName', 'name', identity),
+                    ('RegistrantPPBCountry', 'ppb_country', identity)]
+
+subelt_parsers = {
+    'Registrant': ('registrant', parse_element, registrant_attrs)
+    }
 
 def parse_filings(doc):
     """Parse all filing records in a lobbyist database.
@@ -112,8 +168,12 @@ def parse_filings(doc):
     Yields a sequence of dictionaries, one per filing record.
 
     """
-    for elt in filings(doc):
-        yield dict(parse_element(elt, filing_attrs))
+    for filing_elt in filings(doc):
+        filing = dict(parse_attrs(filing_elt, filing_attrs))
+        for elt in child_elements(filing_elt):
+            parser = make_element_parser(elt, subelt_parsers)
+            filing.update(parser())
+        yield filing
 
 
 def import_filings(con, filings):
