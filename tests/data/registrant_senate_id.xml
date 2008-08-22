@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+  <!-- Registrant IDs are always provided and are always integers. -->
+
+  <Filing ID="9CF0D039-7655-4C7E-99E9-00166359FD5B" Year="2006" Received="2007-04-11T00:00:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="287656" RegistrantName="JG ASSOCIATES" Address="8517 BEECH TREE RD&#xD;&#xA;BETHESDA, MD 20817" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+  
+</PublicFilings>

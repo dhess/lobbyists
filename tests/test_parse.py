@@ -276,6 +276,12 @@ class TestParseRegistrants(unittest.TestCase):
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrant_addrs.xml'))]
 
         f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['address'],
+                             'Waterside P. O. Box 365\r\nHarmondworth, West Drayto\r\nBE\r\nBELGIUM')
+
+        f = filings.pop()
         self.failUnlessEqual(f['id'], 'D4AFC576-0B22-4CE7-B595-141BE8ABC8DC')
         reg = f['registrant']
         self.failUnlessEqual(reg['address'], None)
@@ -293,6 +299,94 @@ class TestParseRegistrants(unittest.TestCase):
                              '8 HERBERT STREET\r\nALEXANDRIA, VA 22305')
 
         self.failUnlessEqual(len(filings), 0)
+
+    def test_description(self):
+        filings = list(lobbyists.parse_filings(util.testpath('registrant_descriptions.xml')))
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'C35AF239-B3BF-45A8-A5F0-11B73F8C7D64')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['description'],
+                             u'Government Relations & Strategic Consulting')
+        
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D0325DF2-82F6-4FF1-8C72-08B9CC3E99D7')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['description'],
+                             'defense/energy/interior consulting')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '443C63BC-F0DB-41F7-B912-002CABBF0CAD')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['description'], None)
+
+        self.failUnlessEqual(len(filings), 0)
+
+    def test_country(self):
+        filings = list(lobbyists.parse_filings(util.testpath('registrant_country.xml')))
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '9B69F104-60E7-4704-9757-AFE7D14A27C3')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['country'], 'UNDETERMINED')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['country'], 'BELGIUM')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'A6D2238A-9786-428F-9CF9-13A460DE4560')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['country'], 'USA')
+
+        self.failUnlessEqual(len(filings), 0)
+
+    def test_senate_id(self):
+        filings = list(lobbyists.parse_filings(util.testpath('registrant_senate_id.xml')))
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '9CF0D039-7655-4C7E-99E9-00166359FD5B')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['senate_id'], 287656)
+
+        self.failUnlessEqual(len(filings), 0)
+
+    def test_name(self):
+        filings = list(lobbyists.parse_filings(util.testpath('registrant_name.xml')))
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'FB4267F6-F8CF-43EB-BF47-01EAACD4FAC0')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['name'], 'CHAFE, BONNIE L.')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '03F5D9EE-5EDD-4ACA-8766-0503753C3C1D')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['name'], u'Crowell & Moring LLP')
+
+        self.failUnlessEqual(len(filings), 0)
+
+    def test_ppb_country(self):
+        filings = list(lobbyists.parse_filings(util.testpath('registrant_country.xml')))
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], '9B69F104-60E7-4704-9757-AFE7D14A27C3')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['ppb_country'], 'UNDETERMINED')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['ppb_country'], 'UNITED KINGDOM')
+
+        f = filings.pop()
+        self.failUnlessEqual(f['id'], 'A6D2238A-9786-428F-9CF9-13A460DE4560')
+        reg = f['registrant']
+        self.failUnlessEqual(reg['ppb_country'], 'USA')
+
+        self.failUnlessEqual(len(filings), 0)
+
 
 if __name__ == '__main__':
     unittest.main()

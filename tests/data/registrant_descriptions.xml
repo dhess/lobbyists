@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+  <!-- Registrant GeneralDescription field is optional, though most
+       recent records seem to have them. -->
+  
+  <Filing ID="443C63BC-F0DB-41F7-B912-002CABBF0CAD" Year="2001" Received="2002-03-15T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="29881" RegistrantName="O'HARA, BARTLEY" Address="1875 EYE STREET  NW  FIFTH FLOOR&#xD;&#xA;WASHINGTON, DC 20006" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <Filing ID="D0325DF2-82F6-4FF1-8C72-08B9CC3E99D7" Year="2007" Received="2007-04-18T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Some GeneralDescription fields have escaped characters. -->
+  <Filing ID="C35AF239-B3BF-45A8-A5F0-11B73F8C7D64" Year="2005" Received="2007-04-11T10:17:21" Amount="45000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="65271" RegistrantName="WASHINGTON LINKAGE GROUP, INC" GeneralDescription="Government Relations &amp; Strategic Consulting" Address="633 PENNSYLVANIA AVENUE, NW&#xD;&#xA;WASHINGTON, DC 20004" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

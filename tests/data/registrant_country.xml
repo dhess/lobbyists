@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+  <!-- A registrant's country and "primary place of business" (PPB)
+       country are mandatory; most are "USA". -->
+
+  <Filing ID="A6D2238A-9786-428F-9CF9-13A460DE4560" Year="2006" Received="2007-04-30T00:00:00" Amount="260000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="19387" RegistrantName="INFORMATION TECHNOLOGY INDUSTRY COUNCIL" Address="1250 EYE STREET, NW, #200&#xD;&#xA;WASHINGTON, DC 20005" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+  
+  <!-- Occasionally a registrant country is != USA. -->
+  
+  <Filing ID="D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89" Year="2001" Received="2002-02-12T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="7075" RegistrantName="BRITISH AIRWAYS PLC" Address="Waterside P. O. Box 365&#xD;&#xA;Harmondworth, West Drayto&#xD;&#xA;BE&#xD;&#xA;BELGIUM" RegistrantCountry="BELGIUM" RegistrantPPBCountry="UNITED KINGDOM" xmlns="" />
+  </Filing>
+
+  <!-- There are a handful of registrants whose country is
+       "undetermined." Also, the country and PPB country are sometimes
+       different. -->
+  
+  <Filing ID="9B69F104-60E7-4704-9757-AFE7D14A27C3" Year="2007" Received="2007-06-29T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="317971" RegistrantName="MILLER GROUP PLLC, WILLIAM" Address="1666 CONNECTICUT AVENUE, NW SUITE 222&#xD;&#xA;WASHINGTON DC 20009 " RegistrantCountry="UNDETERMINED" RegistrantPPBCountry="UNDETERMINED" xmlns="" />
+  </Filing>
+
+</PublicFilings>

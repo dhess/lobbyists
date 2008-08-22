@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- RegistrantName is mandatory. Usually it's an organization name. -->
+
+  <Filing ID="03F5D9EE-5EDD-4ACA-8766-0503753C3C1D" Year="2006" Received="2007-04-20T18:12:59" Type="YEAR-END (NO ACTIVITY)" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="11377" RegistrantName="Crowell &amp; Moring LLP" GeneralDescription="Law firm" Address="1001 Pennsylvania Avenue, NW&#xD;&#xA;Washington, DC 20004-2595" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+  
+  <!-- Sometimes it's an individual. -->
+  
+  <Filing ID="FB4267F6-F8CF-43EB-BF47-01EAACD4FAC0" Year="2006" Received="2007-04-24T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="302552" RegistrantName="CHAFE, BONNIE L." Address="36564  CAMINO DEL MAR&#xD;&#xA;CATHEDRAL CITY, CA 92234" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+    
+</PublicFilings>

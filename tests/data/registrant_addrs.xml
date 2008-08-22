@@ -17,4 +17,10 @@
   <Filing ID="D4AFC576-0B22-4CE7-B595-141BE8ABC8DC" Year="2000" Received="2000-10-18T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
     <Registrant RegistrantID="25226" RegistrantName="MID-WEST ELECTRIC CONSUMERS ASSN" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
   </Filing>
+
+  <!-- Occasionally, a registrant address is outside the US (meaning no ZIP code). -->
+  <Filing ID="D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89" Year="2001" Received="2002-02-12T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="7075" RegistrantName="BRITISH AIRWAYS PLC" Address="Waterside P. O. Box 365&#xD;&#xA;Harmondworth, West Drayto&#xD;&#xA;BE&#xD;&#xA;BELGIUM" RegistrantCountry="BELGIUM" RegistrantPPBCountry="UNITED KINGDOM" xmlns="" />
+  </Filing>
+  
 </PublicFilings>
