@@ -25,8 +25,8 @@ def identity(x):
     return x
 
 def amount(x):
-    if x == '':
-        return None
+    if x is None:
+        return x
     else:
         return int(x)
     
@@ -42,14 +42,9 @@ def period(x):
         }
     return periods[x]
 
-def optional(x):
-    """Returns identity if specified, None if not."""
-    if x == '':
-        return None
-    else:
-        return identity(x)
 
-
+# xml.dom.pulldom-specific code
+    
 def filing_elements(doc):
     """The sequence of all Filing elements in a lobbyist database.
 
@@ -71,8 +66,33 @@ def child_elements(elt):
     for child in elt.childNodes:
         if child.nodeType == xml.dom.Node.ELEMENT_NODE:
             yield child
-            
-        
+
+
+def attr_of(elt, attrname):
+    """Get the value of an attribute of an element.
+
+    Returns the value of an attribute of the specified DOM element, or
+    None if no such attribute exists in the element.
+    
+    elt - The DOM element.
+
+    attrname - The name of the attribute to retrieve.
+
+    """
+    val = elt.getAttribute(attrname)
+    if val == '':
+        return None
+    else:
+        return val
+    
+
+def element_name(elt):
+    """The name of the given element."""
+    return elt.tagName
+
+
+# Parsers for DOM elements and their child elements.
+    
 def parse_attrs(elt, attrs):
     """Parse the attributes of a DOM element into a sequence of pairs.
 
@@ -85,14 +105,14 @@ def parse_attrs(elt, attrs):
     attribute's DOM value, and its output is stored with the
     identifier in the yielded pair.
 
-    Note that attributes which don't appear in the DOM are given to
-    the attribute parser as the empty string ('').
+    Note that the value of an attribute which doesn't appear in the
+    element is None.
 
     Yields a sequence of (identifier, value) pairs.
 
     """
     for name, id, parse in attrs:
-        yield (id, parse(elt.getAttribute(name)))
+        yield (id, parse(attr_of(elt, name)))
 
 
 def parse_element(elt, id, attrs):
@@ -100,8 +120,8 @@ def parse_element(elt, id, attrs):
     return [(id, dict(parse_attrs(elt, attrs)))]
 
 
-registrant_attrs = [('Address', 'address', optional),
-                    ('GeneralDescription', 'description', optional),
+registrant_attrs = [('Address', 'address', identity),
+                    ('GeneralDescription', 'description', identity),
                     ('RegistrantCountry', 'country', identity),
                     ('RegistrantID', 'senate_id', int),
                     ('RegistrantName', 'name', identity),
@@ -140,10 +160,6 @@ def parse_filing(elt):
     return parse_element(elt, 'filing', filing_attrs)
 
 
-def element_name(elt):
-    return elt.tagName
-
-
 subelt_parsers = {
     'Registrant': parse_registrant
     }
@@ -165,6 +181,8 @@ def parse_filings(doc):
         yield filing
 
 
+# Code to import parsed records into the database.
+        
 # XXX dhess - the sqlite3 Connection.execute() method doesn't appear
 # to set its cursor's lastrowid, so use an explicit cursor object for
 # operations that need lastrowid.
