@@ -24,6 +24,12 @@ import lobbyists
 import sqlite3
 import util
 
+def filing_values(parsed_filings):
+    """Iterate over filing dictionaries in a sequence of parsed filings."""
+    for x in parsed_filings:
+        yield x['filing']
+
+
 class TestImport(unittest.TestCase):
     def test_import_filings(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('filings.xml'))]
@@ -40,7 +46,7 @@ class TestImport(unittest.TestCase):
         filings.sort(key=lambda x: x['filing']['id'])
 
         self.failUnlessEqual(len(rows), len(filings))
-        for (row, filing) in zip(rows, lobbyists.filing_values(filings)):
+        for (row, filing) in zip(rows, filing_values(filings)):
             self.failUnlessEqual(row['id'], filing['id'])
             self.failUnlessEqual(row['type'], filing['type'])
             self.failUnlessEqual(row['year'], filing['year'])

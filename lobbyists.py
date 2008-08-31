@@ -30,9 +30,6 @@ def amount(x):
     else:
         return int(x)
     
-def lower(x):
-    return x.lower()
-
 def period(x):
     periods = {
         '1st Quarter (Jan 1 - Mar 31)': 'Q1',
@@ -43,10 +40,6 @@ def period(x):
         'Year-End (July 1 - Dec 31)': 'H2',
         'UNDETERMINED': 'undetermined'
         }
-    #if x in periods.keys():
-    #    return periods[x]
-    #else:
-    #    return 'unknown (%s)' % x
     return periods[x]
 
 def optional(x):
@@ -172,12 +165,6 @@ def parse_filings(doc):
         yield filing
 
 
-def filing_values(parsed_filings):
-    """Iterate over filing dictionaries in a sequence of parsed filings."""
-    for x in parsed_filings:
-        yield x['filing']
-
-    
 # XXX dhess - the sqlite3 Connection.execute() method doesn't appear
 # to set its cursor's lastrowid, so use an explicit cursor object for
 # operations that need lastrowid.
