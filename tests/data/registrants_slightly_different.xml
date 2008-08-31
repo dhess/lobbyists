@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- These records have similar, but different, registrants. -->
+
+  <!-- Missing address. -->
+  <Filing ID="5DA4C8F8-4E2D-4EE1-895C-00369A8222FB" Year="1999" Received="1999-12-15T00:00:00" Type="MID-YEAR TERMINATION AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Different RegistrantID. -->
+  <Filing ID="D97EF71E-9062-42A9-9510-00048B943421" Year="2000" Received="2000-10-25T00:00:00" Amount="35000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="285952" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Different name. -->
+  <Filing ID="D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89" Year="2001" Received="2002-02-12T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC." GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Different description. -->
+  <Filing ID="A6D2238A-9786-428F-9CF9-13A460DE4560" Year="2006" Received="2007-04-30T00:00:00" Amount="260000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Address is formatted differently. -->
+  <Filing ID="D0325DF2-82F6-4FF1-8C72-08B9CC3E99D7" Year="2007" Received="2007-04-18T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE, Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Different country. -->
+  <Filing ID="C35AF239-B3BF-45A8-A5F0-11B73F8C7D64" Year="2005" Received="2007-04-11T10:17:21" Amount="45000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="Canada" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <!-- Different PPB country. -->
+  <Filing ID="443C63BC-F0DB-41F7-B912-002CABBF0CAD" Year="2001" Received="2002-03-15T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="United Kingdom" xmlns="" />
+  </Filing>
+
+  <!-- Missing description. -->
+  <Filing ID="D48A20C9-211C-43B1-BBD1-001B075854BA" Year="2007" Received="2008-03-19T23:04:03" Amount="33914" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

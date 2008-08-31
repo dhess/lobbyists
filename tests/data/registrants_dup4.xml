@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- These two records have the same registrant. -->
+
+  <Filing ID="443C63BC-F0DB-41F7-B912-002CABBF0CAD" Year="2001" Received="2002-03-15T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <Filing ID="D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89" Year="2001" Received="2002-02-12T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="285951" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

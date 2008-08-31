@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- These two records have the same registrant. The registrant's address and description are missing. -->
+
+  <Filing ID="D4AFC576-0B22-4CE7-B595-141BE8ABC8DC" Year="2000" Received="2000-10-18T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="25226" RegistrantName="MID-WEST ELECTRIC CONSUMERS ASSN" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <Filing ID="C35AF239-B3BF-45A8-A5F0-11B73F8C7D64" Year="2005" Received="2007-04-11T10:17:21" Amount="45000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="25226" RegistrantName="MID-WEST ELECTRIC CONSUMERS ASSN" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

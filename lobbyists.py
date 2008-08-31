@@ -57,7 +57,7 @@ def optional(x):
         return identity(x)
 
 
-def filings(doc):
+def filing_elements(doc):
     """The sequence of all Filing elements in a lobbyist database.
 
     doc - The XML document. Can be a filename, a URL or anything else
@@ -102,6 +102,18 @@ def parse_attrs(elt, attrs):
         yield (id, parse(elt.getAttribute(name)))
 
 
+def parse_element(elt, id, attrs):
+    # Caller expects a sequence
+    return [(id, dict(parse_attrs(elt, attrs)))]
+
+
+registrant_attrs = [('Address', 'address', optional),
+                    ('GeneralDescription', 'description', optional),
+                    ('RegistrantCountry', 'country', identity),
+                    ('RegistrantID', 'senate_id', int),
+                    ('RegistrantName', 'name', identity),
+                    ('RegistrantPPBCountry', 'ppb_country', identity)]
+
 def parse_registrant(elt):
     """Parse a Registrant DOM element.
 
@@ -112,12 +124,7 @@ def parse_registrant(elt):
     parsed attributes.
 
     """
-    # Caller expects a sequence.
-    return [('registrant', dict(parse_attrs(elt, registrant_attrs)))]
-    
-
-def element_name(elt):
-    return elt.tagName
+    return parse_element(elt, 'registrant', registrant_attrs)
 
 
 filing_attrs = [('ID', 'id', identity),
@@ -127,12 +134,22 @@ filing_attrs = [('ID', 'id', identity),
                 ('Type', 'type', identity),
                 ('Period', 'period', period)]
 
-registrant_attrs = [('Address', 'address', optional),
-                    ('GeneralDescription', 'description', optional),
-                    ('RegistrantCountry', 'country', identity),
-                    ('RegistrantID', 'senate_id', int),
-                    ('RegistrantName', 'name', identity),
-                    ('RegistrantPPBCountry', 'ppb_country', identity)]
+def parse_filing(elt):
+    """Parse a Filing DOM element.
+
+    elt - The Filing DOM element.
+
+    Returns a list with one item, a pair whose first item is the
+    string 'filing' and whose second item is the dictionary of parsed
+    attributes.
+
+    """
+    return parse_element(elt, 'filing', filing_attrs)
+
+
+def element_name(elt):
+    return elt.tagName
+
 
 subelt_parsers = {
     'Registrant': parse_registrant
@@ -147,33 +164,121 @@ def parse_filings(doc):
     Yields a sequence of dictionaries, one per filing record.
 
     """
-    for filing_elt in filings(doc):
-        filing = dict(parse_attrs(filing_elt, filing_attrs))
+    for filing_elt in filing_elements(doc):
+        filing = dict(parse_filing(filing_elt))
         for elt in child_elements(filing_elt):
             parser = subelt_parsers[element_name(elt)]
             filing.update(parser(elt))
         yield filing
 
 
-def import_filings(con, filings):
-    """Import filings into an sqlite3 database.
+def filing_values(parsed_filings):
+    """Iterate over filing dictionaries in a sequence of parsed filings."""
+    for x in parsed_filings:
+        yield x['filing']
 
-    The sqlite3 database is assumed to have a table named "filing"
-    with the following column names: "id", "type", "year", "period",
-    "filing_date" and "amount". The type of each column should be
-    compatible with the Python type of the corresponding value in
-    the filing dictionaries.
+    
+# XXX dhess - the sqlite3 Connection.execute() method doesn't appear
+# to set its cursor's lastrowid, so use an explicit cursor object for
+# operations that need lastrowid.
+
+def registrant_rowid(reg, con):
+    """Find a registrant in an sqlite3 database.
+
+    Returns the row ID of the matching registrant, or None if there is
+    no match.
+
+    reg - The parsed registrant dictionary.
+
+    con - An sqlite3.Connection object.
+    
+    """
+    # address and description may be null; keep the query simple and
+    # check address and description in the results.
+    con.row_factory = sqlite3.Row
+    rows = con.execute('SELECT id, address, description \
+                        FROM registrant WHERE \
+                          country=:country AND \
+                          senate_id=:senate_id AND \
+                          name=:name AND \
+                          ppb_country=:ppb_country',
+                       reg)
+    for row in rows:
+        if row['address'] == reg['address'] and \
+                row['description'] == reg['description']:
+            return row['id']
+    return None
+
+    
+def insert_registrant(reg, con):
+    """Insert a registrant into an sqlite3 database.
+
+    Returns the row ID of the inserted registrant.
+
+    As a side effect, this function also inserts rows into the country
+    and org tables.
+
+    reg - The parsed registrant dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    cur = con.cursor()
+    cur.execute('INSERT INTO country VALUES(?)',
+                [reg['country']])
+    cur.execute('INSERT INTO country VALUES(?)',
+                [reg['ppb_country']])
+    cur.execute('INSERT INTO org VALUES(?)',
+                [reg['name']])
+    cur.execute('INSERT INTO registrant VALUES(NULL, \
+                           :address, :description, :country, :senate_id, \
+                           :name, :ppb_country)',
+                reg)
+    return cur.lastrowid
+
+
+def insert_filing(filing, con):
+    """Insert a filing into an sqlite3 database.
+
+    Returns the row ID of the inserted filing.
+
+    filing - The parsed filing dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    cur = con.cursor()
+    cur.execute('INSERT INTO filing VALUES(\
+                       :id, :type, :year, :period, :filing_date, :amount, \
+                       :registrant)',
+                filing)
+    return cur.lastrowid
+
+    
+def import_filings(con, parsed_filings):
+    """Import parsed filings into an sqlite3 database.
+
+    The sqlite3 database is assumed to have a particular schema; see
+    filings.sql.
     
     con - A Connection object for the sqlite3 database.
 
-    filings - A sequence of filing dictionaries. Each dictionary must
-    have the following keys: 'id', 'type', 'year', 'period',
-    'filing_date' and 'amount'.
+    parsed_filings - A sequence of parsed filings.
 
     Returns True.
     
     """
-    con.executemany('INSERT INTO filing VALUES(\
-                       :id, :type, :year, :period, :filing_date, :amount)',
-                    filings)
+    for f in parsed_filings:
+        if 'registrant' in f:
+            reg = f['registrant']
+            regid = registrant_rowid(reg, con)
+            if regid is None:
+                regid = insert_registrant(reg, con)
+        else:
+            regid = None
+        filing = f['filing']
+        filing['registrant'] = regid
+        insert_filing(filing, con)
+        # Force commit, subsequent records may depend on this one.
+        con.commit()
     return True

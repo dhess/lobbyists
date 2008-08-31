@@ -1,11 +1,13 @@
 DROP TABLE IF EXISTS filing;
 DROP TABLE IF EXISTS org;
-DROP TABLE IF EXISTS lobbying_org;
 DROP TABLE IF EXISTS lobbyist;
 DROP TABLE IF EXISTS government_entity;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS specific_issue;
 DROP TABLE IF EXISTS url;
+DROP TABLE IF EXISTS registrant;
+DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS filing_registrant;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -13,16 +15,12 @@ CREATE TABLE filing(
   year INTEGER,
   period VARCHAR(64),
   filing_date VARCHAR(20),      -- ISO 8601 extended date+time format
-  amount INTEGER
+  amount INTEGER,
+  registrant REFERENCES registrant  -- optional
 );
 
 CREATE TABLE org(
-  name VARCHAR(256) PRIMARY KEY
-);
-
-CREATE TABLE lobbying_org(
-  id INTEGER PRIMARY KEY,           -- Senate registration ID
-  name VARCHAR(256) REFERENCES org
+  name VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
 
 CREATE TABLE lobbyist(
@@ -48,9 +46,22 @@ CREATE TABLE url(
   url VARCHAR(256) PRIMARY KEY
 );
 
+CREATE TABLE country(
+  name VARCHAR(64) PRIMARY KEY ON CONFLICT IGNORE
+);
+
+CREATE TABLE registrant(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  address VARCHAR(256),
+  description VARCHAR(256),
+  country REFERENCES country,
+  senate_id INTEGER,
+  name REFERENCES org,
+  ppb_country REFERENCES country
+);
+
 -- special values, usually for unspecified fields.
 INSERT INTO org VALUES('unspecified');
-INSERT INTO lobbying_org VALUES(0, 'unspecified');
 INSERT INTO lobbyist VALUES(NULL, 'unspecified', 'unspecified', 'unspecified'); -- key is always 1
 INSERT INTO government_entity VALUES('unspecified');
 INSERT INTO issue VALUES('unspecified');
