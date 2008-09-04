@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Most client countries are USA. -->
+  
+  <Filing ID="77CC99B3-FFD7-435D-9507-010548438B6F" Year="1999" Received="1999-02-18T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <Client ClientName="OFFICEMAX" ClientID="12" ClientStatus="1" ContactFullname="GUY G. HURLBUTT" ClientCountry="USA" ClientPPBCountry="USA" ClientState="IDAHO" ClientPPBState="IDAHO" xmlns="" />
+  </Filing>
+
+  <!-- Foreign client countries. These don't have a state. -->
+
+  <Filing ID="539731C9-3393-4B0B-A6DB-1E1B613C641B" Year="2003" Received="2004-02-12T00:00:00" Amount="12500" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="CEMEX S.A. DE C.V." ClientID="734" ClientStatus="0" ContactFullname="HARRY L. GUTMAN" ClientCountry="MEXICO" ClientPPBCountry="MEXICO" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- U.S. territories are sometimes considered separate countries,
+       other times just a US state. -->
+
+  <Filing ID="63FC1581-591E-483A-A5D8-24071BE8DEBE" Year="2003" Received="2004-02-17T00:00:00" Amount="60000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="POPULAR INC (FORMERLY BANCO POPULAR DE PUERTO RICO)" ClientID="1457" ClientStatus="0" ContactFullname="LIZ MCCURTAIN" ClientCountry="PUERTO RICO" ClientPPBCountry="PUERTO RICO" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- Occasionally the client country is "undetermined". -->
+
+  <Filing ID="CFC6E2B6-3A98-4D4B-A239-000B62C084CC" Year="2008" Received="2008-04-16T17:48:23" Amount="30000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="FORTRESS INVESTMENT GROUP LLC" GeneralDescription="Investment management" ClientID="1002623" ClientStatus="0" ContactFullname="NICK GIORDANOA" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- Client country and PPB country may be different. Note that
+       country may be non-USA even when PPB country is USA. -->
+
+  <Filing ID="7DB2EC06-677B-4BA3-ACCF-4855C6E112C3" Year="2003" Received="2003-08-12T00:00:00" Amount="40000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="BAE SYSTEMS" ClientID="342" ClientStatus="1" ContactFullname="COLLEEN A. TEMPLETON" ClientCountry="USA" ClientPPBCountry="UNITED KINGDOM" ClientState="VIRGINIA" ClientPPBState="" xmlns="" />
+  </Filing>
+  
+  <Filing ID="104313A3-968E-478E-870B-9DD28A3E02C4" Year="2002" Received="2002-08-14T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="MARCONI PLC" ClientID="773" ClientStatus="1" ContactFullname="BARRY B. DIRENFELD" ClientCountry="UNITED KINGDOM" ClientPPBCountry="USA" ClientState="" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+</PublicFilings>

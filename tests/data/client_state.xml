@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Most clients have identical state and PPB state. -->
+  
+  <Filing ID="77CC99B3-FFD7-435D-9507-010548438B6F" Year="1999" Received="1999-02-18T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <Client ClientName="OFFICEMAX" ClientID="12" ClientStatus="1" ContactFullname="GUY G. HURLBUTT" ClientCountry="USA" ClientPPBCountry="USA" ClientState="IDAHO" ClientPPBState="IDAHO" xmlns="" />
+  </Filing>
+
+  <!-- States aren't always states.... -->
+
+  <Filing ID="3C6F64C0-4AC8-4E08-AE55-5A8B0E3BB91E" Year="1999" Received="1999-09-01T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="NATL ASSN OF AFFORDABLE HOUSING LENDERS" ClientID="12" ClientStatus="0" ContactFullname="JUDITH A. KENNEDY" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+  
+  <Filing ID="7425914C-E115-4449-B977-0722455B4463" Year="2008" Received="2008-04-21T14:45:32" Amount="10000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
+  </Filing>
+
+  <!-- Foreign client countries don't have a state. -->
+
+  <Filing ID="539731C9-3393-4B0B-A6DB-1E1B613C641B" Year="2003" Received="2004-02-12T00:00:00" Amount="12500" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="CEMEX S.A. DE C.V." ClientID="734" ClientStatus="0" ContactFullname="HARRY L. GUTMAN" ClientCountry="MEXICO" ClientPPBCountry="MEXICO" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- Sometimes the state and/or PPB state are blank. -->
+
+  <Filing ID="CFC6E2B6-3A98-4D4B-A239-000B62C084CC" Year="2008" Received="2008-04-16T17:48:23" Amount="30000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="FORTRESS INVESTMENT GROUP LLC" GeneralDescription="Investment management" ClientID="1002623" ClientStatus="0" ContactFullname="NICK GIORDANOA" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="7DB2EC06-677B-4BA3-ACCF-4855C6E112C3" Year="2003" Received="2003-08-12T00:00:00" Amount="40000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="BAE SYSTEMS" ClientID="342" ClientStatus="1" ContactFullname="COLLEEN A. TEMPLETON" ClientCountry="USA" ClientPPBCountry="UNITED KINGDOM" ClientState="VIRGINIA" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="296B5A74-B4B0-4F51-A7FD-16D8195C3A2E" Year="2005" Received="2005-02-10T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Client ClientName="PUBLIC-ROOT C/O INAIC" ClientID="12" ClientStatus="0" ContactFullname="JOE BAPTISTA" ClientCountry="CANADA" ClientPPBCountry="USA" ClientState="" ClientPPBState="NEW YORK" xmlns="" />
+  </Filing>
+  
+  <!-- Sometimes one is "undetermined." When this happens, the other
+       seems to be always either blank or "undetermined." -->
+
+  <Filing ID="104313A3-968E-478E-870B-9DD28A3E02C4" Year="2002" Received="2002-08-14T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="MARCONI PLC" ClientID="773" ClientStatus="1" ContactFullname="BARRY B. DIRENFELD" ClientCountry="UNITED KINGDOM" ClientPPBCountry="USA" ClientState="" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+  <Filing ID="5FED9056-BDB0-4738-9F25-243242AE0E3B" Year="2008" Received="2008-07-16T14:28:37" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Client ClientName="AMERICAN MEDICAL INFORMATICS ASSOCIATION" ClientID="48" ClientStatus="0" ContactFullname="JONATHAN JAGODA" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+  <Filing ID="36C7C2ED-A81D-4EC9-9270-24882C2D99F1" Year="2008" Received="2008-07-08T14:43:12" Amount="10000" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Client ClientName="GREATER YELLOWSTONE COALITION INC" GeneralDescription="Organization dedicated to the preservation/protection of the Greater Yellowstone" ClientID="1004236" ClientStatus="0" ContactFullname="MICHAEL TONGOUR" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+  
+</PublicFilings>

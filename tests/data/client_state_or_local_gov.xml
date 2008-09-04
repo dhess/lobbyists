@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Client "IsStateOrLocalGov" is always either 0 or not
+       present. Presumably, if it were actually useful, it'd be 1 when
+       the client is, well, a state or local government! -->
+  
+  <Filing ID="8949C958-ABF0-49B8-8ACF-0026E92C2B13" Year="2006" Received="2007-01-29T11:35:01" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="INTERNATIONAL INTELLECTUAL PROPERTY INST" ClientID="1193" ClientStatus="0" ContactFullname="DAVID WHITESTONE" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+  
+  <Filing ID="045E8E33-BBEA-437C-844D-D1D6057AA2A0" Year="2001" Received="2002-02-11T00:00:00" Amount="100000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="GENERAL ELECTRIC CAPITAL SERVICES" ClientID="1154" ClientStatus="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+
+  <!-- In the actual XML database, this filing's "IsStateOrLocalGov"
+       attribute is 0, even though it's clearly a local
+       government. It's set to 1 here just to test the functionality,
+       in case the Senate ever fixes their database. -->
+  
+  <Filing ID="31733890-2D8D-414E-8EF1-08701CBC5871" Year="2000" Received="2000-08-07T00:00:00" Amount="12000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="CITY OF WASILLA" ClientID="595" ClientStatus="0" ContactFullname="STEVEN W. SILVER" IsStateOrLocalGov="1" ClientCountry="USA" ClientPPBCountry="USA" ClientState="ALASKA" ClientPPBState="ALASKA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

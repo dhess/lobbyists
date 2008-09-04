@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Client IDs are straightforward; they're just integers. Note
+       that they're only unique for a given registrant ID; they're not
+       globally unique like registrant IDs are. -->
+  
+  <Filing ID="C3226D4B-2F22-4516-BDF2-9E1F918D140E" Year="2002" Received="2002-08-19T00:00:00" Amount="10000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="RENEWABLE FUELS ASSN" ClientID="48" ClientStatus="0" ContactFullname="EDWARD D. HEFFERNAN" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+  
+</PublicFilings>

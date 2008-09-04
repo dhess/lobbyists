@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Client description is straightforward. It appears to be a
+       fairly recent addition to the database (2008). -->
+  
+  <Filing ID="1402A175-987F-4896-B0F5-00107EF69834" Year="2007" Received="2008-02-13T14:44:07.167" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="H SQUARED INC" GeneralDescription="Distributor of tactical clothing and gear for the military and law enforcement." ClientID="1004229" ClientStatus="0" ContactFullname="KAYLENE GREEN" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+  
+  <!-- Usually it's mixed-case, but not always. -->
+  
+  <Filing ID="530238AB-4144-484F-8297-00D4A969779C" Year="2008" Received="2008-04-16T12:11:18" Amount="6000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="CEREBRAL PALSY RESEARCH FOUNDATION" GeneralDescription="DISABILITY RESEARCH" ClientID="1700" ClientStatus="0" ContactFullname="JOHN D. KEMP" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="KANSAS" ClientPPBState="KANSAS" xmlns="" />
+  </Filing>
+
+  <!-- Sometimes it's blank. -->
+    
+  <Filing ID="BD57AEBC-D1D7-4867-880E-0711F5AABD17" Year="2008" Received="2008-02-24T11:57:10" Type="REGISTRATION" Period="UNDETERMINED">
+    <Client ClientName="MS JAMILA TAYLOR" GeneralDescription="" ClientID="36" ClientStatus="0" ContactFullname="Jamila Taylor" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- Frequently, it's missing entirely. -->
+
+  <Filing ID="CCB41994-81FB-4C32-A155-082164564403" Year="2007" Received="2008-02-08T12:35:54.250" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="TD Federal Services" ClientID="7234" ClientStatus="1" ContactFullname="ANDRE HOLLIS" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+  
+</PublicFilings>

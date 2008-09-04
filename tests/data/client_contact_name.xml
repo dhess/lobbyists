@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Contact name is straightforward. It's usually FIRST MI. LAST,
+       but sometimes just FIRST LAST and occasionally
+       FI. MI. LAST. -->
+  
+  <Filing ID="583E1BE3-1B7E-4357-A6C8-00125C7DE22D" Year="2006" Received="2006-08-08T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="EMPRESA BRASILEIRA DE AERONAUTICA SA (EMBRAER)" ClientID="9455" ClientStatus="0" ContactFullname="JAMES B. CHRISTIAN" ClientCountry="BRAZIL" ClientPPBCountry="BRAZIL" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="357D6040-8761-42CB-94C9-0A27C088091E" Year="2006" Received="2006-08-22T00:00:00" Amount="220000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="COMPUTER &amp; COMMUNICATIONS INDUSTRY ASSN" ClientID="12" ClientStatus="2" ContactFullname="DANIEL JOHNSON" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+  <Filing ID="5A4F7B14-D143-4B57-A345-34296865C20D" Year="2007" Received="2008-02-14T15:29:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="Microsoft" GeneralDescription="Computing Software" ClientID="520" ClientStatus="0" ContactFullname="JR KIRKLAND" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- Sometimes the contact name includes a nickname (?) -->
+  
+  <Filing ID="810A9431-7235-4FEB-9A33-08214322E37F" Year="2007" Received="2008-02-12T22:21:28.223" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="SAVE A LIFE FOUNDATION" ClientID="36" ClientStatus="1" ContactFullname="JOHN G. BURKE &quot;TOBY&quot;" ClientCountry="USA" ClientPPBCountry="USA" ClientState="ILLINOIS" ClientPPBState="ILLINOIS" xmlns="" />
+  </Filing>
+  
+  <Filing ID="66439336-A74C-41AE-8659-D1A6140D1494" Year="2001" Received="2002-02-13T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="SCHOOL DISTRICT OF OSCEOLA COUNTY, FL" ClientID="1650" ClientStatus="0" ContactFullname="L.A. (SKIP) BAFALIS" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+  
+</PublicFilings>

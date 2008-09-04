@@ -42,6 +42,25 @@ def period(x):
         }
     return periods[x]
 
+def is_gov(x):
+    if x is None:
+        return False
+    elif x.lower() in ['0', 'n', 'no']:
+        return False
+    else:
+        return True
+    
+def client_status(x):
+    # Senate web page that provides the key for the client status code
+    # lists '3: undetermined', but in practice this value doesn't
+    # occur in any of the XML documents.
+    status = {
+        0: 'active',
+        1: 'terminated',
+        2: 'administratively terminated'
+        }
+    return status[int(x)]
+
 
 # xml.dom.pulldom-specific code
     
@@ -120,6 +139,30 @@ def parse_element(elt, id, attrs):
     return [(id, dict(parse_attrs(elt, attrs)))]
 
 
+client_attrs = [('ClientCountry', 'country', identity),
+                ('ClientID', 'id', int),
+                ('ClientName', 'name', identity),
+                ('ClientPPBCountry', 'ppb_country', identity),
+                ('ClientPPBState', 'ppb_state', identity),
+                ('ClientState', 'state', identity),
+                ('ClientStatus', 'status', client_status),
+                ('ContactFullname', 'contact_name', identity),
+                ('GeneralDescription', 'description', identity),
+                ('IsStateOrLocalGov', 'state_or_local_gov', is_gov)]
+
+def parse_client(elt):
+    """Parse a Client DOM element.
+
+    elt - The Client DOM element.
+
+    Returns a list with one item, a pair whose first item is the
+    string 'client' and whose second item is the dictionary of parsed
+    attributes.
+    
+    """
+    return parse_element(elt, 'client', client_attrs)
+
+    
 registrant_attrs = [('Address', 'address', identity),
                     ('GeneralDescription', 'description', identity),
                     ('RegistrantCountry', 'country', identity),
@@ -161,7 +204,8 @@ def parse_filing(elt):
 
 
 subelt_parsers = {
-    'Registrant': parse_registrant
+    'Registrant': parse_registrant,
+    'Client': parse_client
     }
 
 def parse_filings(doc):
