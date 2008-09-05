@@ -516,7 +516,7 @@ class TestParseClients(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], 'C3226D4B-2F22-4516-BDF2-9E1F918D140E')
         client = x['client']
-        self.failUnlessEqual(client['id'], 48)
+        self.failUnlessEqual(client['senate_id'], 48)
 
         self.failUnlessEqual(len(filings), 0)
 

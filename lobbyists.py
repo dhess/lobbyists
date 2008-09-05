@@ -140,7 +140,7 @@ def parse_element(elt, id, attrs):
 
 
 client_attrs = [('ClientCountry', 'country', identity),
-                ('ClientID', 'id', int),
+                ('ClientID', 'senate_id', int),
                 ('ClientName', 'name', identity),
                 ('ClientPPBCountry', 'ppb_country', identity),
                 ('ClientPPBState', 'ppb_state', identity),
