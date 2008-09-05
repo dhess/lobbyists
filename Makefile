@@ -9,6 +9,12 @@ help:
 	@echo 'test - run all unit tests.'
 	@echo 'help - this message.'
 
+push:
+	git push origin
+
+push-all: push
+	git push github
+
 test-parse:
 	PYTHONPATH=.:$$PYTHONPATH python tests/test_parse.py
 
