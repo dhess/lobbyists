@@ -303,7 +303,31 @@ def insert_filing(filing, con):
                 filing)
     return cur.lastrowid
 
+
+def import_entity(record, con, name, findrow, insert):
+    if name in record:
+        entity = record[name]
+        rowid = findrow(entity, con)
+        if rowid is None:
+            return insert(entity, con)
+        else:
+            return rowid
+    else:
+        return None
+
     
+def import_registrant(record, con):
+    return import_entity(record,
+                         con,
+                         'registrant',
+                         registrant_rowid,
+                         insert_registrant)
+
+
+entity_importers = {
+    'registrant': import_registrant,
+    }
+
 def import_filings(con, parsed_filings):
     """Import parsed filings into an sqlite3 database.
 
@@ -317,16 +341,10 @@ def import_filings(con, parsed_filings):
     Returns True.
     
     """
-    for f in parsed_filings:
-        if 'registrant' in f:
-            reg = f['registrant']
-            regid = registrant_rowid(reg, con)
-            if regid is None:
-                regid = insert_registrant(reg, con)
-        else:
-            regid = None
-        filing = f['filing']
-        filing['registrant'] = regid
+    for record in parsed_filings:
+        filing = record['filing']
+        for entity_name, entity_importer in entity_importers.items():
+            filing[entity_name] = entity_importer(record, con)
         insert_filing(filing, con)
         # Force commit, subsequent records may depend on this one.
         con.commit()
