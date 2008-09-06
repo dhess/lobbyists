@@ -8,6 +8,9 @@ DROP TABLE IF EXISTS url;
 DROP TABLE IF EXISTS registrant;
 DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS filing_registrant;
+DROP TABLE IF EXISTS state;
+DROP TABLE IF EXISTS client_status;
+DROP TABLE IF EXISTS client;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -16,7 +19,8 @@ CREATE TABLE filing(
   period VARCHAR(64),
   filing_date VARCHAR(20),      -- ISO 8601 extended date+time format
   amount INTEGER,
-  registrant REFERENCES registrant  -- optional
+  registrant REFERENCES registrant,  -- optional
+  client REFERENCES client -- optional
 );
 
 CREATE TABLE org(
@@ -50,6 +54,10 @@ CREATE TABLE country(
   name VARCHAR(64) PRIMARY KEY ON CONFLICT IGNORE
 );
 
+CREATE TABLE state(
+  name VARCHAR(64) PRIMARY KEY ON CONFLICT IGNORE
+);
+  
 CREATE TABLE registrant(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   address VARCHAR(256),
@@ -60,6 +68,24 @@ CREATE TABLE registrant(
   ppb_country REFERENCES country
 );
 
+CREATE TABLE client_status(
+  status VARCHAR(32) PRIMARY KEY
+);
+
+CREATE TABLE client(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  country REFERENCES country,
+  senate_id INTEGER,
+  name REFERENCES org,
+  ppb_country REFERENCES country,
+  state REFERENCES state,
+  ppb_state REFERENCES state,
+  status REFERENCES client_status,
+  description VARCHAR(256),
+  state_or_local_gov BOOLEAN,
+  contact_name VARCHAR(256)
+);
+
 -- special values, usually for unspecified fields.
 INSERT INTO org VALUES('unspecified');
 INSERT INTO lobbyist VALUES(NULL, 'unspecified', 'unspecified', 'unspecified'); -- key is always 1
@@ -67,3 +93,8 @@ INSERT INTO government_entity VALUES('unspecified');
 INSERT INTO issue VALUES('unspecified');
 INSERT INTO specific_issue VALUES('unspecified');
 INSERT INTO url VALUES('unspecified');
+
+-- 3 possible client statuses.
+INSERT INTO client_status VALUES('active');
+INSERT INTO client_status VALUES('terminated');
+INSERT INTO client_status VALUES('administratively terminated');

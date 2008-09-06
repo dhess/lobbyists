@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- These two records have the same client. All client attributes
+       are present. -->
+
+  <Filing ID="5A4F7B14-D143-4B57-A345-34296865C20D" Year="2007" Received="2008-02-14T15:29:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="CEREBRAL PALSY RESEARCH FOUNDATION" GeneralDescription="DISABILITY RESEARCH" ClientID="1700" ClientStatus="0" ContactFullname="JOHN D. KEMP" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="KANSAS" ClientPPBState="KANSAS" xmlns="" />
+  </Filing>
+
+  <Filing ID="530238AB-4144-484F-8297-00D4A969779C" Year="2008" Received="2008-04-16T12:11:18" Amount="6000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="CEREBRAL PALSY RESEARCH FOUNDATION" GeneralDescription="DISABILITY RESEARCH" ClientID="1700" ClientStatus="0" ContactFullname="JOHN D. KEMP" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="KANSAS" ClientPPBState="KANSAS" xmlns="" />
+  </Filing>
+
+</PublicFilings>

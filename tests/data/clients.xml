@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- A collection of "interesting" filings with client
+       elements. Unless otherwise noted, each of these records comes
+       from one of the other client_*.xml documents. -->
+
+  <!-- from client_contact_name.xml -->
+  
+  <Filing ID="583E1BE3-1B7E-4357-A6C8-00125C7DE22D" Year="2006" Received="2006-08-08T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="EMPRESA BRASILEIRA DE AERONAUTICA SA (EMBRAER)" ClientID="9455" ClientStatus="0" ContactFullname="JAMES B. CHRISTIAN" ClientCountry="BRAZIL" ClientPPBCountry="BRAZIL" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="357D6040-8761-42CB-94C9-0A27C088091E" Year="2006" Received="2006-08-22T00:00:00" Amount="220000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="COMPUTER &amp; COMMUNICATIONS INDUSTRY ASSN" ClientID="12" ClientStatus="2" ContactFullname="DANIEL JOHNSON" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+  <Filing ID="5A4F7B14-D143-4B57-A345-34296865C20D" Year="2007" Received="2008-02-14T15:29:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="Microsoft" GeneralDescription="Computing Software" ClientID="520" ClientStatus="0" ContactFullname="JR KIRKLAND" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="810A9431-7235-4FEB-9A33-08214322E37F" Year="2007" Received="2008-02-12T22:21:28.223" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="SAVE A LIFE FOUNDATION" ClientID="36" ClientStatus="1" ContactFullname="JOHN G. BURKE &quot;TOBY&quot;" ClientCountry="USA" ClientPPBCountry="USA" ClientState="ILLINOIS" ClientPPBState="ILLINOIS" xmlns="" />
+  </Filing>
+  
+  <Filing ID="66439336-A74C-41AE-8659-D1A6140D1494" Year="2001" Received="2002-02-13T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="SCHOOL DISTRICT OF OSCEOLA COUNTY, FL" ClientID="1650" ClientStatus="0" ContactFullname="L.A. (SKIP) BAFALIS" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+  
+  <!-- Here's a filing with no client. They're rare but sometimes do
+       occur. -->
+  
+  <Filing ID="028C0F4E-0B08-465F-BD86-0197F149A77E" Year="1999" Received="1999-02-08T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+  </Filing>
+
+  <!-- from client_country.xml -->
+  
+  <Filing ID="77CC99B3-FFD7-435D-9507-010548438B6F" Year="1999" Received="1999-02-18T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <Client ClientName="OFFICEMAX" ClientID="12" ClientStatus="1" ContactFullname="GUY G. HURLBUTT" ClientCountry="USA" ClientPPBCountry="USA" ClientState="IDAHO" ClientPPBState="IDAHO" xmlns="" />
+  </Filing>
+
+  <Filing ID="539731C9-3393-4B0B-A6DB-1E1B613C641B" Year="2003" Received="2004-02-12T00:00:00" Amount="12500" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="CEMEX S.A. DE C.V." ClientID="734" ClientStatus="0" ContactFullname="HARRY L. GUTMAN" ClientCountry="MEXICO" ClientPPBCountry="MEXICO" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="63FC1581-591E-483A-A5D8-24071BE8DEBE" Year="2003" Received="2004-02-17T00:00:00" Amount="60000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="POPULAR INC (FORMERLY BANCO POPULAR DE PUERTO RICO)" ClientID="1457" ClientStatus="0" ContactFullname="LIZ MCCURTAIN" ClientCountry="PUERTO RICO" ClientPPBCountry="PUERTO RICO" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="CFC6E2B6-3A98-4D4B-A239-000B62C084CC" Year="2008" Received="2008-04-16T17:48:23" Amount="30000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="FORTRESS INVESTMENT GROUP LLC" GeneralDescription="Investment management" ClientID="1002623" ClientStatus="0" ContactFullname="NICK GIORDANOA" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="7DB2EC06-677B-4BA3-ACCF-4855C6E112C3" Year="2003" Received="2003-08-12T00:00:00" Amount="40000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="BAE SYSTEMS" ClientID="342" ClientStatus="1" ContactFullname="COLLEEN A. TEMPLETON" ClientCountry="USA" ClientPPBCountry="UNITED KINGDOM" ClientState="VIRGINIA" ClientPPBState="" xmlns="" />
+  </Filing>
+  
+  <Filing ID="104313A3-968E-478E-870B-9DD28A3E02C4" Year="2002" Received="2002-08-14T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="MARCONI PLC" ClientID="773" ClientStatus="1" ContactFullname="BARRY B. DIRENFELD" ClientCountry="UNITED KINGDOM" ClientPPBCountry="USA" ClientState="" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+  <!-- from client_description.xml -->
+
+  <Filing ID="1402A175-987F-4896-B0F5-00107EF69834" Year="2007" Received="2008-02-13T14:44:07.167" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="H SQUARED INC" GeneralDescription="Distributor of tactical clothing and gear for the military and law enforcement." ClientID="1004229" ClientStatus="0" ContactFullname="KAYLENE GREEN" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+  
+  <Filing ID="530238AB-4144-484F-8297-00D4A969779C" Year="2008" Received="2008-04-16T12:11:18" Amount="6000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="CEREBRAL PALSY RESEARCH FOUNDATION" GeneralDescription="DISABILITY RESEARCH" ClientID="1700" ClientStatus="0" ContactFullname="JOHN D. KEMP" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="KANSAS" ClientPPBState="KANSAS" xmlns="" />
+  </Filing>
+
+  <Filing ID="BD57AEBC-D1D7-4867-880E-0711F5AABD17" Year="2008" Received="2008-02-24T11:57:10" Type="REGISTRATION" Period="UNDETERMINED">
+    <Client ClientName="MS JAMILA TAYLOR" GeneralDescription="" ClientID="36" ClientStatus="0" ContactFullname="Jamila Taylor" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <Filing ID="CCB41994-81FB-4C32-A155-082164564403" Year="2007" Received="2008-02-08T12:35:54.250" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="TD Federal Services" ClientID="7234" ClientStatus="1" ContactFullname="ANDRE HOLLIS" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+
+  <!-- from client_name.xml -->
+
+  <Filing ID="240EDC03-05F3-4F04-9F4B-0018BF4651F1" Year="2006" Received="2006-08-11T00:00:00" Amount="0" Type="MID-YEAR (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="AUTOMATIC DATA PROCESSING, INC." ClientID="761" ClientStatus="1" ContactFullname="MICHAEL S. BERMAN" ClientCountry="USA" ClientPPBCountry="USA" ClientState="NEW JERSEY" ClientPPBState="NEW JERSEY" xmlns="" />
+  </Filing>
+
+  <!-- from client_state.xml -->
+  
+  <Filing ID="3C6F64C0-4AC8-4E08-AE55-5A8B0E3BB91E" Year="1999" Received="1999-09-01T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="NATL ASSN OF AFFORDABLE HOUSING LENDERS" ClientID="12" ClientStatus="0" ContactFullname="JUDITH A. KENNEDY" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+  
+  <Filing ID="7425914C-E115-4449-B977-0722455B4463" Year="2008" Received="2008-04-21T14:45:32" Amount="10000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
+  </Filing>
+
+  <Filing ID="296B5A74-B4B0-4F51-A7FD-16D8195C3A2E" Year="2005" Received="2005-02-10T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Client ClientName="PUBLIC-ROOT C/O INAIC" ClientID="12" ClientStatus="0" ContactFullname="JOE BAPTISTA" ClientCountry="CANADA" ClientPPBCountry="USA" ClientState="" ClientPPBState="NEW YORK" xmlns="" />
+  </Filing>
+  
+  <Filing ID="5FED9056-BDB0-4738-9F25-243242AE0E3B" Year="2008" Received="2008-07-16T14:28:37" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Client ClientName="AMERICAN MEDICAL INFORMATICS ASSOCIATION" ClientID="48" ClientStatus="0" ContactFullname="JONATHAN JAGODA" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+
+  <Filing ID="36C7C2ED-A81D-4EC9-9270-24882C2D99F1" Year="2008" Received="2008-07-08T14:43:12" Amount="10000" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Client ClientName="GREATER YELLOWSTONE COALITION INC" GeneralDescription="Organization dedicated to the preservation/protection of the Greater Yellowstone" ClientID="1004236" ClientStatus="0" ContactFullname="MICHAEL TONGOUR" IsStateOrLocalGov="0" ClientCountry="UNDETERMINED" ClientPPBCountry="UNDETERMINED" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>
+
+  <!-- from client_state_or_local_gov.xml -->
+  
+  <Filing ID="8949C958-ABF0-49B8-8ACF-0026E92C2B13" Year="2006" Received="2007-01-29T11:35:01" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="INTERNATIONAL INTELLECTUAL PROPERTY INST" ClientID="1193" ClientStatus="0" ContactFullname="DAVID WHITESTONE" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+  
+  <Filing ID="045E8E33-BBEA-437C-844D-D1D6057AA2A0" Year="2001" Received="2002-02-11T00:00:00" Amount="100000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Client ClientName="GENERAL ELECTRIC CAPITAL SERVICES" ClientID="1154" ClientStatus="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="DISTRICT OF COLUMBIA" ClientPPBState="DISTRICT OF COLUMBIA" xmlns="" />
+  </Filing>
+
+  <Filing ID="31733890-2D8D-414E-8EF1-08701CBC5871" Year="2000" Received="2000-08-07T00:00:00" Amount="12000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="CITY OF WASILLA" ClientID="595" ClientStatus="0" ContactFullname="STEVEN W. SILVER" IsStateOrLocalGov="1" ClientCountry="USA" ClientPPBCountry="USA" ClientState="ALASKA" ClientPPBState="ALASKA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

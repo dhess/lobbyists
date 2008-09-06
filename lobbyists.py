@@ -231,6 +231,69 @@ def parse_filings(doc):
 # to set its cursor's lastrowid, so use an explicit cursor object for
 # operations that need lastrowid.
 
+def client_rowid(client, con):
+    """Find a client in an sqlite3 database.
+
+    Returns the row ID of the matching client, or None if there is no
+    match.
+
+    client - The parsed client dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    # ppb_state, state and description may be null; keep the query
+    # simple and check these fields in the results.
+    con.row_factory = sqlite3.Row
+    rows = con.execute('SELECT id, state, ppb_state, description \
+                        FROM client WHERE \
+                          country=:country AND \
+                          senate_id=:senate_id AND \
+                          name=:name AND \
+                          ppb_country=:ppb_country AND \
+                          status=:status AND \
+                          state_or_local_gov=:state_or_local_gov AND \
+                          contact_name=:contact_name',
+                       client)
+    for row in rows:
+        if row['ppb_state'] == client['ppb_state'] and \
+                row['state'] == client['state'] and \
+                row['description'] == client['description']:
+            return row['id']
+    return None
+
+
+def insert_client(client, con):
+    """Insert a client into an sqlite3 database.
+
+    Returns the row ID of the inserted client.
+
+    As a side effect, this function also inserts rows into the
+    'country', 'state' and 'org' tables.
+
+    client - The parsed client dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    cur = con.cursor()
+    # Note - client status is pre-inserted into DB.
+    for key in ['country', 'ppb_country']:
+        cur.execute('INSERT INTO country VALUES(?)', [client[key]])
+    for key in ['state', 'ppb_state']:
+        # May be null
+        val = client[key]
+        if val:
+            cur.execute('INSERT INTO state VALUES(?)', [val])
+    cur.execute('INSERT INTO org VALUES(?)', [client['name']])
+    cur.execute('INSERT INTO client VALUES(NULL, \
+                   :country, :senate_id, :name, :ppb_country, \
+                   :state, :ppb_state, :status, :description, \
+                   :state_or_local_gov, :contact_name)',
+                client)
+    return cur.lastrowid
+
+
 def registrant_rowid(reg, con):
     """Find a registrant in an sqlite3 database.
 
@@ -299,7 +362,7 @@ def insert_filing(filing, con):
     cur = con.cursor()
     cur.execute('INSERT INTO filing VALUES(\
                        :id, :type, :year, :period, :filing_date, :amount, \
-                       :registrant)',
+                       :registrant, :client)',
                 filing)
     return cur.lastrowid
 
@@ -324,8 +387,17 @@ def import_registrant(record, con):
                          insert_registrant)
 
 
+def import_client(record, con):
+    return import_entity(record,
+                         con,
+                         'client',
+                         client_rowid,
+                         insert_client)
+
+
 entity_importers = {
     'registrant': import_registrant,
+    'client': import_client,
     }
 
 def import_filings(con, parsed_filings):
