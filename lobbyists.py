@@ -43,13 +43,9 @@ def period(x):
     return periods[x]
 
 def is_gov(x):
-    if x is None:
-        return False
-    elif x.lower() in ['0', 'n', 'no']:
-        return False
-    else:
-        return True
-    
+    values = { None: 'missing', '0': 'n', '1': 'y'}
+    return values[x]
+
 def client_status(x):
     # Senate web page that provides the key for the client status code
     # lists '3: undetermined', but in practice this value doesn't

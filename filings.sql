@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS country;
 DROP TABLE IF EXISTS filing_registrant;
 DROP TABLE IF EXISTS state;
 DROP TABLE IF EXISTS client_status;
+DROP TABLE IF EXISTS state_or_local_gov;
 DROP TABLE IF EXISTS client;
 
 CREATE TABLE filing(
@@ -72,6 +73,10 @@ CREATE TABLE client_status(
   status VARCHAR(32) PRIMARY KEY
 );
 
+CREATE TABLE state_or_local_gov(
+  val VARCHAR(7) PRIMARY KEY
+);
+  
 CREATE TABLE client(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   country REFERENCES country,
@@ -82,17 +87,16 @@ CREATE TABLE client(
   ppb_state REFERENCES state,
   status REFERENCES client_status,
   description VARCHAR(256),
-  state_or_local_gov BOOLEAN,
+  state_or_local_gov REFERENCES state_or_local_gov,
   contact_name VARCHAR(256)
 );
 
 -- special values, usually for unspecified fields.
-INSERT INTO org VALUES('unspecified');
-INSERT INTO lobbyist VALUES(NULL, 'unspecified', 'unspecified', 'unspecified'); -- key is always 1
-INSERT INTO government_entity VALUES('unspecified');
-INSERT INTO issue VALUES('unspecified');
-INSERT INTO specific_issue VALUES('unspecified');
-INSERT INTO url VALUES('unspecified');
+
+-- 3 possible state/local govt values.
+INSERT INTO state_or_local_gov VALUES('missing');
+INSERT INTO state_or_local_gov VALUES('n');
+INSERT INTO state_or_local_gov VALUES('y');
 
 -- 3 possible client statuses.
 INSERT INTO client_status VALUES('active');
