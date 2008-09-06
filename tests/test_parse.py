@@ -660,6 +660,12 @@ class TestParseClients(unittest.TestCase):
 
         x = filings.pop()
         f = x['filing']
+        self.failUnlessEqual(f['id'], '500D51F8-7D36-44D1-B196-9A96A892921A')
+        client = x['client']
+        self.failUnlessEqual(client['contact_name'], None)
+
+        x = filings.pop()
+        f = x['filing']
         self.failUnlessEqual(f['id'], '66439336-A74C-41AE-8659-D1A6140D1494')
         client = x['client']
         self.failUnlessEqual(client['contact_name'], 'L.A. (SKIP) BAFALIS')

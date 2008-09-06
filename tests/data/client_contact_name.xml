@@ -26,5 +26,13 @@
   <Filing ID="66439336-A74C-41AE-8659-D1A6140D1494" Year="2001" Received="2002-02-13T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
     <Client ClientName="SCHOOL DISTRICT OF OSCEOLA COUNTY, FL" ClientID="1650" ClientStatus="0" ContactFullname="L.A. (SKIP) BAFALIS" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
   </Filing>
+
+  <!-- Sometimes the contact name is missing. Note: in the original
+       XML document, this filing does specify a contact name. It's
+       been modified here for the test. -->
+
+  <Filing ID="500D51F8-7D36-44D1-B196-9A96A892921A" Year="1999" Received="1999-09-02T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Client ClientName="TETHERS UNLIMITED INC" ClientID="12" ClientStatus="1" ClientCountry="USA" ClientPPBCountry="USA" ClientState="WASHINGTON" ClientPPBState="WASHINGTON" xmlns="" />
+  </Filing> 
   
 </PublicFilings>
