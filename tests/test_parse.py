@@ -341,7 +341,7 @@ class TestParseRegistrants(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], 'D4AFC576-0B22-4CE7-B595-141BE8ABC8DC')
         reg = x['registrant']
-        self.failUnlessEqual(reg['address'], None)
+        self.failUnlessEqual(reg['address'], 'unspecified')
 
         x = filings.pop()
         f = x['filing']
@@ -380,7 +380,7 @@ class TestParseRegistrants(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], '443C63BC-F0DB-41F7-B912-002CABBF0CAD')
         reg = x['registrant']
-        self.failUnlessEqual(reg['description'], None)
+        self.failUnlessEqual(reg['description'], 'unspecified')
 
         self.failUnlessEqual(len(filings), 0)
 
