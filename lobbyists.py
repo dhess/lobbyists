@@ -145,11 +145,11 @@ client_attrs = [('ClientCountry', 'country', identity),
                 ('ClientID', 'senate_id', int),
                 ('ClientName', 'name', identity),
                 ('ClientPPBCountry', 'ppb_country', identity),
-                ('ClientPPBState', 'ppb_state', identity),
-                ('ClientState', 'state', identity),
+                ('ClientPPBState', 'ppb_state', optional),
+                ('ClientState', 'state', optional),
                 ('ClientStatus', 'status', client_status),
-                ('ContactFullname', 'contact_name', identity),
-                ('GeneralDescription', 'description', identity),
+                ('ContactFullname', 'contact_name', optional),
+                ('GeneralDescription', 'description', optional),
                 ('IsStateOrLocalGov', 'state_or_local_gov', is_gov)]
 
 def parse_client(elt):
@@ -233,6 +233,44 @@ def parse_filings(doc):
 # to set its cursor's lastrowid, so use an explicit cursor object for
 # operations that need lastrowid.
 
+def rowid(table, tomatch, con):
+    """Find a match in a database table and return its rowid.
+
+    This function only works for tables with a primary key
+    auto-increment column named 'id'.
+    
+    table - The name of the table to search (a string).
+
+    tomatch - A mapping whose key names are identical to the table's
+    column names, and whose values are the values to match in the
+    table.
+
+    con - An sqlite3.Connection object.
+    
+    column - An optional keyword argument which can be used to select
+    a subset of columns from the match, possibly improving performance
+    a bit. For example, set this argument to 'id' to select just the
+    'id' column in the result. The default is to select all columns,
+    which works for all cases but might not be optimal.
+
+    Returns the rowid of the matching row, or None if no match is
+    found.
+
+    """
+    stmt = 'SELECT id from %s WHERE ' % table
+    for k in tomatch.keys():
+        stmt += '%s=:%s AND ' % (k, k)
+    # remove trailing AND
+    stmt = stmt.rsplit(' AND', 1)[0]
+    cur = con.cursor()
+    cur.execute(stmt, tomatch)
+    row = cur.fetchone()
+    if row:
+        return row[0]
+    else:
+        return None
+
+
 def client_rowid(client, con):
     """Find a client in an sqlite3 database.
 
@@ -244,25 +282,7 @@ def client_rowid(client, con):
     con - An sqlite3.Connection object.
 
     """
-    # ppb_state, state and description may be null; keep the query
-    # simple and check these fields in the results.
-    con.row_factory = sqlite3.Row
-    rows = con.execute('SELECT id, state, ppb_state, description \
-                        FROM client WHERE \
-                          country=:country AND \
-                          senate_id=:senate_id AND \
-                          name=:name AND \
-                          ppb_country=:ppb_country AND \
-                          status=:status AND \
-                          state_or_local_gov=:state_or_local_gov AND \
-                          contact_name=:contact_name',
-                       client)
-    for row in rows:
-        if row['ppb_state'] == client['ppb_state'] and \
-                row['state'] == client['state'] and \
-                row['description'] == client['description']:
-            return row['id']
-    return None
+    return rowid('client', client, con)
 
 
 def insert_client(client, con):
@@ -307,21 +327,7 @@ def registrant_rowid(reg, con):
     con - An sqlite3.Connection object.
     
     """
-    cur = con.cursor()
-    cur.execute('SELECT id \
-                 FROM registrant WHERE \
-                      address=:address AND \
-                      description=:description AND \
-                      country=:country AND \
-                      senate_id=:senate_id AND \
-                      name=:name AND \
-                      ppb_country=:ppb_country',
-                reg)
-    row = cur.fetchone()
-    if row:
-        return row[0]
-    else:
-        return None
+    return rowid('registrant', reg, con)
 
     
 def insert_registrant(reg, con):

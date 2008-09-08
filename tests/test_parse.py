@@ -560,8 +560,8 @@ class TestParseClients(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], '36C7C2ED-A81D-4EC9-9270-24882C2D99F1')
         client = x['client']
-        self.failUnlessEqual(client['state'], None)
-        self.failUnlessEqual(client['ppb_state'], None)
+        self.failUnlessEqual(client['state'], 'unspecified')
+        self.failUnlessEqual(client['ppb_state'], 'unspecified')
         
         x = filings.pop()
         f = x['filing']
@@ -574,14 +574,14 @@ class TestParseClients(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], '104313A3-968E-478E-870B-9DD28A3E02C4')
         client = x['client']
-        self.failUnlessEqual(client['state'], None)
+        self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'UNDETERMINED')
         
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '296B5A74-B4B0-4F51-A7FD-16D8195C3A2E')
         client = x['client']
-        self.failUnlessEqual(client['state'], None)
+        self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'NEW YORK')
         
         x = filings.pop()
@@ -589,21 +589,21 @@ class TestParseClients(unittest.TestCase):
         self.failUnlessEqual(f['id'], '7DB2EC06-677B-4BA3-ACCF-4855C6E112C3')
         client = x['client']
         self.failUnlessEqual(client['state'], 'VIRGINIA')
-        self.failUnlessEqual(client['ppb_state'], None)
+        self.failUnlessEqual(client['ppb_state'], 'unspecified')
         
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'CFC6E2B6-3A98-4D4B-A239-000B62C084CC')
         client = x['client']
-        self.failUnlessEqual(client['state'], None)
-        self.failUnlessEqual(client['ppb_state'], None)
+        self.failUnlessEqual(client['state'], 'unspecified')
+        self.failUnlessEqual(client['ppb_state'], 'unspecified')
         
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '539731C9-3393-4B0B-A6DB-1E1B613C641B')
         client = x['client']
-        self.failUnlessEqual(client['state'], None)
-        self.failUnlessEqual(client['ppb_state'], None)
+        self.failUnlessEqual(client['state'], 'unspecified')
+        self.failUnlessEqual(client['ppb_state'], 'unspecified')
         
         x = filings.pop()
         f = x['filing']
@@ -662,7 +662,7 @@ class TestParseClients(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], '500D51F8-7D36-44D1-B196-9A96A892921A')
         client = x['client']
-        self.failUnlessEqual(client['contact_name'], None)
+        self.failUnlessEqual(client['contact_name'], 'unspecified')
 
         x = filings.pop()
         f = x['filing']
@@ -705,13 +705,13 @@ class TestParseClients(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], 'CCB41994-81FB-4C32-A155-082164564403')
         client = x['client']
-        self.failUnlessEqual(client['description'], None)
+        self.failUnlessEqual(client['description'], 'unspecified')
         
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'BD57AEBC-D1D7-4867-880E-0711F5AABD17')
         client = x['client']
-        self.failUnlessEqual(client['description'], None)
+        self.failUnlessEqual(client['description'], 'unspecified')
 
         x = filings.pop()
         f = x['filing']
