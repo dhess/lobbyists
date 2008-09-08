@@ -91,8 +91,6 @@ CREATE TABLE client(
   contact_name VARCHAR(256)
 );
 
--- special values, usually for unspecified fields.
-
 -- 3 possible state/local govt values.
 INSERT INTO state_or_local_gov VALUES('missing');
 INSERT INTO state_or_local_gov VALUES('n');
@@ -102,3 +100,5 @@ INSERT INTO state_or_local_gov VALUES('y');
 INSERT INTO client_status VALUES('active');
 INSERT INTO client_status VALUES('terminated');
 INSERT INTO client_status VALUES('administratively terminated');
+
+-- special values, usually for unspecified fields.

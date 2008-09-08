@@ -24,6 +24,12 @@ import sqlite3
 def identity(x):
     return x
 
+def optional(x):
+    if x is None:
+        return 'unspecified'
+    else:
+        return x
+        
 def amount(x):
     if x is None:
         return x
@@ -159,8 +165,8 @@ def parse_client(elt):
     return parse_element(elt, 'client', client_attrs)
 
     
-registrant_attrs = [('Address', 'address', identity),
-                    ('GeneralDescription', 'description', identity),
+registrant_attrs = [('Address', 'address', optional),
+                    ('GeneralDescription', 'description', optional),
                     ('RegistrantCountry', 'country', identity),
                     ('RegistrantID', 'senate_id', int),
                     ('RegistrantName', 'name', identity),
@@ -301,21 +307,21 @@ def registrant_rowid(reg, con):
     con - An sqlite3.Connection object.
     
     """
-    # address and description may be null; keep the query simple and
-    # check address and description in the results.
-    con.row_factory = sqlite3.Row
-    rows = con.execute('SELECT id, address, description \
-                        FROM registrant WHERE \
-                          country=:country AND \
-                          senate_id=:senate_id AND \
-                          name=:name AND \
-                          ppb_country=:ppb_country',
-                       reg)
-    for row in rows:
-        if row['address'] == reg['address'] and \
-                row['description'] == reg['description']:
-            return row['id']
-    return None
+    cur = con.cursor()
+    cur.execute('SELECT id \
+                 FROM registrant WHERE \
+                      address=:address AND \
+                      description=:description AND \
+                      country=:country AND \
+                      senate_id=:senate_id AND \
+                      name=:name AND \
+                      ppb_country=:ppb_country',
+                reg)
+    row = cur.fetchone()
+    if row:
+        return row[0]
+    else:
+        return None
 
     
 def insert_registrant(reg, con):

@@ -90,17 +90,6 @@ class TestImport(unittest.TestCase):
             self.failUnlessEqual(row['name'], reg['name'])
             self.failUnlessEqual(row['ppb_country'], reg['ppb_country'])
 
-    # Multiple filings with the exact same registrant info should
-    # share the same registrant row ID in the database; i.e., there
-    # should not be duplicate registrant rows in the database.
-    #
-    # Registrant address and description are optional. When they're
-    # not included in a particular registrant record, they're
-    # represented as NULL in the database. Because of the details of
-    # the importing implementation, there are 4 tests for identical
-    # registrant records, one for each combination of missing/present
-    # address and description.
-
     def dup_test(self, file, column):
         filings = [x for x in lobbyists.parse_filings(util.testpath(file))]
         con = sqlite3.connect(':memory:')
@@ -121,48 +110,9 @@ class TestImport(unittest.TestCase):
                       FROM filing')
         return len(cur.fetchall()), len(filings)
         
-    def test_import_identical_registrants1(self):
-        """Identical registrants shouldn't be duplicated in the database (case 1)."""
-        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup1.xml'))]
-        con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
-        self.failUnless(lobbyists.import_filings(con, filings))
-        cur = con.cursor()
-        cur.execute('SELECT filing.registrant \
-                      FROM filing')
-        row1, row2 = cur.fetchall()
-        self.failUnlessEqual(row1[0], row2[0])
-
-
-    def test_import_identical_registrants2(self):
-        """Identical registrants shouldn't be duplicated in the database (case 2)."""
-        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup2.xml'))]
-        con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
-        self.failUnless(lobbyists.import_filings(con, filings))
-        cur = con.cursor()
-        cur.execute('SELECT filing.registrant \
-                      FROM filing')
-        row1, row2 = cur.fetchall()
-        self.failUnlessEqual(row1[0], row2[0])
-
-
-    def test_import_identical_registrants3(self):
-        """Identical registrants shouldn't be duplicated in the database (case 3)."""
-        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup3.xml'))]
-        con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
-        self.failUnless(lobbyists.import_filings(con, filings))
-        cur = con.cursor()
-        cur.execute('SELECT filing.registrant \
-                      FROM filing')
-        row1, row2 = cur.fetchall()
-        self.failUnlessEqual(row1[0], row2[0])
-
-
-    def test_import_identical_registrants4(self):
-        """Identical registrants shouldn't be duplicated in the database (case 4)."""
-        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup4.xml'))]
+    def test_import_identical_registrants(self):
+        """Identical registrants shouldn't be duplicated in the database"""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup.xml'))]
         con = sqlite3.connect(':memory:')
         con.executescript(util.sqlscript('filings.sql'))
         self.failUnless(lobbyists.import_filings(con, filings))
