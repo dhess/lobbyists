@@ -742,7 +742,7 @@ class TestParseClients(unittest.TestCase):
         f = x['filing']
         self.failUnlessEqual(f['id'], '045E8E33-BBEA-437C-844D-D1D6057AA2A0')
         client = x['client']
-        self.failUnlessEqual(client['state_or_local_gov'], 'missing')
+        self.failUnlessEqual(client['state_or_local_gov'], 'unspecified')
         
         x = filings.pop()
         f = x['filing']

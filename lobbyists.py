@@ -49,7 +49,7 @@ def period(x):
     return periods[x]
 
 def is_gov(x):
-    values = { None: 'missing', '0': 'n', '1': 'y'}
+    values = { None: 'unspecified', '0': 'n', '1': 'y'}
     return values[x]
 
 def client_status(x):
