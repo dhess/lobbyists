@@ -302,6 +302,23 @@ class TestImport(unittest.TestCase):
         for state in states:
             self.failUnless(state in rows)
         
+    def test_import_client_persons(self):
+        """Importing clients should fill the 'person' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM person")
+        rows = [row['name'] for row in cur]
+        clients = [x for x in filings if 'client' in x]
+        persons = set([x['client']['contact_name'] for x in clients])
+        self.failUnlessEqual(len(rows), len(persons))
+        for person in persons:
+            self.failUnless(person in rows)
+        
     def test_import_client_state_or_local_gov(self):
         """After importing clients, state_or_local_gov table should be unchanged (it's pre-loaded)."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]

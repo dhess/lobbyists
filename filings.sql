@@ -28,13 +28,10 @@ CREATE TABLE org(
   name VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
 
-CREATE TABLE lobbyist(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  last_name VARCHAR(256),
-  first_name VARCHAR(256),
-  middle_name VARCHAR(256)
+CREATE TABLE person(
+  name VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
-
+  
 CREATE TABLE government_entity(
   name VARCHAR(256) PRIMARY KEY
 );
@@ -88,7 +85,7 @@ CREATE TABLE client(
   status REFERENCES client_status,
   description VARCHAR(256),
   state_or_local_gov REFERENCES state_or_local_gov,
-  contact_name VARCHAR(256)
+  contact_name VARCHAR(256) REFERENCES person
 );
 
 -- 3 possible state/local govt values.
@@ -102,3 +99,4 @@ INSERT INTO client_status VALUES('terminated');
 INSERT INTO client_status VALUES('administratively terminated');
 
 -- special values, usually for unspecified fields.
+INSERT INTO person VALUES('unspecified');

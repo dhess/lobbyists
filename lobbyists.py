@@ -304,6 +304,7 @@ def insert_client(client, con):
         cur.execute('INSERT INTO country VALUES(?)', [client[key]])
     for key in ['state', 'ppb_state']:
         cur.execute('INSERT INTO state VALUES(?)', [client[key]])
+    cur.execute('INSERT INTO person VALUES(?)', [client['contact_name']])
     cur.execute('INSERT INTO org VALUES(?)', [client['name']])
     cur.execute('INSERT INTO client VALUES(NULL, \
                    :country, :senate_id, :name, :ppb_country, \
