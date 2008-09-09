@@ -31,6 +31,32 @@ def filing_values(parsed_filings):
 
 
 class TestImport(unittest.TestCase):
+    def test_preloaded_table_state_or_local_gov(self):
+        """Is the state_or_local_gov table preloaded by the schema file?"""
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT val FROM state_or_local_gov")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('unspecified' in rows)
+        self.failUnless('y' in rows)
+        self.failUnless('n' in rows)
+        
+    def test_preloaded_table_client_status(self):
+        """Is the client_status table preloaded by the schema file?"""
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT status FROM client_status")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('active' in rows)
+        self.failUnless('terminated' in rows)
+        self.failUnless('administratively terminated' in rows)
+        
     def test_import_filings(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('filings.xml'))]
         con = sqlite3.connect(':memory:')
@@ -90,6 +116,42 @@ class TestImport(unittest.TestCase):
             self.failUnlessEqual(row['name'], reg['name'])
             self.failUnlessEqual(row['ppb_country'], reg['ppb_country'])
 
+    def test_import_registrant_countries(self):
+        """Ensure importing registrants fills the 'country' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM country")
+        rows = [row['name'] for row in cur]
+        registrants = [x for x in filings if 'registrant' in x]
+        countries = set([x['registrant']['country'] for x in registrants])
+        countries = countries.union([x['registrant']['ppb_country'] for x in \
+                                         registrants])
+        self.failUnlessEqual(len(rows), len(countries))
+        for country in countries:
+            self.failUnless(country in rows)
+        
+    def test_import_registrant_orgs(self):
+        """Ensure importing registrants fills the 'org' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('registrants.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM org")
+        rows = [row['name'] for row in cur]
+        registrants = [x for x in filings if 'registrant' in x]
+        orgs = set([x['registrant']['name'] for x in registrants])
+        self.failUnlessEqual(len(rows), len(orgs))
+        for org in orgs:
+            self.failUnless(org in rows)
+        
     def dup_test(self, file, column):
         filings = [x for x in lobbyists.parse_filings(util.testpath(file))]
         con = sqlite3.connect(':memory:')
@@ -184,6 +246,92 @@ class TestImport(unittest.TestCase):
         n1, n2 = self.similarity_test('clients_slightly_different.xml', 'client')
         self.failUnlessEqual(n1, n2)
 
+    def test_import_client_orgs(self):
+        """Importing clients should fill the 'org' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM org")
+        rows = [row['name'] for row in cur]
+        clients = [x for x in filings if 'client' in x]
+        orgs = set([x['client']['name'] for x in clients])
+        self.failUnlessEqual(len(rows), len(orgs))
+        for org in orgs:
+            self.failUnless(org in rows)
+        
+    def test_import_client_countries(self):
+        """Importing clients should fill the 'country' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM country")
+        rows = [row['name'] for row in cur]
+        clients = [x for x in filings if 'client' in x]
+        countries = set([x['client']['country'] for x in clients])
+        countries = countries.union([x['client']['ppb_country'] for x in \
+                                         clients])
+        self.failUnlessEqual(len(rows), len(countries))
+        for country in countries:
+            self.failUnless(country in rows)
+        
+
+    def test_import_client_states(self):
+        """Importing clients should fill the 'state' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM state")
+        rows = [row['name'] for row in cur]
+        clients = [x for x in filings if 'client' in x]
+        states = set([x['client']['state'] for x in clients])
+        states = states.union([x['client']['ppb_state'] for x in \
+                                         clients])
+        self.failUnlessEqual(len(rows), len(states))
+        for state in states:
+            self.failUnless(state in rows)
+        
+    def test_import_client_state_or_local_gov(self):
+        """After importing clients, state_or_local_gov table should be unchanged (it's pre-loaded)."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT val FROM state_or_local_gov")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('unspecified' in rows)
+        self.failUnless('y' in rows)
+        self.failUnless('n' in rows)
+        
+    def test_import_client_client_status(self):
+        """After importing clients, client_status table should be unchanged (it's pre-loaded)."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT status FROM client_status")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('active' in rows)
+        self.failUnless('terminated' in rows)
+        self.failUnless('administratively terminated' in rows)
+        
 
 if __name__ == '__main__':
     unittest.main()
