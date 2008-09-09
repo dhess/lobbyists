@@ -92,7 +92,7 @@ CREATE TABLE client(
 );
 
 -- 3 possible state/local govt values.
-INSERT INTO state_or_local_gov VALUES('missing');
+INSERT INTO state_or_local_gov VALUES('unspecified');
 INSERT INTO state_or_local_gov VALUES('n');
 INSERT INTO state_or_local_gov VALUES('y');
 
