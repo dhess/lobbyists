@@ -299,14 +299,11 @@ def insert_client(client, con):
 
     """
     cur = con.cursor()
-    # Note - client status is pre-inserted into DB.
+    # Note - client status is pre-inserted into client_status table.
     for key in ['country', 'ppb_country']:
         cur.execute('INSERT INTO country VALUES(?)', [client[key]])
     for key in ['state', 'ppb_state']:
-        # May be null
-        val = client[key]
-        if val:
-            cur.execute('INSERT INTO state VALUES(?)', [val])
+        cur.execute('INSERT INTO state VALUES(?)', [client[key]])
     cur.execute('INSERT INTO org VALUES(?)', [client['name']])
     cur.execute('INSERT INTO client VALUES(NULL, \
                    :country, :senate_id, :name, :ppb_country, \
