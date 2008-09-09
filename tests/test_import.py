@@ -179,8 +179,8 @@ class TestImport(unittest.TestCase):
         row1, row2 = self.dup_test('clients_dup.xml', 'client')
         self.failUnlessEqual(row1[0], row2[0])
 
-    def test_import_similar_registrants(self):
-        """Ensure slightly different registrants are inserted into different rows."""
+    def test_import_similar_clients(self):
+        """Ensure slightly different clients are inserted into different rows."""
         n1, n2 = self.similarity_test('clients_slightly_different.xml', 'client')
         self.failUnlessEqual(n1, n2)
 
