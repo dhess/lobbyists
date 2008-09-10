@@ -137,8 +137,7 @@ def parse_attrs(elt, attrs):
 
 
 def parse_element(elt, id, attrs):
-    # Caller expects a sequence
-    return [(id, dict(parse_attrs(elt, attrs)))]
+    return (id, dict(parse_attrs(elt, attrs)))
 
 
 client_attrs = [('ClientCountry', 'country', identity),
@@ -205,6 +204,12 @@ def parse_filing(elt):
     return parse_element(elt, 'filing', filing_attrs)
 
 
+# These parsers are used by parse_filings to parse sub-elements of
+# Filing DOM elements. The parser is applied to a single argument, the
+# DOM element to parse. The parser must return a key-value pair
+# ('thing_name': thing_value), which will be inserted into the
+# dictionary representing the parsed Filing element.
+
 subelt_parsers = {
     'Registrant': parse_registrant,
     'Client': parse_client
@@ -220,10 +225,10 @@ def parse_filings(doc):
 
     """
     for filing_elt in filing_elements(doc):
-        filing = dict(parse_filing(filing_elt))
+        filing = dict([parse_filing(filing_elt)])
         for elt in child_elements(filing_elt):
             parser = subelt_parsers[element_name(elt)]
-            filing.update(parser(elt))
+            filing.update([parser(elt)])
         yield filing
 
 
