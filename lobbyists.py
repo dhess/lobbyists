@@ -156,9 +156,8 @@ def parse_client(elt):
 
     elt - The Client DOM element.
 
-    Returns a list with one item, a pair whose first item is the
-    string 'client' and whose second item is the dictionary of parsed
-    attributes.
+    Returns a a pair whose first item is the string 'client' and whose
+    second item is the dictionary of parsed attributes.
     
     """
     return parse_element(elt, 'client', client_attrs)
@@ -176,9 +175,8 @@ def parse_registrant(elt):
 
     elt - The Registrant DOM element.
 
-    Returns a list with one item, a pair whose first item is the
-    string 'registrant' and whose second item is the dictionary of
-    parsed attributes.
+    Returns a a pair whose first item is the string 'registrant' and
+    whose second item is the dictionary of parsed attributes.
 
     """
     return parse_element(elt, 'registrant', registrant_attrs)
@@ -196,9 +194,8 @@ def parse_filing(elt):
 
     elt - The Filing DOM element.
 
-    Returns a list with one item, a pair whose first item is the
-    string 'filing' and whose second item is the dictionary of parsed
-    attributes.
+    Returns a pair whose first item is the string 'filing' and whose
+    second item is the dictionary of parsed attributes.
 
     """
     return parse_element(elt, 'filing', filing_attrs)
