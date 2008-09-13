@@ -1,0 +1,82 @@
+<PublicFilings>
+
+  <!-- LobbyistName is almost always Last, First with an optional
+       middle initial (sometimes with, sometimes without trailing
+       period) trailing the first name. There are also a handful of
+       records with blank ("") lobbyist names. They all appear in the
+       2008_3_7.xml document. Here's one of them. -->
+  
+  <Filing ID="02DDA99B-725A-4DBA-8397-34892A6918D7" Year="2008" Received="2008-07-18T17:03:10" Amount="60000" Type="FIRST QUARTER AMENDMENT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="GRAFMEYER, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Deputy Chief of Staff, JCT" xmlns="" />
+      <Lobbyist LobbyistName="DENNIS, JAMES" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Tax Counsel, Sen Robb - Counsel, Sen Bingaman" xmlns="" />
+      <Lobbyist LobbyistName="TALISMAN, JONATHAN" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Assistant Treasury Secretary for Tax Policy" xmlns="" />
+      <Lobbyist LobbyistName="MIKRUT, JOSEPH" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Tax Legislative Counsel - US Treasury" xmlns="" />
+      <Lobbyist LobbyistName="HOOPER, LINDSAY" LobbyistStatus="0" LobbyisteIndicator="0" xmlns="" />
+      <Lobbyist LobbyistName="WILLCOX, LAWRENCE" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Staff Director, Senate Republican Policy Committee" xmlns="" />
+      <Lobbyist LobbyistName="MCKENNEY, WILLIAM" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Staff Director, Ways &amp; Means Over Sub" xmlns="" />
+      <Lobbyist LobbyistName="" LobbyistStatus="1" LobbyisteIndicator="0" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- Here's a Filing with only a single lobbyist. -->
+
+  <Filing ID="D97EF71E-9062-42A9-9510-00048B943421" Year="2000" Received="2000-10-25T00:00:00" Amount="35000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="LEVI, ROBERT" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+    <!-- Occasionally a lobbyist is listed twice in the same
+         filing. Yes, Lobbyist records appear to have lots of
+         problems. -->
+
+  <Filing ID="0FC23296-F948-43FD-98D4-0912F6579E6A" Year="2004" Received="2004-11-18T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="NEAL, KATIE" LobbyistStatus="0" LobbyisteIndicator="2" xmlns="" />
+      <Lobbyist LobbyistName="NEAL, KATIE" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="NEAL, KATIE" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="COMM DIR/REP DINGELL" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- Here's a filing where several lobbyists are listed multiple
+       times, usually (but not always) with a slightly different
+       spelling. -->
+  
+  <Filing ID="AB94AB3D-F5D6-4EE8-A462-0925A6D9A499" Year="2004" Received="2004-11-11T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="SEIDEN, ELLIOTT" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="FOUSHES, CLAY" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="CLIFFORD, DENNY" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="ROSIA, MEGAN RAE" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="LONG, MARK" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="VAN DE WATER, READ" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="BETHKE, CECILIA" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="LIEN, RICHARD" LobbyistStatus="1" LobbyisteIndicator="1" OfficialPosition="MGR. AIR TRAFFIC DIV. WEST PAC, REG, FAA" xmlns="" />
+      <Lobbyist LobbyistName="MISHKIN, DAVID" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="FOUSHEE, CLAY" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="AMANTE, CAROL" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="ROSIA, MEGAN" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="SKWAREK, DANIEL" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="QUERN, DARRIN" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="AILOR, DIANE" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="STEENLAND, DOUGLAS M." LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="GRANESE, LARRY" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="NEWMAN, ANDREA FISCHER" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="HIRST, RICHARD" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="BROWER, RONALD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="VEITH, SALLY W." LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="LIEN, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- Here's a fragment from a filing that lists a lobbyist with an
+       unusual name. -->
+  
+  <Filing ID="87A30FA6-7C35-4294-BA43-4CE7B5B808B3" Year="2008" Received="2008-04-11T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="LEHMAN (MY 2006), PATRICK" LobbyistStatus="1" LobbyisteIndicator="2" OfficialPosition="" xmlns="" />
+    </Lobbyists>
+  </Filing>
+  
+</PublicFilings>

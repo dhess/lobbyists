@@ -1,0 +1,66 @@
+<PublicFilings>
+
+  <!-- OfficialPosition is supposed to state which "covered positions"
+       in government a lobbyist has held within 20 years of the filing
+       date. In practice, it's unclear how reliable it is. Many
+       filings contain lobbyists records whose LobbyisteIndicator (sp)
+       is "covered" but whose OfficialPosition is "N/A". Less frequent
+       are lobbyist records whose indicator is "not covered" but whose
+       OfficialPosition is specific. It's not immediately obvious
+       whether which, if either, of these fields is more accurate.
+
+       OfficialPosition is sometimes, though rarely, omitted entirely.
+       
+       When it is provided, the format of the OfficialPosition
+       attribute is fairly free-form. It may be all caps or mixed. It
+       may contain punctuation. It frequently lists multiple covered
+       positions, usually saparated by a semicolon (';'). -->
+
+  <!-- In the following filing, all of the lobbyists listed as
+       "covered" have a value of "n/a" as their position, which should
+       not be the case. -->
+  
+  <Filing ID="2164D6BB-EBBA-40D2-9C18-16A2D670030A" Year="2007" Received="2008-06-17T22:59:19" Amount="1680000" Type="YEAR-END AMENDMENT" Period="Year-End (July 1 - Dec 31)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="LAVINSON, MELISSA" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="KLINE, STEVEN L" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="CARTER, RICHARD A" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="ALDANA, SILVIA" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="TRAMUTO, JAMES" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+  </Filing>
+  
+  <!-- Here's a filing where a lobbyist is listed as covered and the
+       position is the empty string (""). -->
+  
+  <Filing ID="DE038A45-9F6B-4764-B678-8004E7903BC4" Year="2005" Received="2008-03-14T00:00:00" Amount="300000" Type="MID-YEAR AMENDMENT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="SULLIVAN, JULI" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- Here's the opposite case: several lobbyists listed as "not
+       covered" but providing covered position titles. -->
+  
+  <Filing ID="BD894C51-AA23-46AE-9802-006B8C91702B" Year="2008" Received="2008-07-18T12:24:22" Amount="100000" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="UELAND, ERIC" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="AsstEditor/Ed./Res.Dir, Sen.Rep.PolicyComm;" xmlns="" />
+      <Lobbyist LobbyistName="DUBERSTEIN, KENNETH" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Chief of Staff, President Reagan" xmlns="" />
+      <Lobbyist LobbyistName="GRIFFIN, BRIAN" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="StaffAsst, DemPolicyComm; FlrAsst, MinoritySec" xmlns="" />
+      <Lobbyist LobbyistName="CHAMPLIN, STEVEN" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="ExecFlrAsst, H. Maj. Whip; ExecDir, H.DemCauc." xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- Here's another lovely filing with a lobbyist listed twice, each
+       time with a different indicator. At least the indicator is
+       consistent with the value of the OfficialPosition
+       attribute. -->
+  
+  <Filing ID="AB94AB3D-F5D6-4EE8-A462-0925A6D9A499" Year="2004" Received="2004-11-11T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="LIEN, RICHARD" LobbyistStatus="1" LobbyisteIndicator="1" OfficialPosition="MGR. AIR TRAFFIC DIV. WEST PAC, REG, FAA" xmlns="" />
+      <Lobbyist LobbyistName="LIEN, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+</PublicFilings>

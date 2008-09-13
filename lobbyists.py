@@ -61,6 +61,14 @@ def status(x):
         }
     return status[int(x)]
 
+def lobbyist_indicator(x):
+    indicator = {
+        0: 'not covered',
+        1: 'covered',
+        2: 'undetermined'
+        }
+    return indicator[int(x)]
+
 
 # xml.dom.pulldom-specific code
     
@@ -180,6 +188,44 @@ def parse_registrant(elt):
     return parse_element(elt, 'registrant', registrant_attrs)
 
 
+# LobbyistName uses the 'optional' parser. This is intentional; there
+# are a handful of records in the XML documents (see 2008_3_7.xml)
+# where the attribute's value is the empty string "".
+
+lobbyist_attrs = [('LobbyistName', 'name', optional),
+                  ('LobbyistStatus', 'status', status),
+                  ('LobbyisteIndicator', 'indicator', lobbyist_indicator),
+                  ('OfficialPosition', 'official_position', optional)]
+
+def parse_lobbyist(elt):
+    """Parse a Lobbyist DOM element.
+
+    elt - The Lobbyist DOM element.
+
+    Returns a pair whose first item is the string 'lobbyist' and whose
+    second item is the dictionary of parsed attributes.
+
+    """
+    return parse_element(elt, 'lobbyist', lobbyist_attrs)
+
+
+def parse_lobbyists(elt):
+    """Parse a Lobbyists DOM element.
+
+    elt - The Lobbyists DOM element.
+
+    Returns a pair whose first item is the string 'lobbyists' and
+    whose second item is a list of parsed Lobbyist DOM elements, one
+    for each Lobbyist sub-element of this Lobbyists element.
+
+    """
+    lobbyists = list()
+    # All children of Lobbyists elements are Lobbyist elements.
+    for lobbyist_elt in child_elements(elt):
+        lobbyists.append(dict([parse_lobbyist(lobbyist_elt)]))
+    return ('lobbyists', lobbyists)
+
+
 filing_attrs = [('ID', 'id', identity),
                 ('Year', 'year', int),
                 ('Received', 'filing_date', identity),
@@ -207,7 +253,8 @@ def parse_filing(elt):
 
 subelt_parsers = {
     'Registrant': parse_registrant,
-    'Client': parse_client
+    'Client': parse_client,
+    'Lobbyists': parse_lobbyists
     }
 
 def parse_filings(doc):

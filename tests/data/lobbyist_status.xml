@@ -1,0 +1,34 @@
+<PublicFilings>
+
+  <!-- LobbyistStatus is always present and is always 0, 1 or 3, never
+       2 ('administratively terminated'). The only records with a
+       status of 3 ('undetermined') occur in the 2000_3.xml
+       database. Here's one of them. -->
+  
+  <Filing ID="04926911-8A12-4A0E-9DA4-510869446EAC" Year="2000" Received="2000-08-14T00:00:00" Amount="20000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="HARRIS, ROBERT L." LobbyistStatus="3" LobbyisteIndicator="2" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- Occasionally, a record lists the same lobbyist twice, each time
+       with a different status. (Sigh.) Here's one with "LIEN,
+       RICHARD" given twice, once with status 0, once with status
+       1. -->
+
+  <Filing ID="AB94AB3D-F5D6-4EE8-A462-0925A6D9A499" Year="2004" Received="2004-11-11T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="LIEN, RICHARD" LobbyistStatus="1" LobbyisteIndicator="1" OfficialPosition="MGR. AIR TRAFFIC DIV. WEST PAC, REG, FAA" xmlns="" />
+      <Lobbyist LobbyistName="LIEN, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- This filing includes a lobbyist with no name and a status of 1. -->
+  
+  <Filing ID="02DDA99B-725A-4DBA-8397-34892A6918D7" Year="2008" Received="2008-07-18T17:03:10" Amount="60000" Type="FIRST QUARTER AMENDMENT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="" LobbyistStatus="1" LobbyisteIndicator="0" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+</PublicFilings>
