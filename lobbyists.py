@@ -156,7 +156,7 @@ def parse_client(elt):
 
     elt - The Client DOM element.
 
-    Returns a a pair whose first item is the string 'client' and whose
+    Returns a pair whose first item is the string 'client' and whose
     second item is the dictionary of parsed attributes.
     
     """
@@ -175,7 +175,7 @@ def parse_registrant(elt):
 
     elt - The Registrant DOM element.
 
-    Returns a a pair whose first item is the string 'registrant' and
+    Returns a pair whose first item is the string 'registrant' and
     whose second item is the dictionary of parsed attributes.
 
     """
