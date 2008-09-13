@@ -52,14 +52,12 @@ def is_gov(x):
     values = { None: 'unspecified', '0': 'n', '1': 'y'}
     return values[x]
 
-def client_status(x):
-    # Senate web page that provides the key for the client status code
-    # lists '3: undetermined', but in practice this value doesn't
-    # occur in any of the XML documents.
+def status(x):
     status = {
         0: 'active',
         1: 'terminated',
-        2: 'administratively terminated'
+        2: 'administratively terminated',
+        3: 'undetermined'
         }
     return status[int(x)]
 
@@ -146,7 +144,7 @@ client_attrs = [('ClientCountry', 'country', identity),
                 ('ClientPPBCountry', 'ppb_country', identity),
                 ('ClientPPBState', 'ppb_state', optional),
                 ('ClientState', 'state', optional),
-                ('ClientStatus', 'status', client_status),
+                ('ClientStatus', 'status', status),
                 ('ContactFullname', 'contact_name', optional),
                 ('GeneralDescription', 'description', optional),
                 ('IsStateOrLocalGov', 'state_or_local_gov', is_gov)]
