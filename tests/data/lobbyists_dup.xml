@@ -1,0 +1,17 @@
+<PublicFilings>
+
+  <!-- These two records have identical lobbyists. -->
+  
+  <Filing ID="04926911-8A12-4A0E-9DA4-510869446EAC" Year="2000" Received="2000-08-14T00:00:00" Amount="20000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="GRAFMEYER, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Deputy Chief of Staff, JCT" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <Filing ID="02DDA99B-725A-4DBA-8397-34892A6918D7" Year="2008" Received="2008-07-18T17:03:10" Amount="60000" Type="FIRST QUARTER AMENDMENT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="GRAFMEYER, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Deputy Chief of Staff, JCT" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+</PublicFilings>

@@ -26,3 +26,12 @@ def testpath(basename):
 def sqlscript(basename):
     f = open(basename)
     return ''.join(f.readlines())
+
+def flatten(lst):
+    result = list()
+    for x in lst:
+        if isinstance(x, list):
+            result.extend(flatten(x))
+        else:
+            result.append(x)
+    return result

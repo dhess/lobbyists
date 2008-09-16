@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS filing;
 DROP TABLE IF EXISTS org;
-DROP TABLE IF EXISTS lobbyist;
 DROP TABLE IF EXISTS government_entity;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS specific_issue;
@@ -12,6 +11,10 @@ DROP TABLE IF EXISTS state;
 DROP TABLE IF EXISTS client_status;
 DROP TABLE IF EXISTS state_or_local_gov;
 DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS lobbyist_status;
+DROP TABLE IF EXISTS lobbyist_indicator;
+DROP TABLE IF EXISTS lobbyist;
+DROP TABLE IF EXISTS filing_lobbyists;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -55,7 +58,7 @@ CREATE TABLE country(
 CREATE TABLE state(
   name VARCHAR(64) PRIMARY KEY ON CONFLICT IGNORE
 );
-  
+
 CREATE TABLE registrant(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   address VARCHAR(256),
@@ -88,6 +91,28 @@ CREATE TABLE client(
   contact_name VARCHAR(256) REFERENCES person
 );
 
+CREATE TABLE lobbyist_status(
+  status VARCHAR(32) PRIMARY KEY
+);
+
+CREATE TABLE lobbyist_indicator(
+  status VARCHAR(16) PRIMARY KEY
+);
+
+CREATE TABLE lobbyist(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name REFERENCES person,
+  status REFERENCES lobbyist_status,
+  indicator REFERENCES lobbyist_indicator,
+  official_position VARCHAR(256)
+);
+
+CREATE TABLE filing_lobbyists(
+  filing_id REFERENCES filing,
+  lobbyist_id REFERENCES lobbyist,
+  PRIMARY KEY(filing_id, lobbyist_id)
+);
+
 -- 3 possible state/local govt values.
 INSERT INTO state_or_local_gov VALUES('unspecified');
 INSERT INTO state_or_local_gov VALUES('n');
@@ -98,5 +123,12 @@ INSERT INTO client_status VALUES('active');
 INSERT INTO client_status VALUES('terminated');
 INSERT INTO client_status VALUES('administratively terminated');
 
--- special values, usually for unspecified fields.
-INSERT INTO person VALUES('unspecified');
+-- 4 possible lobbyist statuses.
+INSERT INTO lobbyist_status VALUES('active');
+INSERT INTO lobbyist_status VALUES('terminated');
+INSERT INTO lobbyist_status VALUES('undetermined');
+
+-- 3 possible lobbyist indicators
+INSERT INTO lobbyist_indicator VALUES('not covered');
+INSERT INTO lobbyist_indicator VALUES('covered');
+INSERT INTO lobbyist_indicator VALUES('undetermined');

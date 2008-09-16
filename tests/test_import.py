@@ -57,6 +57,32 @@ class TestImport(unittest.TestCase):
         self.failUnless('terminated' in rows)
         self.failUnless('administratively terminated' in rows)
         
+    def test_preloaded_table_lobbyist_status(self):
+        """Is the lobbyist_status table preloaded by the schema file?"""
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT status FROM lobbyist_status")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('active' in rows)
+        self.failUnless('terminated' in rows)
+        self.failUnless('undetermined' in rows)
+        
+    def test_preloaded_table_lobbyist_indicator(self):
+        """Is the lobbyist_indicator table preloaded by the schema file?"""
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT status FROM lobbyist_indicator")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('covered' in rows)
+        self.failUnless('not covered' in rows)
+        self.failUnless('undetermined' in rows)
+        
     def test_import_filings(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('filings.xml'))]
         con = sqlite3.connect(':memory:')
@@ -152,26 +178,16 @@ class TestImport(unittest.TestCase):
         for org in orgs:
             self.failUnless(org in rows)
         
-    def dup_test(self, file, column):
+    def dup_test(self, file, column, table):
         filings = [x for x in lobbyists.parse_filings(util.testpath(file))]
         con = sqlite3.connect(':memory:')
         con.executescript(util.sqlscript('filings.sql'))
         self.failUnless(lobbyists.import_filings(con, filings))
         cur = con.cursor()
-        cur.execute('SELECT filing.%s FROM filing' % column)
+        cur.execute('SELECT %s FROM %s' % (column, table))
         row1, row2 = cur.fetchall()
         return row1, row2
 
-    def similarity_test(self, file, column):
-        filings = [x for x in lobbyists.parse_filings(util.testpath(file))]
-        con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
-        self.failUnless(lobbyists.import_filings(con, filings))
-        cur = con.cursor()
-        cur.execute('SELECT filing.registrant \
-                      FROM filing')
-        return len(cur.fetchall()), len(filings)
-        
     def test_import_identical_registrants(self):
         """Identical registrants shouldn't be duplicated in the database"""
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup.xml'))]
@@ -238,13 +254,20 @@ class TestImport(unittest.TestCase):
 
     def test_import_identical_clients(self):
         """Identical clients shouldn't be duplicated in the database."""
-        row1, row2 = self.dup_test('clients_dup.xml', 'client')
+        row1, row2 = self.dup_test('clients_dup.xml', 'client', 'filing')
         self.failUnlessEqual(row1[0], row2[0])
 
     def test_import_similar_clients(self):
         """Ensure slightly different clients are inserted into different rows."""
-        n1, n2 = self.similarity_test('clients_slightly_different.xml', 'client')
-        self.failUnlessEqual(n1, n2)
+        filings = [x for x in lobbyists.parse_filings(\
+                util.testpath('clients_slightly_different.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+        cur = con.cursor()
+        cur.execute('SELECT id FROM client')
+        clients = [x['client'] for x in filings if 'client' in x]
+        self.failUnlessEqual(len(cur.fetchall()), len(clients))
 
     def test_import_client_orgs(self):
         """Importing clients should fill the 'org' table."""
@@ -348,7 +371,291 @@ class TestImport(unittest.TestCase):
         self.failUnless('active' in rows)
         self.failUnless('terminated' in rows)
         self.failUnless('administratively terminated' in rows)
-        
 
+    def test_import_lobbyists(self):
+        """Check lobbyist importing."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        # Some of the other import tests just compare the parsed
+        # filings to the contents of the database, but for various
+        # reasons that's difficult for lobbyist records.  Instead,
+        # this test has knowledge of the contents of the
+        # 'lobbyists.xml' test file, and checks the database contents
+        # explicitly, ala the parser tests in test_parser.py.
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM lobbyist")
+        rows = [row for row in cur]
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 16)
+        self.failUnlessEqual(row['name'], 'KNUTSON, KENT')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'undetermined')
+        self.failUnlessEqual(row['official_position'], 'N/A')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 15)
+        self.failUnlessEqual(row['name'], 'KNUTSON, KENT')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'N/A')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 14)
+        self.failUnlessEqual(row['name'], 'CHAMPLIN, STEVEN')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'ExecFlrAsst, H. Maj. Whip; ExecDir, H.DemCauc.')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 13)
+        self.failUnlessEqual(row['name'], 'GRIFFIN, BRIAN')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'StaffAsst, DemPolicyComm; FlrAsst, MinoritySec')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 12)
+        self.failUnlessEqual(row['name'], 'DUBERSTEIN, KENNETH')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'Chief of Staff, President Reagan')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 11)
+        self.failUnlessEqual(row['name'], 'UELAND, ERIC')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'AsstEditor/Ed./Res.Dir, Sen.Rep.PolicyComm;')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 10)
+        self.failUnlessEqual(row['name'], 'BEDWELL, EDWARD T')
+        self.failUnlessEqual(row['status'], 'terminated')
+        self.failUnlessEqual(row['indicator'], 'undetermined')
+        self.failUnlessEqual(row['official_position'], 'unspecified')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 9)
+        self.failUnlessEqual(row['name'], 'LEHMAN (MY 2006), PATRICK')
+        self.failUnlessEqual(row['status'], 'terminated')
+        self.failUnlessEqual(row['indicator'], 'undetermined')
+        self.failUnlessEqual(row['official_position'], 'unspecified')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 8)
+        self.failUnlessEqual(row['name'], 'NEAL, KATIE')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'covered')
+        self.failUnlessEqual(row['official_position'], 'COMM DIR/REP DINGELL')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 7)
+        self.failUnlessEqual(row['name'], 'NEAL, KATIE')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'N/A')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 6)
+        self.failUnlessEqual(row['name'], 'NEAL, KATIE')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'undetermined')
+        self.failUnlessEqual(row['official_position'], 'unspecified')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 5)
+        self.failUnlessEqual(row['name'], 'unspecified')
+        self.failUnlessEqual(row['status'], 'terminated')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'unspecified')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 4)
+        self.failUnlessEqual(row['name'], 'MCKENNEY, WILLIAM')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'Staff Director, Ways & Means Over Sub')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 3)
+        self.failUnlessEqual(row['name'], 'DENNIS, JAMES')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'Tax Counsel, Sen Robb - Counsel, Sen Bingaman')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 2)
+        self.failUnlessEqual(row['name'], 'GRAFMEYER, RICHARD')
+        self.failUnlessEqual(row['status'], 'active')
+        self.failUnlessEqual(row['indicator'], 'not covered')
+        self.failUnlessEqual(row['official_position'], 'Deputy Chief of Staff, JCT')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 1)
+        self.failUnlessEqual(row['name'], 'HARRIS, ROBERT L.')
+        self.failUnlessEqual(row['status'], 'undetermined')
+        self.failUnlessEqual(row['indicator'], 'undetermined')
+        self.failUnlessEqual(row['official_position'], 'unspecified')
+        
+        self.failUnlessEqual(len(rows), 0)
+
+    def test_import_filings_to_lobbyists(self):
+        """Ensure lobbyists are matched up with filings in the database."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM filing_lobbyists")
+        rows = [row for row in cur]
+
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
+        self.failUnlessEqual(row['lobbyist_id'], 16)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
+        self.failUnlessEqual(row['lobbyist_id'], 15)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             'BD894C51-AA23-46AE-9802-006B8C91702B')
+        self.failUnlessEqual(row['lobbyist_id'], 14)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             'BD894C51-AA23-46AE-9802-006B8C91702B')
+        self.failUnlessEqual(row['lobbyist_id'], 13)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             'BD894C51-AA23-46AE-9802-006B8C91702B')
+        self.failUnlessEqual(row['lobbyist_id'], 12)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             'BD894C51-AA23-46AE-9802-006B8C91702B')
+        self.failUnlessEqual(row['lobbyist_id'], 11)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '2164D6BB-EBBA-40D2-9C18-16A2D670030A')
+        self.failUnlessEqual(row['lobbyist_id'], 10)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '87A30FA6-7C35-4294-BA43-4CE7B5B808B3')
+        self.failUnlessEqual(row['lobbyist_id'], 9)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '0FC23296-F948-43FD-98D4-0912F6579E6A')
+        self.failUnlessEqual(row['lobbyist_id'], 8)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '0FC23296-F948-43FD-98D4-0912F6579E6A')
+        self.failUnlessEqual(row['lobbyist_id'], 7)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '0FC23296-F948-43FD-98D4-0912F6579E6A')
+        self.failUnlessEqual(row['lobbyist_id'], 6)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '02DDA99B-725A-4DBA-8397-34892A6918D7')
+        self.failUnlessEqual(row['lobbyist_id'], 5)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '02DDA99B-725A-4DBA-8397-34892A6918D7')
+        self.failUnlessEqual(row['lobbyist_id'], 4)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '02DDA99B-725A-4DBA-8397-34892A6918D7')
+        self.failUnlessEqual(row['lobbyist_id'], 3)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '02DDA99B-725A-4DBA-8397-34892A6918D7')
+        self.failUnlessEqual(row['lobbyist_id'], 2)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing_id'],
+                             '04926911-8A12-4A0E-9DA4-510869446EAC')
+        self.failUnlessEqual(row['lobbyist_id'], 1)
+        
+    def test_import_lobbyist_person(self):
+        """Importing lobbyists should fill the 'person' table."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM person")
+        rows = [row['name'] for row in cur]
+        lobbyers = util.flatten([x['lobbyists'] for x in filings if 'lobbyists' in x])
+        names = set([x['lobbyist']['name'] for x in lobbyers])
+        self.failUnlessEqual(len(rows), len(names))
+        for name in names:
+            self.failUnless(name in rows)
+
+    def test_import_lobbyist_lobbyist_status(self):
+        """After import, lobbyist_status table should be unchanged (it's pre-loaded)."""
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT status FROM lobbyist_status")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('active' in rows)
+        self.failUnless('terminated' in rows)
+        self.failUnless('undetermined' in rows)
+        
+    def test_import_lobbyist_lobbyist_indicator(self):
+        """After import, lobbyist_indicator table should be unchanged (it's pre-loaded)."""
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT status FROM lobbyist_indicator")
+        rows = set([row[0] for row in cur])
+        self.failUnlessEqual(len(rows), 3)
+        self.failUnless('covered' in rows)
+        self.failUnless('not covered' in rows)
+        self.failUnless('undetermined' in rows)
+        
+    def test_import_identical_lobbyists(self):
+        """Identical lobbyists shouldn't be duplicated in the database."""
+        row1, row2 = self.dup_test('lobbyists_dup.xml', 'lobbyist_id', 'filing_lobbyists')
+        self.failUnlessEqual(row1[0], row2[0])
+
+    def test_import_similar_lobbyists(self):
+        """Ensure slightly different lobbyists are inserted into different rows."""
+        filings = [x for x in lobbyists.parse_filings(\
+                util.testpath('lobbyists_slightly_different.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+        cur = con.cursor()
+        cur.execute('SELECT id FROM lobbyist')
+        lobbyers = util.flatten([x['lobbyists'] for x in filings if 'lobbyists' in x])
+        self.failUnlessEqual(len(cur.fetchall()), len(lobbyers))
+
+        
 if __name__ == '__main__':
     unittest.main()

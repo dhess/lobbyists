@@ -402,8 +402,45 @@ def insert_registrant(reg, con):
     return cur.lastrowid
 
 
+def lobbyist_rowid(lobbyist, con):
+    """Find a lobbyist in an sqlite3 database.
+
+    Returns the row ID of the matching lobbyist, or None if there is
+    no match.
+
+    lobbyist - The parsed lobbyist dictionary.
+
+    con - An sqlite3.Connection object.
+    
+    """
+    return rowid('lobbyist', lobbyist, con)
+
+
+def insert_lobbyist(lobbyist, con):
+    """Insert a lobbyist into an sqlite3 database.
+
+    Returns the row ID of the inserted lobbyist.
+
+    As a side effect, this function also inserts rows into the
+    'person' table.
+
+    lobbyist - The parsed lobbyist dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    cur = con.cursor()
+    # Note - lobbyist status and indicator are pre-inserted into the
+    # lobbyist_status and lobbyist_indicator tables.
+    cur.execute('INSERT INTO person VALUES(?)', [lobbyist['name']])
+    cur.execute('INSERT INTO lobbyist VALUES(NULL, \
+                   :name, :status, :indicator, :official_position)',
+                lobbyist)
+    return cur.lastrowid
+
+
 def insert_filing(filing, con):
-    """Insert a filing into an sqlite3 database.
+    """Insert a filing and its relationships into an sqlite3 database.
 
     Returns the row ID of the inserted filing.
 
@@ -412,12 +449,17 @@ def insert_filing(filing, con):
     con - An sqlite3.Connection object.
 
     """
+    # Insert the filing first, then its relationships.
     cur = con.cursor()
     cur.execute('INSERT INTO filing VALUES(\
                        :id, :type, :year, :period, :filing_date, :amount, \
                        :registrant, :client)',
                 filing)
-    return cur.lastrowid
+    filing_rowid = cur.lastrowid
+    for lobbyist_id in filing['lobbyists']:
+        cur.execute('INSERT into filing_lobbyists VALUES(?, ?)',
+                    [filing['id'], lobbyist_id])
+    return filing_rowid
 
 
 def import_entity(record, con, name, findrow, insert):
@@ -431,7 +473,7 @@ def import_entity(record, con, name, findrow, insert):
     else:
         return None
 
-    
+
 def import_registrant(record, con):
     return import_entity(record,
                          con,
@@ -448,9 +490,34 @@ def import_client(record, con):
                          insert_client)
 
 
+def import_lobbyist(record, con):
+    return import_entity(record,
+                         con,
+                         'lobbyist',
+                         lobbyist_rowid,
+                         insert_lobbyist)
+
+
+def import_lobbyists(record, con):
+    """Returns a list of rowids for the lobbyists in a filing record.
+
+    record - The parsed filing dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    rowids = list()
+    if 'lobbyists' in record:
+        lobbyists = record['lobbyists']
+        for lobbyist in lobbyists:
+            rowids.append(import_lobbyist(lobbyist, con))
+    return rowids
+
+
 entity_importers = {
     'registrant': import_registrant,
     'client': import_client,
+    'lobbyists': import_lobbyists,
     }
 
 def import_filings(con, parsed_filings):

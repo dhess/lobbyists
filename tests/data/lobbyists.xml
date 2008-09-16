@@ -1,0 +1,64 @@
+<PublicFilings>
+
+  <!-- These records are compiled from the other lobbyist_*.xml test
+       documents, except for the record with no Lobbyists. I've
+       attempted to cover most of the interesting cases for the import
+       process here. -->
+  
+  <Filing ID="04926911-8A12-4A0E-9DA4-510869446EAC" Year="2000" Received="2000-08-14T00:00:00" Amount="20000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="HARRIS, ROBERT L." LobbyistStatus="3" LobbyisteIndicator="2" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <Filing ID="02DDA99B-725A-4DBA-8397-34892A6918D7" Year="2008" Received="2008-07-18T17:03:10" Amount="60000" Type="FIRST QUARTER AMENDMENT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="GRAFMEYER, RICHARD" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Deputy Chief of Staff, JCT" xmlns="" />
+      <Lobbyist LobbyistName="DENNIS, JAMES" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Tax Counsel, Sen Robb - Counsel, Sen Bingaman" xmlns="" />
+      <Lobbyist LobbyistName="MCKENNEY, WILLIAM" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Staff Director, Ways &amp; Means Over Sub" xmlns="" />
+      <Lobbyist LobbyistName="" LobbyistStatus="1" LobbyisteIndicator="0" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <!-- This record has no lobbyists. -->
+  
+  <Filing ID="583E1BE3-1B7E-4357-A6C8-00125C7DE22D" Year="2006" Received="2006-08-08T00:00:00" Amount="0" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+  </Filing>
+
+  <Filing ID="0FC23296-F948-43FD-98D4-0912F6579E6A" Year="2004" Received="2004-11-18T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="NEAL, KATIE" LobbyistStatus="0" LobbyisteIndicator="2" xmlns="" />
+      <Lobbyist LobbyistName="NEAL, KATIE" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="NEAL, KATIE" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="COMM DIR/REP DINGELL" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <Filing ID="87A30FA6-7C35-4294-BA43-4CE7B5B808B3" Year="2008" Received="2008-04-11T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="LEHMAN (MY 2006), PATRICK" LobbyistStatus="1" LobbyisteIndicator="2" OfficialPosition="" xmlns="" />
+    </Lobbyists>
+  </Filing>
+  
+  <Filing ID="2164D6BB-EBBA-40D2-9C18-16A2D670030A" Year="2007" Received="2008-06-17T22:59:19" Amount="1680000" Type="YEAR-END AMENDMENT" Period="Year-End (July 1 - Dec 31)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="BEDWELL, EDWARD T" LobbyistStatus="1" LobbyisteIndicator="2" xmlns="" />
+    </Lobbyists>
+  </Filing>
+  
+  <Filing ID="BD894C51-AA23-46AE-9802-006B8C91702B" Year="2008" Received="2008-07-18T12:24:22" Amount="100000" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Lobbyists>
+      <Lobbyist LobbyistName="UELAND, ERIC" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="AsstEditor/Ed./Res.Dir, Sen.Rep.PolicyComm;" xmlns="" />
+      <Lobbyist LobbyistName="DUBERSTEIN, KENNETH" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="Chief of Staff, President Reagan" xmlns="" />
+      <Lobbyist LobbyistName="GRIFFIN, BRIAN" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="StaffAsst, DemPolicyComm; FlrAsst, MinoritySec" xmlns="" />
+      <Lobbyist LobbyistName="CHAMPLIN, STEVEN" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="ExecFlrAsst, H. Maj. Whip; ExecDir, H.DemCauc." xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+  <Filing ID="771F3B6A-315D-4190-88F3-2CE0F138B2B8" Year="1999" Received="1999-11-04T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Lobbyists>
+      <Lobbyist LobbyistName="KNUTSON, KENT" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="KNUTSON, KENT" LobbyistStatus="0" LobbyisteIndicator="2" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+  </Filing>
+
+</PublicFilings>
