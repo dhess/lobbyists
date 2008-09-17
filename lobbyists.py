@@ -625,6 +625,4 @@ def import_filings(con, parsed_filings):
         for entity_name, entity_importer in entity_importers.items():
             filing[entity_name] = entity_importer(record, con)
         insert_filing(filing, con)
-        # Force commit, subsequent records may depend on this one.
-        con.commit()
     return True
