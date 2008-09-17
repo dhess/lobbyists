@@ -471,6 +471,35 @@ def insert_lobbyist(lobbyist, con):
     return cur.lastrowid
 
 
+def govt_entity_rowid(entity, con):
+    """Find a government entity in an sqlite3 database.
+
+    Returns the row ID of the matching entity, or None if there is no
+    match.
+
+    lobbyist - The parsed government entity dictionary.
+
+    con - An sqlite3.Connection object.
+    
+    """
+    return rowid('govt_entity', entity, con)
+
+
+def insert_govt_entity(entity, con):
+    """Insert a government entity into an sqlite3 database.
+
+    Returns the row ID of the inserted entity.
+
+    entity - The parsed government entity dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    cur = con.cursor()
+    cur.execute('INSERT INTO govt_entity VALUES(NULL, :name)', entity)
+    return cur.lastrowid
+
+
 def insert_filing(filing, con):
     """Insert a filing and its relationships into an sqlite3 database.
 
@@ -488,9 +517,12 @@ def insert_filing(filing, con):
                        :registrant, :client)',
                 filing)
     filing_rowid = cur.lastrowid
-    for lobbyist_id in filing['lobbyists']:
-        cur.execute('INSERT into filing_lobbyists VALUES(?, ?)',
-                    [filing['id'], lobbyist_id])
+    for id in filing['lobbyists']:
+        cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
+                    [filing['id'], id])
+    for id in filing['govt_entities']:
+        cur.execute('INSERT INTO filing_govt_entities VALUES(?, ?)',
+                    [filing['id'], id])
     return filing_rowid
 
 
@@ -530,6 +562,22 @@ def import_lobbyist(record, con):
                          insert_lobbyist)
 
 
+def import_govt_entity(record, con):
+    return import_entity(record,
+                         con,
+                         'govt_entity',
+                         govt_entity_rowid,
+                         insert_govt_entity)
+
+
+def import_list(record, id, entity_importer, con):
+    rowids = list()
+    if id in record:
+        for entity in record[id]:
+            rowids.append(entity_importer(entity, con))
+    return rowids
+
+
 def import_lobbyists(record, con):
     """Returns a list of rowids for the lobbyists in a filing record.
 
@@ -538,18 +586,25 @@ def import_lobbyists(record, con):
     con - An sqlite3.Connection object.
 
     """
-    rowids = list()
-    if 'lobbyists' in record:
-        lobbyists = record['lobbyists']
-        for lobbyist in lobbyists:
-            rowids.append(import_lobbyist(lobbyist, con))
-    return rowids
+    return import_list(record, 'lobbyists', import_lobbyist, con)
+
+
+def import_govt_entities(record, con):
+    """Returns a list of rowids for the govt entities in a filing record.
+
+    record - The parsed filing dictionary.
+
+    con - An sqlite3.Connection object.
+
+    """
+    return import_list(record, 'govt_entities', import_govt_entity, con)
 
 
 entity_importers = {
     'registrant': import_registrant,
     'client': import_client,
     'lobbyists': import_lobbyists,
+    'govt_entities': import_govt_entities
     }
 
 def import_filings(con, parsed_filings):

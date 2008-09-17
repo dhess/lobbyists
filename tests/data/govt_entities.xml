@@ -1,0 +1,38 @@
+<PublicFiling>
+
+  <!-- There are 8 unique government entities in this test
+       document. They're representative of all entities for the
+       purposes of importing into the DB.
+
+       There are a few duplicate government entities in this test
+       document. For most other elements, duplicate testing is done in
+       separate unit tests, but government entities are so simple that
+       it's more convenient to test duplicates in the main import
+       test. -->
+  
+  <Filing ID="FD29F4AF-763B-42A6-A27E-0AE115CD6D51" Year="1999" Received="1999-02-07T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="NONE" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+
+  <Filing ID="FFF29969-FDEC-4125-809E-0D8D2D8E73FC" Year="1999" Received="1999-01-10T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+      <GovernmentEntity GovEntityName="Health &amp; Human Services, Dept of  (HHS)" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+
+  <Filing ID="106C2C6E-F0E1-46E3-9409-294E0BD27878" Year="1999" Received="1999-01-05T00:00:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+      <GovernmentEntity GovEntityName="Federal Energy Regulatory Commission (FERC)" xmlns="" />
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="Energy, Dept of" xmlns="" />
+      <GovernmentEntity GovEntityName="Environmental Protection Agency (EPA)" xmlns="" />
+      <GovernmentEntity GovEntityName="Federal Communications Commission (FCC)" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+  
+</PublicFiling>

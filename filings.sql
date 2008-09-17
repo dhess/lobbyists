@@ -16,6 +16,8 @@ DROP TABLE IF EXISTS lobbyist_status;
 DROP TABLE IF EXISTS lobbyist_indicator;
 DROP TABLE IF EXISTS lobbyist;
 DROP TABLE IF EXISTS filing_lobbyists;
+DROP TABLE IF EXISTS govt_entity;
+DROP TABLE IF EXISTS filing_govt_entities;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -36,10 +38,6 @@ CREATE TABLE person(
   name VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
   
-CREATE TABLE government_entity(
-  name VARCHAR(256) PRIMARY KEY
-);
-
 CREATE TABLE issue(
   description VARCHAR(256) PRIMARY KEY
 );
@@ -112,6 +110,17 @@ CREATE TABLE filing_lobbyists(
   filing_id REFERENCES filing,
   lobbyist_id REFERENCES lobbyist,
   PRIMARY KEY(filing_id, lobbyist_id)
+);
+
+CREATE TABLE govt_entity(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(64)
+);
+
+CREATE TABLE filing_govt_entities(
+  filing REFERENCES filing,
+  govt_entity REFERENCES govt_entity,
+  PRIMARY KEY(filing, govt_entity)
 );
 
 -- 3 possible state/local govt values.

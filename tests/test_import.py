@@ -656,6 +656,119 @@ class TestImport(unittest.TestCase):
         lobbyers = util.flatten([x['lobbyists'] for x in filings if 'lobbyists' in x])
         self.failUnlessEqual(len(cur.fetchall()), len(lobbyers))
 
+    def test_import_govt_entities(self):
+        """Check government entity importing."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('govt_entities.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM govt_entity")
+        rows = [row for row in cur]
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 8)
+        self.failUnlessEqual(row['name'],
+                             'Federal Communications Commission (FCC)')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 7)
+        self.failUnlessEqual(row['name'],
+                             'Environmental Protection Agency (EPA)')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 6)
+        self.failUnlessEqual(row['name'], 'Energy, Dept of')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 5)
+        self.failUnlessEqual(row['name'],
+                             'Federal Energy Regulatory Commission (FERC)')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 4)
+        self.failUnlessEqual(row['name'],
+                             'Health & Human Services, Dept of  (HHS)')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 3)
+        self.failUnlessEqual(row['name'], 'SENATE')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 2)
+        self.failUnlessEqual(row['name'], 'HOUSE OF REPRESENTATIVES')
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 1)
+        self.failUnlessEqual(row['name'], 'NONE')
+        
+        self.failUnlessEqual(len(rows), 0)
+
+    def test_import_filings_to_govt_entities(self):
+        """Ensure government entities are matched up with filings in the database."""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('govt_entities.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM filing_govt_entities")
+        rows = [row for row in cur]
+
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        self.failUnlessEqual(row['govt_entity'], 8)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        self.failUnlessEqual(row['govt_entity'], 7)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        self.failUnlessEqual(row['govt_entity'], 6)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        self.failUnlessEqual(row['govt_entity'], 2)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        self.failUnlessEqual(row['govt_entity'], 5)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        self.failUnlessEqual(row['govt_entity'], 3)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
+        self.failUnlessEqual(row['govt_entity'], 4)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
+        self.failUnlessEqual(row['govt_entity'], 3)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
+        self.failUnlessEqual(row['govt_entity'], 2)
+        
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             'FD29F4AF-763B-42A6-A27E-0AE115CD6D51')
+        self.failUnlessEqual(row['govt_entity'], 1)
+        
+        self.failUnlessEqual(len(rows), 0)
         
 if __name__ == '__main__':
     unittest.main()
