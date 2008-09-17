@@ -106,10 +106,16 @@ CREATE TABLE lobbyist(
   official_position VARCHAR(256)
 );
 
+-- Lobbyists elements in the XML documents are badly broken. Among
+-- other problems, filings sometimes list the exact same Lobbyist
+-- element (with identical attribute values) more than once. When
+-- these are encountered, just ignore any occurrences after the
+-- first. (In the future, it might be nice to flag these records so
+-- they can be reported to the Senate.)
 CREATE TABLE filing_lobbyists(
   filing REFERENCES filing,
   lobbyist REFERENCES lobbyist,
-  PRIMARY KEY(filing, lobbyist)
+  PRIMARY KEY(filing, lobbyist) ON CONFLICT IGNORE
 );
 
 CREATE TABLE govt_entity(

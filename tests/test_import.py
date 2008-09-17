@@ -644,6 +644,21 @@ class TestImport(unittest.TestCase):
         row1, row2 = self.dup_test('lobbyists_dup.xml', 'lobbyist', 'filing_lobbyists')
         self.failUnlessEqual(row1[0], row2[0])
 
+    def test_import_identical_lobbyists2(self):
+        """Identical lobbyists shouldn't be duplicated in the database (case 2)."""
+        # This test file contains a single filing with two
+        # lobbyists. The two lobbyists are exactly the same. This
+        # should result in only a single entry in the filing_lobbyists
+        # table.
+        filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists_dup2.xml'))]
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        self.failUnless(lobbyists.import_filings(con, filings))
+        cur = con.cursor()
+        cur.execute('SELECT lobbyist FROM filing_lobbyists')
+        rows = cur.fetchall()
+        self.failUnlessEqual(len(rows), 1)
+
     def test_import_similar_lobbyists(self):
         """Ensure slightly different lobbyists are inserted into different rows."""
         filings = [x for x in lobbyists.parse_filings(\
