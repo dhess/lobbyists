@@ -1,0 +1,75 @@
+#!/usr/bin/env python
+#
+# timings.py - Coarse-grained timing for parsing and importing a Senate
+# LD-1/LD-2 document.
+#
+# Copyright (C) 2008 by Drew Hess <dhess@bothan.net>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with this program.  If not, see
+# <http://www.gnu.org/licenses/>.
+
+"""Coarse-grained timing for parsing and importing a Senate LD-1/LD-2
+document.
+
+"""
+
+import lobbyists
+import optparse
+import sys
+import sqlite3
+import time
+
+VERSION = '1.0'
+
+def timed_func(func):
+    def timer(*args):
+        t1 = time.clock()
+        result = func(*args)
+        t2 = time.clock()
+        return result, t2 - t1
+    return timer
+
+def parse_all(doc):
+    return [x for x in lobbyists.parse_filings(doc)]
+    
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+    usage = """%prog [OPTIONS] db doc.xml
+
+Parse a Senate LD-1/LD-2 document, then import it into an sqlite3
+database. Print the wall-clock time it takes to perform each action.
+
+A document may be identified either by a URL or a file, so long as
+it's a valid Senate LD-1/LD-2 XML document.
+"""
+    parser = optparse.OptionParser(usage=usage,
+                                   version=VERSION)
+    (options, args) = parser.parse_args(argv[1:])
+    if len(args) != 2:
+        parser.error('specify one sqlite3 database and one XML document')
+    dbname = args[0]
+    doc = args[1]
+
+    timed_parser = timed_func(parse_all)
+    timed_importer = timed_func(lobbyists.import_filings)
+    con = sqlite3.connect(dbname)
+    filings, parse_time = timed_parser(doc)
+    print 'Parse time:', parse_time
+    _, import_time = timed_importer(con, filings)
+    print 'Import time:', import_time
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
