@@ -336,7 +336,7 @@ def rowid(table, tomatch, con):
     found.
 
     """
-    stmt = 'SELECT id from %s WHERE ' % table
+    stmt = 'SELECT id FROM %s WHERE ' % table
     for k in tomatch.keys():
         stmt += '%s=:%s AND ' % (k, k)
     # remove trailing AND
