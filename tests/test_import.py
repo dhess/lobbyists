@@ -517,84 +517,84 @@ class TestImport(unittest.TestCase):
         rows = [row for row in cur]
 
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
-        self.failUnlessEqual(row['lobbyist_id'], 16)
+        self.failUnlessEqual(row['lobbyist'], 16)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
-        self.failUnlessEqual(row['lobbyist_id'], 15)
+        self.failUnlessEqual(row['lobbyist'], 15)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
-        self.failUnlessEqual(row['lobbyist_id'], 14)
+        self.failUnlessEqual(row['lobbyist'], 14)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
-        self.failUnlessEqual(row['lobbyist_id'], 13)
+        self.failUnlessEqual(row['lobbyist'], 13)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
-        self.failUnlessEqual(row['lobbyist_id'], 12)
+        self.failUnlessEqual(row['lobbyist'], 12)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
-        self.failUnlessEqual(row['lobbyist_id'], 11)
+        self.failUnlessEqual(row['lobbyist'], 11)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '2164D6BB-EBBA-40D2-9C18-16A2D670030A')
-        self.failUnlessEqual(row['lobbyist_id'], 10)
+        self.failUnlessEqual(row['lobbyist'], 10)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '87A30FA6-7C35-4294-BA43-4CE7B5B808B3')
-        self.failUnlessEqual(row['lobbyist_id'], 9)
+        self.failUnlessEqual(row['lobbyist'], 9)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '0FC23296-F948-43FD-98D4-0912F6579E6A')
-        self.failUnlessEqual(row['lobbyist_id'], 8)
+        self.failUnlessEqual(row['lobbyist'], 8)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '0FC23296-F948-43FD-98D4-0912F6579E6A')
-        self.failUnlessEqual(row['lobbyist_id'], 7)
+        self.failUnlessEqual(row['lobbyist'], 7)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '0FC23296-F948-43FD-98D4-0912F6579E6A')
-        self.failUnlessEqual(row['lobbyist_id'], 6)
+        self.failUnlessEqual(row['lobbyist'], 6)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
-        self.failUnlessEqual(row['lobbyist_id'], 5)
+        self.failUnlessEqual(row['lobbyist'], 5)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
-        self.failUnlessEqual(row['lobbyist_id'], 4)
+        self.failUnlessEqual(row['lobbyist'], 4)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
-        self.failUnlessEqual(row['lobbyist_id'], 3)
+        self.failUnlessEqual(row['lobbyist'], 3)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
-        self.failUnlessEqual(row['lobbyist_id'], 2)
+        self.failUnlessEqual(row['lobbyist'], 2)
         
         row = rows.pop()
-        self.failUnlessEqual(row['filing_id'],
+        self.failUnlessEqual(row['filing'],
                              '04926911-8A12-4A0E-9DA4-510869446EAC')
-        self.failUnlessEqual(row['lobbyist_id'], 1)
+        self.failUnlessEqual(row['lobbyist'], 1)
         
     def test_import_lobbyist_person(self):
         """Importing lobbyists should fill the 'person' table."""
@@ -641,7 +641,7 @@ class TestImport(unittest.TestCase):
         
     def test_import_identical_lobbyists(self):
         """Identical lobbyists shouldn't be duplicated in the database."""
-        row1, row2 = self.dup_test('lobbyists_dup.xml', 'lobbyist_id', 'filing_lobbyists')
+        row1, row2 = self.dup_test('lobbyists_dup.xml', 'lobbyist', 'filing_lobbyists')
         self.failUnlessEqual(row1[0], row2[0])
 
     def test_import_similar_lobbyists(self):

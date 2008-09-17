@@ -107,9 +107,9 @@ CREATE TABLE lobbyist(
 );
 
 CREATE TABLE filing_lobbyists(
-  filing_id REFERENCES filing,
-  lobbyist_id REFERENCES lobbyist,
-  PRIMARY KEY(filing_id, lobbyist_id)
+  filing REFERENCES filing,
+  lobbyist REFERENCES lobbyist,
+  PRIMARY KEY(filing, lobbyist)
 );
 
 CREATE TABLE govt_entity(
