@@ -256,7 +256,19 @@ def parse_govt_entities(elt):
     """
     return parse_list(elt, 'govt_entities', parse_govt_entity)
 
-    
+
+def parse_issues(elt):
+    return ('issues', list())
+
+
+def parse_foreign_entities(elt):
+    return ('foreign_entities', list())
+
+
+def parse_affiliated_orgs(elt):
+    return ('affiliated_orgs', list())
+
+
 filing_attrs = [('ID', 'id', identity),
                 ('Year', 'year', int),
                 ('Received', 'filing_date', identity),
@@ -286,7 +298,10 @@ subelt_parsers = {
     'Registrant': parse_registrant,
     'Client': parse_client,
     'Lobbyists': parse_lobbyists,
-    'GovernmentEntities': parse_govt_entities
+    'GovernmentEntities': parse_govt_entities,
+    'Issues': parse_issues,
+    'ForeignEntities': parse_foreign_entities,
+    'AffiliatedOrgs': parse_affiliated_orgs
     }
 
 def parse_filings(doc):
