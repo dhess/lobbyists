@@ -146,6 +146,13 @@ def parse_element(elt, id, attrs):
     return (id, dict(parse_attrs(elt, attrs)))
 
 
+def parse_list(list_elt, id, subelt_parser):
+    lst = list()
+    for subelt in child_elements(list_elt):
+        lst.append(dict([subelt_parser(subelt)]))
+    return (id, lst)
+    
+
 client_attrs = [('ClientCountry', 'country', identity),
                 ('ClientID', 'senate_id', int),
                 ('ClientName', 'name', identity),
@@ -219,13 +226,37 @@ def parse_lobbyists(elt):
     for each Lobbyist sub-element of this Lobbyists element.
 
     """
-    lobbyists = list()
-    # All children of Lobbyists elements are Lobbyist elements.
-    for lobbyist_elt in child_elements(elt):
-        lobbyists.append(dict([parse_lobbyist(lobbyist_elt)]))
-    return ('lobbyists', lobbyists)
+    return parse_list(elt, 'lobbyists', parse_lobbyist)
 
 
+govt_entity_attrs = [('GovEntityName', 'name', identity)]
+
+def parse_govt_entity(elt):
+    """Parse a GovernmentEntity DOM element.
+
+    elt - The GovernmentEntity DOM element.
+
+    Returns a pair whose first item is the string 'govt_entity' and
+    whose second item is the dictionary of parsed attributes.
+
+    """
+    return parse_element(elt, 'govt_entity', govt_entity_attrs)
+
+
+def parse_govt_entities(elt):
+    """Parse a GovernmentEntities DOM element.
+
+    elt - The GovernmentEntities DOM element.
+
+    Returns a pair whose first item is the string 'govt_entities' and
+    whose second item is a list of parsed GovernmentEntity DOM
+    elements, one for each GovernmentEntity sub-element of this
+    GovernmentEntities element.
+
+    """
+    return parse_list(elt, 'govt_entities', parse_govt_entity)
+
+    
 filing_attrs = [('ID', 'id', identity),
                 ('Year', 'year', int),
                 ('Received', 'filing_date', identity),
@@ -254,7 +285,8 @@ def parse_filing(elt):
 subelt_parsers = {
     'Registrant': parse_registrant,
     'Client': parse_client,
-    'Lobbyists': parse_lobbyists
+    'Lobbyists': parse_lobbyists,
+    'GovernmentEntities': parse_govt_entities
     }
 
 def parse_filings(doc):

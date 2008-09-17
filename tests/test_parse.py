@@ -1057,5 +1057,77 @@ class TestParseLobbyists(unittest.TestCase):
         self.failUnlessEqual(len(filings), 0)
         
 
+class TestParseGovtEntities(unittest.TestCase):
+    def test_name(self):
+        """Parse government entity name"""
+        filings = [x for x in lobbyists.parse_filings(util.testpath('government_entity_name.xml'))]
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'A55002C7-78C4-41BA-A6CA-01FCF7650116')
+        entities = x['govt_entities']
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'Treasury, Dept of')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'Federal Reserve System')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'HOUSE OF REPRESENTATIVES')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'Vice President of the U.S.')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'Office of Policy Development')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'],
+                             'Executive Office of the President (EOP)')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'SENATE')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'White House Office')
+        self.failUnlessEqual(len(entities), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '106C2C6E-F0E1-46E3-9409-294E0BD27878')
+        entities = x['govt_entities']
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'],
+                             'Federal Communications Commission (FCC)')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'Environmental Protection Agency (EPA)')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'Energy, Dept of')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'HOUSE OF REPRESENTATIVES')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'],
+                             'Federal Energy Regulatory Commission (FERC)')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'SENATE')
+        self.failUnlessEqual(len(entities), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
+        entities = x['govt_entities']
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'],
+                             'Health & Human Services, Dept of  (HHS)')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'SENATE')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'HOUSE OF REPRESENTATIVES')
+        self.failUnlessEqual(len(entities), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'FD29F4AF-763B-42A6-A27E-0AE115CD6D51')
+        entities = x['govt_entities']
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'NONE')
+        self.failUnlessEqual(len(entities), 0)
+
+        self.failUnlessEqual(len(filings), 0)
+
+
 if __name__ == '__main__':
     unittest.main()

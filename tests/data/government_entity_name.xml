@@ -1,0 +1,61 @@
+<PublicFiling>
+
+  <!-- GovernmentEntities are lists of GovernmentEntity elements. A
+       GovernmentEntity element has only one attribute, which is
+       always present, named GovEntityName. Here are some
+       representative records. -->
+
+  <!-- Sometimes the name is "NONE". However, it's never the empty
+       string (""). -->
+  
+  <Filing ID="FD29F4AF-763B-42A6-A27E-0AE115CD6D51" Year="1999" Received="1999-02-07T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="NONE" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+
+  <!-- There can be multiple entities in a single record. -->
+  
+  <Filing ID="FFF29969-FDEC-4125-809E-0D8D2D8E73FC" Year="1999" Received="1999-01-10T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+      <GovernmentEntity GovEntityName="Health &amp; Human Services, Dept of  (HHS)" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+
+  <!-- Most departments, but not all, are given with their full name
+       and acronym. Here "Energy, Dept of" should presumably be
+       "Energy, Dept of (DOE)", but for some reason the acronym is
+       omitted. Note that this is consistent throughout the database;
+       the DOE's name is always given as "Energy, Dept of" and never
+       given with the acronym. -->
+       
+  <Filing ID="106C2C6E-F0E1-46E3-9409-294E0BD27878" Year="1999" Received="1999-01-05T00:00:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+      <GovernmentEntity GovEntityName="Federal Energy Regulatory Commission (FERC)" xmlns="" />
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="Energy, Dept of" xmlns="" />
+      <GovernmentEntity GovEntityName="Environmental Protection Agency (EPA)" xmlns="" />
+      <GovernmentEntity GovEntityName="Federal Communications Commission (FCC)" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+  
+  <!-- Interesting to note that the President, V.P. and White House
+       can all show up as distinct entities. -->
+  
+  <Filing ID="A55002C7-78C4-41BA-A6CA-01FCF7650116" Year="2007" Received="2008-01-02T00:00:00" Amount="0" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="White House Office" xmlns="" />
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+      <GovernmentEntity GovEntityName="Executive Office of the President (EOP)" xmlns="" />
+      <GovernmentEntity GovEntityName="Office of Policy Development" xmlns="" />
+      <GovernmentEntity GovEntityName="Vice President of the U.S." xmlns="" />
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="Federal Reserve System" xmlns="" />
+      <GovernmentEntity GovEntityName="Treasury, Dept of" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+
+</PublicFiling>
