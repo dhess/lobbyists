@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS govt_entity;
 DROP TABLE IF EXISTS filing_govt_entities;
 
 DROP INDEX IF EXISTS lobbyist_index;
+DROP INDEX IF EXISTS client_index;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -138,7 +139,23 @@ CREATE TABLE filing_govt_entities(
 -- Create indexes for tables that get looked up during import. They
 -- make a HUGE difference in import performance.
 CREATE UNIQUE INDEX lobbyist_index ON lobbyist(
-  name, status, indicator, official_position
+  name,
+  status,
+  indicator,
+  official_position
+);
+
+CREATE UNIQUE INDEX client_index ON client(
+  country,
+  senate_id,
+  name,
+  ppb_country,
+  state,
+  ppb_state,
+  status,
+  description,
+  state_or_local_gov,
+  contact_name
 );
 
 -- 3 possible state/local govt values.
