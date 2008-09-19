@@ -17,7 +17,6 @@
 # <http://www.gnu.org/licenses/>.
 
 import xml.dom.pulldom
-import sqlite3
 
 # Attribute parsers.
 
@@ -352,7 +351,7 @@ where_stmt = {
         'official_position=:official_position'
     }
     
-def rowid(table, tomatch, con):
+def rowid(table, tomatch, cur):
     """Find a match in a database table and return its rowid.
 
     This function only works for tables with a primary key
@@ -364,14 +363,13 @@ def rowid(table, tomatch, con):
     column names, and whose values are the values to match in the
     table.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
     
     Returns the rowid of the matching row, or None if no match is
     found.
 
     """
     stmt = 'SELECT id FROM %s' % where_stmt[table]
-    cur = con.cursor()
     cur.execute(stmt, tomatch)
     row = cur.fetchone()
     if row:
@@ -380,22 +378,22 @@ def rowid(table, tomatch, con):
         return None
 
 
-def client_rowid(client, con):
-    """Find a client in an sqlite3 database.
+def client_rowid(client, cur):
+    """Find a client the database.
 
     Returns the row ID of the matching client, or None if there is no
     match.
 
     client - The parsed client dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    return rowid('client', client, con)
+    return rowid('client', client, cur)
 
 
-def insert_client(client, con):
-    """Insert a client into an sqlite3 database.
+def insert_client(client, cur):
+    """Insert a client into the database.
 
     Returns the row ID of the inserted client.
 
@@ -404,10 +402,9 @@ def insert_client(client, con):
 
     client - The parsed client dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    cur = con.cursor()
     # Note - client status is pre-inserted into client_status table.
     for key in ['country', 'ppb_country']:
         cur.execute('INSERT INTO country VALUES(?)', [client[key]])
@@ -423,22 +420,22 @@ def insert_client(client, con):
     return cur.lastrowid
 
 
-def registrant_rowid(reg, con):
-    """Find a registrant in an sqlite3 database.
+def registrant_rowid(reg, cur):
+    """Find a registrant in the database.
 
     Returns the row ID of the matching registrant, or None if there is
     no match.
 
     reg - The parsed registrant dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
     
     """
-    return rowid('registrant', reg, con)
+    return rowid('registrant', reg, cur)
 
     
-def insert_registrant(reg, con):
-    """Insert a registrant into an sqlite3 database.
+def insert_registrant(reg, cur):
+    """Insert a registrant into the database.
 
     Returns the row ID of the inserted registrant.
 
@@ -447,10 +444,9 @@ def insert_registrant(reg, con):
 
     reg - The parsed registrant dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    cur = con.cursor()
     cur.execute('INSERT INTO country VALUES(?)',
                 [reg['country']])
     cur.execute('INSERT INTO country VALUES(?)',
@@ -464,22 +460,22 @@ def insert_registrant(reg, con):
     return cur.lastrowid
 
 
-def lobbyist_rowid(lobbyist, con):
-    """Find a lobbyist in an sqlite3 database.
+def lobbyist_rowid(lobbyist, cur):
+    """Find a lobbyist in the database.
 
     Returns the row ID of the matching lobbyist, or None if there is
     no match.
 
     lobbyist - The parsed lobbyist dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
     
     """
-    return rowid('lobbyist', lobbyist, con)
+    return rowid('lobbyist', lobbyist, cur)
 
 
-def insert_lobbyist(lobbyist, con):
-    """Insert a lobbyist into an sqlite3 database.
+def insert_lobbyist(lobbyist, cur):
+    """Insert a lobbyist into the database.
 
     Returns the row ID of the inserted lobbyist.
 
@@ -488,10 +484,9 @@ def insert_lobbyist(lobbyist, con):
 
     lobbyist - The parsed lobbyist dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    cur = con.cursor()
     # Note - lobbyist status and indicator are pre-inserted into the
     # lobbyist_status and lobbyist_indicator tables.
     cur.execute('INSERT INTO person VALUES(?)', [lobbyist['name']])
@@ -501,33 +496,31 @@ def insert_lobbyist(lobbyist, con):
     return cur.lastrowid
 
 
-def insert_govt_entity(entity, con):
-    """Insert a government entity into an sqlite3 database.
+def insert_govt_entity(entity, cur):
+    """Insert a government entity into the database.
 
     Returns the key (NOT the rowid!) of the inserted entry.
 
     entity - The parsed government entity dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    cur = con.cursor()
     cur.execute('INSERT INTO govt_entity VALUES(:name)', entity)
     return entity['name']
 
 
-def insert_filing(filing, con):
-    """Insert a filing and its relationships into an sqlite3 database.
+def insert_filing(filing, cur):
+    """Insert a filing and its relationships into the database.
 
     Returns the row ID of the inserted filing.
 
     filing - The parsed filing dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
     # Insert the filing first, then its relationships.
-    cur = con.cursor()
     cur.execute('INSERT INTO filing VALUES(\
                        :id, :type, :year, :period, :filing_date, :amount, \
                        :registrant, :client)',
@@ -542,75 +535,75 @@ def insert_filing(filing, con):
     return filing_rowid
 
 
-def import_entity(record, con, name, findrow, insert):
+def import_entity(record, cur, name, findrow, insert):
     if name in record:
         entity = record[name]
-        rowid = findrow(entity, con)
+        rowid = findrow(entity, cur)
         if rowid is None:
-            return insert(entity, con)
+            return insert(entity, cur)
         else:
             return rowid
     else:
         return None
 
 
-def import_registrant(record, con):
+def import_registrant(record, cur):
     return import_entity(record,
-                         con,
+                         cur,
                          'registrant',
                          registrant_rowid,
                          insert_registrant)
 
 
-def import_client(record, con):
+def import_client(record, cur):
     return import_entity(record,
-                         con,
+                         cur,
                          'client',
                          client_rowid,
                          insert_client)
 
 
-def import_lobbyist(record, con):
+def import_lobbyist(record, cur):
     return import_entity(record,
-                         con,
+                         cur,
                          'lobbyist',
                          lobbyist_rowid,
                          insert_lobbyist)
 
 
-def import_govt_entity(record, con):
-    return insert_govt_entity(record['govt_entity'], con)
+def import_govt_entity(record, cur):
+    return insert_govt_entity(record['govt_entity'], cur)
 
 
 
-def import_list(record, id, entity_importer, con):
+def import_list(record, id, entity_importer, cur):
     ids = list()
     if id in record:
         for entity in record[id]:
-            ids.append(entity_importer(entity, con))
+            ids.append(entity_importer(entity, cur))
     return ids
 
 
-def import_lobbyists(record, con):
+def import_lobbyists(record, cur):
     """Returns a list of rowids for the lobbyists in a filing record.
 
     record - The parsed filing dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    return import_list(record, 'lobbyists', import_lobbyist, con)
+    return import_list(record, 'lobbyists', import_lobbyist, cur)
 
 
-def import_govt_entities(record, con):
+def import_govt_entities(record, cur):
     """Returns a list of keys for the govt entities in a filing record.
 
     record - The parsed filing dictionary.
 
-    con - An sqlite3.Connection object.
+    cur - The DB API 2.0-compliant database cursor.
 
     """
-    return import_list(record, 'govt_entities', import_govt_entity, con)
+    return import_list(record, 'govt_entities', import_govt_entity, cur)
 
 
 entity_importers = {
@@ -620,13 +613,13 @@ entity_importers = {
     'govt_entities': import_govt_entities
     }
 
-def import_filings(con, parsed_filings):
-    """Import parsed filings into an sqlite3 database.
+def import_filings(cur, parsed_filings):
+    """Import parsed filings into the database.
 
-    The sqlite3 database is assumed to have a particular schema; see
-    filings.sql.
+    The database is assumed to have a particular schema; see
+    filings.sql for a schema that can be used with sqlite3.
     
-    con - A Connection object for the sqlite3 database.
+    cur - The DB API 2.0-compliant database cursor.
 
     parsed_filings - A sequence of parsed filings.
 
@@ -636,6 +629,6 @@ def import_filings(con, parsed_filings):
     for record in parsed_filings:
         filing = record['filing']
         for entity_name, entity_importer in entity_importers.items():
-            filing[entity_name] = entity_importer(record, con)
-        insert_filing(filing, con)
+            filing[entity_name] = entity_importer(record, cur)
+        insert_filing(filing, cur)
     return True
