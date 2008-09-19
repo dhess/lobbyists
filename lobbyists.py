@@ -327,6 +327,35 @@ def parse_filings(doc):
 # to set its cursor's lastrowid, so use an explicit cursor object for
 # operations that need lastrowid.
 
+where_stmt = {
+    'client':
+        'client WHERE ' \
+        'country=:country AND ' \
+        'senate_id=:senate_id AND '\
+        'name=:name AND ' \
+        'ppb_country=:ppb_country AND ' \
+        'state=:state AND ' \
+        'ppb_state=:ppb_state AND ' \
+        'status=:status AND ' \
+        'description=:description AND ' \
+        'state_or_local_gov=:state_or_local_gov AND ' \
+        'contact_name=:contact_name',
+    'registrant':
+        'registrant WHERE ' \
+        'address=:address AND ' \
+        'description=:description AND ' \
+        'country=:country AND ' \
+        'senate_id=:senate_id AND ' \
+        'name=:name AND ' \
+        'ppb_country=:ppb_country',
+    'lobbyist':
+        'lobbyist WHERE ' \
+        'name=:name AND ' \
+        'status=:status AND ' \
+        'indicator=:indicator AND ' \
+        'official_position=:official_position'
+    }
+    
 def rowid(table, tomatch, con):
     """Find a match in a database table and return its rowid.
 
@@ -351,11 +380,7 @@ def rowid(table, tomatch, con):
     found.
 
     """
-    stmt = 'SELECT id FROM %s WHERE ' % table
-    for k in tomatch.keys():
-        stmt += '%s=:%s AND ' % (k, k)
-    # remove trailing AND
-    stmt = stmt.rsplit(' AND', 1)[0]
+    stmt = 'SELECT id FROM %s' % where_stmt[table]
     cur = con.cursor()
     cur.execute(stmt, tomatch)
     row = cur.fetchone()
