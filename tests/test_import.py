@@ -684,43 +684,34 @@ class TestImport(unittest.TestCase):
         rows = [row for row in cur]
 
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 9)
         self.failUnlessEqual(row['name'], 'UNDETERMINED')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 8)
         self.failUnlessEqual(row['name'],
                              'Federal Communications Commission (FCC)')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 7)
         self.failUnlessEqual(row['name'],
                              'Environmental Protection Agency (EPA)')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 6)
         self.failUnlessEqual(row['name'], 'Energy, Dept of')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 5)
         self.failUnlessEqual(row['name'],
                              'Federal Energy Regulatory Commission (FERC)')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 4)
         self.failUnlessEqual(row['name'],
                              'Health & Human Services, Dept of  (HHS)')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 3)
         self.failUnlessEqual(row['name'], 'SENATE')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 2)
         self.failUnlessEqual(row['name'], 'HOUSE OF REPRESENTATIVES')
         
         row = rows.pop()
-        self.failUnlessEqual(row['id'], 1)
         self.failUnlessEqual(row['name'], 'NONE')
         
         self.failUnlessEqual(len(rows), 0)
@@ -740,57 +731,63 @@ class TestImport(unittest.TestCase):
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '2627E811-33AB-43F4-B8E0-5B979A10FBF9')
-        self.failUnlessEqual(row['govt_entity'], 9)
+        self.failUnlessEqual(row['govt_entity'], 'UNDETERMINED')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
-        self.failUnlessEqual(row['govt_entity'], 8)
+        self.failUnlessEqual(row['govt_entity'],
+                             'Federal Communications Commission (FCC)')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
-        self.failUnlessEqual(row['govt_entity'], 7)
+        self.failUnlessEqual(row['govt_entity'],
+                             'Environmental Protection Agency (EPA)')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
-        self.failUnlessEqual(row['govt_entity'], 6)
+        self.failUnlessEqual(row['govt_entity'],'Energy, Dept of')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
-        self.failUnlessEqual(row['govt_entity'], 2)
+        self.failUnlessEqual(row['govt_entity'],
+                             'HOUSE OF REPRESENTATIVES')        
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
-        self.failUnlessEqual(row['govt_entity'], 5)
+        self.failUnlessEqual(row['govt_entity'],
+                             'Federal Energy Regulatory Commission (FERC)')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
-        self.failUnlessEqual(row['govt_entity'], 3)
+        self.failUnlessEqual(row['govt_entity'], 'SENATE')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
-        self.failUnlessEqual(row['govt_entity'], 4)
+        self.failUnlessEqual(row['govt_entity'],
+                             'Health & Human Services, Dept of  (HHS)')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
+        self.failUnlessEqual(row['govt_entity'], 'SENATE')
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
-        self.failUnlessEqual(row['govt_entity'], 3)
-        
-        row = rows.pop()
-        self.failUnlessEqual(row['filing'],
-                             'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
-        self.failUnlessEqual(row['govt_entity'], 2)
+        self.failUnlessEqual(row['govt_entity'],
+                             'HOUSE OF REPRESENTATIVES')        
         
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'FD29F4AF-763B-42A6-A27E-0AE115CD6D51')
-        self.failUnlessEqual(row['govt_entity'], 1)
+        self.failUnlessEqual(row['govt_entity'], 'NONE')
         
         self.failUnlessEqual(len(rows), 0)
         

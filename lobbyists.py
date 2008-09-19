@@ -486,24 +486,10 @@ def insert_lobbyist(lobbyist, con):
     return cur.lastrowid
 
 
-def govt_entity_rowid(entity, con):
-    """Find a government entity in an sqlite3 database.
-
-    Returns the row ID of the matching entity, or None if there is no
-    match.
-
-    lobbyist - The parsed government entity dictionary.
-
-    con - An sqlite3.Connection object.
-    
-    """
-    return rowid('govt_entity', entity, con)
-
-
 def insert_govt_entity(entity, con):
     """Insert a government entity into an sqlite3 database.
 
-    Returns the row ID of the inserted entity.
+    Returns the key (NOT the rowid!) of the inserted entry.
 
     entity - The parsed government entity dictionary.
 
@@ -511,8 +497,8 @@ def insert_govt_entity(entity, con):
 
     """
     cur = con.cursor()
-    cur.execute('INSERT INTO govt_entity VALUES(NULL, :name)', entity)
-    return cur.lastrowid
+    cur.execute('INSERT INTO govt_entity VALUES(:name)', entity)
+    return entity['name']
 
 
 def insert_filing(filing, con):
@@ -578,19 +564,16 @@ def import_lobbyist(record, con):
 
 
 def import_govt_entity(record, con):
-    return import_entity(record,
-                         con,
-                         'govt_entity',
-                         govt_entity_rowid,
-                         insert_govt_entity)
+    return insert_govt_entity(record['govt_entity'], con)
+
 
 
 def import_list(record, id, entity_importer, con):
-    rowids = list()
+    ids = list()
     if id in record:
         for entity in record[id]:
-            rowids.append(entity_importer(entity, con))
-    return rowids
+            ids.append(entity_importer(entity, con))
+    return ids
 
 
 def import_lobbyists(record, con):
@@ -605,7 +588,7 @@ def import_lobbyists(record, con):
 
 
 def import_govt_entities(record, con):
-    """Returns a list of rowids for the govt entities in a filing record.
+    """Returns a list of keys for the govt entities in a filing record.
 
     record - The parsed filing dictionary.
 

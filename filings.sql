@@ -123,8 +123,7 @@ CREATE TABLE filing_lobbyists(
 );
 
 CREATE TABLE govt_entity(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name VARCHAR(64)
+  name VARCHAR(64) PRIMARY KEY ON CONFLICT IGNORE
 );
 
 -- Filings sometimes list the exact same GovernmentEntity more than
