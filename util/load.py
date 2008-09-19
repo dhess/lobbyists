@@ -56,7 +56,8 @@ it's a valid Senate LD-1/LD-2 XML document.
     con = sqlite3.connect(dbname)
     for doc in args[1:]:
         print 'Importing', doc
-        lobbyists.import_filings(con, lobbyists.parse_filings(doc))
+        cur = con.cursor()
+        lobbyists.import_filings(cur, lobbyists.parse_filings(doc))
         if options.commit:
             con.commit()
     if not options.commit:

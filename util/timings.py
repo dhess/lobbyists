@@ -98,9 +98,10 @@ it's a valid Senate LD-1/LD-2 XML document.
     timed_parser = timed_func(parse_all)
     timed_importer = timed_func(lobbyists.import_filings)
     con = sqlite3.connect(dbname)
+    cur = con.cursor()
     filings, parse_time = timed_parser(doc)
     print 'Parse time:', parse_time
-    _, import_time = timed_importer(con, filings)
+    _, import_time = timed_importer(cur, filings)
     print 'Import time:', import_time
     if options.commit:
         con.commit()
