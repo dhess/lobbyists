@@ -73,6 +73,10 @@ it's a valid Senate LD-1/LD-2 XML document.
                       dest='skip_import_client',
                       help='stub out the client import functions to ' \
                           'simulate inifinitely-fast client importing')
+    parser.add_option('-r', '--skip-import-registrant', action='store_true',
+                      dest='skip_import_registrant',
+                      help='stub out the registrant import functions to ' \
+                          'simulate inifinitely-fast registrant importing')
     (options, args) = parser.parse_args(argv[1:])
     if len(args) != 2:
         parser.error('specify one sqlite3 database and one XML document')
@@ -82,6 +86,8 @@ it's a valid Senate LD-1/LD-2 XML document.
         lobbyists.entity_importers['lobbyists'] = skip_import_list
     if options.skip_import_client:
         lobbyists.entity_importers['client'] = skip_import
+    if options.skip_import_registrant:
+        lobbyists.entity_importers['registrant'] = skip_import
     timed_parser = timed_func(parse_all)
     timed_importer = timed_func(lobbyists.import_filings)
     con = sqlite3.connect(dbname)
