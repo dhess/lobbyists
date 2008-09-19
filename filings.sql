@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS filing_govt_entities;
 
 DROP INDEX IF EXISTS lobbyist_index;
 DROP INDEX IF EXISTS client_index;
+DROP INDEX IF EXISTS registrant_index;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -156,6 +157,15 @@ CREATE UNIQUE INDEX client_index ON client(
   description,
   state_or_local_gov,
   contact_name
+);
+
+CREATE UNIQUE INDEX registrant_index ON registrant(
+  address,
+  description,
+  country,
+  senate_id,
+  name,
+  ppb_country
 );
 
 -- 3 possible state/local govt values.
