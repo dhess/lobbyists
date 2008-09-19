@@ -323,10 +323,6 @@ def parse_filings(doc):
 
 # Code to import parsed records into the database.
         
-# XXX dhess - the sqlite3 Connection.execute() method doesn't appear
-# to set its cursor's lastrowid, so use an explicit cursor object for
-# operations that need lastrowid.
-
 where_stmt = {
     'client':
         'client WHERE ' \
@@ -370,12 +366,6 @@ def rowid(table, tomatch, con):
 
     con - An sqlite3.Connection object.
     
-    column - An optional keyword argument which can be used to select
-    a subset of columns from the match, possibly improving performance
-    a bit. For example, set this argument to 'id' to select just the
-    'id' column in the result. The default is to select all columns,
-    which works for all cases but might not be optimal.
-
     Returns the rowid of the matching row, or None if no match is
     found.
 
