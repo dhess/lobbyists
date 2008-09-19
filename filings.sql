@@ -123,10 +123,14 @@ CREATE TABLE govt_entity(
   name VARCHAR(64)
 );
 
+-- Filings sometimes list the exact same GovernmentEntity more than
+-- once. Just ignore any occurrences after the first. (In the future,
+-- it might be nice to flag these records so they can be reported to
+-- the Senate.)
 CREATE TABLE filing_govt_entities(
   filing REFERENCES filing,
   govt_entity REFERENCES govt_entity,
-  PRIMARY KEY(filing, govt_entity)
+  PRIMARY KEY(filing, govt_entity) ON CONFLICT IGNORE
 );
 
 -- 3 possible state/local govt values.

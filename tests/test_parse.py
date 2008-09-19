@@ -1064,6 +1064,18 @@ class TestParseGovtEntities(unittest.TestCase):
 
         x = filings.pop()
         f = x['filing']
+        self.failUnlessEqual(f['id'], '2627E811-33AB-43F4-B8E0-5B979A10FBF9')
+        entities = x['govt_entities']
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'UNDETERMINED')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'UNDETERMINED')
+        e = entities.pop()['govt_entity']
+        self.failUnlessEqual(e['name'], 'UNDETERMINED')
+        self.failUnlessEqual(len(entities), 0)
+
+        x = filings.pop()
+        f = x['filing']
         self.failUnlessEqual(f['id'], 'A55002C7-78C4-41BA-A6CA-01FCF7650116')
         entities = x['govt_entities']
         e = entities.pop()['govt_entity']

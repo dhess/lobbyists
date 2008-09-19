@@ -684,6 +684,10 @@ class TestImport(unittest.TestCase):
         rows = [row for row in cur]
 
         row = rows.pop()
+        self.failUnlessEqual(row['id'], 9)
+        self.failUnlessEqual(row['name'], 'UNDETERMINED')
+        
+        row = rows.pop()
         self.failUnlessEqual(row['id'], 8)
         self.failUnlessEqual(row['name'],
                              'Federal Communications Commission (FCC)')
@@ -733,6 +737,11 @@ class TestImport(unittest.TestCase):
         cur.execute("SELECT * FROM filing_govt_entities")
         rows = [row for row in cur]
 
+        row = rows.pop()
+        self.failUnlessEqual(row['filing'],
+                             '2627E811-33AB-43F4-B8E0-5B979A10FBF9')
+        self.failUnlessEqual(row['govt_entity'], 9)
+        
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')

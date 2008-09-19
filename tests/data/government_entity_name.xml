@@ -58,4 +58,17 @@
     </GovernmentEntities>
   </Filing>
 
+  <!-- Beginning with the 2006_2.xml document, there are quite a few
+       occurrences of entities with name "UNDETERMINED". Sometimes
+       these occur multiple times in a single filing. -->
+
+  <Filing ID="2627E811-33AB-43F4-B8E0-5B979A10FBF9" Year="2005" Received="2006-04-25T00:00:00" Amount="100000" Type="YEAR-END AM
+ENDMENT" Period="Year-End (July 1 - Dec 31)">
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="UNDETERMINED" xmlns="" />
+      <GovernmentEntity GovEntityName="UNDETERMINED" xmlns="" />
+      <GovernmentEntity GovEntityName="UNDETERMINED" xmlns="" />
+    </GovernmentEntities>
+  </Filing>
+
 </PublicFiling>
