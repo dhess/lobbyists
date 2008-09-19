@@ -42,7 +42,10 @@ def timed_func(func):
 
 def parse_all(doc):
     return [x for x in lobbyists.parse_filings(doc)]
-    
+
+def skip_import(record, con):
+    return list()
+
 def main(argv=None):
     if argv is None:
         argv = sys.argv
@@ -56,12 +59,21 @@ it's a valid Senate LD-1/LD-2 XML document.
 """
     parser = optparse.OptionParser(usage=usage,
                                    version=VERSION)
+    parser.add_option('-c', '--commit', action='store_true',
+                      help='commit changes to the database (default is ' \
+                          'not to commit)')
+    parser.add_option('-l', '--skip-import-lobbyists', action='store_true',
+                      dest='skip_import_lobbyist',
+                      help='stub out the lobbyist import functions to ' \
+                          'simulate inifinitely-fast lobbyist importing')
     (options, args) = parser.parse_args(argv[1:])
     if len(args) != 2:
         parser.error('specify one sqlite3 database and one XML document')
     dbname = args[0]
     doc = args[1]
-
+    if options.skip_import_lobbyist:
+        lobbyists.entity_importers['lobbyists'] = skip_import
+        
     timed_parser = timed_func(parse_all)
     timed_importer = timed_func(lobbyists.import_filings)
     con = sqlite3.connect(dbname)
@@ -69,6 +81,9 @@ it's a valid Senate LD-1/LD-2 XML document.
     print 'Parse time:', parse_time
     _, import_time = timed_importer(con, filings)
     print 'Import time:', import_time
+    if options.commit:
+        con.commit()
+    con.close()
     return 0
 
 if __name__ == "__main__":
