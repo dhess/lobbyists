@@ -59,6 +59,10 @@
     <Client ClientName="MARCONI PLC" ClientID="773" ClientStatus="1" ContactFullname="BARRY B. DIRENFELD" ClientCountry="UNITED KINGDOM" ClientPPBCountry="USA" ClientState="" ClientPPBState="UNDETERMINED" xmlns="" />
   </Filing>
 
+  <Filing ID="15A2AECC-B034-42D7-B447-27E70284F3DB" Year="2008" Received="2008-07-14T11:15:08" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <Client ClientName="Tenet Technology" GeneralDescription="Provide solutions for defence and security, intelligent transport, industry and government" ClientID="1000584" ClientStatus="0" ContactFullname="Alan L Ross" IsStateOrLocalGov="0" ClientCountry="&lt;SELECT ONE&gt;" ClientPPBCountry="&lt;SELECT ONE&gt;" ClientState="" ClientPPBState="" xmlns="" />
+  </Filing>  
+
   <!-- from client_description.xml -->
 
   <Filing ID="1402A175-987F-4896-B0F5-00107EF69834" Year="2007" Received="2008-02-13T14:44:07.167" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
