@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Issue Code attributes appear to be selected from a pre-defined
+       list. Whenever an Issue element appears, it always has a
+       Code. -->
+  
+  <Filing ID="D1C9DB2A-AE4F-4FED-9BCB-024C8373813E" Year="1999" Received="1999-03-08T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <Issues>
+      <Issue Code="INSURANCE" xmlns="" />
+      <Issue Code="TAXATION/INTERNAL REVENUE CODE" xmlns="" />
+      <Issue Code="BUDGET/APPROPRIATIONS" xmlns="" />
+      <Issue Code="WELFARE" xmlns="" />
+      <Issue Code="MEDICARE/MEDICAID" xmlns="" />
+      <Issue Code="HEALTH ISSUES" xmlns="" />
+    </Issues>
+  </Filing>
+  
+  <Filing ID="A55002C7-78C4-41BA-A6CA-01FCF7650116" Year="2007" Received="2008-01-02T00:00:00" Amount="0" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Issues>
+      <Issue Code="FAMILY ISSUES/ABORTION/ADOPTION" xmlns="" />
+      <Issue Code="LAW ENFORCEMENT/CRIME/CRIMINAL JUSTICE" xmlns="" />
+      <Issue Code="FOREIGN RELATIONS" xmlns="" />
+      <Issue Code="FINANCIAL INSTITUTIONS/INVESTMENTS/SECURITIES" xmlns="" />
+      <Issue Code="REAL ESTATE/LAND USE/CONSERVATION" xmlns="" />
+      <Issue Code="BANKING" xmlns="" />
+    </Issues>
+  </Filing>
+
+</PublicFilings>

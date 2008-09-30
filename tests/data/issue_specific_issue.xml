@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Issue SpecificIssue attributes are free-form text. Some of them
+       are quite long. They're optional. -->
+
+  <Filing ID="F56492FC-4FBD-4824-83E1-0004B30F0519" Year="2007" Received="2008-01-03T11:31:38.843" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Issues>
+      <Issue Code="DEFENSE" SpecificIssue="DEFENSE AUTHORIZATION, DEFENSE APPROPRIATIONS, VETERANS, DEFENSE HEALTH CARE, ARMED FORCES RETIREMENT, ARMED FORCES PERSONNEL BENEFITS, EMERGING DEFENSE RELATED ISSUES" xmlns="" />
+    </Issues>
+  </Filing>
+
+  <!-- Sometimes the exact same specific issue is given for multiple
+       issue codes. -->
+
+  <Filing ID="05804BE5-57C9-41BF-97B2-0120826D4393" Year="2007" Received="2008-01-24T13:26:48.027" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Issues>
+      <Issue Code="BUDGET/APPROPRIATIONS" SpecificIssue="H.R.3222 &amp; Senate FY08 Defense Appropriations-Navy, Army &amp; SOCOM R&amp;D&#xA;H.R.1585 &amp; S.1547 FY08 Defense Authorizations-Navy, Army &amp; SOCOM R&amp;D&#xA;H.R.2638 &amp; S.1644 FY08 DHS AppropriationsBill-CRP" xmlns="" />
+      <Issue Code="HOMELAND SECURITY" SpecificIssue="H.R.3222 &amp; Senate FY08 Defense Appropriations-Navy, Army &amp; SOCOM R&amp;D&#xA;H.R.1585 &amp; S.1547 FY08 Defense Authorizations-Navy, Army &amp; SOCOM R&amp;D&#xA;H.R.2638 &amp; S.1644 FY08 DHS AppropriationsBill-CRP" xmlns="" />
+      <Issue Code="DEFENSE" SpecificIssue="H.R.3222 &amp; Senate FY08 Defense Appropriations-Navy, Army &amp; SOCOM R&amp;D&#xA;H.R.1585 &amp; S.1547 FY08 Defense Authorizations-Navy, Army &amp; SOCOM R&amp;D&#xA;" xmlns="" />
+    </Issues>
+  </Filing>
+
+  <Filing ID="79E53F91-8C5F-44AD-909D-032AA25D5B00" Year="2007" Received="2008-01-03T09:51:43.767" Amount="60000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Issues>
+      <Issue Code="ROADS/HIGHWAY" SpecificIssue="&#xD;&#xA;H.R. 3098 to restore farm truck exemptions from federal motor carrier vehicle regulations." xmlns="" />
+      <Issue Code="EDUCATION" SpecificIssue="&#xD;&#xA;FY08 Labor, HHS and Education spending.  Perkins Amendment (federal funding for FFA and career and technical education)." xmlns="" />
+      <Issue Code="TRADE (DOMESTIC/FOREIGN)" SpecificIssue="&#xD;&#xA;U.S. -Peru Trade Promotion Agreement (TPA) - the goal is to increase U.S. agriculture exports and increase market share." xmlns="" />
+      <Issue Code="AGRICULTURE" SpecificIssue="&#xD;&#xA;FY08 Agriculture Appropriations Bill - (Sec. 738) amendment to prohibit USDA from spending money for health inspection of horses.&#xA;&#xA;H.R. 3161, the FY08 Ag spending bill - amendments: King/Kingston amendment to strike Sec. 738. It would limit USDA authority for equine health inspection, effectively restricting the movement of all horses; Ackerman amendment prohibits funding for Food Safety and Inspection Service (FSIS) inspections in facilities that process nonambulatory or downer livestock;  Whitfield-Spratt-Rahall-Chandler amendment to restrict USDA inspection of horses intended for processing for human consumption.&#xA;&#xA;Payment Limits.&#xD;&#xA;Farm Bill: tax title, reductions in direct payments, counter-cyclical revenue option, senate ag committee markup on farm bill, amendments seeking further reform to payment limits and adjusted gross income restrictions.&#xA;" xmlns="" />
+      <Issue Code="IMMIGRATION" SpecificIssue="&#xD;&#xA;Immigration - Thanking Senator Lincoln and her staff for the hard work and long hours and dedication they presented in an effort to develop a comprehensive immigration reform.&#xA;" xmlns="" />
+      <Issue Code="TRANSPORTATION" SpecificIssue="&#xD;&#xA;H.R. 1495 Water Resources Development Act (WRDA) - the WRDA provisions to modernize the locks on the Upper Mississippi and Illinois Rivers are essential if U.S. agriculture is going to remain competitive in the global marketplace.&#xD;&#xA;H.R. 1495 the Water Resources Development Act of 2007 (WRDA) - conference report - Title VIII of the legislation includes authorization for the Corps of Engineers to construct new 1,200 foot locks on the Upper Mississippi and Illinois Rivers&#xA;" xmlns="" />
+      <Issue Code="ENERGY/NUCLEAR" SpecificIssue="&#xD;&#xA;Comprehensive Energy Bill" xmlns="" />
+    </Issues>
+  </Filing>
+
+</PublicFilings>
