@@ -256,8 +256,32 @@ def parse_govt_entities(elt):
     return parse_list(elt, 'govt_entities', parse_govt_entity)
 
 
+issue_attrs = [('Code', 'code', identity),
+               ('SpecificIssue', 'specific_issue', identity)]
+
+def parse_issue(elt):
+    """Parse an Issue DOM element.
+
+    elt - The Issue DOM element.
+
+    Returns a pair whose first item is the string 'issue' and whose
+    second item is the dictionary of parsed attributes.
+
+    """
+    return parse_element(elt, 'issue', issue_attrs)
+
+
 def parse_issues(elt):
-    return ('issues', list())
+    """Parse an Issues DOM element.
+
+    elt - The Issues DOM element.
+
+    Returns a pair whose first item is the string 'issues' and whose
+    second item is a list of parsed Issue DOM elements, one for each
+    Issue sub-element of this Issues element.
+
+    """
+    return parse_list(elt, 'issues', parse_issue)
 
 
 def parse_foreign_entities(elt):
