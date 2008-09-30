@@ -257,7 +257,7 @@ def parse_govt_entities(elt):
 
 
 issue_attrs = [('Code', 'code', identity),
-               ('SpecificIssue', 'specific_issue', identity)]
+               ('SpecificIssue', 'specific_issue', optional)]
 
 def parse_issue(elt):
     """Parse an Issue DOM element.

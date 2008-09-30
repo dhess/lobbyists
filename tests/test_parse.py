@@ -1199,6 +1199,13 @@ class TestParseIssues(unittest.TestCase):
 
         x = filings.pop()
         f = x['filing']
+        self.failUnlessEqual(f['id'], 'D1C9DB2A-AE4F-4FED-9BCB-024C8373813E')
+        issues = x['issues']
+        i = issues.pop()['issue']
+        self.failUnlessEqual(i['specific_issue'], 'unspecified')
+
+        x = filings.pop()
+        f = x['filing']
         self.failUnlessEqual(f['id'], '79E53F91-8C5F-44AD-909D-032AA25D5B00')
         issues = x['issues']
         i = issues.pop()['issue']
