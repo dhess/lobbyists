@@ -2,8 +2,6 @@ DROP TABLE IF EXISTS filing;
 DROP TABLE IF EXISTS org;
 DROP TABLE IF EXISTS person;
 DROP TABLE IF EXISTS government_entity;
-DROP TABLE IF EXISTS issue;
-DROP TABLE IF EXISTS specific_issue;
 DROP TABLE IF EXISTS url;
 DROP TABLE IF EXISTS registrant;
 DROP TABLE IF EXISTS country;
@@ -18,6 +16,9 @@ DROP TABLE IF EXISTS lobbyist;
 DROP TABLE IF EXISTS filing_lobbyists;
 DROP TABLE IF EXISTS govt_entity;
 DROP TABLE IF EXISTS filing_govt_entities;
+DROP TABLE IF EXISTS issue_code;
+DROP TABLE IF EXISTS issue;
+DROP TABLE IF EXISTS filing_issues;
 
 DROP INDEX IF EXISTS lobbyist_index;
 DROP INDEX IF EXISTS client_index;
@@ -42,14 +43,6 @@ CREATE TABLE person(
   name VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
   
-CREATE TABLE issue(
-  description VARCHAR(256) PRIMARY KEY
-);
-
-CREATE TABLE specific_issue(
-  description VARCHAR(256) PRIMARY KEY
-);
-
 CREATE TABLE url(
   url VARCHAR(256) PRIMARY KEY
 );
@@ -134,6 +127,22 @@ CREATE TABLE filing_govt_entities(
   filing REFERENCES filing,
   govt_entity REFERENCES govt_entity,
   PRIMARY KEY(filing, govt_entity) ON CONFLICT IGNORE
+);
+
+CREATE TABLE issue_code(
+  code VARCHAR(80) PRIMARY KEY ON CONFLICT IGNORE
+);
+
+CREATE TABLE issue(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  code REFERENCES code,
+  specific_issue VARCHAR
+);
+
+CREATE TABLE filing_issues(
+  filing REFERENCES filing,
+  issue REFERENCES issue,
+  PRIMARY KEY(filing, issue)
 );
 
 -- Create indexes for tables that get looked up during import. They

@@ -534,6 +534,25 @@ def insert_govt_entity(entity, cur):
     return entity['name']
 
 
+def insert_issue(issue, cur):
+    """Insert an issue into the database.
+
+    Returns the row ID of the inserted issue.
+
+    As a side effect, this function also inserts rows into the
+    'issue_code' table.
+
+    issue - The parsed issue dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    cur.execute('INSERT INTO issue_code VALUES(?)', [issue['code']])
+    cur.execute('INSERT INTO issue VALUES(NULL, :code, :specific_issue)',
+                issue)
+    return cur.lastrowid
+
+
 def insert_filing(filing, cur):
     """Insert a filing and its relationships into the database.
 
@@ -555,6 +574,9 @@ def insert_filing(filing, cur):
                     [filing['id'], id])
     for id in filing['govt_entities']:
         cur.execute('INSERT INTO filing_govt_entities VALUES(?, ?)',
+                    [filing['id'], id])
+    for id in filing['issues']:
+        cur.execute('INSERT INTO filing_issues VALUES(?, ?)',
                     [filing['id'], id])
     return filing_rowid
 
@@ -599,6 +621,9 @@ def import_govt_entity(record, cur):
     return insert_govt_entity(record['govt_entity'], cur)
 
 
+def import_issue(record, cur):
+    return insert_issue(record['issue'], cur)
+
 
 def import_list(record, id, entity_importer, cur):
     ids = list()
@@ -630,11 +655,23 @@ def import_govt_entities(record, cur):
     return import_list(record, 'govt_entities', import_govt_entity, cur)
 
 
+def import_issues(record, cur):
+    """Returns a list of rowids for the issues in a filing record.
+
+    record - The parsed filing dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return import_list(record, 'issues', import_issue, cur)
+
+
 entity_importers = {
     'registrant': import_registrant,
     'client': import_client,
     'lobbyists': import_lobbyists,
-    'govt_entities': import_govt_entities
+    'govt_entities': import_govt_entities,
+    'issues': import_issues,
     }
 
 def import_filings(cur, parsed_filings):

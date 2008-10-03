@@ -813,5 +813,182 @@ class TestImport(unittest.TestCase):
         
         self.failUnlessEqual(len(rows), 0)
         
+    def test_import_issues(self):
+        """Check issues importing."""
+        filings = list(lobbyists.parse_filings(util.testpath('issues.xml')))
+        con = sqlite3.connect(':memory:')
+        con.executescript(util.sqlscript('filings.sql'))
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM issue")
+        rows = list(cur)
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 23)
+        self.failUnlessEqual(row['code'],
+                             'ENERGY/NUCLEAR')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nComprehensive Energy Bill')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 22)
+        self.failUnlessEqual(row['code'],
+                             'TRANSPORTATION')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nH.R. 1495 Water Resources Development Act (WRDA) - the WRDA provisions to modernize the locks on the Upper Mississippi and Illinois Rivers are essential if U.S. agriculture is going to remain competitive in the global marketplace.\r\nH.R. 1495 the Water Resources Development Act of 2007 (WRDA) - conference report - Title VIII of the legislation includes authorization for the Corps of Engineers to construct new 1,200 foot locks on the Upper Mississippi and Illinois Rivers\n')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 21)
+        self.failUnlessEqual(row['code'],
+                             'IMMIGRATION')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nImmigration - Thanking Senator Lincoln and her staff for the hard work and long hours and dedication they presented in an effort to develop a comprehensive immigration reform.\n')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 20)
+        self.failUnlessEqual(row['code'],
+                             'AGRICULTURE')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nFY08 Agriculture Appropriations Bill - (Sec. 738) amendment to prohibit USDA from spending money for health inspection of horses.\n\nH.R. 3161, the FY08 Ag spending bill - amendments: King/Kingston amendment to strike Sec. 738. It would limit USDA authority for equine health inspection, effectively restricting the movement of all horses; Ackerman amendment prohibits funding for Food Safety and Inspection Service (FSIS) inspections in facilities that process nonambulatory or downer livestock;  Whitfield-Spratt-Rahall-Chandler amendment to restrict USDA inspection of horses intended for processing for human consumption.\n\nPayment Limits.\r\nFarm Bill: tax title, reductions in direct payments, counter-cyclical revenue option, senate ag committee markup on farm bill, amendments seeking further reform to payment limits and adjusted gross income restrictions.\n')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 19)
+        self.failUnlessEqual(row['code'],
+                             'TRADE (DOMESTIC/FOREIGN)')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nU.S. -Peru Trade Promotion Agreement (TPA) - the goal is to increase U.S. agriculture exports and increase market share.')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 18)
+        self.failUnlessEqual(row['code'],
+                             'EDUCATION')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nFY08 Labor, HHS and Education spending.  Perkins Amendment (federal funding for FFA and career and technical education).')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 17)
+        self.failUnlessEqual(row['code'],
+                             'ROADS/HIGHWAY')
+        self.failUnlessEqual(row['specific_issue'],
+                             '\r\nH.R. 3098 to restore farm truck exemptions from federal motor carrier vehicle regulations.')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 16)
+        self.failUnlessEqual(row['code'],
+                             'DEFENSE')
+        self.failUnlessEqual(row['specific_issue'],
+                             'H.R.3222 & Senate FY08 Defense Appropriations-Navy, Army & SOCOM R&D\nH.R.1585 & S.1547 FY08 Defense Authorizations-Navy, Army & SOCOM R&D\n')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 15)
+        self.failUnlessEqual(row['code'],
+                             'HOMELAND SECURITY')
+        self.failUnlessEqual(row['specific_issue'],
+                             'H.R.3222 & Senate FY08 Defense Appropriations-Navy, Army & SOCOM R&D\nH.R.1585 & S.1547 FY08 Defense Authorizations-Navy, Army & SOCOM R&D\nH.R.2638 & S.1644 FY08 DHS AppropriationsBill-CRP')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 14)
+        self.failUnlessEqual(row['code'],
+                             'BUDGET/APPROPRIATIONS')
+        self.failUnlessEqual(row['specific_issue'],
+                             'H.R.3222 & Senate FY08 Defense Appropriations-Navy, Army & SOCOM R&D\nH.R.1585 & S.1547 FY08 Defense Authorizations-Navy, Army & SOCOM R&D\nH.R.2638 & S.1644 FY08 DHS AppropriationsBill-CRP')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 13)
+        self.failUnlessEqual(row['code'],
+                             'DEFENSE')
+        self.failUnlessEqual(row['specific_issue'],
+                             'DEFENSE AUTHORIZATION, DEFENSE APPROPRIATIONS, VETERANS, DEFENSE HEALTH CARE, ARMED FORCES RETIREMENT, ARMED FORCES PERSONNEL BENEFITS, EMERGING DEFENSE RELATED ISSUES')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 12)
+        self.failUnlessEqual(row['code'],
+                             'BANKING')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 11)
+        self.failUnlessEqual(row['code'],
+                             'REAL ESTATE/LAND USE/CONSERVATION')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 10)
+        self.failUnlessEqual(row['code'],
+                             'FINANCIAL INSTITUTIONS/INVESTMENTS/SECURITIES')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 9)
+        self.failUnlessEqual(row['code'],
+                             'FOREIGN RELATIONS')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 8)
+        self.failUnlessEqual(row['code'],
+                             'LAW ENFORCEMENT/CRIME/CRIMINAL JUSTICE')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 7)
+        self.failUnlessEqual(row['code'],
+                             'FAMILY ISSUES/ABORTION/ADOPTION')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 6)
+        self.failUnlessEqual(row['code'],
+                             'HEALTH ISSUES')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 5)
+        self.failUnlessEqual(row['code'],
+                             'MEDICARE/MEDICAID')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 4)
+        self.failUnlessEqual(row['code'],
+                             'WELFARE')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 3)
+        self.failUnlessEqual(row['code'],
+                             'BUDGET/APPROPRIATIONS')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 2)
+        self.failUnlessEqual(row['code'],
+                             'TAXATION/INTERNAL REVENUE CODE')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        row = rows.pop()
+        self.failUnlessEqual(row['id'], 1)
+        self.failUnlessEqual(row['code'],
+                             'INSURANCE')
+        self.failUnlessEqual(row['specific_issue'],
+                             'unspecified')
+
+        self.failUnlessEqual(len(rows), 0)
+
+        
 if __name__ == '__main__':
     unittest.main()
