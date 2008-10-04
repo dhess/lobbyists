@@ -540,6 +540,13 @@ class TestParseClients(unittest.TestCase):
 
         x = filings.pop()
         f = x['filing']
+        self.failUnlessEqual(f['id'], '62114C8C-2868-4FD8-AC6A-8CB2C3D64307')
+        client = x['client']
+        self.failUnlessEqual(client['country'], 'unspecified')
+        self.failUnlessEqual(client['ppb_country'], 'USA')
+
+        x = filings.pop()
+        f = x['filing']
         self.failUnlessEqual(f['id'], '15A2AECC-B034-42D7-B447-27E70284F3DB')
         client = x['client']
         self.failUnlessEqual(client['country'], '<SELECT ONE>')

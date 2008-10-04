@@ -152,7 +152,7 @@ def parse_list(list_elt, id, subelt_parser):
     return (id, lst)
     
 
-client_attrs = [('ClientCountry', 'country', identity),
+client_attrs = [('ClientCountry', 'country', optional),
                 ('ClientID', 'senate_id', int),
                 ('ClientName', 'name', identity),
                 ('ClientPPBCountry', 'ppb_country', identity),

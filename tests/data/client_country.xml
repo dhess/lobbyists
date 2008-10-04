@@ -45,4 +45,9 @@
     <Client ClientName="Tenet Technology" GeneralDescription="Provide solutions for defence and security, intelligent transport, industry and government" ClientID="1000584" ClientStatus="0" ContactFullname="Alan L Ross" IsStateOrLocalGov="0" ClientCountry="&lt;SELECT ONE&gt;" ClientPPBCountry="&lt;SELECT ONE&gt;" ClientState="" ClientPPBState="" xmlns="" />
   </Filing>  
 
+  <!-- Here the client country is blank. -->
+  <Filing ID="62114C8C-2868-4FD8-AC6A-8CB2C3D64307" Year="2006" Received="2006-03-24T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <Client ClientName="MANITOBA INTERNATIONAL PHARMACISTS ASSOCIATION INC. (MIPA)" ClientID="87" ClientStatus="1" ContactFullname="PAUL FRAZER" ClientCountry="" ClientPPBCountry="USA" ClientState="" ClientPPBState="UNDETERMINED" xmlns="" />
+  </Filing>
+  
 </PublicFilings>
