@@ -1,0 +1,87 @@
+<PublicFilings>
+
+  <!-- The affiliated org country and PPB country attributes are
+       required and relatively straightforward. Note that the PPB
+       country attribute is spelled, "AffiliatedOrgPPBCcountry"
+       (sic). -->
+  
+  <Filing ID="C8293344-9A8D-4D6F-AAA5-25925E60BED9" Year="2008" Received="2008-01-17T16:43:35.463" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="N/A">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="DANA FARBER CANCER INSTITUTE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="PARTNERS HEALTHCARE SYSTEM" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="BOSTON MEDICAL CENTER" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="CARITAS CHRISTI" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Country and PPB country are sometimes different. -->
+  
+  <Filing ID="9B506978-9D51-431A-A698-11F682485512" Year="2007" Received="2007-08-02T12:04:46" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="UC GROUP LIMITED" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Sometimes one or the other is "undetermined." -->
+  
+  <Filing ID="E63105D4-9840-492D-A81E-F6816CBAFACE" Year="2005" Received="2005-04-26T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="INMARSAT LTD" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="UNDETERMINED" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <Filing ID="A0AA1F41-447E-4A0B-B09A-B0C24645F805" Year="1999" Received="1999-10-15T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="CHILDRENS HOSPITAL OAKLAND" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="ISL" AffiliatedOrgCountry="UNDETERMINED" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- There is one record where the country is blank. PPB country is
+       never blank. -->
+  
+  <Filing ID="A4F6A122-5550-46AF-9C5C-2838FF6538FE" Year="2007" Received="2007-10-03T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="ITNL EMISSIONS TRADING ASSN" AffiliatedOrgCountry="" AffiliatedOrgPPBCcountry="UNDETERMINED" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- There is one record that lists Puerto Rico as an affiliated org
+       country and PPB country. -->
+  
+  <Filing ID="F0054303-E42F-48CE-8D71-CE7B2FBE8707" Year="2007" Received="2008-02-14T11:47:27.887" Amount="160000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="PORTAL DEL FUTURO AUTHORITY" AffiliatedOrgCountry="PUERTO RICO" AffiliatedOrgPPBCcountry="PUERTO RICO" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <!-- As with client records, sometimes the country or PPB country is "<SELECT ONE>" -->
+    
+  <Filing ID="373B396A-51A9-42F6-AAB2-0CBF69177C43" Year="2008" Received="2008-07-15T16:30:04" Amount="153000" Type="SECOND QUARTER REPORT" Period="2nd Quarter (Apr 1 - June 30)">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Citigroup" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="UBS AG" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Bank of America" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Wachovia Corporation" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Koch Industries" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Kirkland &amp; Ellis" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Merrill Lynch &amp; Co." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Wells Fargo Bank" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="J.P.Morgan Chase &amp; Co." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Patton Boggs LLP" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Lehman Brothers Ltd.," AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Calyon Corporation" AffiliatedOrgCountry="FRANCE" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Cargill Financial Services Corp.," AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Man Financial Group" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Prudential Global Funding LLC" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Morgan Stanley &amp; Co." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="HSBC Holdings plc" AffiliatedOrgCountry="FRANCE" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Credit Suisse" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Deutsche Bank" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="ABN Amro Bank" AffiliatedOrgCountry="NETHERLANDS" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Goldman Sachs &amp; Company" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Barclays Capital" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+</PublicFilings>

@@ -288,16 +288,49 @@ def parse_foreign_entities(elt):
     return ('foreign_entities', list())
 
 
-def parse_affiliated_orgs(elt):
-    return ('affiliated_orgs', list())
+# The affiliated org PPB country attribute name is spelled,
+# "AffiliatedOrgPPBCcountry" (sic).
 
+org_attrs = [('AffiliatedOrgCountry', 'country', optional),
+             ('AffiliatedOrgName', 'name', identity),
+             ('AffiliatedOrgPPBCcountry', 'ppb_country', identity)]
+
+def parse_org(elt):
+    """Parse an Org DOM element.
+
+    elt - The Org DOM element.
+
+    Returns a pair whose first item is the string 'org' and whose
+    second item is the dictionary of parsed attributes.
+
+    """
+    return parse_element(elt, 'org', org_attrs)
+
+
+def parse_affiliated_orgs(elt):
+    """Parse an AffiliatedOrgs DOM element.
+
+    elt - The AffiliatedOrgs DOM element.
+
+    Returns a pair whose first item is the string 'affiliated_orgs'
+    and whose second item is a list of parsed Org DOM elements, one
+    for each Org sub-element of this AffiliatedOrgs element.
+
+    """
+    return parse_list(elt, 'affiliated_orgs', parse_org)
+
+
+# AffiliatedOrgsURL parser ideally would be a URL parser, but
+# unfortunately this element contains all kinds of non-URL junk, and
+# must be treated as free-form text.
 
 filing_attrs = [('ID', 'id', identity),
                 ('Year', 'year', int),
                 ('Received', 'filing_date', identity),
                 ('Amount', 'amount', amount),
                 ('Type', 'type', identity),
-                ('Period', 'period', period)]
+                ('Period', 'period', period),
+                ('AffiliatedOrgsURL', 'affiliated_orgs_url', optional)]
 
 def parse_filing(elt):
     """Parse a Filing DOM element.

@@ -1,0 +1,84 @@
+<PublicFilings>
+
+  <!-- The AffiliatedOrgsURL element is new as of 2008 records, and
+       only a few of those records have one. Unfortunately, the URL
+       element is often used for free-form text in addition to a URL,
+       and sometimes doesn't even include a URL at all. -->
+
+  <!-- Here's a simple one. Note that there's no protocol prefix. -->
+  
+  <Filing ID="16E1EA9C-F6B3-4319-957E-14F4D65BD9F4" Year="2008" Received="2008-01-18T16:41:12.707" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.exxonmobile.com">
+  </Filing>
+
+  <!-- Here's a URL with path and a protocol prefix. -->
+  
+  <Filing ID="09C471E9-2B98-433A-8E4D-0C3928459C20" Year="2008" Received="2008-02-13T16:30:03.513" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="http://skipjack.net/le_shore/worcestr/welcome.html">
+  </Filing>
+  
+  <!-- This record lists an email address rather than a URL. -->
+  
+  <Filing ID="C72D65BA-24D0-4AB7-97E4-7D68FD2BCB7D" Year="2008" Received="2008-01-27T10:18:49.790" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="judith_burrell@cox.net">
+  </Filing>
+  
+  <!-- This record lists the URL as "N/A". -->
+    
+  <Filing ID="C8293344-9A8D-4D6F-AAA5-25925E60BED9" Year="2008" Received="2008-01-17T16:43:35.463" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="N/A">
+  </Filing>
+
+  <!-- Here's a URL with a full mailing address followed by an email address -->
+
+  <Filing ID="0C4051F5-2E0A-4ABC-A140-7FAFF7669D00" Year="2008" Received="2008-02-25T16:33:09" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="Patton Boggs, LLP, 2550 M. Street N.W., Washington, D.C. 20037 - pfarthing@pattonboggs.com">
+  </Filing>
+
+  <!-- URL is "None" -->
+
+  <Filing ID="E34132EF-DA6D-40BF-BDEA-D13DBDF09BEA" Year="2007" Received="2008-02-13T12:34:22.663" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="None">
+  </Filing>
+
+  <!-- URL followed by mailing address -->
+  
+  <Filing ID="6D4AFEE6-E886-4993-B153-14A887FD325A" Year="2008" Received="2008-04-22T08:30:56" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.landolakesinc.com              4001 Lexington Ave. N, Arden Hills Minnesota 55112-6943">
+  </Filing>
+
+  <!-- Multiple URLs separated by a semicolon. -->
+  
+  <Filing ID="8A3DB5DF-04A3-4002-9353-2C12104A0B49" Year="2008" Received="2008-04-18T10:50:35" Amount="90000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="www.wal-mart.com; www.rossstores.com">
+  </Filing>
+
+  <!-- Multiple URLs, separated by a semicolon, each with a parenthetical name -->
+  
+  <Filing ID="C6EABAE0-1E89-491F-97B3-5282386EC69C" Year="2008" Received="2008-04-21T14:50:09" Amount="300000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="www.bnl.gov (Brookhaven Science Association);   www.ut-battelle.org (UT-Battelle)">
+  </Filing>
+
+  <!-- Multiple URLs separated by commas. -->
+  
+  <Filing ID="5F456254-75FE-4ED2-8F74-92C169B6800A" Year="2008" Received="2008-04-21T16:22:57" Amount="125812" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="www.vitas.com, www.odyssey-healthcare.com, www.hcr-manorcare.com/home, www.aseracare.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="AseraCare" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Odyssey" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Vitas" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="HCR ManorCare" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Multiple URLs separated by spaces -->
+  
+  <Filing ID="9B5A4E46-8AAA-4497-B11A-B83B6D18836C" Year="2008" Received="2008-04-21T10:14:54" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="www.hklaw.com    www.ppsv.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Holland and Knight" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Power Pyles Sutter &amp; Verville" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Here the URL is actually a question. -->
+  
+  <Filing ID="493C9C11-17ED-4875-88D2-FAC96FF06849" Year="2008" Received="2008-04-21T10:59:24" Amount="150000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="are the members listed on coalition's website?">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="AOL" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Warner Bros." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Palm, Inc." AffiliatedOrgCountry="&lt;SELECT ONE&gt;" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Time Warner Cable" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+</PublicFilings>

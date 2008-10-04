@@ -326,6 +326,80 @@ class TestParseFilings(unittest.TestCase):
         
         self.failUnlessEqual(len(filings), 0)
 
+    def test_affiliated_orgs_url(self):
+        filings = list(lobbyists.parse_filings(util.testpath('filing_affiliated_orgs_url.xml')))
+        
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '493C9C11-17ED-4875-88D2-FAC96FF06849')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             "are the members listed on coalition's website?")
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '9B5A4E46-8AAA-4497-B11A-B83B6D18836C')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'www.hklaw.com    www.ppsv.com')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '5F456254-75FE-4ED2-8F74-92C169B6800A')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'www.vitas.com, www.odyssey-healthcare.com, www.hcr-manorcare.com/home, www.aseracare.com')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'C6EABAE0-1E89-491F-97B3-5282386EC69C')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'www.bnl.gov (Brookhaven Science Association);   www.ut-battelle.org (UT-Battelle)')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '8A3DB5DF-04A3-4002-9353-2C12104A0B49')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'www.wal-mart.com; www.rossstores.com')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '6D4AFEE6-E886-4993-B153-14A887FD325A')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'www.landolakesinc.com              4001 Lexington Ave. N, Arden Hills Minnesota 55112-6943')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'E34132EF-DA6D-40BF-BDEA-D13DBDF09BEA')
+        self.failUnlessEqual(f['affiliated_orgs_url'], 'None')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '0C4051F5-2E0A-4ABC-A140-7FAFF7669D00')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'Patton Boggs, LLP, 2550 M. Street N.W., Washington, D.C. 20037 - pfarthing@pattonboggs.com')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'C8293344-9A8D-4D6F-AAA5-25925E60BED9')
+        self.failUnlessEqual(f['affiliated_orgs_url'], 'N/A')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'C72D65BA-24D0-4AB7-97E4-7D68FD2BCB7D')
+        self.failUnlessEqual(f['affiliated_orgs_url'], 'judith_burrell@cox.net')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '09C471E9-2B98-433A-8E4D-0C3928459C20')
+        self.failUnlessEqual(f['affiliated_orgs_url'],
+                             'http://skipjack.net/le_shore/worcestr/welcome.html')
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '16E1EA9C-F6B3-4319-957E-14F4D65BD9F4')
+        self.failUnlessEqual(f['affiliated_orgs_url'], 'www.exxonmobile.com')
+
+        self.failUnlessEqual(len(filings), 0)
+
+
 class TestParseRegistrants(unittest.TestCase):
     def test_address(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrant_addrs.xml'))]
@@ -1255,6 +1329,267 @@ class TestParseIssues(unittest.TestCase):
         self.failUnlessEqual(i['specific_issue'],
                              'DEFENSE AUTHORIZATION, DEFENSE APPROPRIATIONS, VETERANS, DEFENSE HEALTH CARE, ARMED FORCES RETIREMENT, ARMED FORCES PERSONNEL BENEFITS, EMERGING DEFENSE RELATED ISSUES')
         self.failUnlessEqual(len(issues), 0)
+
+        self.failUnlessEqual(len(filings), 0)
+
+
+class TestParseAffiliatedOrgs(unittest.TestCase):
+    def test_name(self):
+        """Parse affiliated org name"""
+        filings = list(lobbyists.parse_filings(util.testpath('affiliated_org_name.xml')))
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'E8A4D9C9-2D0B-4F0A-966D-A076858D2751')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['name'], 'N/A')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'C8293344-9A8D-4D6F-AAA5-25925E60BED9')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['name'], 'CARITAS CHRISTI')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['name'], 'BOSTON MEDICAL CENTER')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['name'], 'PARTNERS HEALTHCARE SYSTEM')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['name'], 'DANA FARBER CANCER INSTITUTE')
+        self.failUnlessEqual(len(orgs), 0)
+        
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '6D4AFEE6-E886-4993-B153-14A887FD325A')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['name'], "Land O'Lakes, Inc.")
+
+        self.failUnlessEqual(len(filings), 0)
+
+    def test_country(self):
+        """Parse affiliated org country"""
+        filings = list(lobbyists.parse_filings(util.testpath('affiliated_org_country.xml')))
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '373B396A-51A9-42F6-AAB2-0CBF69177C43')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'NETHERLANDS')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'FRANCE')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'FRANCE')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'F0054303-E42F-48CE-8D71-CE7B2FBE8707')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'PUERTO RICO')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'A4F6A122-5550-46AF-9C5C-2838FF6538FE')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'unspecified')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'A0AA1F41-447E-4A0B-B09A-B0C24645F805')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNDETERMINED')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'E63105D4-9840-492D-A81E-F6816CBAFACE')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '9B506978-9D51-431A-A698-11F682485512')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'UNITED KINGDOM')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'C8293344-9A8D-4D6F-AAA5-25925E60BED9')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['country'], 'USA')
+        self.failUnlessEqual(len(orgs), 0)
+
+        self.failUnlessEqual(len(filings), 0)
+
+    def test_ppb_country(self):
+        """Parse affiliated org PPB country"""
+        filings = list(lobbyists.parse_filings(util.testpath('affiliated_org_country.xml')))
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '373B396A-51A9-42F6-AAB2-0CBF69177C43')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], '<SELECT ONE>')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'F0054303-E42F-48CE-8D71-CE7B2FBE8707')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'PUERTO RICO')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'A4F6A122-5550-46AF-9C5C-2838FF6538FE')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'UNDETERMINED')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'A0AA1F41-447E-4A0B-B09A-B0C24645F805')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'E63105D4-9840-492D-A81E-F6816CBAFACE')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'UNDETERMINED')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], '9B506978-9D51-431A-A698-11F682485512')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        self.failUnlessEqual(len(orgs), 0)
+
+        x = filings.pop()
+        f = x['filing']
+        self.failUnlessEqual(f['id'], 'C8293344-9A8D-4D6F-AAA5-25925E60BED9')
+        orgs = x['affiliated_orgs']
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        o = orgs.pop()['org']
+        self.failUnlessEqual(o['ppb_country'], 'USA')
+        self.failUnlessEqual(len(orgs), 0)
 
         self.failUnlessEqual(len(filings), 0)
 
