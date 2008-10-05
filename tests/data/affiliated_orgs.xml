@@ -1,0 +1,128 @@
+<PublicFilings>
+
+  <!-- A number of "interesting" filings with affiliated org
+       info. Most of these come from the various affiliated_org_*.xml
+       test files. -->
+  
+  <Filing ID="16E1EA9C-F6B3-4319-957E-14F4D65BD9F4" Year="2008" Received="2008-01-18T16:41:12.707" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.exxonmobile.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="09C471E9-2B98-433A-8E4D-0C3928459C20" Year="2008" Received="2008-02-13T16:30:03.513" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="http://skipjack.net/le_shore/worcestr/welcome.html">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="JERRY REDDEN" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <Filing ID="C72D65BA-24D0-4AB7-97E4-7D68FD2BCB7D" Year="2008" Received="2008-01-27T10:18:49.790" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="judith_burrell@cox.net">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="ORANGE COUNTY TRANSPORTATION AUTHOR" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <Filing ID="C8293344-9A8D-4D6F-AAA5-25925E60BED9" Year="2008" Received="2008-01-17T16:43:35.463" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="N/A">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="DANA FARBER CANCER INSTITUTE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="PARTNERS HEALTHCARE SYSTEM" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="BOSTON MEDICAL CENTER" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="CARITAS CHRISTI" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="0C4051F5-2E0A-4ABC-A140-7FAFF7669D00" Year="2008" Received="2008-02-25T16:33:09" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="Patton Boggs, LLP, 2550 M. Street N.W., Washington, D.C. 20037 - pfarthing@pattonboggs.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Patton Boggs, LLP" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="E34132EF-DA6D-40BF-BDEA-D13DBDF09BEA" Year="2007" Received="2008-02-13T12:34:22.663" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="None">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="SOUTHEASTERN FEDERAL POWER CUSTOME" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="6D4AFEE6-E886-4993-B153-14A887FD325A" Year="2008" Received="2008-04-22T08:30:56" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.landolakesinc.com              4001 Lexington Ave. N, Arden Hills Minnesota 55112-6943">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Land O'Lakes, Inc." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="8A3DB5DF-04A3-4002-9353-2C12104A0B49" Year="2008" Received="2008-04-18T10:50:35" Amount="90000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="www.wal-mart.com; www.rossstores.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Wal-Mart Stores, Inc." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Ross Stores, Inc." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="C6EABAE0-1E89-491F-97B3-5282386EC69C" Year="2008" Received="2008-04-21T14:50:09" Amount="300000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="www.bnl.gov (Brookhaven Science Association);   www.ut-battelle.org (UT-Battelle)">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Brookhaven Science Association" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="UT-Battelle" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="5F456254-75FE-4ED2-8F74-92C169B6800A" Year="2008" Received="2008-04-21T16:22:57" Amount="125812" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="www.vitas.com, www.odyssey-healthcare.com, www.hcr-manorcare.com/home, www.aseracare.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="AseraCare" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Odyssey" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Vitas" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="HCR ManorCare" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="9B5A4E46-8AAA-4497-B11A-B83B6D18836C" Year="2008" Received="2008-04-21T10:14:54" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="www.hklaw.com    www.ppsv.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Holland and Knight" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Power Pyles Sutter &amp; Verville" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="493C9C11-17ED-4875-88D2-FAC96FF06849" Year="2008" Received="2008-04-21T10:59:24" Amount="150000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="are the members listed on coalition's website?">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="AOL" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Warner Bros." AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Palm, Inc." AffiliatedOrgCountry="&lt;SELECT ONE&gt;" AffiliatedOrgPPBCcountry="&lt;SELECT ONE&gt;" xmlns="" />
+      <Org AffiliatedOrgName="Time Warner Cable" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <Filing ID="E8A4D9C9-2D0B-4F0A-966D-A076858D2751" Year="2000" Received="2001-02-08T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="N/A" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="UNDETERMINED" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <Filing ID="9B506978-9D51-431A-A698-11F682485512" Year="2007" Received="2007-08-02T12:04:46" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="UC GROUP LIMITED" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="E63105D4-9840-492D-A81E-F6816CBAFACE" Year="2005" Received="2005-04-26T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="INMARSAT LTD" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="UNDETERMINED" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+  
+  <Filing ID="A0AA1F41-447E-4A0B-B09A-B0C24645F805" Year="1999" Received="1999-10-15T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="CHILDRENS HOSPITAL OAKLAND" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="ISL" AffiliatedOrgCountry="UNDETERMINED" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="A4F6A122-5550-46AF-9C5C-2838FF6538FE" Year="2007" Received="2007-10-03T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="ITNL EMISSIONS TRADING ASSN" AffiliatedOrgCountry="" AffiliatedOrgPPBCcountry="UNDETERMINED" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="F0054303-E42F-48CE-8D71-CE7B2FBE8707" Year="2007" Received="2008-02-14T11:47:27.887" Amount="160000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="PORTAL DEL FUTURO AUTHORITY" AffiliatedOrgCountry="PUERTO RICO" AffiliatedOrgPPBCcountry="PUERTO RICO" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+</PublicFilings>

@@ -1,0 +1,38 @@
+<PublicFilings>
+
+  <!-- Each of these filings contains an affiliated org that's
+       slightly different than the others. -->
+
+  <!-- Original filing. -->
+  
+  <Filing ID="16E1EA9C-F6B3-4319-957E-14F4D65BD9F4" Year="2008" Received="2008-01-18T16:41:12.707" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.exxonmobile.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Different name. -->
+  
+  <Filing ID="09C471E9-2B98-433A-8E4D-0C3928459C20" Year="2008" Received="2008-02-13T16:30:03.513" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="http://skipjack.net/le_shore/worcestr/welcome.html">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE INC" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Different country. -->
+  
+  <Filing ID="C72D65BA-24D0-4AB7-97E4-7D68FD2BCB7D" Year="2008" Received="2008-01-27T10:18:49.790" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="judith_burrell@cox.net">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE" AffiliatedOrgCountry="UNITED KINGDOM" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <!-- Different PPB country. -->
+  
+  <Filing ID="C8293344-9A8D-4D6F-AAA5-25925E60BED9" Year="2008" Received="2008-01-17T16:43:35.463" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED" AffiliatedOrgsURL="N/A">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="UNITED KINGDOM" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+</PublicFilings>

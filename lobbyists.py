@@ -405,7 +405,12 @@ where_stmt = {
         'name=:name AND ' \
         'status=:status AND ' \
         'indicator=:indicator AND ' \
-        'official_position=:official_position'
+        'official_position=:official_position',
+    'affiliated_org':
+        'affiliated_org WHERE ' \
+        'name=:name AND ' \
+        'country=:country AND ' \
+        'ppb_country=:ppb_country'
     }
     
 def rowid(table, tomatch, cur):
@@ -586,6 +591,42 @@ def insert_issue(issue, cur):
     return cur.lastrowid
 
 
+def affiliated_org_rowid(org, cur):
+    """Find an affiliated org the database.
+
+    Returns the row ID of the matching org, or None if there is no
+    match.
+
+    org - The parsed org dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return rowid('affiliated_org', org, cur)
+
+
+def insert_affiliated_org(org, cur):
+    """Insert an affiliated org into the database.
+
+    Returns the row ID of the inserted org.
+
+    As a side effect, this function also inserts rows into the
+    'country' and 'org' tables.
+
+    org - The parsed org dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    for key in ['country', 'ppb_country']:
+        cur.execute('INSERT INTO country VALUES(?)', [org[key]])
+    cur.execute('INSERT INTO org VALUES(?)', [org['name']])
+    cur.execute('INSERT INTO affiliated_org VALUES(NULL, \
+                   :name, :country, :ppb_country)',
+                org)
+    return cur.lastrowid
+
+
 def insert_filing(filing, cur):
     """Insert a filing and its relationships into the database.
 
@@ -602,6 +643,10 @@ def insert_filing(filing, cur):
                        :registrant, :client)',
                 filing)
     filing_rowid = cur.lastrowid
+    # The affiliated orgs URL is a special case. It should really be
+    # an attribute of the AffiliatedOrgs element, not the Filing
+    # element.
+    cur.execute('INSERT INTO url VALUES(:affiliated_orgs_url)', filing)
     for id in filing['lobbyists']:
         cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
                     [filing['id'], id])
@@ -611,6 +656,11 @@ def insert_filing(filing, cur):
     for id in filing['issues']:
         cur.execute('INSERT INTO filing_issues VALUES(?, ?)',
                     [filing['id'], id])
+    for id in filing['affiliated_orgs']:
+        cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?)',
+                    [filing['id'], id])
+        cur.execute('INSERT INTO affiliated_org_urls VALUES(?, ?)',
+                    [id, filing['affiliated_orgs_url']])
     return filing_rowid
 
 
@@ -658,6 +708,14 @@ def import_issue(record, cur):
     return insert_issue(record['issue'], cur)
 
 
+def import_affiliated_org(record, cur):
+    return import_entity(record,
+                         cur,
+                         'org',
+                         affiliated_org_rowid,
+                         insert_affiliated_org)
+
+
 def import_list(record, id, entity_importer, cur):
     ids = list()
     if id in record:
@@ -699,12 +757,24 @@ def import_issues(record, cur):
     return import_list(record, 'issues', import_issue, cur)
 
 
+def import_affiliated_orgs(record, cur):
+    """Returns a list of rowids for the affiliated orgs in a filing record.
+
+    record - The parsed filing dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return import_list(record, 'affiliated_orgs', import_affiliated_org, cur)
+
+
 entity_importers = {
     'registrant': import_registrant,
     'client': import_client,
     'lobbyists': import_lobbyists,
     'govt_entities': import_govt_entities,
     'issues': import_issues,
+    'affiliated_orgs': import_affiliated_orgs
     }
 
 def import_filings(cur, parsed_filings):

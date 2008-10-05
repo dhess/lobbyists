@@ -1,0 +1,17 @@
+<PublicFilings>
+
+  <!-- These two records have identical affiliated orgs. -->
+  
+  <Filing ID="16E1EA9C-F6B3-4319-957E-14F4D65BD9F4" Year="2008" Received="2008-01-18T16:41:12.707" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.exxonmobile.com">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+  <Filing ID="09C471E9-2B98-433A-8E4D-0C3928459C20" Year="2008" Received="2008-02-13T16:30:03.513" Type="REGISTRATION" Period="UNDETERMINED">
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="EXXONMOBILE" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+  </Filing>
+
+</PublicFilings>

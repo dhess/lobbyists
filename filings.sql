@@ -19,10 +19,14 @@ DROP TABLE IF EXISTS filing_govt_entities;
 DROP TABLE IF EXISTS issue_code;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS filing_issues;
+DROP TABLE IF EXISTS affiliated_org;
+DROP TABLE IF EXISTS affiliated_org_urls;
+DROP TABLE IF EXISTS filing_affiliated_orgs;
 
 DROP INDEX IF EXISTS lobbyist_index;
 DROP INDEX IF EXISTS client_index;
 DROP INDEX IF EXISTS registrant_index;
+DROP INDEX IF EXISTS affiliated_org_index;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -42,9 +46,11 @@ CREATE TABLE org(
 CREATE TABLE person(
   name VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
-  
+
+-- Unfortunately, this isn't always a valid URL. It may contain all
+-- sorts of random text.
 CREATE TABLE url(
-  url VARCHAR(256) PRIMARY KEY
+  url VARCHAR(256) PRIMARY KEY ON CONFLICT IGNORE
 );
 
 CREATE TABLE country(
@@ -145,6 +151,25 @@ CREATE TABLE filing_issues(
   PRIMARY KEY(filing, issue)
 );
 
+CREATE TABLE affiliated_org(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name REFERENCES org,
+  country REFERENCES country,
+  ppb_country REFERENCES country
+);
+
+CREATE TABLE affiliated_org_urls(
+  org REFERENCES affiliated_org,
+  url REFERENCES url,
+  PRIMARY KEY(org, url) ON CONFLICT IGNORE
+);
+
+CREATE TABLE filing_affiliated_orgs(
+  filing REFERENCES filing,
+  org REFERENCES affiliated_org,
+  PRIMARY KEY(filing, org)
+);
+
 -- Create indexes for tables that get looked up during import. They
 -- make a HUGE difference in import performance.
 CREATE UNIQUE INDEX lobbyist_index ON lobbyist(
@@ -173,6 +198,12 @@ CREATE UNIQUE INDEX registrant_index ON registrant(
   country,
   senate_id,
   name,
+  ppb_country
+);
+
+CREATE UNIQUE INDEX affiliated_org_index ON affiliated_org(
+  name,
+  country,
   ppb_country
 );
 
