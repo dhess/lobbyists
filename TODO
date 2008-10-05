@@ -1,0 +1,8 @@
+TODO    -*- mode: org; -*-
+
+* DONE Add 'SELECT ONE' to tests for client country/ppb country.*
+* TODO Check all secondary tables in tests.
+* TODO Profile
+* TODO logging hooks
+* TODO Progress callbacks
+* DONE Per-doc commit option in load.py
