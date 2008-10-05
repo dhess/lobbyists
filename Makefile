@@ -23,5 +23,5 @@ test-import:
 
 test: test-parse test-import
 
-filings:
+db:
 	sqlite3 filings.db < filings.sql
