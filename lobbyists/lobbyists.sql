@@ -167,7 +167,7 @@ CREATE TABLE affiliated_org_urls(
 CREATE TABLE filing_affiliated_orgs(
   filing REFERENCES filing,
   org REFERENCES affiliated_org,
-  PRIMARY KEY(filing, org)
+  PRIMARY KEY(filing, org) ON CONFLICT IGNORE
 );
 
 -- Create indexes for tables that get looked up during import. They
