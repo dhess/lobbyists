@@ -782,8 +782,8 @@ entity_importers = {
 def import_filings(cur, parsed_filings):
     """Import parsed filings into the database.
 
-    The database is assumed to have a particular schema; see
-    filings.sql for a schema that can be used with sqlite3.
+    The database is assumed to have a particular schema; the create_db
+    function can be used to create the database.
     
     cur - The DB API 2.0-compliant database cursor.
 
@@ -798,3 +798,34 @@ def import_filings(cur, parsed_filings):
             filing[entity_name] = entity_importer(record, cur)
         insert_filing(filing, cur)
     return True
+
+
+def create_db(con):
+    """Create the lobbying database.
+
+    con - A DB API 2.0-compliant database Connection object. The
+    database will be created via this connection. Note that if the
+    connection is made to an existing database, all of the tables in
+    that database will be dropped by this function (i.e., the data
+    will be lost).
+
+    This function is only guaranteed to work with an sqlite3
+    Connection object, but it may work with other SQL databases, as
+    well.
+
+    This function has the side-effect of modifying the connection
+    object.
+
+    Returns the connection object.
+
+    """
+    try:
+        # if packaged as a setuptools egg.
+        from pkg_resources import resource_string
+        script = resource_string(__name__, 'lobbyists.sql')
+    except:
+        import os.path
+        f = open(os.path.join(os.path.dirname(__file__), 'lobbyists.sql'))
+        script = ''.join(f.readlines())
+    con.executescript(script)
+    return con
