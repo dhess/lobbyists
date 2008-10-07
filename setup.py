@@ -21,7 +21,7 @@ setup(
     keywords = 'lobbyists government parser',
     url = 'http://github.com/dhess/lobbyists/',
     long_description = """
-This module provides a reference parser and database importer for the
+This package provides a reference parser and database importer for the
 United States Senate LD-1/LD-2 lobbying disclosure database. The
 Senate provides the database as a series of XML documents,
 downloadable here:
@@ -33,7 +33,7 @@ of the XML schema used in the Senate documents. This isn't a
 particularly useful format for analyzing lobbying data, but it is
 useful for analyzing the lobbying records themselves, which often
 contain errors or anomalies. In any case, it shouldn't be too
-difficult to adapt the importing code in this module to a more useful
+difficult to adapt the importing code in this package to a more useful
 schema.
 """,
     classifiers = [
