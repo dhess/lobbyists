@@ -18,6 +18,8 @@
 
 import xml.dom.pulldom
 
+VERSION = '0.9'
+
 # Attribute parsers.
 
 def identity(x):

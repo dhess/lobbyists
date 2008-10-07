@@ -1,5 +1,5 @@
 #
-# util.py - Test utilities.
+# lobbyists.py - Parse and import Senate LD-1/LD-2 XML documents.
 # Copyright (C) 2008 Drew Hess <dhess@bothan.net>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,6 @@
 # License along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Unit test utilities for lobbyists.py."""
+"""Parse and import Senate LD-1/LD-2 XML documents."""
 
-import os.path
-
-def testpath(basename):
-    return os.path.join('tests', 'data', basename)
-
-def sqlscript(basename):
-    f = open(basename)
-    return ''.join(f.readlines())
-
-def flatten(lst):
-    result = list()
-    for x in lst:
-        if isinstance(x, list):
-            result.extend(flatten(x))
-        else:
-            result.append(x)
-    return result
+from lobbyists import *

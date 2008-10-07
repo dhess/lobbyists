@@ -3,10 +3,13 @@ all: help
 help:
 	@echo 'Choose one:'
 	@echo
-	@echo 'filings - create (clobber) the filings.db database.'
-	@echo 'test-parse - run parse_*() unit tests.'
-	@echo 'test-import - run import_*() unit tests.'
+	@echo 'push - push to git origin remote.'
+	@echo 'push-all - push to all git remotes.'
+	@echo 'db - create (clobber) the filings.db database.'
 	@echo 'test - run all unit tests.'
+	@echo 'sdist - make a source distribution.'
+	@echo 'egg - make a setuptools egg binary distribution.'
+	@echo 'clean - remove build and dist subdirectories.'
 	@echo 'help - this message.'
 
 push:
@@ -15,13 +18,17 @@ push:
 push-all: push
 	git push github
 
-test-parse:
-	PYTHONPATH=.:$$PYTHONPATH python tests/test_parse.py
-
-test-import:
-	PYTHONPATH=.:$$PYTHONPATH python tests/test_import.py
-
-test: test-parse test-import
+test:
+	python setup.py test
 
 db:
-	sqlite3 filings.db < filings.sql
+	sqlite3 lobbyists.db < lobbyists/lobbyists.sql
+
+sdist:
+	python setup.py sdist
+
+egg:
+	python setup.py bdist_egg
+
+clean:
+	rm -rf build dist

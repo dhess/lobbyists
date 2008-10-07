@@ -34,7 +34,7 @@ class TestImport(unittest.TestCase):
     def test_preloaded_table_state_or_local_gov(self):
         """Is the state_or_local_gov table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT val FROM state_or_local_gov")
@@ -47,7 +47,7 @@ class TestImport(unittest.TestCase):
     def test_preloaded_table_client_status(self):
         """Is the client_status table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT status FROM client_status")
@@ -60,7 +60,7 @@ class TestImport(unittest.TestCase):
     def test_preloaded_table_lobbyist_status(self):
         """Is the lobbyist_status table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT status FROM lobbyist_status")
@@ -73,7 +73,7 @@ class TestImport(unittest.TestCase):
     def test_preloaded_table_lobbyist_indicator(self):
         """Is the lobbyist_indicator table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT status FROM lobbyist_indicator")
@@ -86,7 +86,7 @@ class TestImport(unittest.TestCase):
     def test_import_filings(self):
         filings = [x for x in lobbyists.parse_filings(util.testpath('filings.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -114,7 +114,7 @@ class TestImport(unittest.TestCase):
         """Ensure filing rows point to the correct registrants."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrants.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -148,7 +148,7 @@ class TestImport(unittest.TestCase):
         """Ensure importing registrants fills the 'country' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrants.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -168,7 +168,7 @@ class TestImport(unittest.TestCase):
         """Ensure importing registrants fills the 'org' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrants.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -185,7 +185,7 @@ class TestImport(unittest.TestCase):
     def dup_test(self, file, column, table):
         filings = [x for x in lobbyists.parse_filings(util.testpath(file))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
@@ -197,7 +197,7 @@ class TestImport(unittest.TestCase):
         """Identical registrants shouldn't be duplicated in the database"""
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_dup.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
@@ -210,7 +210,7 @@ class TestImport(unittest.TestCase):
         """Ensure slightly different registrants are inserted into different rows."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('registrants_slightly_different.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
@@ -222,7 +222,7 @@ class TestImport(unittest.TestCase):
         """Ensure filing rows point to the correct clients."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
                   
@@ -270,7 +270,7 @@ class TestImport(unittest.TestCase):
         filings = [x for x in lobbyists.parse_filings(\
                 util.testpath('clients_slightly_different.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
@@ -282,7 +282,7 @@ class TestImport(unittest.TestCase):
         """Importing clients should fill the 'org' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -300,7 +300,7 @@ class TestImport(unittest.TestCase):
         """Importing clients should fill the 'country' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -321,7 +321,7 @@ class TestImport(unittest.TestCase):
         """Importing clients should fill the 'state' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -341,7 +341,7 @@ class TestImport(unittest.TestCase):
         """Importing clients should fill the 'person' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -359,7 +359,7 @@ class TestImport(unittest.TestCase):
         """After importing clients, state_or_local_gov table should be unchanged (it's pre-loaded)."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         con.row_factory = sqlite3.Row
@@ -375,7 +375,7 @@ class TestImport(unittest.TestCase):
         """After importing clients, client_status table should be unchanged (it's pre-loaded)."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('clients.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         con.row_factory = sqlite3.Row
@@ -391,7 +391,7 @@ class TestImport(unittest.TestCase):
         """Check lobbyist importing."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -524,7 +524,7 @@ class TestImport(unittest.TestCase):
         """Ensure lobbyists are matched up with filings in the database."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -617,7 +617,7 @@ class TestImport(unittest.TestCase):
         """Importing lobbyists should fill the 'person' table."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -634,7 +634,7 @@ class TestImport(unittest.TestCase):
     def test_import_lobbyist_lobbyist_status(self):
         """After import, lobbyist_status table should be unchanged (it's pre-loaded)."""
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT status FROM lobbyist_status")
@@ -647,7 +647,7 @@ class TestImport(unittest.TestCase):
     def test_import_lobbyist_lobbyist_indicator(self):
         """After import, lobbyist_indicator table should be unchanged (it's pre-loaded)."""
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT status FROM lobbyist_indicator")
@@ -670,7 +670,7 @@ class TestImport(unittest.TestCase):
         # table.
         filings = [x for x in lobbyists.parse_filings(util.testpath('lobbyists_dup2.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
@@ -683,7 +683,7 @@ class TestImport(unittest.TestCase):
         filings = [x for x in lobbyists.parse_filings(\
                 util.testpath('lobbyists_slightly_different.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
@@ -695,7 +695,7 @@ class TestImport(unittest.TestCase):
         """Check government entity importing."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('govt_entities.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -741,7 +741,7 @@ class TestImport(unittest.TestCase):
         """Ensure government entities are matched up with filings in the database."""
         filings = [x for x in lobbyists.parse_filings(util.testpath('govt_entities.xml'))]
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -817,7 +817,7 @@ class TestImport(unittest.TestCase):
         """Check issues importing."""
         filings = list(lobbyists.parse_filings(util.testpath('issues.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -993,7 +993,7 @@ class TestImport(unittest.TestCase):
         """Importing issues should fill issue_code table."""
         filings = list(lobbyists.parse_filings(util.testpath('issues.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1092,7 +1092,7 @@ class TestImport(unittest.TestCase):
         """Ensure issues are matched up with filings in the database."""
         filings = list(lobbyists.parse_filings(util.testpath('issues.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1199,7 +1199,7 @@ class TestImport(unittest.TestCase):
         """Check affiliated org importing."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1400,7 +1400,7 @@ class TestImport(unittest.TestCase):
         """Ensure affiliated orgs are matched up with filings in the database."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1570,7 +1570,7 @@ class TestImport(unittest.TestCase):
         """Ensure affiliated orgs are matched up with URLs in the database."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1733,7 +1733,7 @@ class TestImport(unittest.TestCase):
         """Importing affiliated orgs should fill the 'org' table."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1841,7 +1841,7 @@ class TestImport(unittest.TestCase):
         """Importing affiliated orgs should fill the 'country' table."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1874,7 +1874,7 @@ class TestImport(unittest.TestCase):
         """Importing affiliated orgs should fill the 'url' table."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
 
@@ -1944,7 +1944,7 @@ class TestImport(unittest.TestCase):
         """Ensure slightly different affiliated orgs are inserted into different rows."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs_slightly_different.xml')))
         con = sqlite3.connect(':memory:')
-        con.executescript(util.sqlscript('filings.sql'))
+        con.executescript(util.sqlscript('lobbyists.sql'))
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
