@@ -21,11 +21,12 @@
 import os.path
 
 def testpath(basename):
-    return os.path.join('lobbyists', 'tests', 'data', basename)
-
-def sqlscript(basename):
-    f = open(os.path.join('lobbyists', basename))
-    return ''.join(f.readlines())
+    try:
+        # if packaged as a setuptools egg.
+        from pkg_resources import resource_string
+        return resource_string(__name__, basename)
+    except:
+        return os.path.join(os.path.dirname(__file__), 'data', basename)
 
 def flatten(lst):
     result = list()
