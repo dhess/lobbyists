@@ -1,3 +1,6 @@
+Summary
+-------
+
 This package provides a reference parser and database importer for the
 United States Senate LD-1/LD-2 lobbying disclosure database. The
 Senate provides the database as a series of XML documents,
@@ -16,3 +19,9 @@ schema.
 For information on how to interpret the LD-1/LD-2 database, see here:
 
 http://watchdog.jottit.com/lobbying_database
+
+Scripts
+-------
+
+The lobbyists-load script loads one or more XML documents into a
+database.
