@@ -50,6 +50,7 @@ def main(argv=None):
     import optparse
     import sys
     import sqlite3
+    import os.path
 
     if argv is None:
         argv = sys.argv
@@ -59,9 +60,16 @@ Parse one or more Senate LD-1/LD-2 XML documents and load them into an
 sqlite3 database.
 
 A document may be identified either by a URL or a file, so long as
-it's a valid Senate LD-1/LD-2 XML document."""
+it's a valid Senate LD-1/LD-2 XML document.
+
+If db doesn't exist, %prog will create it prior to loading the first
+document."""
     parser = optparse.OptionParser(usage=usage,
                                    version=lobbyists.VERSION)
+    parser.add_option('-C', '--clobber-database', action='store_true',
+                      dest='clobber_db',
+                      help='clobber the existing database contents prior to ' \
+                          'loading first document')
     parser.add_option('-c', '--commit-per-document', action='store_true',
                       dest='commit',
                       help='commit changes to the database after importing ' \
@@ -72,10 +80,14 @@ it's a valid Senate LD-1/LD-2 XML document."""
         parser.error('specify exactly one sqlite3 database and at least one ' \
                          'XML document')
     dbname = args[0]
+
+    create_db = options.clobber_db or not os.path.exists(dbname)
     con = sqlite3.connect(dbname)
+    if create_db:
+        lobbyists.create_db(con)
     for doc in args[1:]:
         print 'Loading', doc
-        con = load_db(con, doc)
+        load_db(con, doc)
         if options.commit:
             con.commit()
     if not options.commit:
