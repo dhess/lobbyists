@@ -7,6 +7,7 @@ help:
 	@echo 'push-all - push to all git remotes.'
 	@echo 'db - create (clobber) the filings.db database.'
 	@echo 'test - run all unit tests.'
+	@echo 'develop - run "setup.py develop".'
 	@echo 'sdist - make a source distribution.'
 	@echo 'egg - make a setuptools egg binary distribution.'
 	@echo 'clean - remove build and dist subdirectories.'
@@ -29,6 +30,9 @@ sdist:
 
 egg:
 	python setup.py bdist_egg
+
+develop:
+	python setup.py develop
 
 clean:
 	rm -rf build dist
