@@ -46,10 +46,13 @@ def load_db(con, doc):
 
 # Can be run as a script. Note: argv[0] should be the program name.
 
-def main(argv):
+def main(argv=None):
     import optparse
+    import sys
     import sqlite3
-    
+
+    if argv is None:
+        argv = sys.argv
     usage = """%prog [OPTIONS] db doc.xml ...
 
 Parse one or more Senate LD-1/LD-2 XML documents and load them into an
@@ -82,4 +85,4 @@ it's a valid Senate LD-1/LD-2 XML document."""
 
 if __name__ == "__main__":
     import sys
-    sys.exit(main(sys.argv))
+    sys.exit(main())
