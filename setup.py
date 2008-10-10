@@ -13,6 +13,9 @@ setup(
     test_suite = 'lobbyists',
 
     package_data = { 'lobbyists' : ['lobbyists.sql'] },
+    entry_points = {
+        'console_scripts': [ 'lobbyists-load = lobbyists.load:main', ]
+        },
     
     author = 'Drew Hess',
     author_email = 'dhess-src@bothan.net',
