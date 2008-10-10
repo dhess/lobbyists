@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# load.py - Load Senate LD-1/LD-2 XML documents into a database.
+# util.py - Utility functions for the lobbyists package.
 # Copyright (C) 2008 by Drew Hess <dhess@bothan.net>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 # License along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Load Senate LD-1/LD-2 XML documents into a database."""
+"""Utility functions for the lobbyists package."""
 
 import lobbyists
 

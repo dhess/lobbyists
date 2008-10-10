@@ -14,7 +14,7 @@ setup(
 
     package_data = { 'lobbyists' : ['lobbyists.sql'] },
     entry_points = {
-        'console_scripts': [ 'lobbyists-load = lobbyists.load:main', ]
+        'console_scripts': [ 'lobbyists-load = lobbyists.util:main', ]
         },
     
     author = 'Drew Hess',
