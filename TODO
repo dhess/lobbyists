@@ -7,3 +7,4 @@ p.strip_dirs().sort_stats('cum', 'time').print_stats(.5,'lobbyists.py')
 * TODO logging hooks
 * TODO Progress callbacks
 * DONE Per-doc commit option in load.py
+* TODO Tests for load_db.
