@@ -9,4 +9,4 @@ p.strip_dirs().sort_stats('cum', 'time').print_stats(.5,'lobbyists.py')
 * DONE Per-doc commit option in load.py
 * TODO Tests for load_db.
 * TODO Tests for time_load and time_parse.
-* TODO Split up tests.
+* DONE Split up tests.
