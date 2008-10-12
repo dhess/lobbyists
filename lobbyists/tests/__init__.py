@@ -1,5 +1,5 @@
 #
-# tests - Tests for lobbyists utilities.
+# tests - Tests for lobbyists package.
 # Copyright (C) 2008 Drew Hess <dhess@bothan.net>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,4 +16,4 @@
 # License along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Tests for the lobbyists utilities."""
+"""Tests for the lobbyists package."""
