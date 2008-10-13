@@ -46,6 +46,16 @@ def _skip_import(record, con):
 
 
 def time_parse(doc):
+    """Parse all filing records in a lobbyist database and time it.
+
+    doc - The database to parse. Can be a filename, a URL or anything
+    else that xml.dom.pulldom.parse takes as an argument.
+
+    Returns a tuple. The first item is the time (in seconds) taken to
+    parse the entire document, and the second is the list of all
+    parsed filings.
+    
+    """
     timed_parser = _timed_func(_parse_all)
     return timed_parser(doc)
 
@@ -58,14 +68,37 @@ _skippers = {'registrant': _skip_import,
              'affiliated_orgs': _skip_import_list}
 
 
-def time_import(filings, cur, skiplist=list()):
-    for key in skiplist:
-        lobbyists._entity_importers[key] = _skippers[key]
+def time_import(cur, parsed_filings, skiplist=None):
+    """Import parsed filings into a database and time it.
+
+    cur - The DB API 2.0-compliant database cursor.
+    
+    parsed_filings - A sequence of parsed filings.
+
+    skiplist - Either None (the default), or a list of filing element
+    names ('registrant', 'client', etc.). Any filing element name that
+    appears in the list is skipped at import time. This feature is
+    useful for stubbing out specific import functions when you don't
+    want them to impact the benchmark.
+    
+    Returns a tuple. The first item is the time (in seconds) taken by
+    the import, and the second is the return value of
+    lobbyist.import_filings.
+
+    """
+    if skiplist:
+        for key in skiplist:
+            lobbyists._entity_importers[key] = _skippers[key]
     timed_importer = _timed_func(lobbyists.import_filings)
-    return timed_importer(cur, filings)
+    return timed_importer(cur, parsed_filings)
 
 
 def main(argv=None):
+    """Run the lobbyists-benchmark script directly from Python.
+
+    Note that argv[0] is the program name.
+
+    """
     import sqlite3
     import optparse
     import os.path
@@ -93,7 +126,6 @@ document."""
                       help='commit the database after importing the ' \
                           'document (default is not to commit)')
     parser.add_option('-s', '--skip-import', action='append',
-                      default=[],
                       dest='skip_import',
                       help='skip importing a particular entity, e.g., ' \
                           '"registrant"')
@@ -107,7 +139,7 @@ document."""
         lobbyists.create_db(con)
     filings, parse_time = time_parse(doc)
     print 'Parse time:', parse_time
-    _, import_time = time_import(filings, con.cursor(), options.skip_import)
+    _, import_time = time_import(con.cursor(), filings, options.skip_import)
     print 'Import time:', import_time
     if options.commit:
         con.commit()
