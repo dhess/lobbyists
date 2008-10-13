@@ -66,7 +66,7 @@ class TestImportClients(unittest.TestCase):
         self.failUnlessEqual(len(rows), len(orgs))
         for org in orgs:
             self.failUnless(org in rows)
-        
+
     def test_import_client_countries(self):
         """Importing clients should fill the 'country' table."""
         filings = list(lobbyists.parse_filings(util.testpath('clients.xml')))
@@ -86,7 +86,7 @@ class TestImportClients(unittest.TestCase):
         self.failUnlessEqual(len(rows), len(countries))
         for country in countries:
             self.failUnless(country in rows)
-        
+
 
     def test_import_client_states(self):
         """Importing clients should fill the 'state' table."""
@@ -107,7 +107,7 @@ class TestImportClients(unittest.TestCase):
         self.failUnlessEqual(len(rows), len(states))
         for state in states:
             self.failUnless(state in rows)
-        
+
     def test_import_client_persons(self):
         """Importing clients should fill the 'person' table."""
         filings = list(lobbyists.parse_filings(util.testpath('clients.xml')))
@@ -125,7 +125,7 @@ class TestImportClients(unittest.TestCase):
         self.failUnlessEqual(len(rows), len(persons))
         for person in persons:
             self.failUnless(person in rows)
-        
+
     def test_import_client_state_or_local_gov(self):
         """After importing clients, state_or_local_gov table should be unchanged (it's pre-loaded)."""
         filings = list(lobbyists.parse_filings(util.testpath('clients.xml')))
@@ -141,7 +141,7 @@ class TestImportClients(unittest.TestCase):
         self.failUnless('unspecified' in rows)
         self.failUnless('y' in rows)
         self.failUnless('n' in rows)
-        
+
     def test_import_client_client_status(self):
         """After importing clients, client_status table should be unchanged (it's pre-loaded)."""
         filings = list(lobbyists.parse_filings(util.testpath('clients.xml')))

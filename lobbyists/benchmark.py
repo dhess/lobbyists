@@ -22,6 +22,7 @@
 import lobbyists
 import time
 
+
 def timed_func(func):
     def timer(*args):
         t1 = time.clock()
@@ -48,14 +49,13 @@ def time_parse(doc):
     return timed_parser(doc)
 
 
-skippers = {
-    'registrant': skip_import,
-    'client': skip_import,
-    'lobbyists': skip_import_list,
-    'govt_entities': skip_import_list,
-    'issues': skip_import_list,
-    'affiliated_orgs': skip_import_list
-    }
+skippers = {'registrant': skip_import,
+            'client': skip_import,
+            'lobbyists': skip_import_list,
+            'govt_entities': skip_import_list,
+            'issues': skip_import_list,
+            'affiliated_orgs': skip_import_list}
+
 
 def time_import(filings, cur, skiplist=[]):
     for key in skiplist:
@@ -69,7 +69,7 @@ def main(argv=None):
     import sys
     import optparse
     import os.path
-    
+
     if argv is None:
         argv = sys.argv
     usage = """%prog [OPTIONS] db doc.xml
@@ -90,8 +90,8 @@ document."""
                           'to loading first document')
     parser.add_option('-c', '--commit-database', action='store_true',
                       dest='commit',
-                      help='commit the database after importing the document ' \
-                          '(default is not to commit)')
+                      help='commit the database after importing the ' \
+                          'document (default is not to commit)')
     parser.add_option('-s', '--skip-import', action='append',
                       default=[],
                       dest='skip_import',

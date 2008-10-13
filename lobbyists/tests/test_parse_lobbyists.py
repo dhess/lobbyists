@@ -23,6 +23,7 @@ import unittest
 import lobbyists
 import util
 
+
 class TestParseLobbyists(unittest.TestCase):
     def test_name(self):
         """Parse lobbyist name"""
@@ -97,7 +98,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['name'], 'NEAL, KATIE')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'D97EF71E-9062-42A9-9510-00048B943421')
@@ -105,7 +106,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['name'], 'LEVI, ROBERT')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '02DDA99B-725A-4DBA-8397-34892A6918D7')
@@ -127,7 +128,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['name'], 'GRAFMEYER, RICHARD')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         self.failUnlessEqual(len(filings), 0)
 
 
@@ -142,7 +143,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['status'], 'terminated')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'AB94AB3D-F5D6-4EE8-A462-0925A6D9A499')
@@ -152,7 +153,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['status'], 'terminated')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '04926911-8A12-4A0E-9DA4-510869446EAC')
@@ -160,7 +161,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['status'], 'undetermined')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         self.failUnlessEqual(len(filings), 0)
 
     def test_indicator(self):
@@ -174,7 +175,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['indicator'], 'covered')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
@@ -200,7 +201,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['indicator'], 'not covered')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'AB94AB3D-F5D6-4EE8-A462-0925A6D9A499')
@@ -210,7 +211,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['indicator'], 'covered')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'BD894C51-AA23-46AE-9802-006B8C91702B')
@@ -228,7 +229,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['indicator'], 'not covered')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'DE038A45-9F6B-4764-B678-8004E7903BC4')
@@ -240,7 +241,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['indicator'], 'not covered')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '2164D6BB-EBBA-40D2-9C18-16A2D670030A')
@@ -264,9 +265,9 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['indicator'], 'undetermined')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         self.failUnlessEqual(len(filings), 0)
-        
+
     def test_official_position(self):
         """Parse lobbyist 'official position'"""
         filings = list(lobbyists.parse_filings(util.testpath('lobbyist_official_position.xml')))
@@ -281,7 +282,7 @@ class TestParseLobbyists(unittest.TestCase):
         self.failUnlessEqual(l['official_position'],
                              'MGR. AIR TRAFFIC DIV. WEST PAC, REG, FAA')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'BD894C51-AA23-46AE-9802-006B8C91702B')
@@ -299,7 +300,7 @@ class TestParseLobbyists(unittest.TestCase):
         self.failUnlessEqual(l['official_position'],
                              'AsstEditor/Ed./Res.Dir, Sen.Rep.PolicyComm;')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'DE038A45-9F6B-4764-B678-8004E7903BC4')
@@ -307,7 +308,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['official_position'], 'unspecified')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '2164D6BB-EBBA-40D2-9C18-16A2D670030A')
@@ -323,7 +324,7 @@ class TestParseLobbyists(unittest.TestCase):
         l = lobbiers.pop()['lobbyist']
         self.failUnlessEqual(l['official_position'], 'N/A')
         self.failUnlessEqual(len(lobbiers), 0)
-        
+
         self.failUnlessEqual(len(filings), 0)
 
 

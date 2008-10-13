@@ -20,6 +20,7 @@
 
 import os.path
 
+
 def testpath(basename):
     try:
         # if packaged as a setuptools egg.
@@ -27,6 +28,7 @@ def testpath(basename):
         return resource_string(__name__, basename)
     except:
         return os.path.join(os.path.dirname(__file__), 'data', basename)
+
 
 def flatten(lst):
     result = list()

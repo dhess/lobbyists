@@ -37,7 +37,7 @@ class TestDB(unittest.TestCase):
         self.failUnless('unspecified' in rows)
         self.failUnless('y' in rows)
         self.failUnless('n' in rows)
-        
+
     def test_preloaded_table_client_status(self):
         """Is the client_status table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
@@ -50,7 +50,7 @@ class TestDB(unittest.TestCase):
         self.failUnless('active' in rows)
         self.failUnless('terminated' in rows)
         self.failUnless('administratively terminated' in rows)
-        
+
     def test_preloaded_table_lobbyist_status(self):
         """Is the lobbyist_status table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
@@ -63,7 +63,7 @@ class TestDB(unittest.TestCase):
         self.failUnless('active' in rows)
         self.failUnless('terminated' in rows)
         self.failUnless('undetermined' in rows)
-        
+
     def test_preloaded_table_lobbyist_indicator(self):
         """Is the lobbyist_indicator table preloaded by the schema file?"""
         con = sqlite3.connect(':memory:')
@@ -76,7 +76,7 @@ class TestDB(unittest.TestCase):
         self.failUnless('covered' in rows)
         self.failUnless('not covered' in rows)
         self.failUnless('undetermined' in rows)
-        
+
 
 if __name__ == '__main__':
     unittest.main()

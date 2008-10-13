@@ -23,6 +23,7 @@ import lobbyists
 import sqlite3
 import os.path
 
+
 def load_db(docs, dbname, clobber=False, commit_per_doc=False):
     """Load filing records from lobbyist documents into an sqlite3 database.
 
@@ -32,10 +33,10 @@ def load_db(docs, dbname, clobber=False, commit_per_doc=False):
 
     docs - A sequence of URLs or filenames identifying the LD-1/LD-2
     XML documents load load.
-    
+
     dbname - The filename of the sqlite3 database to load. If the
     database doesn't exist, load_db creates it.
-    
+
     clobber - If True, and the database already exists, the database's
     contents will be clobbered prior to loading.
 
@@ -45,12 +46,12 @@ def load_db(docs, dbname, clobber=False, commit_per_doc=False):
     loaded. Per-document committing ensures that successfully loaded
     documents are committed to the database in case of parsing or
     importing errors in subsequent documents, but is slower.
-    
+
     This function has the side-effect of creating and/or modifying the
     database.
-    
+
     Returns the database's sqlite3.Connection object.
-    
+
     """
     create_db = clobber or not os.path.exists(dbname)
     con = sqlite3.connect(dbname)
@@ -96,8 +97,8 @@ document."""
     parser.add_option('-c', '--commit-per-document', action='store_true',
                       dest='commit',
                       help='commit changes to the database after importing ' \
-                          'each document (default is to commit only after all ' \
-                          'documents are imported)')
+                          'each document (default is to commit only after ' \
+                          'all documents are imported)')
     (options, args) = parser.parse_args(argv[1:])
     if len(args) < 2:
         parser.error('specify exactly one sqlite3 database and at least one ' \

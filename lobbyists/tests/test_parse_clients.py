@@ -23,6 +23,7 @@ import unittest
 import lobbyists
 import util
 
+
 class TestParseClients(unittest.TestCase):
     def test_country(self):
         """Parse client country and PPB country"""
@@ -140,70 +141,70 @@ class TestParseClients(unittest.TestCase):
         client = x['client']
         self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'unspecified')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '5FED9056-BDB0-4738-9F25-243242AE0E3B')
         client = x['client']
         self.failUnlessEqual(client['state'], 'UNDETERMINED')
         self.failUnlessEqual(client['ppb_state'], 'UNDETERMINED')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '104313A3-968E-478E-870B-9DD28A3E02C4')
         client = x['client']
         self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'UNDETERMINED')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '296B5A74-B4B0-4F51-A7FD-16D8195C3A2E')
         client = x['client']
         self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'NEW YORK')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '7DB2EC06-677B-4BA3-ACCF-4855C6E112C3')
         client = x['client']
         self.failUnlessEqual(client['state'], 'VIRGINIA')
         self.failUnlessEqual(client['ppb_state'], 'unspecified')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'CFC6E2B6-3A98-4D4B-A239-000B62C084CC')
         client = x['client']
         self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'unspecified')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '539731C9-3393-4B0B-A6DB-1E1B613C641B')
         client = x['client']
         self.failUnlessEqual(client['state'], 'unspecified')
         self.failUnlessEqual(client['ppb_state'], 'unspecified')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '7425914C-E115-4449-B977-0722455B4463')
         client = x['client']
         self.failUnlessEqual(client['state'], 'PUERTO RICO')
         self.failUnlessEqual(client['ppb_state'], 'PUERTO RICO')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '3C6F64C0-4AC8-4E08-AE55-5A8B0E3BB91E')
         client = x['client']
         self.failUnlessEqual(client['state'], 'DISTRICT OF COLUMBIA')
         self.failUnlessEqual(client['ppb_state'], 'DISTRICT OF COLUMBIA')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '77CC99B3-FFD7-435D-9507-010548438B6F')
         client = x['client']
         self.failUnlessEqual(client['state'], 'IDAHO')
         self.failUnlessEqual(client['ppb_state'], 'IDAHO')
-        
+
         self.failUnlessEqual(len(filings), 0)
 
 
@@ -253,7 +254,7 @@ class TestParseClients(unittest.TestCase):
         self.failUnlessEqual(f['id'], '810A9431-7235-4FEB-9A33-08214322E37F')
         client = x['client']
         self.failUnlessEqual(client['contact_name'], 'JOHN G. BURKE "TOBY"')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '5A4F7B14-D143-4B57-A345-34296865C20D')
@@ -284,7 +285,7 @@ class TestParseClients(unittest.TestCase):
         self.failUnlessEqual(f['id'], 'CCB41994-81FB-4C32-A155-082164564403')
         client = x['client']
         self.failUnlessEqual(client['description'], 'unspecified')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'BD57AEBC-D1D7-4867-880E-0711F5AABD17')
@@ -315,19 +316,19 @@ class TestParseClients(unittest.TestCase):
         self.failUnlessEqual(f['id'], '31733890-2D8D-414E-8EF1-08701CBC5871')
         client = x['client']
         self.failUnlessEqual(client['state_or_local_gov'], 'y')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '045E8E33-BBEA-437C-844D-D1D6057AA2A0')
         client = x['client']
         self.failUnlessEqual(client['state_or_local_gov'], 'unspecified')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '8949C958-ABF0-49B8-8ACF-0026E92C2B13')
         client = x['client']
         self.failUnlessEqual(client['state_or_local_gov'], 'n')
-        
+
         self.failUnlessEqual(len(filings), 0)
 
 

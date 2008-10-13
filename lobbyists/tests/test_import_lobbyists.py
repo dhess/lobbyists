@@ -24,6 +24,7 @@ import lobbyists
 import sqlite3
 import util
 
+
 class TestImportLobbyists(unittest.TestCase):
     def test_import_lobbyists(self):
         """Lobbyist importing."""
@@ -50,112 +51,112 @@ class TestImportLobbyists(unittest.TestCase):
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'undetermined')
         self.failUnlessEqual(row['official_position'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 15)
         self.failUnlessEqual(row['name'], 'KNUTSON, KENT')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 14)
         self.failUnlessEqual(row['name'], 'CHAMPLIN, STEVEN')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'ExecFlrAsst, H. Maj. Whip; ExecDir, H.DemCauc.')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 13)
         self.failUnlessEqual(row['name'], 'GRIFFIN, BRIAN')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'StaffAsst, DemPolicyComm; FlrAsst, MinoritySec')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 12)
         self.failUnlessEqual(row['name'], 'DUBERSTEIN, KENNETH')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'Chief of Staff, President Reagan')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 11)
         self.failUnlessEqual(row['name'], 'UELAND, ERIC')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'AsstEditor/Ed./Res.Dir, Sen.Rep.PolicyComm;')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 10)
         self.failUnlessEqual(row['name'], 'BEDWELL, EDWARD T')
         self.failUnlessEqual(row['status'], 'terminated')
         self.failUnlessEqual(row['indicator'], 'undetermined')
         self.failUnlessEqual(row['official_position'], 'unspecified')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 9)
         self.failUnlessEqual(row['name'], 'LEHMAN (MY 2006), PATRICK')
         self.failUnlessEqual(row['status'], 'terminated')
         self.failUnlessEqual(row['indicator'], 'undetermined')
         self.failUnlessEqual(row['official_position'], 'unspecified')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 8)
         self.failUnlessEqual(row['name'], 'NEAL, KATIE')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'covered')
         self.failUnlessEqual(row['official_position'], 'COMM DIR/REP DINGELL')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 7)
         self.failUnlessEqual(row['name'], 'NEAL, KATIE')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 6)
         self.failUnlessEqual(row['name'], 'NEAL, KATIE')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'undetermined')
         self.failUnlessEqual(row['official_position'], 'unspecified')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 5)
         self.failUnlessEqual(row['name'], 'unspecified')
         self.failUnlessEqual(row['status'], 'terminated')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'unspecified')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 4)
         self.failUnlessEqual(row['name'], 'MCKENNEY, WILLIAM')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'Staff Director, Ways & Means Over Sub')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 3)
         self.failUnlessEqual(row['name'], 'DENNIS, JAMES')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'Tax Counsel, Sen Robb - Counsel, Sen Bingaman')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 2)
         self.failUnlessEqual(row['name'], 'GRAFMEYER, RICHARD')
         self.failUnlessEqual(row['status'], 'active')
         self.failUnlessEqual(row['indicator'], 'not covered')
         self.failUnlessEqual(row['official_position'], 'Deputy Chief of Staff, JCT')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['id'], 1)
         self.failUnlessEqual(row['name'], 'HARRIS, ROBERT L.')
         self.failUnlessEqual(row['status'], 'undetermined')
         self.failUnlessEqual(row['indicator'], 'undetermined')
         self.failUnlessEqual(row['official_position'], 'unspecified')
-        
+
         self.failUnlessEqual(len(rows), 0)
 
     def test_import_filings_to_lobbyists(self):
@@ -175,82 +176,82 @@ class TestImportLobbyists(unittest.TestCase):
         self.failUnlessEqual(row['filing'],
                              '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
         self.failUnlessEqual(row['lobbyist'], 16)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '771F3B6A-315D-4190-88F3-2CE0F138B2B8')
         self.failUnlessEqual(row['lobbyist'], 15)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
         self.failUnlessEqual(row['lobbyist'], 14)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
         self.failUnlessEqual(row['lobbyist'], 13)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
         self.failUnlessEqual(row['lobbyist'], 12)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'BD894C51-AA23-46AE-9802-006B8C91702B')
         self.failUnlessEqual(row['lobbyist'], 11)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '2164D6BB-EBBA-40D2-9C18-16A2D670030A')
         self.failUnlessEqual(row['lobbyist'], 10)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '87A30FA6-7C35-4294-BA43-4CE7B5B808B3')
         self.failUnlessEqual(row['lobbyist'], 9)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '0FC23296-F948-43FD-98D4-0912F6579E6A')
         self.failUnlessEqual(row['lobbyist'], 8)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '0FC23296-F948-43FD-98D4-0912F6579E6A')
         self.failUnlessEqual(row['lobbyist'], 7)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '0FC23296-F948-43FD-98D4-0912F6579E6A')
         self.failUnlessEqual(row['lobbyist'], 6)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
         self.failUnlessEqual(row['lobbyist'], 5)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
         self.failUnlessEqual(row['lobbyist'], 4)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
         self.failUnlessEqual(row['lobbyist'], 3)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '02DDA99B-725A-4DBA-8397-34892A6918D7')
         self.failUnlessEqual(row['lobbyist'], 2)
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '04926911-8A12-4A0E-9DA4-510869446EAC')
         self.failUnlessEqual(row['lobbyist'], 1)
-        
+
     def test_import_lobbyist_person(self):
         """Importing lobbyists should fill the 'person' table."""
         filings = list(lobbyists.parse_filings(util.testpath('lobbyists.xml')))
@@ -281,7 +282,7 @@ class TestImportLobbyists(unittest.TestCase):
         self.failUnless('active' in rows)
         self.failUnless('terminated' in rows)
         self.failUnless('undetermined' in rows)
-        
+
     def test_import_lobbyist_lobbyist_indicator(self):
         """After import, lobbyist_indicator table should be unchanged (it's pre-loaded)."""
         con = sqlite3.connect(':memory:')
@@ -294,7 +295,7 @@ class TestImportLobbyists(unittest.TestCase):
         self.failUnless('covered' in rows)
         self.failUnless('not covered' in rows)
         self.failUnless('undetermined' in rows)
-        
+
     def test_import_identical_lobbyists(self):
         """Identical lobbyists shouldn't be duplicated in the database."""
         filings = list(lobbyists.parse_filings(util.testpath('lobbyists_dup.xml')))

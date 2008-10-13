@@ -24,6 +24,7 @@ import lobbyists
 import sqlite3
 import util
 
+
 def filing_values(parsed_filings):
     for x in parsed_filings:
         yield x['filing']
@@ -57,7 +58,7 @@ class TestImportFilings(unittest.TestCase):
             # All of these filings have no Registrant, no Client.
             self.failUnless(row['registrant'] is None)
             self.failUnless(row['client'] is None)
-        
+
     def test_import_filings_to_registrants(self):
         """Filing rows point to the correct registrants."""
         filings = list(lobbyists.parse_filings(util.testpath('registrants.xml')))
@@ -99,7 +100,7 @@ class TestImportFilings(unittest.TestCase):
         con = lobbyists.create_db(con)
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
-        
+
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT filing.id AS filing_id, \

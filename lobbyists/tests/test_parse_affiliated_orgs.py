@@ -23,6 +23,7 @@ import unittest
 import lobbyists
 import util
 
+
 class TestParseAffiliatedOrgs(unittest.TestCase):
     def test_name(self):
         """Parse affiliated org name"""
@@ -49,7 +50,7 @@ class TestParseAffiliatedOrgs(unittest.TestCase):
         o = orgs.pop()['org']
         self.failUnlessEqual(o['name'], 'DANA FARBER CANCER INSTITUTE')
         self.failUnlessEqual(len(orgs), 0)
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], '6D4AFEE6-E886-4993-B153-14A887FD325A')

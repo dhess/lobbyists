@@ -24,6 +24,7 @@ import lobbyists
 import sqlite3
 import util
 
+
 class TestImportRegistrants(unittest.TestCase):
     def test_import_registrant_countries(self):
         """Importing registrants fills the 'country' table."""
@@ -44,7 +45,7 @@ class TestImportRegistrants(unittest.TestCase):
         self.failUnlessEqual(len(rows), len(countries))
         for country in countries:
             self.failUnless(country in rows)
-        
+
     def test_import_registrant_orgs(self):
         """Importing registrants fills the 'org' table."""
         filings = list(lobbyists.parse_filings(util.testpath('registrants.xml')))
@@ -62,7 +63,7 @@ class TestImportRegistrants(unittest.TestCase):
         self.failUnlessEqual(len(rows), len(orgs))
         for org in orgs:
             self.failUnless(org in rows)
-        
+
     def test_import_identical_registrants(self):
         """Identical registrants shouldn't be duplicated in the database"""
         filings = list(lobbyists.parse_filings(util.testpath('registrants_dup.xml')))

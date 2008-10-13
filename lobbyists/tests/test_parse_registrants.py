@@ -23,6 +23,7 @@ import unittest
 import lobbyists
 import util
 
+
 class TestParseRegistrants(unittest.TestCase):
     def test_address(self):
         """Parse registrant address"""
@@ -67,7 +68,7 @@ class TestParseRegistrants(unittest.TestCase):
         reg = x['registrant']
         self.failUnlessEqual(reg['description'],
                              u'Government Relations & Strategic Consulting')
-        
+
         x = filings.pop()
         f = x['filing']
         self.failUnlessEqual(f['id'], 'D0325DF2-82F6-4FF1-8C72-08B9CC3E99D7')

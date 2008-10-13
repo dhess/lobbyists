@@ -24,6 +24,7 @@ import lobbyists
 import sqlite3
 import util
 
+
 class TestImportAffiliatedOrgs(unittest.TestCase):
     def test_import_affiliated_orgs(self):
         """Import affiliated orgs"""
@@ -395,7 +396,7 @@ class TestImportAffiliatedOrgs(unittest.TestCase):
         self.failUnlessEqual(row['org'], 1)
 
         self.failUnlessEqual(len(rows), 0)
-        
+
     def test_import_affiliated_org_to_urls(self):
         """Affiliated orgs are matched up with URLs in the database."""
         filings = list(lobbyists.parse_filings(util.testpath('affiliated_orgs.xml')))
@@ -513,50 +514,50 @@ class TestImportAffiliatedOrgs(unittest.TestCase):
         self.failUnlessEqual(row['org'], 11)
         self.failUnlessEqual(row['url'],
                              'www.wal-mart.com; www.rossstores.com')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 10)
         self.failUnlessEqual(row['url'],
                              'www.landolakesinc.com              4001 Lexington Ave. N, Arden Hills Minnesota 55112-6943')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 9)
         self.failUnlessEqual(row['url'], 'None')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 8)
         self.failUnlessEqual(row['url'],
                              'Patton Boggs, LLP, 2550 M. Street N.W., Washington, D.C. 20037 - pfarthing@pattonboggs.com')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 7)
         self.failUnlessEqual(row['url'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 6)
         self.failUnlessEqual(row['url'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 5)
         self.failUnlessEqual(row['url'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 4)
         self.failUnlessEqual(row['url'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 3)
         self.failUnlessEqual(row['url'],  'judith_burrell@cox.net')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 2)
         self.failUnlessEqual(row['url'],
                              'http://skipjack.net/le_shore/worcestr/welcome.html')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['org'], 1)
         self.failUnlessEqual(row['url'], 'www.exxonmobile.com')
-        
+
         self.failUnlessEqual(len(rows), 0)
 
     def test_import_affiliated_orgs_org(self):
@@ -740,27 +741,27 @@ class TestImportAffiliatedOrgs(unittest.TestCase):
         row = rows.pop()
         self.failUnlessEqual(row['url'],
                              'www.landolakesinc.com              4001 Lexington Ave. N, Arden Hills Minnesota 55112-6943')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['url'], 'None')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['url'],
                              'Patton Boggs, LLP, 2550 M. Street N.W., Washington, D.C. 20037 - pfarthing@pattonboggs.com')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['url'], 'N/A')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['url'],  'judith_burrell@cox.net')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['url'],
                              'http://skipjack.net/le_shore/worcestr/welcome.html')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['url'], 'www.exxonmobile.com')
-        
+
         self.failUnlessEqual(len(rows), 0)
 
     def test_import_identical_affiliated_orgs(self):

@@ -24,6 +24,7 @@ import lobbyists
 import sqlite3
 import util
 
+
 class TestImportIssues(unittest.TestCase):
     def test_import_issues(self):
         """Import issues"""
@@ -410,4 +411,3 @@ class TestImportIssues(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    

@@ -24,6 +24,7 @@ import lobbyists
 import sqlite3
 import util
 
+
 class TestImportGovtEntities(unittest.TestCase):
     def test_import_govt_entities(self):
         """Government entity importing."""
@@ -40,35 +41,35 @@ class TestImportGovtEntities(unittest.TestCase):
 
         row = rows.pop()
         self.failUnlessEqual(row['name'], 'UNDETERMINED')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'],
                              'Federal Communications Commission (FCC)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'],
                              'Environmental Protection Agency (EPA)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'], 'Energy, Dept of')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'],
                              'Federal Energy Regulatory Commission (FERC)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'],
                              'Health & Human Services, Dept of  (HHS)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'], 'SENATE')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'], 'HOUSE OF REPRESENTATIVES')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['name'], 'NONE')
-        
+
         self.failUnlessEqual(len(rows), 0)
 
     def test_import_filings_to_govt_entities(self):
@@ -88,41 +89,41 @@ class TestImportGovtEntities(unittest.TestCase):
         self.failUnlessEqual(row['filing'],
                              '2627E811-33AB-43F4-B8E0-5B979A10FBF9')
         self.failUnlessEqual(row['govt_entity'], 'UNDETERMINED')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
         self.failUnlessEqual(row['govt_entity'],
                              'Federal Communications Commission (FCC)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
         self.failUnlessEqual(row['govt_entity'],
                              'Environmental Protection Agency (EPA)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
         self.failUnlessEqual(row['govt_entity'],'Energy, Dept of')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
         self.failUnlessEqual(row['govt_entity'],
-                             'HOUSE OF REPRESENTATIVES')        
-        
+                             'HOUSE OF REPRESENTATIVES')
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
         self.failUnlessEqual(row['govt_entity'],
                              'Federal Energy Regulatory Commission (FERC)')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              '106C2C6E-F0E1-46E3-9409-294E0BD27878')
         self.failUnlessEqual(row['govt_entity'], 'SENATE')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
@@ -133,20 +134,20 @@ class TestImportGovtEntities(unittest.TestCase):
         self.failUnlessEqual(row['filing'],
                              'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
         self.failUnlessEqual(row['govt_entity'], 'SENATE')
-        
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'FFF29969-FDEC-4125-809E-0D8D2D8E73FC')
         self.failUnlessEqual(row['govt_entity'],
-                             'HOUSE OF REPRESENTATIVES')        
-        
+                             'HOUSE OF REPRESENTATIVES')
+
         row = rows.pop()
         self.failUnlessEqual(row['filing'],
                              'FD29F4AF-763B-42A6-A27E-0AE115CD6D51')
         self.failUnlessEqual(row['govt_entity'], 'NONE')
-        
+
         self.failUnlessEqual(len(rows), 0)
-        
+
 
 if __name__ == '__main__':
     unittest.main()
