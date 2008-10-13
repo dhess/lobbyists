@@ -26,7 +26,7 @@ db:
 	sqlite3 lobbyists.db < lobbyists/lobbyists.sql
 
 sdist:
-	python setup.py sdist
+	python setup.py sdist --formats=bztar
 
 egg:
 	python setup.py bdist_egg
