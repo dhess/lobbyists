@@ -25,3 +25,8 @@ Scripts
 
 The lobbyists-load script loads one or more XML documents into a
 database.
+
+The lobbyists-benchmark script loads one XML document into a database,
+and reports the amount of time required to a) parse the document and
+b) import the parsed records into the database. It's mainly
+interesting for developers working on the lobbyists package itself.
