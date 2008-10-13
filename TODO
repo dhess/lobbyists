@@ -10,3 +10,5 @@ p.strip_dirs().sort_stats('cum', 'time').print_stats(.5,'lobbyists.py')
 * TODO Tests for load_db.
 * TODO Tests for time_load and time_parse.
 * DONE Split up tests.
+* TODO Simple docs.
+* TODO Simple examples.
