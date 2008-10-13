@@ -11,6 +11,7 @@ help:
 	@echo 'sdist - make a source distribution.'
 	@echo 'egg - make a setuptools egg binary distribution.'
 	@echo 'clean - remove build and dist subdirectories.'
+	@echo 'changelog - make a changelog (requires git-changelog script).'
 	@echo 'help - this message.'
 
 push:
@@ -36,3 +37,7 @@ develop:
 
 clean:
 	rm -rf build dist
+
+changelog:
+	# See http://github.com/jwiegley/git-scripts/tree/master/git-changelog
+	git-changelog > ChangeLog

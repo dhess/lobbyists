@@ -1,0 +1,9 @@
+This package uses setuptools. If you're not familiar with it, see the
+EasyInstall home page for installation instructions:
+
+http://peak.telecommunity.com/DevCenter/EasyInstall
+
+Or see the help for the setup.py script, included with this
+distribution:
+
+python setup.py --help-commands

@@ -1,0 +1,770 @@
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* TODO: TODO: split up tests (done).
+
+	* commit 53715934acb299bd1286f4a0206c8d7e8579e2a2
+
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/tests/test_db.py, lobbyists/tests/test_import.py,
+	lobbyists/tests/test_import_affiliated_orgs.py,
+	lobbyists/tests/test_import_clients.py,
+	lobbyists/tests/test_import_filings.py,
+	lobbyists/tests/test_import_govt_entites.py,
+	lobbyists/tests/test_import_issues.py,
+	lobbyists/tests/test_import_lobbyists.py,
+	lobbyists/tests/test_import_registrants.py: Importing tests:
+	split into separate modules.
+
+	Minor docstring fixes.
+
+	Convert [x for x in lobbyists.parse_filings(...)] to more
+	concise list(lobbyists.parse_filings(...)).
+
+	* commit 55ef033fcb53fff2f3eb53ced08d883523a078ac
+
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/tests/test_parse.py,
+	lobbyists/tests/test_parse_affiliated_orgs.py,
+	lobbyists/tests/test_parse_clients.py,
+	lobbyists/tests/test_parse_filings.py,
+	lobbyists/tests/test_parse_govt_entities.py,
+	lobbyists/tests/test_parse_issues.py,
+	lobbyists/tests/test_parse_lobbyists.py,
+	lobbyists/tests/test_parse_registrants.py: Parsing tests:
+	split into separate modules, add docstrings.
+
+	Also converted verbose [x for x in lobbyists.parse_filings(...)]
+	to more concise list(lobbyists.parse_filings(...)).
+
+	* commit f4022ce38998a5967cd441f80bf395ace23930b5
+
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/tests/__init__.py: tests/__init__.py: minor
+	docstring change.
+
+	* commit 1e724c34a37f9ab8c2adfc565e8f018712a41e2e
+
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* TODO: TODO: split up tests.
+
+	* commit e2e29b76920aae799e4443d48f1888eefb1f7f63
+
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* TODO: TODO: tests for time_load and time_parse.
+
+	* commit b5d572f5a06a69f2526642addc17cc4acc78cbab
+
+2008-10-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/benchmark.py, util/timings.py: Removed timings.py
+	script, replaced it with lobbyists.benchmark.
+
+	* commit a7e970d9bef977b99dce26a3ee40de008f6b9f19
+
+2008-10-11  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/util.py, setup.py: util.py: moved most of main's
+	functionality into load_db.
+
+	Makes it easier to exploit from Python code. Lost the ability
+	to print status messages, though; need to restore that when
+	I add logging hooks to the library.
+
+	Also renamed main to load_main in anticipation of adding
+	some more scripting functionality to util.py.
+
+	* commit eae12a20c65ee14e112504ccb68d36f01d64eda8
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* scripts/lobbyists-catalog.py: Removed lobbyists-catalog.py
+	script; not needed anymore and no plans to maintain it.
+
+	* commit 9920ea5612ff72e39061fbbcaf21f7a5e9378c57
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/load.py, lobbyists/util.py, setup.py: Renamed
+	load.py -> util.py.
+
+	* commit ea0a26fb1170076360079b8e3861e922fbf2d6e9
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/load.py: load.py: create the db if it doesn't
+	exist.
+
+	Also added an option to clobber an existing database.
+
+	* commit d3ef3b70f9cf51f5e6ada2fef88a8f6546ac3989
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* README: README: added a note about the lobbyist-load
+	script.
+
+	* commit 46d7609122dc650b088ea1aa5449adda04575183
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* Makefile: Makefile: added a 'develop' target.
+
+	* commit bc6cbb6491f575afe33e0b9635ebaaab22119437
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* setup.py: setup.py: install lobbyists-load script, a
+	wrapper around load.py's main.
+
+	* commit 231a06b045898458ea15664fd2357d1322ad305a
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/load.py: load.py: Fix main so that it works
+	with setuptools script wrapper.
+
+	* commit 863585563fe55297446227540e29c18528b8f7e1
+
+2008-10-10  Drew Hess  <dhess-src@bothan.net>
+
+	* TODO, lobbyists/load.py, util/load.py: Moved load.py
+	script into the lobbyists package, added load_db function.
+
+	* commit efda1fe208cbb199c2239e8eae0281a8849b15c2
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* scripts/lobbyists-catalog.py, util/catalog.py: Renamed
+	catalog.py script to lobbyists-catalog.py, moved to scripts/
+	subdir.
+
+	* commit b35adf9554610a0e08e2479164c61d5fbe18efd2
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* scripts/lobbyists-catalog.py: Removed the old (and
+	mistakenly renamed) catalog.py script.
+
+	* commit 1182e5e6b1b11391c65fe57d25ecfb075a94bb07
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* util/catalog.py: Revert "Removed old catalog.py script,
+	not sure how this got missed...."
+
+	Removed the wrong one :(
+
+	This reverts commit 6cd797748cd9ebb87295e5f7d5bed97979d4c4c3.
+
+	* commit 9e777b14b537dcf84b61bacc643fb9acd7701e60
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* util/catalog.py: Removed old catalog.py script, not sure
+	how this got missed....
+
+	* commit 6cd797748cd9ebb87295e5f7d5bed97979d4c4c3
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* scripts/catalog.py, scripts/lobbyists-catalog.py: Rename
+	catalog.py -> lobbyists-catalog.py.
+
+	* commit c8ce7bcd7f5f89a9b40db5befce4c99922c82db3
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* scripts/catalog.py, util/catalog.py: catalog.py: use the
+	lobbyists API; moved to scripts/ subdirectory.
+
+	catalog.py was using minidom directly, but now all of that
+	functionality is provided by the lobbyists module.
+
+	* commit b690c9fe83815d1334f5bd5c29b500169e08f9e8
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* README: Added a README.
+
+	* commit 79cb708ad1ef506b8f539a1a601625b382c58201
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/lobbyists.sql: lobbyists.sql: ignore conflicts
+	in filing_affiliated_orgs table.
+
+	* commit e29825ec4959cec64a34afad0bde47db7275d4ca
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* setup.py: setup.py: changed 'module' to 'package' in
+	long_description.
+
+	* commit e86f4ef590ce079b74a263bc8956e407c2922785
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/tests/test_import.py, lobbyists/tests/util.py:
+	Added a "proper" method for finding test data files.
+
+	Works from a setuptools egg package or from the filesystem.
+
+	* commit 3bddd985882738f6fc39f9a7fbe26aefd9ef8373
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists/lobbyists.py: lobbyists.py: added a create_db
+	function.
+
+	* commit 274430881e8aab0350a096e3200898f62ad79329
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* .gitignore: .gitignore: ignore .egg files.
+
+	* commit 883c09af66e051143a9f990dbf180b75940e6c5c
+
+2008-10-07  Drew Hess  <dhess-src@bothan.net>
+
+	* .gitignore, Makefile, ez_setup.py, filings.sql, lobbyists.py,
+	lobbyists/__init__.py, lobbyists/lobbyists.py,
+	lobbyists/lobbyists.sql, lobbyists/tests/__init__.py,
+	lobbyists/tests/data/affiliated_org_country.xml,
+	lobbyists/tests/data/affiliated_org_name.xml,
+	lobbyists/tests/data/affiliated_orgs.xml,
+	lobbyists/tests/data/affiliated_orgs_dup.xml,
+	.../data/affiliated_orgs_slightly_different.xml,
+	lobbyists/tests/data/amounts.xml,
+	lobbyists/tests/data/client_contact_name.xml,
+	lobbyists/tests/data/client_country.xml,
+	lobbyists/tests/data/client_description.xml,
+	lobbyists/tests/data/client_id.xml,
+	lobbyists/tests/data/client_name.xml,
+	lobbyists/tests/data/client_state.xml,
+	lobbyists/tests/data/client_state_or_local_gov.xml,
+	lobbyists/tests/data/client_status.xml,
+	lobbyists/tests/data/clients.xml,
+	lobbyists/tests/data/clients_dup.xml,
+	.../tests/data/clients_slightly_different.xml,
+	.../tests/data/filing_affiliated_orgs_url.xml,
+	lobbyists/tests/data/filing_dates.xml,
+	lobbyists/tests/data/filings.xml,
+	lobbyists/tests/data/government_entity_name.xml,
+	lobbyists/tests/data/govt_entities.xml,
+	lobbyists/tests/data/ids.xml, lobbyists/tests/data/issue_code.xml,
+	lobbyists/tests/data/issue_specific_issue.xml,
+	lobbyists/tests/data/issues.xml,
+	lobbyists/tests/data/lobbyist_indicator.xml,
+	lobbyists/tests/data/lobbyist_name.xml,
+	.../tests/data/lobbyist_official_position.xml,
+	lobbyists/tests/data/lobbyist_status.xml,
+	lobbyists/tests/data/lobbyists.xml,
+	lobbyists/tests/data/lobbyists_dup.xml,
+	lobbyists/tests/data/lobbyists_dup2.xml,
+	.../tests/data/lobbyists_slightly_different.xml,
+	lobbyists/tests/data/periods.xml,
+	lobbyists/tests/data/registrant_addrs.xml,
+	lobbyists/tests/data/registrant_country.xml,
+	lobbyists/tests/data/registrant_descriptions.xml,
+	lobbyists/tests/data/registrant_name.xml,
+	lobbyists/tests/data/registrant_senate_id.xml,
+	lobbyists/tests/data/registrants.xml,
+	lobbyists/tests/data/registrants_dup.xml,
+	.../tests/data/registrants_slightly_different.xml,
+	lobbyists/tests/data/types.xml, lobbyists/tests/data/years.xml,
+	lobbyists/tests/test_import.py, lobbyists/tests/test_parse.py,
+	lobbyists/tests/util.py, setup.py, tests/__init__.py,
+	tests/data/affiliated_org_country.xml,
+	tests/data/affiliated_org_name.xml, tests/data/affiliated_orgs.xml,
+	tests/data/affiliated_orgs_dup.xml,
+	tests/data/affiliated_orgs_slightly_different.xml,
+	tests/data/amounts.xml, tests/data/client_contact_name.xml,
+	tests/data/client_country.xml, tests/data/client_description.xml,
+	tests/data/client_id.xml, tests/data/client_name.xml,
+	tests/data/client_state.xml,
+	tests/data/client_state_or_local_gov.xml,
+	tests/data/client_status.xml, tests/data/clients.xml,
+	tests/data/clients_dup.xml,
+	tests/data/clients_slightly_different.xml,
+	tests/data/filing_affiliated_orgs_url.xml,
+	tests/data/filing_dates.xml, tests/data/filings.xml,
+	tests/data/government_entity_name.xml,
+	tests/data/govt_entities.xml, tests/data/ids.xml,
+	tests/data/issue_code.xml, tests/data/issue_specific_issue.xml,
+	tests/data/issues.xml, tests/data/lobbyist_indicator.xml,
+	tests/data/lobbyist_name.xml,
+	tests/data/lobbyist_official_position.xml,
+	tests/data/lobbyist_status.xml, tests/data/lobbyists.xml,
+	tests/data/lobbyists_dup.xml, tests/data/lobbyists_dup2.xml,
+	tests/data/lobbyists_slightly_different.xml,
+	tests/data/periods.xml, tests/data/registrant_addrs.xml,
+	tests/data/registrant_country.xml,
+	tests/data/registrant_descriptions.xml,
+	tests/data/registrant_name.xml,
+	tests/data/registrant_senate_id.xml, tests/data/registrants.xml,
+	tests/data/registrants_dup.xml,
+	tests/data/registrants_slightly_different.xml,
+	tests/data/types.xml, tests/data/years.xml, tests/test_import.py,
+	tests/test_parse.py, tests/util.py: setuptools packaging.
+
+	Lots of changes in this commit, but they're mostly just
+	from moving files around for easier setuptools support.
+	lobbyists is now a package and no longer a module, but all
+	of the package symbols are visible at in the top-level
+	namespace, so no code changes are necessary.
+
+	Move the SQL schema into the package and tell setuptools
+	to package it with the source; it's effectively required
+	in order to make use of the importer, anyway.
+
+	* commit e4301be4ac397fb318521bcbfabc97a428d9c344
+
+2008-10-04  Drew Hess  <dhess-src@bothan.net>
+
+	* TODO: TODO: added the Python-fu needed for profiling.
+
+	* commit 84a53c8b52d6427f1c80bc4bea947aa778e8ff7a
+
+2008-10-04  Drew Hess  <dhess-src@bothan.net>
+
+	* TODO: Added TODO file.
+
+	* commit 74dbeb5a8f2f928fc38469548dc01f5d4f80dfbf
+
+2008-10-04  Drew Hess  <dhess-src@bothan.net>
+
+	* Makefile: Makefile: changed 'filings' target to 'db'.
+
+	* commit 60e91f7ea70f574c21fcbe33a3bbc004b9fe281f
+
+2008-10-04  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, lobbyists.py, tests/data/affiliated_orgs.xml,
+	tests/data/affiliated_orgs_dup.xml,
+	tests/data/affiliated_orgs_slightly_different.xml,
+	tests/test_import.py: Import affiliated orgs.
+
+	* commit e24334dcaf4272cab251ae6bafbef0e0749a834c
+
+2008-10-03  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/data/client_country.xml, tests/test_parse.py:
+	lobbyists.py: change ClientCountry parser to 'optional'.
+
+	A handful of ClientCountry attributes are the empty string
+	("").
+
+	* commit b55a21a525679c3c6a36060073eeed399adddaed
+
+2008-10-03  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/data/affiliated_org_country.xml,
+	tests/data/affiliated_org_name.xml,
+	tests/data/filing_affiliated_orgs_url.xml, tests/test_parse.py:
+	lobbyists.py: Parse affiliated orgs.
+
+	* commit 09a79f1081476c09f9c55d356653418f1562be00
+
+2008-10-02  Drew Hess  <dhess-src@bothan.net>
+
+	* tests/test_import.py: Added complete set of tests for
+	importing issues.
+
+	* commit b7daacbe8cf6163ba0856de74c5b5e9738f58d77
+
+2008-10-02  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, lobbyists.py, tests/data/issues.xml,
+	tests/test_import.py: Import issues.
+
+	* commit dfa301bb9b753ac11db425dfc805c4aa50281afb
+
+2008-09-30  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/data/issue_specific_issue.xml,
+	tests/test_parse.py: SpecificIssue attributes are optional,
+	use 'optional' parser.
+
+	* commit 81aaf93206de886b6a17f25765360898efbb50b3
+
+2008-09-29  Drew Hess  <dhess-src@bothan.net>
+
+	* tests/data/issue_code.xml, tests/data/issue_specific_issue.xml:
+	Added test files for issues parsing.
+
+	* commit 050fa0932e930baaff1e90ddc41c9225c4e6c187
+
+2008-09-29  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/test_parse.py: lobbyists.py: Parse
+	issues.
+
+	* commit 14d56dc5cefad2db864fb14cc372bb80372e27c1
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* tests/data/client_country.xml, tests/data/clients.xml,
+	tests/test_parse.py: Added tests for clients with '<SELECT
+	ONE>' for country and PPB country.
+
+	* commit 18297cf18f678ccd574d072b594683e11df3b3e6
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* util/load.py, util/timings.py: Updated load.py and
+	timings.py for new database interface.
+
+	* commit 7fa98d8ee02f9ef3967e0b39ce5d0bbbd4ffff16
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/test_import.py: lobbyists.py: import
+	functions are now compatible with Python DB API 2.0.
+
+	All import functions now take a Cursor object instead of a
+	Connection object. This means no more Cursor constructions
+	during import, which should be a bit more efficient.
+
+	Removed sqlite3 dependencies. Importing should now work
+	with any Python DB API 2.0-compliant interface. (Note that
+	the interface must set the Cursor.lastrowid attribute after
+	executing an INSERT statement.)
+
+	* commit 5e97bb6ebf46baf1a8c10db96641b3680507cf31
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: a couple of minor
+	documentation/comment cleanups.
+
+	* commit 7dae66d45a5025746bf1131fbbc1133e93fa425f
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: use pre-formatted SELECT
+	statements in rowid.
+
+	This change provides a minor speedup during import (about
+	3%).
+
+	* commit 67845b35c39ef4b5e469afeb4edb66756016234a
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, lobbyists.py, tests/test_import.py: The
+	govt_entity table is now indexed by name, not an autoincrement
+	integer.
+
+	This change achieves a relatively minor improvement in
+	import speed (from about 15s to about 13s, where the
+	asymptotic limit is about 11s). Import speed now appears
+	to be limited by the insertion of filings, but changing the
+	govt_entity table was relatively simple compared to what
+	it would take to improve filing insertion.
+
+	* commit 3a85a6bc047736fca6b6740ad84bd5f11c103158
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* util/timings.py: timings.py: added a 'skip govt entity
+	import' option.
+
+	* commit 13e3fc6776b9592905502c81bc4ceb8500928521
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql: filings.sql: create an index for the registrant
+	table.
+
+	Import time for the 2000_1.xml document went from about 30s
+	to about 15s as a result of this change. (Note that the
+	best-case time, as measured by stubbing out registrant
+	import, is about 13.5s.)
+
+	* commit c77e04cc45de9ff4162c2e7ab24655af23b167b2
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* util/timings.py: timings.py: added a 'skip registrant
+	import' option.
+
+	Registrant import is next on the execution time list.
+
+	* commit 40e9792105c7f401544cbb8e80a4385c061f89a6
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql: filings.sql: create an index for the client
+	table.
+
+	Import time for 2000_1.xml document went from about 70s to
+	about 30s as a result of this change. (Note that the best-case
+	time, as measured by stubbing out client import, is about
+	26s.)
+
+	* commit a2a5c6ecd4a54d6dccc75c3d4ad8c89c87edaa5e
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* util/timings.py: timings.py: added a 'skip client import'
+	option.
+
+	Added this particular benchmark feature next, since after
+	drastically speeding up lobbyist import in the previous
+	check-in, client import is now the most expensive operation.
+
+	* commit f7e298a76bac2f9c84287579be4adf1c276c103c
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql: filings.sql: build an index for the lobbyist
+	table.
+
+	The lobbyist table is looked up during import. Despite the
+	fact that inserting into the table is probably more expensive
+	with the index, it more than makes up for it during import
+	in select performance. In my tests, the elapsed time for
+	importing the 2000_1.xml document went from about 460s to
+	about 70s.
+
+	* commit 322cc10db5b10052157f33f72d76dbad59f798de
+
+2008-09-19  Drew Hess  <dhess-src@bothan.net>
+
+	* util/timings.py: timings.py: added DB commit and 'skip
+	lobbyist import' options.
+
+	The 'skip lobbyist import' option is useful for asymptotic
+	benchmarking; i.e., for asking the question, "If lobbyist
+	import were effectively infinitely fast, how much would
+	that speed up the import?" I chose to implement lobbyist
+	import-skipping first because current profiling results
+	indicate that lobbyist import is at least twice as expensive
+	as the next most expensive entity import, and accounts for
+	over half the execution time of the load.py program.
+
+	The commit option is mainly a sanity check to ensure that
+	skipped imports were, in fact, skipped.
+
+	* commit bc3d4b51d4dbc79c55f8654807e4966ff96df480
+
+2008-09-18  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, tests/data/government_entity_name.xml,
+	tests/data/govt_entities.xml, tests/test_import.py,
+	tests/test_parse.py: filings.sql: Ignore conflicts in the
+	filing_govt_entities table.
+
+	Found some cases where the government entitiy name
+	"UNDETERMINED" appears multiple times in the same filing.
+	See my comments in commit d28a9a6b1d119791e164989d1ecaf6f234af4a4f.
+
+	* commit c9d4da59ee1a70add4d2457435dbf170dcda9241
+
+2008-09-17  Drew Hess  <dhess-src@bothan.net>
+
+	* util/timings.py: timings.py: a simple utility to time
+	parsing and importing.
+
+	* commit 762333c578a4da6fafc7a93daab6ce5a56bbfd8b
+
+2008-09-17  Drew Hess  <dhess-src@bothan.net>
+
+	* util/load.py: load.py: a simple command-line database
+	loader utility.
+
+	* commit 8d89ffb5bf2969301196d293cef87fe35797e9b4
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, tests/data/lobbyists_dup2.xml, tests/test_import.py:
+	filings.sql: Ignore conflicts in the filing_lobbyists table.
+
+	While testing database import with actual XML documents, I
+	discovered some filings that list the same Lobbyist element
+	(with identical attribute values) more than once. It would
+	be nice to flag these records so they can be reported to
+	the Senate, but they're not particularly harmful -- they're
+	just redundant. They're no more broken than the multitude
+	of other suspect Lobbyist elements, either.
+
+	For now, just ignore the problem by telling the database
+	to ignore conflicts in this table.
+
+	* commit d28a9a6b1d119791e164989d1ecaf6f234af4a4f
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: stub out remaining parsers.
+
+	Created stubs for 'Issues', 'ForeignEntities' and
+	'AffiliatedOrgs' so I can start testing the existing
+	functionality on real documents.
+
+	* commit 1dc4f63fbb17bced03048e43c310623a91aec5a6
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: Don't force a DB commit after
+	importing a filing record.
+
+	I don't think it's necessary for the import process.
+
+	* commit 445b2cab5886bbf94407203702c7b5f34e62c494
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: Minor SQL formatting change.
+
+	* commit 12a752829069fb39b2c75bc7f89ff80323d453c5
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, tests/test_import.py: filings.sql: Minor
+	change to column names in filing_lobbyists table.
+
+	Be consistent with the names in filing_govt_entities table.
+
+	* commit 9e424ca07d4b5f7d0acec43632d910ec6c7455b2
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, lobbyists.py, tests/data/govt_entities.xml,
+	tests/test_import.py: Import government entities into the
+	DB.
+
+	* commit b07f70d5ec4c993456afbabd14c189a817bb5b4c
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql: filings.sql: drop table persons when creating
+	the DB.
+
+	* commit 626f80217df832d541d1d094b808f022f5aabb89
+
+2008-09-16  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/data/government_entity_name.xml,
+	tests/test_parse.py: Parse government entity elements.
+
+	* commit c9a4ae8ee6a66bd21c03b827c0cf71e9c310229a
+
+2008-09-15  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, lobbyists.py, tests/data/lobbyists.xml,
+	tests/data/lobbyists_dup.xml,
+	tests/data/lobbyists_slightly_different.xml, tests/test_import.py,
+	tests/util.py: Added support for importing lobbyists into
+	the DB.
+
+	* commit 893aa4541fed91bb1971dcd6e12d6fc54cc55ccd
+
+2008-09-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/data/lobbyist_indicator.xml,
+	tests/data/lobbyist_name.xml,
+	tests/data/lobbyist_official_position.xml,
+	tests/data/lobbyist_status.xml, tests/test_parse.py: Support
+	for parsing lobbyists.
+
+	* commit bf274dd0dee257cac5bfdd776857a49693da6322
+
+2008-09-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: rename client_status->status,
+	can use it for lobbyists, too.
+
+	* commit 0ad66a21c465710076936791f54bfe2987f3d0d4
+
+2008-09-12  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: Fix a typo in the new docstrings.
+
+	* commit b3f9b4b943493f15806f378e5bdbbf9b252773c5
+
+2008-09-10  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: sync docstrings with previous
+	commit (doc-only change).
+
+	* commit c577005391e633ccf4d7610670f0cc475400654f
+
+2008-09-09  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: DOM element parsers now return
+	a key-value pair.
+
+	Previously they returned a list with a single key-value
+	pair because of an implementation detail in parse_filing.
+	The new behavior is a bit cleaner in case anyone wants to
+	use just the element parsers but not the whole module.
+
+	Also added a brief comment on what's expected of element
+	parsers.
+
+	* commit 31c3f6e53c304e6a4c08bc87d0894572e21e637f
+
+2008-09-09  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql, lobbyists.py, tests/test_import.py: Database
+	schema cleanup to make way for importing lobbyist records.
+
+	Created a new table named 'person' for storing names of
+	persons. Use this table for client.contact_name.
+
+	Removed the lobbyists table. It'll be replaced with a new
+	schema in an upcoming checkin.
+
+	* commit 2f897c00d88cc3652eb8e81a45c44ee7f3d86310
+
+2008-09-09  Drew Hess  <dhess-src@bothan.net>
+
+	* tests/test_import.py: test_import.py: numerous new import
+	tests.
+
+	* commit 949dbd8733c23fa17ced255cdbdace7f048b7511
+
+2008-09-09  Drew Hess  <dhess-src@bothan.net>
+
+	* filings.sql: filings.sql: replace 'missing' with 'unspecified'
+	in pre-loaded tables.
+
+	* commit 93030cafe9120cff48f43e9a1b4997fb4015336a
+
+2008-09-08  Drew Hess  <dhess-src@bothan.net>
+
+	* tests/test_import.py: test_import.py: oops, a two tests
+	had the same name.
+
+	* commit 0310162580a58e58f81a4e0124e3f02f9a94c90d
+
+2008-09-08  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/test_parse.py: lobbyists.py: missing
+	client local/state gov status is now 'unspecified.'
+
+	* commit f9a2588f12b90e5f84d65db6fb3c4f0832881c50
+
+2008-09-08  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py: lobbyists.py: minor cleanup of client
+	insertion.
+
+	* commit 1e8b274a9bbdaa25e5a54ae54b488d1ef0c26ef1
+
+2008-09-08  Drew Hess  <dhess-src@bothan.net>
+
+	* lobbyists.py, tests/test_parse.py: lobbyists.py: client
+	desc, state, ppb_state and contact name now 'unspecified'
+	instead of NULL/None.
+
+	Also refactored finding the rowid of an existing entity
+	into a reusable function.
+
+	* commit 934f5eeeeb4bf6e6774b816e592355b2257d9281
+
