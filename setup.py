@@ -43,7 +43,7 @@ schema.
     classifiers = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: Affero GNU Public License',
+        'License :: OSI Approved',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Database',
