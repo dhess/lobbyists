@@ -54,7 +54,7 @@ def time_parse(doc):
     Returns a tuple. The first item is the time (in seconds) taken to
     parse the entire document, and the second is the list of all
     parsed filings.
-    
+
     """
     timed_parser = _timed_func(_parse_all)
     return timed_parser(doc)
@@ -72,7 +72,7 @@ def time_import(cur, parsed_filings, skiplist=None):
     """Import parsed filings into a database and time it.
 
     cur - The DB API 2.0-compliant database cursor.
-    
+
     parsed_filings - A sequence of parsed filings.
 
     skiplist - Either None (the default), or a list of filing element
@@ -80,7 +80,7 @@ def time_import(cur, parsed_filings, skiplist=None):
     appears in the list is skipped at import time. This feature is
     useful for stubbing out specific import functions when you don't
     want them to impact the benchmark.
-    
+
     Returns a tuple. The first item is the time (in seconds) taken by
     the import, and the second is the return value of
     lobbyist.import_filings.
