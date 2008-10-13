@@ -19,7 +19,7 @@
 
 """Utility functions for the lobbyists package."""
 
-import lobbyists
+from . import lobbyists
 import sqlite3
 import os.path
 
@@ -74,7 +74,6 @@ def load_main(argv=None):
     """
     import optparse
     import sys
-    import sqlite3
 
     if argv is None:
         argv = sys.argv
