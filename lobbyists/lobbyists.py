@@ -24,25 +24,25 @@ VERSION = '0.9'
 
 # Attribute parsers.
 
-def identity(x):
+def _identity(x):
     return x
 
 
-def optional(x):
+def _optional(x):
     if x is None:
         return 'unspecified'
     else:
         return x
 
 
-def amount(x):
+def _amount(x):
     if x is None:
         return x
     else:
         return int(x)
 
 
-def period(x):
+def _period(x):
     periods = {'1st Quarter (Jan 1 - Mar 31)': 'Q1',
                '2nd Quarter (Apr 1 - June 30)': 'Q2',
                '3rd Quarter (July 1 - Sep 30)': 'Q3',
@@ -53,12 +53,12 @@ def period(x):
     return periods[x]
 
 
-def is_gov(x):
+def _is_gov(x):
     values = {None: 'unspecified', '0': 'n', '1': 'y'}
     return values[x]
 
 
-def status(x):
+def _status(x):
     status = {0: 'active',
               1: 'terminated',
               2: 'administratively terminated',
@@ -66,7 +66,7 @@ def status(x):
     return status[int(x)]
 
 
-def lobbyist_indicator(x):
+def _lobbyist_indicator(x):
     indicator = {0: 'not covered',
                  1: 'covered',
                  2: 'undetermined'}
@@ -75,7 +75,7 @@ def lobbyist_indicator(x):
 
 # xml.dom.pulldom-specific code
 
-def filing_elements(doc):
+def _filing_elements(doc):
     """The sequence of all Filing elements in a lobbyist database.
 
     doc - The XML document. Can be a filename, a URL or anything else
@@ -91,14 +91,14 @@ def filing_elements(doc):
             yield node
 
 
-def child_elements(elt):
+def _child_elements(elt):
     """Yield a sequence of child elements of the given DOM element."""
     for child in elt.childNodes:
         if child.nodeType == xml.dom.Node.ELEMENT_NODE:
             yield child
 
 
-def attr_of(elt, attrname):
+def _attr_of(elt, attrname):
     """Get the value of an attribute of an element.
 
     Returns the value of an attribute of the specified DOM element, or
@@ -116,14 +116,14 @@ def attr_of(elt, attrname):
         return val
 
 
-def element_name(elt):
+def _element_name(elt):
     """The name of the given element."""
     return elt.tagName
 
 
 # Parsers for DOM elements and their child elements.
 
-def parse_attrs(elt, attrs):
+def _parse_attrs(elt, attrs):
     """Parse the attributes of a DOM element into a sequence of pairs.
 
     elt - The DOM element.
@@ -142,33 +142,33 @@ def parse_attrs(elt, attrs):
 
     """
     for name, id, parse in attrs:
-        yield (id, parse(attr_of(elt, name)))
+        yield (id, parse(_attr_of(elt, name)))
 
 
-def parse_element(elt, id, attrs):
-    return (id, dict(parse_attrs(elt, attrs)))
+def _parse_element(elt, id, attrs):
+    return (id, dict(_parse_attrs(elt, attrs)))
 
 
-def parse_list(list_elt, id, subelt_parser):
+def _parse_list(list_elt, id, subelt_parser):
     lst = list()
-    for subelt in child_elements(list_elt):
+    for subelt in _child_elements(list_elt):
         lst.append(dict([subelt_parser(subelt)]))
     return (id, lst)
 
 
-client_attrs = [('ClientCountry', 'country', optional),
-                ('ClientID', 'senate_id', int),
-                ('ClientName', 'name', identity),
-                ('ClientPPBCountry', 'ppb_country', identity),
-                ('ClientPPBState', 'ppb_state', optional),
-                ('ClientState', 'state', optional),
-                ('ClientStatus', 'status', status),
-                ('ContactFullname', 'contact_name', optional),
-                ('GeneralDescription', 'description', optional),
-                ('IsStateOrLocalGov', 'state_or_local_gov', is_gov)]
+_client_attrs = [('ClientCountry', 'country', _optional),
+                 ('ClientID', 'senate_id', int),
+                 ('ClientName', 'name', _identity),
+                 ('ClientPPBCountry', 'ppb_country', _identity),
+                 ('ClientPPBState', 'ppb_state', _optional),
+                 ('ClientState', 'state', _optional),
+                 ('ClientStatus', 'status', _status),
+                 ('ContactFullname', 'contact_name', _optional),
+                 ('GeneralDescription', 'description', _optional),
+                 ('IsStateOrLocalGov', 'state_or_local_gov', _is_gov)]
 
 
-def parse_client(elt):
+def _parse_client(elt):
     """Parse a Client DOM element.
 
     elt - The Client DOM element.
@@ -177,18 +177,18 @@ def parse_client(elt):
     second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'client', client_attrs)
+    return _parse_element(elt, 'client', _client_attrs)
 
 
-registrant_attrs = [('Address', 'address', optional),
-                    ('GeneralDescription', 'description', optional),
-                    ('RegistrantCountry', 'country', identity),
-                    ('RegistrantID', 'senate_id', int),
-                    ('RegistrantName', 'name', identity),
-                    ('RegistrantPPBCountry', 'ppb_country', identity)]
+_registrant_attrs = [('Address', 'address', _optional),
+                     ('GeneralDescription', 'description', _optional),
+                     ('RegistrantCountry', 'country', _identity),
+                     ('RegistrantID', 'senate_id', int),
+                     ('RegistrantName', 'name', _identity),
+                     ('RegistrantPPBCountry', 'ppb_country', _identity)]
 
 
-def parse_registrant(elt):
+def _parse_registrant(elt):
     """Parse a Registrant DOM element.
 
     elt - The Registrant DOM element.
@@ -197,20 +197,20 @@ def parse_registrant(elt):
     whose second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'registrant', registrant_attrs)
+    return _parse_element(elt, 'registrant', _registrant_attrs)
 
 
-# LobbyistName uses the 'optional' parser. This is intentional; there
+# LobbyistName uses the '_optional' parser. This is intentional; there
 # are a handful of records in the XML documents (see 2008_3_7.xml)
 # where the attribute's value is the empty string "".
 
-lobbyist_attrs = [('LobbyistName', 'name', optional),
-                  ('LobbyistStatus', 'status', status),
-                  ('LobbyisteIndicator', 'indicator', lobbyist_indicator),
-                  ('OfficialPosition', 'official_position', optional)]
+_lobbyist_attrs = [('LobbyistName', 'name', _optional),
+                   ('LobbyistStatus', 'status', _status),
+                   ('LobbyisteIndicator', 'indicator', _lobbyist_indicator),
+                   ('OfficialPosition', 'official_position', _optional)]
 
 
-def parse_lobbyist(elt):
+def _parse_lobbyist(elt):
     """Parse a Lobbyist DOM element.
 
     elt - The Lobbyist DOM element.
@@ -219,10 +219,10 @@ def parse_lobbyist(elt):
     second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'lobbyist', lobbyist_attrs)
+    return _parse_element(elt, 'lobbyist', _lobbyist_attrs)
 
 
-def parse_lobbyists(elt):
+def _parse_lobbyists(elt):
     """Parse a Lobbyists DOM element.
 
     elt - The Lobbyists DOM element.
@@ -232,13 +232,13 @@ def parse_lobbyists(elt):
     for each Lobbyist sub-element of this Lobbyists element.
 
     """
-    return parse_list(elt, 'lobbyists', parse_lobbyist)
+    return _parse_list(elt, 'lobbyists', _parse_lobbyist)
 
 
-govt_entity_attrs = [('GovEntityName', 'name', identity)]
+_govt_entity_attrs = [('GovEntityName', 'name', _identity)]
 
 
-def parse_govt_entity(elt):
+def _parse_govt_entity(elt):
     """Parse a GovernmentEntity DOM element.
 
     elt - The GovernmentEntity DOM element.
@@ -247,10 +247,10 @@ def parse_govt_entity(elt):
     whose second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'govt_entity', govt_entity_attrs)
+    return _parse_element(elt, 'govt_entity', _govt_entity_attrs)
 
 
-def parse_govt_entities(elt):
+def _parse_govt_entities(elt):
     """Parse a GovernmentEntities DOM element.
 
     elt - The GovernmentEntities DOM element.
@@ -261,14 +261,14 @@ def parse_govt_entities(elt):
     GovernmentEntities element.
 
     """
-    return parse_list(elt, 'govt_entities', parse_govt_entity)
+    return _parse_list(elt, 'govt_entities', _parse_govt_entity)
 
 
-issue_attrs = [('Code', 'code', identity),
-               ('SpecificIssue', 'specific_issue', optional)]
+_issue_attrs = [('Code', 'code', _identity),
+                ('SpecificIssue', 'specific_issue', _optional)]
 
 
-def parse_issue(elt):
+def _parse_issue(elt):
     """Parse an Issue DOM element.
 
     elt - The Issue DOM element.
@@ -277,10 +277,10 @@ def parse_issue(elt):
     second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'issue', issue_attrs)
+    return _parse_element(elt, 'issue', _issue_attrs)
 
 
-def parse_issues(elt):
+def _parse_issues(elt):
     """Parse an Issues DOM element.
 
     elt - The Issues DOM element.
@@ -290,22 +290,22 @@ def parse_issues(elt):
     Issue sub-element of this Issues element.
 
     """
-    return parse_list(elt, 'issues', parse_issue)
+    return _parse_list(elt, 'issues', _parse_issue)
 
 
-def parse_foreign_entities(elt):
+def _parse_foreign_entities(elt):
     return ('foreign_entities', list())
 
 
 # The affiliated org PPB country attribute name is spelled,
 # "AffiliatedOrgPPBCcountry" (sic).
 
-org_attrs = [('AffiliatedOrgCountry', 'country', optional),
-             ('AffiliatedOrgName', 'name', identity),
-             ('AffiliatedOrgPPBCcountry', 'ppb_country', identity)]
+_org_attrs = [('AffiliatedOrgCountry', 'country', _optional),
+              ('AffiliatedOrgName', 'name', _identity),
+              ('AffiliatedOrgPPBCcountry', 'ppb_country', _identity)]
 
 
-def parse_org(elt):
+def _parse_org(elt):
     """Parse an Org DOM element.
 
     elt - The Org DOM element.
@@ -314,10 +314,10 @@ def parse_org(elt):
     second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'org', org_attrs)
+    return _parse_element(elt, 'org', _org_attrs)
 
 
-def parse_affiliated_orgs(elt):
+def _parse_affiliated_orgs(elt):
     """Parse an AffiliatedOrgs DOM element.
 
     elt - The AffiliatedOrgs DOM element.
@@ -327,23 +327,23 @@ def parse_affiliated_orgs(elt):
     for each Org sub-element of this AffiliatedOrgs element.
 
     """
-    return parse_list(elt, 'affiliated_orgs', parse_org)
+    return _parse_list(elt, 'affiliated_orgs', _parse_org)
 
 
 # AffiliatedOrgsURL parser ideally would be a URL parser, but
 # unfortunately this element contains all kinds of non-URL junk, and
 # must be treated as free-form text.
 
-filing_attrs = [('ID', 'id', identity),
-                ('Year', 'year', int),
-                ('Received', 'filing_date', identity),
-                ('Amount', 'amount', amount),
-                ('Type', 'type', identity),
-                ('Period', 'period', period),
-                ('AffiliatedOrgsURL', 'affiliated_orgs_url', optional)]
+_filing_attrs = [('ID', 'id', _identity),
+                 ('Year', 'year', int),
+                 ('Received', 'filing_date', _identity),
+                 ('Amount', 'amount', _amount),
+                 ('Type', 'type', _identity),
+                 ('Period', 'period', _period),
+                 ('AffiliatedOrgsURL', 'affiliated_orgs_url', _optional)]
 
 
-def parse_filing(elt):
+def _parse_filing(elt):
     """Parse a Filing DOM element.
 
     elt - The Filing DOM element.
@@ -352,7 +352,7 @@ def parse_filing(elt):
     second item is the dictionary of parsed attributes.
 
     """
-    return parse_element(elt, 'filing', filing_attrs)
+    return _parse_element(elt, 'filing', _filing_attrs)
 
 
 # These parsers are used by parse_filings to parse sub-elements of
@@ -361,13 +361,13 @@ def parse_filing(elt):
 # ('thing_name': thing_value), which will be inserted into the
 # dictionary representing the parsed Filing element.
 
-subelt_parsers = {'Registrant': parse_registrant,
-                  'Client': parse_client,
-                  'Lobbyists': parse_lobbyists,
-                  'GovernmentEntities': parse_govt_entities,
-                  'Issues': parse_issues,
-                  'ForeignEntities': parse_foreign_entities,
-                  'AffiliatedOrgs': parse_affiliated_orgs}
+_subelt_parsers = {'Registrant': _parse_registrant,
+                   'Client': _parse_client,
+                   'Lobbyists': _parse_lobbyists,
+                   'GovernmentEntities': _parse_govt_entities,
+                   'Issues': _parse_issues,
+                   'ForeignEntities': _parse_foreign_entities,
+                   'AffiliatedOrgs': _parse_affiliated_orgs}
 
 
 def parse_filings(doc):
@@ -379,50 +379,50 @@ def parse_filings(doc):
     Yields a sequence of dictionaries, one per filing record.
 
     """
-    for filing_elt in filing_elements(doc):
-        filing = dict([parse_filing(filing_elt)])
-        for elt in child_elements(filing_elt):
-            parser = subelt_parsers[element_name(elt)]
+    for filing_elt in _filing_elements(doc):
+        filing = dict([_parse_filing(filing_elt)])
+        for elt in _child_elements(filing_elt):
+            parser = _subelt_parsers[_element_name(elt)]
             filing.update([parser(elt)])
         yield filing
 
 
 # Code to import parsed records into the database.
 
-where_stmt = {'client':
-                  'client WHERE ' \
-                  'country=:country AND ' \
-                  'senate_id=:senate_id AND '\
-                  'name=:name AND ' \
-                  'ppb_country=:ppb_country AND ' \
-                  'state=:state AND ' \
-                  'ppb_state=:ppb_state AND ' \
-                  'status=:status AND ' \
-                  'description=:description AND ' \
-                  'state_or_local_gov=:state_or_local_gov AND ' \
-                  'contact_name=:contact_name',
-              'registrant':
-                  'registrant WHERE ' \
-                  'address=:address AND ' \
-                  'description=:description AND ' \
-                  'country=:country AND ' \
-                  'senate_id=:senate_id AND ' \
-                  'name=:name AND ' \
-                  'ppb_country=:ppb_country',
-              'lobbyist':
-                  'lobbyist WHERE ' \
-                  'name=:name AND ' \
-                  'status=:status AND ' \
-                  'indicator=:indicator AND ' \
-                  'official_position=:official_position',
-              'affiliated_org':
-                  'affiliated_org WHERE ' \
-                  'name=:name AND ' \
-                  'country=:country AND ' \
-                  'ppb_country=:ppb_country'}
+_where_stmt = {'client':
+                   'client WHERE ' \
+                   'country=:country AND ' \
+                   'senate_id=:senate_id AND '\
+                   'name=:name AND ' \
+                   'ppb_country=:ppb_country AND ' \
+                   'state=:state AND ' \
+                   'ppb_state=:ppb_state AND ' \
+                   'status=:status AND ' \
+                   'description=:description AND ' \
+                   'state_or_local_gov=:state_or_local_gov AND ' \
+                   'contact_name=:contact_name',
+               'registrant':
+                   'registrant WHERE ' \
+                   'address=:address AND ' \
+                   'description=:description AND ' \
+                   'country=:country AND ' \
+                   'senate_id=:senate_id AND ' \
+                   'name=:name AND ' \
+                   'ppb_country=:ppb_country',
+               'lobbyist':
+                   'lobbyist WHERE ' \
+                   'name=:name AND ' \
+                   'status=:status AND ' \
+                   'indicator=:indicator AND ' \
+                   'official_position=:official_position',
+               'affiliated_org':
+                   'affiliated_org WHERE ' \
+                   'name=:name AND ' \
+                   'country=:country AND ' \
+                   'ppb_country=:ppb_country'}
 
 
-def rowid(table, tomatch, cur):
+def _rowid(table, tomatch, cur):
     """Find a match in a database table and return its rowid.
 
     This function only works for tables with a primary key
@@ -440,7 +440,7 @@ def rowid(table, tomatch, cur):
     found.
 
     """
-    stmt = 'SELECT id FROM %s' % where_stmt[table]
+    stmt = 'SELECT id FROM %s' % _where_stmt[table]
     cur.execute(stmt, tomatch)
     row = cur.fetchone()
     if row:
@@ -449,7 +449,7 @@ def rowid(table, tomatch, cur):
         return None
 
 
-def client_rowid(client, cur):
+def _client_rowid(client, cur):
     """Find a client the database.
 
     Returns the row ID of the matching client, or None if there is no
@@ -460,10 +460,10 @@ def client_rowid(client, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return rowid('client', client, cur)
+    return _rowid('client', client, cur)
 
 
-def insert_client(client, cur):
+def _insert_client(client, cur):
     """Insert a client into the database.
 
     Returns the row ID of the inserted client.
@@ -491,7 +491,7 @@ def insert_client(client, cur):
     return cur.lastrowid
 
 
-def registrant_rowid(reg, cur):
+def _registrant_rowid(reg, cur):
     """Find a registrant in the database.
 
     Returns the row ID of the matching registrant, or None if there is
@@ -502,10 +502,10 @@ def registrant_rowid(reg, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return rowid('registrant', reg, cur)
+    return _rowid('registrant', reg, cur)
 
 
-def insert_registrant(reg, cur):
+def _insert_registrant(reg, cur):
     """Insert a registrant into the database.
 
     Returns the row ID of the inserted registrant.
@@ -531,7 +531,7 @@ def insert_registrant(reg, cur):
     return cur.lastrowid
 
 
-def lobbyist_rowid(lobbyist, cur):
+def _lobbyist_rowid(lobbyist, cur):
     """Find a lobbyist in the database.
 
     Returns the row ID of the matching lobbyist, or None if there is
@@ -542,10 +542,10 @@ def lobbyist_rowid(lobbyist, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return rowid('lobbyist', lobbyist, cur)
+    return _rowid('lobbyist', lobbyist, cur)
 
 
-def insert_lobbyist(lobbyist, cur):
+def _insert_lobbyist(lobbyist, cur):
     """Insert a lobbyist into the database.
 
     Returns the row ID of the inserted lobbyist.
@@ -567,7 +567,7 @@ def insert_lobbyist(lobbyist, cur):
     return cur.lastrowid
 
 
-def insert_govt_entity(entity, cur):
+def _insert_govt_entity(entity, cur):
     """Insert a government entity into the database.
 
     Returns the key (NOT the rowid!) of the inserted entry.
@@ -581,7 +581,7 @@ def insert_govt_entity(entity, cur):
     return entity['name']
 
 
-def insert_issue(issue, cur):
+def _insert_issue(issue, cur):
     """Insert an issue into the database.
 
     Returns the row ID of the inserted issue.
@@ -600,7 +600,7 @@ def insert_issue(issue, cur):
     return cur.lastrowid
 
 
-def affiliated_org_rowid(org, cur):
+def _affiliated_org_rowid(org, cur):
     """Find an affiliated org the database.
 
     Returns the row ID of the matching org, or None if there is no
@@ -611,10 +611,10 @@ def affiliated_org_rowid(org, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return rowid('affiliated_org', org, cur)
+    return _rowid('affiliated_org', org, cur)
 
 
-def insert_affiliated_org(org, cur):
+def _insert_affiliated_org(org, cur):
     """Insert an affiliated org into the database.
 
     Returns the row ID of the inserted org.
@@ -636,7 +636,7 @@ def insert_affiliated_org(org, cur):
     return cur.lastrowid
 
 
-def insert_filing(filing, cur):
+def _insert_filing(filing, cur):
     """Insert a filing and its relationships into the database.
 
     Returns the row ID of the inserted filing.
@@ -673,7 +673,7 @@ def insert_filing(filing, cur):
     return filing_rowid
 
 
-def import_entity(record, cur, name, findrow, insert):
+def _import_entity(record, cur, name, findrow, insert):
     if name in record:
         entity = record[name]
         rowid = findrow(entity, cur)
@@ -685,47 +685,47 @@ def import_entity(record, cur, name, findrow, insert):
         return None
 
 
-def import_registrant(record, cur):
-    return import_entity(record,
+def _import_registrant(record, cur):
+    return _import_entity(record,
                          cur,
                          'registrant',
-                         registrant_rowid,
-                         insert_registrant)
+                          _registrant_rowid,
+                         _insert_registrant)
 
 
-def import_client(record, cur):
-    return import_entity(record,
+def _import_client(record, cur):
+    return _import_entity(record,
                          cur,
                          'client',
-                         client_rowid,
-                         insert_client)
+                         _client_rowid,
+                         _insert_client)
 
 
-def import_lobbyist(record, cur):
-    return import_entity(record,
+def _import_lobbyist(record, cur):
+    return _import_entity(record,
                          cur,
                          'lobbyist',
-                         lobbyist_rowid,
-                         insert_lobbyist)
+                          _lobbyist_rowid,
+                         _insert_lobbyist)
 
 
-def import_govt_entity(record, cur):
-    return insert_govt_entity(record['govt_entity'], cur)
+def _import_govt_entity(record, cur):
+    return _insert_govt_entity(record['govt_entity'], cur)
 
 
-def import_issue(record, cur):
-    return insert_issue(record['issue'], cur)
+def _import_issue(record, cur):
+    return _insert_issue(record['issue'], cur)
 
 
-def import_affiliated_org(record, cur):
-    return import_entity(record,
+def _import_affiliated_org(record, cur):
+    return _import_entity(record,
                          cur,
                          'org',
-                         affiliated_org_rowid,
-                         insert_affiliated_org)
+                         _affiliated_org_rowid,
+                         _insert_affiliated_org)
 
 
-def import_list(record, id, entity_importer, cur):
+def _import_list(record, id, entity_importer, cur):
     ids = list()
     if id in record:
         for entity in record[id]:
@@ -733,7 +733,7 @@ def import_list(record, id, entity_importer, cur):
     return ids
 
 
-def import_lobbyists(record, cur):
+def _import_lobbyists(record, cur):
     """Returns a list of rowids for the lobbyists in a filing record.
 
     record - The parsed filing dictionary.
@@ -741,10 +741,10 @@ def import_lobbyists(record, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return import_list(record, 'lobbyists', import_lobbyist, cur)
+    return _import_list(record, 'lobbyists', _import_lobbyist, cur)
 
 
-def import_govt_entities(record, cur):
+def _import_govt_entities(record, cur):
     """Returns a list of keys for the govt entities in a filing record.
 
     record - The parsed filing dictionary.
@@ -752,10 +752,10 @@ def import_govt_entities(record, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return import_list(record, 'govt_entities', import_govt_entity, cur)
+    return _import_list(record, 'govt_entities', _import_govt_entity, cur)
 
 
-def import_issues(record, cur):
+def _import_issues(record, cur):
     """Returns a list of rowids for the issues in a filing record.
 
     record - The parsed filing dictionary.
@@ -763,10 +763,10 @@ def import_issues(record, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return import_list(record, 'issues', import_issue, cur)
+    return _import_list(record, 'issues', _import_issue, cur)
 
 
-def import_affiliated_orgs(record, cur):
+def _import_affiliated_orgs(record, cur):
     """Returns a list of rowids for the affiliated orgs in a filing record.
 
     record - The parsed filing dictionary.
@@ -774,15 +774,15 @@ def import_affiliated_orgs(record, cur):
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    return import_list(record, 'affiliated_orgs', import_affiliated_org, cur)
+    return _import_list(record, 'affiliated_orgs', _import_affiliated_org, cur)
 
 
-entity_importers = {'registrant': import_registrant,
-                    'client': import_client,
-                    'lobbyists': import_lobbyists,
-                    'govt_entities': import_govt_entities,
-                    'issues': import_issues,
-                    'affiliated_orgs': import_affiliated_orgs}
+_entity_importers = {'registrant': _import_registrant,
+                     'client': _import_client,
+                     'lobbyists': _import_lobbyists,
+                     'govt_entities': _import_govt_entities,
+                     'issues': _import_issues,
+                     'affiliated_orgs': _import_affiliated_orgs}
 
 
 def import_filings(cur, parsed_filings):
@@ -800,9 +800,9 @@ def import_filings(cur, parsed_filings):
     """
     for record in parsed_filings:
         filing = record['filing']
-        for entity_name, entity_importer in entity_importers.items():
+        for entity_name, entity_importer in _entity_importers.items():
             filing[entity_name] = entity_importer(record, cur)
-        insert_filing(filing, cur)
+        _insert_filing(filing, cur)
     return True
 
 

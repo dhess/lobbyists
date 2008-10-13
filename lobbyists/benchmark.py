@@ -19,54 +19,54 @@
 
 """Internal benchmarking functions for the lobbyists package."""
 
-import lobbyists
+from . import lobbyists
 import time
+import sys
 
 
-def timed_func(func):
+def _timed_func(func):
     def timer(*args):
-        t1 = time.clock()
+        start = time.clock()
         result = func(*args)
-        t2 = time.clock()
-        return result, t2 - t1
+        finish = time.clock()
+        return result, finish - start
     return timer
 
 
-def parse_all(doc):
+def _parse_all(doc):
     return list(lobbyists.parse_filings(doc))
 
 
-def skip_import_list(record, con):
+def _skip_import_list(record, con):
     return list()
 
 
-def skip_import(record, con):
+def _skip_import(record, con):
     return None
 
 
 def time_parse(doc):
-    timed_parser = timed_func(parse_all)
+    timed_parser = _timed_func(_parse_all)
     return timed_parser(doc)
 
 
-skippers = {'registrant': skip_import,
-            'client': skip_import,
-            'lobbyists': skip_import_list,
-            'govt_entities': skip_import_list,
-            'issues': skip_import_list,
-            'affiliated_orgs': skip_import_list}
+_skippers = {'registrant': _skip_import,
+             'client': _skip_import,
+             'lobbyists': _skip_import_list,
+             'govt_entities': _skip_import_list,
+             'issues': _skip_import_list,
+             'affiliated_orgs': _skip_import_list}
 
 
-def time_import(filings, cur, skiplist=[]):
+def time_import(filings, cur, skiplist=list()):
     for key in skiplist:
-        lobbyists.entity_importers[key] = skippers[key]
-    timed_importer = timed_func(lobbyists.import_filings)
+        lobbyists._entity_importers[key] = _skippers[key]
+    timed_importer = _timed_func(lobbyists.import_filings)
     return timed_importer(cur, filings)
 
 
 def main(argv=None):
     import sqlite3
-    import sys
     import optparse
     import os.path
 
@@ -116,5 +116,4 @@ document."""
 
 
 if __name__ == "__main__":
-    import sys
     sys.exit(main())
