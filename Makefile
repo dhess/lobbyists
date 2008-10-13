@@ -16,8 +16,8 @@ help:
 push:
 	git push origin
 
-push-all:
-	git push --all
+push-all: push
+	git push github
 
 test:
 	python setup.py test
