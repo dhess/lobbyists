@@ -12,3 +12,4 @@ p.strip_dirs().sort_stats('cum', 'time').print_stats(.5,'lobbyists.py')
 * DONE Split up tests.
 * TODO Simple docs.
 * TODO Simple examples.
+* TODO Add commented RNG schema.
