@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Foreign entity ownership status is an optional attribute. When
+       it does appear, it's always an integer in the range
+       [0, 100]. -->
+
+  <Filing ID="EEDBB5F5-8BB4-4E0D-9F10-CD8FDD2A0D70" Year="2004" Received="2004-04-28T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="EMBASSY OF VENEZUELA" ForeignEntityCountry="UNDETERMINED" ForeignEntityPPBcountry="USA" ForeignEntityContribution="100000" ForeignEntityOwnershipPercentage="0" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <Filing ID="E4382341-0E5D-4A31-8A7D-3CCB71E8EF6E" Year="2004" Received="2004-06-03T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="THE NEWS CORPORATION LTD." ForeignEntityCountry="UNDETERMINED" ForeignEntityPPBcountry="AUSTRALIA" ForeignEntityContribution="0" ForeignEntityOwnershipPercentage="34" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <Filing ID="4CAC3894-FA4C-4CEC-99C7-1141544CA49B" Year="2008" Received="2008-04-17T18:43:44" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.fbcmedia.com">
+    <ForeignEntities>
+      <Entity ForeignEntityName="FBC Group Ltd." ForeignEntityCountry="UNITED KINGDOM" ForeignEntityPPBcountry="UNITED KINGDOM" ForeignEntityContribution="300000" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="0" xmlns="" />
+      <Entity ForeignEntityName="Beta Gamma Ltd." ForeignEntityCountry="SEYCHELLES" ForeignEntityPPBcountry="SEYCHELLES" ForeignEntityContribution="300000" ForeignEntityStatus="0" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+
+</PublicFilings>

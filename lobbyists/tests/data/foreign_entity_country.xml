@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Foreign entity country and PPB country are required. -->
+
+  <Filing ID="4CAC3894-FA4C-4CEC-99C7-1141544CA49B" Year="2008" Received="2008-04-17T18:43:44" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.fbcmedia.com">
+    <ForeignEntities>
+      <Entity ForeignEntityName="FBC Group Ltd." ForeignEntityCountry="UNITED KINGDOM" ForeignEntityPPBcountry="UNITED KINGDOM" ForeignEntityContribution="300000" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="0" xmlns="" />
+      <Entity ForeignEntityName="Beta Gamma Ltd." ForeignEntityCountry="SEYCHELLES" ForeignEntityPPBcountry="SEYCHELLES" ForeignEntityContribution="300000" ForeignEntityStatus="0" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Sometimes one or both are "undetermined", or even "USA". -->
+
+  <Filing ID="BECA0C94-4308-47E5-BF23-887D3954E254" Year="1999" Received="1999-03-10T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="CITIZENS FOR DEMOCRACTIC RULE IN NIGERIA" ForeignEntityCountry="UNDETERMINED" ForeignEntityPPBcountry="UNDETERMINED" ForeignEntityStatus="3" xmlns="" />
+      <Entity ForeignEntityName="CITIZENS FOR DEMOCRACTIC RULE IN NIGERIA" ForeignEntityCountry="USA" ForeignEntityPPBcountry="USA" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
+      <Entity ForeignEntityName="WALLETTE, GERALD" ForeignEntityCountry="USA" ForeignEntityPPBcountry="USA" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+  
+  <!-- The country and PPB country are usually the same, but not
+       always. -->
+  
+  <Filing ID="ACD87507-EB78-4607-95E8-43871D9D1EF2" Year="2007" Received="2008-01-14T19:20:59" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="EVONIK INDUSTRIES GMBH" ForeignEntityCountry="GERMANY" ForeignEntityPPBcountry="USA" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- There is one record in the entire database where both are
+       blank. -->
+  
+  <Filing ID="498EAE8A-DE7A-4FFF-A813-062D92FDA271" Year="2007" Received="2008-02-14T16:39:29" Amount="100000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <ForeignEntities>
+      <Entity ForeignEntityName="HITACHI, LTD." ForeignEntityCountry="" ForeignEntityPPBcountry="" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Sometimes they're both "<SELECT ONE>" -->
+  
+  <Filing ID="63AC4585-74BC-478D-A356-FCCFD98FDE64" Year="2008" Received="2008-04-21T15:38:10" Amount="165448" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)">
+    <ForeignEntities>
+      <Entity ForeignEntityName="AgustaWestland Holdings, Ltd." ForeignEntityCountry="&lt;SELECT ONE&gt;" ForeignEntityPPBcountry="&lt;SELECT ONE&gt;" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="0" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+</PublicFilings>

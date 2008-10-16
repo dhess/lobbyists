@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Foreign entity name is required. -->
+
+  <Filing ID="4CAC3894-FA4C-4CEC-99C7-1141544CA49B" Year="2008" Received="2008-04-17T18:43:44" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="www.fbcmedia.com">
+    <ForeignEntities>
+      <Entity ForeignEntityName="FBC Group Ltd." ForeignEntityCountry="UNITED KINGDOM" ForeignEntityPPBcountry="UNITED KINGDOM" ForeignEntityContribution="300000" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="0" xmlns="" />
+      <Entity ForeignEntityName="Beta Gamma Ltd." ForeignEntityCountry="SEYCHELLES" ForeignEntityPPBcountry="SEYCHELLES" ForeignEntityContribution="300000" ForeignEntityStatus="0" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Here's a record where the same name appears twice with
+       different countries and PPB countries (looks like a data entry
+       error). The other entity appears to be a person, not an
+       org. -->
+
+  <Filing ID="BECA0C94-4308-47E5-BF23-887D3954E254" Year="1999" Received="1999-03-10T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="CITIZENS FOR DEMOCRACTIC RULE IN NIGERIA" ForeignEntityCountry="UNDETERMINED" ForeignEntityPPBcountry="UNDETERMINED" ForeignEntityStatus="3" xmlns="" />
+      <Entity ForeignEntityName="CITIZENS FOR DEMOCRACTIC RULE IN NIGERIA" ForeignEntityCountry="USA" ForeignEntityPPBcountry="USA" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
+      <Entity ForeignEntityName="WALLETTE, GERALD" ForeignEntityCountry="USA" ForeignEntityPPBcountry="USA" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Here's a record where both of the entity names are "N/A". -->
+  
+  <Filing ID="CE714D21-6713-4764-87F2-5F6294F0FBB3" Year="2001" Received="2002-02-12T00:00:00" Amount="20000" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
+    <ForeignEntities>
+      <Entity ForeignEntityName="N/A" ForeignEntityCountry="UNDETERMINED" ForeignEntityPPBcountry="UNDETERMINED" ForeignEntityStatus="1" xmlns="" />
+      <Entity ForeignEntityName="N/A" ForeignEntityCountry="USA" ForeignEntityPPBcountry="UNDETERMINED" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+</PublicFilings>

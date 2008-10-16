@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Foreign entity contribution is optional. When it's provided,
+       it's always a non-negative integer, frequently 0. -->
+
+  <Filing ID="A9F81F8B-F0B0-440A-8564-051FF553CCA8" Year="1999" Received="1999-06-22T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="NORTH JAPAN MARITIME CORP" ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="JAPAN" ForeignEntityContribution="16500" ForeignEntityStatus="3" xmlns="" />
+      <Entity ForeignEntityName="HOKO FISHING CO" ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="JAPAN" ForeignEntityContribution="16500" ForeignEntityStatus="3" xmlns="" />
+      <Entity ForeignEntityName="MARUHA CORP" ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="JAPAN" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Here the contribution is omitted (maybe because the foreign
+       entity has a 100% ownership stake in the client? -->
+  
+  <Filing ID="ACD87507-EB78-4607-95E8-43871D9D1EF2" Year="2007" Received="2008-01-14T19:20:59" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="EVONIK INDUSTRIES GMBH" ForeignEntityCountry="GERMANY" ForeignEntityPPBcountry="USA" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+</PublicFilings>

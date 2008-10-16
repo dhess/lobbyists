@@ -295,8 +295,39 @@ def _parse_issues(elt):
     return _parse_list(elt, 'issues', _parse_issue)
 
 
+_foreign_entity_attrs = [('ForeignEntityContribution', 'contribution', _amount),
+                         ('ForeignEntityCountry', 'country', _optional),
+                         ('ForeignEntityName', 'name', _identity),
+                         ('ForeignEntityOwnershipPercentage', \
+                              'ownership_percentage', _amount),
+                         ('ForeignEntityPPBcountry', 'ppb_country', _optional),
+                         ('ForeignEntityStatus', 'status', _status)]
+
+
+def _parse_foreign_entity(elt):
+    """Parse a (foreign) Entity DOM element.
+
+    elt - The (foreign) Entity DOM element.
+
+    Returns a pair whose first item is the string 'foreign_entity' and
+    whose second item is the dictionary of parsed attributes.
+
+    """
+    return _parse_element(elt, 'foreign_entity', _foreign_entity_attrs)
+
+
 def _parse_foreign_entities(elt):
-    return ('foreign_entities', list())
+    """Parse a ForeignEntities DOM element.
+
+    elt - The ForeignEntities DOM element.
+
+    Returns a pair whose first item is the string 'foreign_entities'
+    and whose second item is a list of parsed (foreign) Entity DOM
+    elements, one for each Entity sub-element of this ForeignEntities
+    element.
+
+    """
+    return _parse_list(elt, 'foreign_entities', _parse_foreign_entity)
 
 
 # The affiliated org PPB country attribute name is spelled,

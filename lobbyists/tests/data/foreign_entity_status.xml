@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- Foreign entity status is of debatable use. Nearly all records
+       report a status of "3" ("undetermined"). Note that there are no
+       records whose status is "2". -->
+  
+  <Filing ID="BBF87FC8-73FC-4050-B6F8-850C79EC72E2" Year="2008" Received="2008-06-03T10:03:07" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="Japan Tobacco Inc." ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="JAPAN" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="0" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <Filing ID="493C9C11-17ED-4875-88D2-FAC96FF06849" Year="2008" Received="2008-04-21T10:59:24" Amount="150000" Type="FIRST QUARTER REPORT" Period="1st Quarter (Jan 1 - Mar 31)" AffiliatedOrgsURL="are the members listed on coalition's website?">
+    <ForeignEntities>
+      <Entity ForeignEntityName="SAP" ForeignEntityCountry="&lt;SELECT ONE&gt;" ForeignEntityPPBcountry="&lt;SELECT ONE&gt;" ForeignEntityStatus="1" xmlns="" />
+      <Entity ForeignEntityName="Research in Motion" ForeignEntityCountry="&lt;SELECT ONE&gt;" ForeignEntityPPBcountry="&lt;SELECT ONE&gt;" ForeignEntityStatus="1" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <Filing ID="07361BD2-5007-42D6-8794-A7597AECC1B9" Year="2007" Received="2008-04-11T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="SEAN" ForeignEntityCountry="FALKLAND ISLANDS (MALVINAS)" ForeignEntityPPBcountry="FALKLAND ISLANDS (MALVINAS)" ForeignEntityContribution="200" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+</PublicFilings>
