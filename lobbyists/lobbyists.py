@@ -682,13 +682,17 @@ def _insert_filing(filing, cur):
     # Insert the filing first, then its relationships.
     cur.execute('INSERT INTO filing VALUES(\
                        :id, :type, :year, :period, :filing_date, :amount, \
-                       :registrant, :client)',
+                       :client)',
                 filing)
     filing_rowid = cur.lastrowid
     # The affiliated orgs URL is a special case. It should really be
     # an attribute of the AffiliatedOrgs element, not the Filing
     # element.
     cur.execute('INSERT INTO url VALUES(:affiliated_orgs_url)', filing)
+    registrant_rowid = filing['registrant']
+    if registrant_rowid:
+        cur.execute('INSERT INTO filing_registrant VALUES(?, ?)',
+                    [filing['id'], registrant_rowid])
     for id in filing['lobbyists']:
         cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
                     [filing['id'], id])

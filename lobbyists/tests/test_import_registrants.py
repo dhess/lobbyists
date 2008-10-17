@@ -26,6 +26,40 @@ import util
 
 
 class TestImportRegistrants(unittest.TestCase):
+    def test_import_registrants(self):
+        """Import registrants."""
+        filings = list(lobbyists.parse_filings(util.testpath('registrants.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT filing_registrant.filing AS filing_id, \
+                            registrant.address AS address, \
+                            registrant.description AS description, \
+                            registrant.country AS country, \
+                            registrant.senate_id AS senate_id, \
+                            registrant.name AS name, \
+                            registrant.ppb_country AS ppb_country \
+                     FROM filing_registrant INNER JOIN registrant ON \
+                            registrant.id=filing_registrant.registrant")
+        rows = [row for row in cur]
+        rows.sort(key=lambda x: x['filing_id'])
+        registrants = [x for x in filings if 'registrant' in x]
+        registrants.sort(key=lambda x: x['filing']['id'])
+        self.failUnlessEqual(len(rows), len(registrants))
+        for (row, filing) in zip(rows, registrants):
+            self.failUnlessEqual(row['filing_id'], filing['filing']['id'])
+            reg = filing['registrant']
+            self.failUnlessEqual(row['address'], reg['address'])
+            self.failUnlessEqual(row['description'], reg['description'])
+            self.failUnlessEqual(row['country'], reg['country'])
+            self.failUnlessEqual(row['senate_id'], reg['senate_id'])
+            self.failUnlessEqual(row['name'], reg['name'])
+            self.failUnlessEqual(row['ppb_country'], reg['ppb_country'])
+        
     def test_import_registrant_countries(self):
         """Importing registrants fills the 'country' table."""
         filings = list(lobbyists.parse_filings(util.testpath('registrants.xml')))
@@ -72,8 +106,8 @@ class TestImportRegistrants(unittest.TestCase):
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
-        cur.execute('SELECT filing.registrant \
-                      FROM filing')
+        cur.execute('SELECT filing_registrant.registrant \
+                      FROM filing_registrant')
         row1, row2 = cur.fetchall()
         self.failUnlessEqual(row1[0], row2[0])
 
@@ -85,8 +119,8 @@ class TestImportRegistrants(unittest.TestCase):
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
-        cur.execute('SELECT filing.registrant \
-                      FROM filing')
+        cur.execute('SELECT filing_registrant.registrant \
+                      FROM filing_registrant')
         self.failUnlessEqual(len(cur.fetchall()), len(filings))
 
 

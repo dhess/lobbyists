@@ -35,7 +35,6 @@ CREATE TABLE filing(
   period VARCHAR(64),
   filing_date VARCHAR(20),      -- ISO 8601 extended date+time format
   amount INTEGER,
-  registrant REFERENCES registrant,  -- optional
   client REFERENCES client -- optional
 );
 
@@ -69,6 +68,12 @@ CREATE TABLE registrant(
   senate_id INTEGER,
   name REFERENCES org,
   ppb_country REFERENCES country
+);
+
+CREATE TABLE filing_registrant(
+  filing REFERENCES filing,
+  registrant REFERENCES registrant,
+  PRIMARY KEY(filing, registrant)
 );
 
 CREATE TABLE client_status(
