@@ -298,7 +298,7 @@ def _parse_issues(elt):
 _foreign_entity_attrs = [('ForeignEntityContribution', 'contribution', _amount),
                          ('ForeignEntityCountry', 'country', _optional),
                          ('ForeignEntityName', 'name', _identity),
-                         ('ForeignEntityOwnershipPercentage', \
+                         ('ForeignEntityOwnershipPercentage',
                               'ownership_percentage', _amount),
                          ('ForeignEntityPPBcountry', 'ppb_country', _optional),
                          ('ForeignEntityStatus', 'status', _status)]
@@ -423,35 +423,35 @@ def parse_filings(doc):
 # Code to import parsed records into the database.
 
 _where_stmt = {'client':
-                   'client WHERE ' \
-                   'country=:country AND ' \
-                   'senate_id=:senate_id AND '\
-                   'name=:name AND ' \
-                   'ppb_country=:ppb_country AND ' \
-                   'state=:state AND ' \
-                   'ppb_state=:ppb_state AND ' \
-                   'status=:status AND ' \
-                   'description=:description AND ' \
-                   'state_or_local_gov=:state_or_local_gov AND ' \
+                   'client WHERE '
+                   'country=:country AND '
+                   'senate_id=:senate_id AND '
+                   'name=:name AND '
+                   'ppb_country=:ppb_country AND '
+                   'state=:state AND '
+                   'ppb_state=:ppb_state AND '
+                   'status=:status AND '
+                   'description=:description AND '
+                   'state_or_local_gov=:state_or_local_gov AND '
                    'contact_name=:contact_name',
                'registrant':
-                   'registrant WHERE ' \
-                   'address=:address AND ' \
-                   'description=:description AND ' \
-                   'country=:country AND ' \
-                   'senate_id=:senate_id AND ' \
-                   'name=:name AND ' \
+                   'registrant WHERE '
+                   'address=:address AND '
+                   'description=:description AND '
+                   'country=:country AND '
+                   'senate_id=:senate_id AND '
+                   'name=:name AND '
                    'ppb_country=:ppb_country',
                'lobbyist':
-                   'lobbyist WHERE ' \
-                   'name=:name AND ' \
-                   'status=:status AND ' \
-                   'indicator=:indicator AND ' \
+                   'lobbyist WHERE '
+                   'name=:name AND '
+                   'status=:status AND '
+                   'indicator=:indicator AND '
                    'official_position=:official_position',
                'affiliated_org':
-                   'affiliated_org WHERE ' \
-                   'name=:name AND ' \
-                   'country=:country AND ' \
+                   'affiliated_org WHERE '
+                   'name=:name AND '
+                   'country=:country AND '
                    'ppb_country=:ppb_country'}
 
 
@@ -750,8 +750,8 @@ def _import_filing(filing, cur):
     # The affiliated orgs URL is a special case. It's associated with
     # each affiliated org in the record, so it's handled by the
     # affiliated org importer, and we skip it here.
-    cur.execute('INSERT INTO filing VALUES(\
-                       :id, :type, :year, :period, :filing_date, :amount)',
+    cur.execute('INSERT INTO filing VALUES('
+                ':id, :type, :year, :period, :filing_date, :amount)',
                 filing)
     return filing['id']
 
