@@ -496,7 +496,7 @@ def _client_rowid(client, cur):
     return _rowid('client', client, cur)
 
 
-def _import_client(client, filing, cur):
+def _import_client(client, id, filing, cur):
     """Import a client into the database.
 
     Returns the database key of the imported client.
@@ -506,6 +506,8 @@ def _import_client(client, filing, cur):
 
     client - The parsed client dictionary.
 
+    id - Unused.
+    
     filing - The parsed filing dictionary with which the client is
     associated.
 
@@ -546,7 +548,7 @@ def _registrant_rowid(reg, cur):
     return _rowid('registrant', reg, cur)
 
 
-def _import_registrant(reg, filing, cur):
+def _import_registrant(reg, id, filing, cur):
     """Import a registrant into the database.
 
     Returns the database key of the imported registrant.
@@ -556,6 +558,8 @@ def _import_registrant(reg, filing, cur):
 
     reg - The parsed registrant dictionary.
 
+    id - Unused.
+    
     filing - The parsed filing dictionary with which the registrant is
     associated.
 
@@ -594,7 +598,7 @@ def _lobbyist_rowid(lobbyist, cur):
     return _rowid('lobbyist', lobbyist, cur)
 
 
-def _import_lobbyist(lobbyist, filing, cur):
+def _import_lobbyist(lobbyist, id, filing, cur):
     """Import a lobbyist into the database.
 
     Returns the database key of the imported lobbyist.
@@ -604,6 +608,8 @@ def _import_lobbyist(lobbyist, filing, cur):
 
     lobbyist - The parsed lobbyist dictionary.
 
+    id - Unused.
+    
     filing - The parsed filing dictionary with which the lobbyist is
     associated.
 
@@ -624,7 +630,7 @@ def _import_lobbyist(lobbyist, filing, cur):
     return db_key
 
 
-def _import_govt_entity(entity, filing, cur):
+def _import_govt_entity(entity, id, filing, cur):
     """Import a government entity into the database.
 
     Returns the database key of the imported entry.
@@ -634,6 +640,8 @@ def _import_govt_entity(entity, filing, cur):
     
     entity - The parsed government entity dictionary.
 
+    id - Unused.
+    
     filing - The parsed filing dictionary with which the government
     entity is associated.
 
@@ -647,7 +655,7 @@ def _import_govt_entity(entity, filing, cur):
     return db_key
 
 
-def _import_issue(issue, filing, cur):
+def _import_issue(issue, id, filing, cur):
     """Import an issue into the database.
 
     Returns the database key of the imported issue.
@@ -657,6 +665,8 @@ def _import_issue(issue, filing, cur):
 
     issue - The parsed issue dictionary.
 
+    id - Unused.
+    
     filing - The parsed filing dictionary with which the issue is
     associated.
 
@@ -686,7 +696,7 @@ def _affiliated_org_rowid(org, cur):
     return _rowid('affiliated_org', org, cur)
 
 
-def _import_affiliated_org(org, filing, cur):
+def _import_affiliated_org(org, id, filing, cur):
     """Import an affiliated org into the database.
 
     Returns the database key of the imported org.
@@ -697,6 +707,8 @@ def _import_affiliated_org(org, filing, cur):
 
     org - The parsed org dictionary.
 
+    id - Unused.
+    
     filing - The parsed filing dictionary with which the org is
     associated.
 
@@ -744,82 +756,40 @@ def _import_filing(filing, cur):
     return filing['id']
 
 
-def _import_list(entities, id, filing, entity_importer, cur):
+_list_importers = {'lobbyists': (_import_lobbyist, 'lobbyist'),
+                   'govt_entities': (_import_govt_entity, 'govt_entity'),
+                   'issues': (_import_issue, 'issue'),
+                   'affiliated_orgs': (_import_affiliated_org, 'org')}
+
+
+def _import_list(entities, id, filing, cur):
+    """Import a list of parsed entities into the database.
+
+    Returns a list of database keys for each of the entities.
+
+    entitites - The list of parsed entities.
+
+    id - The name of the entity list (e.g., 'lobbyists').
+
+    filing - The parsed filing dictionary with which the list is
+    associated.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    importer, entity_id = _list_importers[id]
     db_keys = list()
     for entity in entities:
-        db_keys.append(entity_importer(entity[id], filing, cur))
+        db_keys.append(importer(entity[entity_id], id, filing, cur))
     return db_keys
-
-
-def _import_lobbyists(lobbyists, filing, cur):
-    """Import a list of parsed lobbyists into the database.
-
-    Returns a list of database keys for each of the lobbyists.
-
-    record - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(lobbyists, 'lobbyist', filing, _import_lobbyist, cur)
-
-
-def _import_govt_entities(govt_entities, filing, cur):
-    """Import a list of parsed government entities into the database.
-
-    Returns a list of database keys for each of the government
-    entities.
-
-    govt_entities - The list of parsed government entity dictionaries.
-    
-    filing - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(govt_entities,
-                        'govt_entity',
-                        filing,
-                        _import_govt_entity,
-                        cur)
-
-
-def _import_issues(issues, filing, cur):
-    """Import a list of parsed issues into the database.
-
-    Returns a list of database keys for each of the issues.
-
-    issues - The list of parsed issue dictionaries.
-    
-    filing - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(issues, 'issue', filing, _import_issue, cur)
-
-
-def _import_affiliated_orgs(orgs, filing, cur):
-    """Import a list of parsed affiliated orgs into the database.
-
-    Returns a list of database keys for each of the affiliated orgs.
-
-    orgs - The list of parsed affiliated org dictionaries.
-
-    filing - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(orgs, 'org', filing, _import_affiliated_org, cur)
 
 
 _entity_importers = {'registrant': _import_registrant,
                      'client': _import_client,
-                     'lobbyists': _import_lobbyists,
-                     'govt_entities': _import_govt_entities,
-                     'issues': _import_issues,
-                     'affiliated_orgs': _import_affiliated_orgs}
+                     'lobbyists': _import_list,
+                     'govt_entities': _import_list,
+                     'issues': _import_list,
+                     'affiliated_orgs': _import_list}
 
 
 def import_filings(cur, parsed_filings):
@@ -840,7 +810,7 @@ def import_filings(cur, parsed_filings):
         _import_filing(filing, cur)
         for entity_name, entity_importer in _entity_importers.items():
             if entity_name in record:
-                entity_importer(record[entity_name], filing, cur)
+                entity_importer(record[entity_name], entity_name, filing, cur)
     return True
 
 
