@@ -455,6 +455,11 @@ _where_stmt = {'client':
                    'ppb_country=:ppb_country'}
 
 
+def _filing_db_key(filing):
+    """Return a filing's database key."""
+    return filing['id']
+
+
 def _rowid(table, tomatch, cur):
     """Find a match in a database table and return its rowid.
 
@@ -530,7 +535,7 @@ def _import_client(client, id, filing, cur):
                     client)
         db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_client VALUES(?, ?)',
-                [filing['id'], db_key])
+                [_filing_db_key(filing), db_key])
     return db_key
 
 
@@ -580,7 +585,7 @@ def _import_registrant(reg, id, filing, cur):
                 reg)
         db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_registrant VALUES(?, ?)',
-                [filing['id'], db_key])
+                [_filing_db_key(filing), db_key])
     return db_key
 
 
@@ -626,7 +631,7 @@ def _import_lobbyist(lobbyist, id, filing, cur):
                     lobbyist)
         db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
-                [filing['id'], db_key])
+                [_filing_db_key(filing), db_key])
     return db_key
 
 
@@ -651,7 +656,7 @@ def _import_govt_entity(entity, id, filing, cur):
     db_key = entity['name']
     cur.execute('INSERT INTO govt_entity VALUES(:name)', entity)
     cur.execute('INSERT INTO filing_govt_entities VALUES(?, ?)',
-                [filing['id'], db_key])
+                [_filing_db_key(filing), db_key])
     return db_key
 
 
@@ -678,7 +683,7 @@ def _import_issue(issue, id, filing, cur):
                 issue)
     db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_issues VALUES(?, ?)',
-                [filing['id'], db_key])
+                [_filing_db_key(filing), db_key])
     return db_key
 
 
@@ -725,7 +730,7 @@ def _import_affiliated_org(org, id, filing, cur):
                     org)
         db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?)',
-                [filing['id'], db_key])
+                [_filing_db_key(filing), db_key])
     if 'affiliated_orgs_url' in filing:
         url = filing['affiliated_orgs_url']
         cur.execute('INSERT INTO url VALUES(?)', [url])
@@ -753,7 +758,7 @@ def _import_filing(filing, cur):
     cur.execute('INSERT INTO filing VALUES('
                 ':id, :type, :year, :period, :filing_date, :amount)',
                 filing)
-    return filing['id']
+    return _filing_db_key(filing)
 
 
 _list_importers = {'lobbyists': (_import_lobbyist, 'lobbyist'),
