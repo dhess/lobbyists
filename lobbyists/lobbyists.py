@@ -430,10 +430,8 @@ _where_stmt = {'client':
                    'ppb_country=:ppb_country AND '
                    'state=:state AND '
                    'ppb_state=:ppb_state AND '
-                   'status=:status AND '
                    'description=:description AND '
-                   'state_or_local_gov=:state_or_local_gov AND '
-                   'contact_name=:contact_name',
+                   'state_or_local_gov=:state_or_local_gov',
                'registrant':
                    'registrant WHERE '
                    'address=:address AND '
@@ -530,12 +528,14 @@ def _import_client(client, id, filing, cur):
         cur.execute('INSERT INTO org VALUES(?)', [client['name']])
         cur.execute('INSERT INTO client VALUES(NULL, '
                     ':country, :senate_id, :name, :ppb_country, '
-                    ':state, :ppb_state, :status, :description, '
-                    ':state_or_local_gov, :contact_name)',
+                    ':state, :ppb_state, :description, :state_or_local_gov)',
                     client)
         db_key = cur.lastrowid
-    cur.execute('INSERT INTO filing_client VALUES(?, ?)',
-                [_filing_db_key(filing), db_key])
+    cur.execute('INSERT INTO filing_client VALUES(?, ?, ?, ?)',
+                [_filing_db_key(filing),
+                 db_key,
+                 client['status'],
+                 client['contact_name']])
     return db_key
 
 

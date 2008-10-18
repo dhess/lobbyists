@@ -92,15 +92,15 @@ CREATE TABLE client(
   ppb_country REFERENCES country,
   state REFERENCES state,
   ppb_state REFERENCES state,
-  status REFERENCES client_status,
   description VARCHAR(256),
-  state_or_local_gov REFERENCES state_or_local_gov,
-  contact_name VARCHAR(256) REFERENCES person
+  state_or_local_gov REFERENCES state_or_local_gov
 );
 
 CREATE TABLE filing_client(
   filing REFERENCES filing,
   client REFERENCES client,
+  status REFERENCES client_status,
+  contact_name REFERENCES person,
   PRIMARY KEY(filing, client)
 );
 
@@ -197,10 +197,8 @@ CREATE UNIQUE INDEX client_index ON client(
   ppb_country,
   state,
   ppb_state,
-  status,
   description,
-  state_or_local_gov,
-  contact_name
+  state_or_local_gov
 );
 
 CREATE UNIQUE INDEX registrant_index ON registrant(

@@ -2,7 +2,7 @@
 <PublicFilings>
 
   <!-- Each one of these records has a client element that's just
-       slightly different than the others. These should all occupy
+       slightly different than the others. They should all occupy
        different rows in the DB. -->
 
   <!-- The original filing. -->
@@ -35,18 +35,6 @@
   
   <Filing ID="810A9431-7235-4FEB-9A33-08214322E37F" Year="2007" Received="2008-02-12T22:21:28.223" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
     <Client ClientName="Puerto Rico Senators" ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
-  <!-- Different contact name. -->
-
-  <Filing ID="66439336-A74C-41AE-8659-D1A6140D1494" Year="2001" Received="2002-02-13T00:00:00" Amount="20000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia Jr." IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
-  <!-- Missing contact name. -->
-  
-  <Filing ID="31733890-2D8D-414E-8EF1-08701CBC5871" Year="2000" Received="2000-08-07T00:00:00" Amount="12000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
   </Filing>
 
   <!-- Different country. -->
@@ -113,18 +101,6 @@
   
   <Filing ID="CCB41994-81FB-4C32-A155-082164564403" Year="2007" Received="2008-02-08T12:35:54.250" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
     <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
-  <!-- Different status ("1") -->
-  
-  <Filing ID="240EDC03-05F3-4F04-9F4B-0018BF4651F1" Year="2006" Received="2006-08-11T00:00:00" Amount="0" Type="MID-YEAR (NO ACTIVITY)" Period="Mid-Year (Jan 1 - Jun 30)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="1" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-  
-  <!-- Different status ("2") -->
-
-  <Filing ID="3C6F64C0-4AC8-4E08-AE55-5A8B0E3BB91E" Year="1999" Received="1999-09-01T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="2" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
   </Filing>
 
 </PublicFilings>

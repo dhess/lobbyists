@@ -42,10 +42,10 @@ class TestImportClients(unittest.TestCase):
                             client.ppb_country as ppb_country, \
                             client.state as state, \
                             client.ppb_state as ppb_state, \
-                            client.status as status, \
+                            filing_client.status as status, \
                             client.description as description, \
                             client.state_or_local_gov as state_or_local_gov, \
-                            client.contact_name as contact_name \
+                            filing_client.contact_name as contact_name \
                      FROM filing_client INNER JOIN client ON \
                             client.id=filing_client.client")
         rows = [row for row in cur]
@@ -199,6 +199,34 @@ class TestImportClients(unittest.TestCase):
         self.failUnless('active' in rows)
         self.failUnless('terminated' in rows)
         self.failUnless('administratively terminated' in rows)
+
+    def test_import_client_different_status(self):
+        """Clients with different status but otherwise identical should occupy same row."""
+        filings = list(lobbyists.parse_filings(util.testpath('clients_different_status.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM client")
+        rows = [row for row in cur]
+        self.failUnlessEqual(len(rows), 1)
+
+    def test_import_client_different_contact_name(self):
+        """Clients with different contact name but otherwise identical should occupy same row."""
+        filings = list(lobbyists.parse_filings(util.testpath('clients_different_contact_name.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM client")
+        rows = [row for row in cur]
+        self.failUnlessEqual(len(rows), 1)
 
 
 if __name__ == '__main__':
