@@ -497,10 +497,10 @@ def _client_rowid(client, cur):
 def _import_client(client, id, filing, cur):
     """Import a client into the database.
 
-    Returns the database key of the imported client.
+    Returns nothing.
 
-    As a side effect, this function may insert rows into the 'client',
-    'country', 'state', 'org' and 'filing_client' tables.
+    Side-effects: may insert rows into the 'client', 'country',
+    'state', 'org' and 'filing_client' tables.
 
     client - The parsed client dictionary.
 
@@ -533,7 +533,6 @@ def _import_client(client, id, filing, cur):
                  client['status'],
                  client['contact_name'],
                  client['description']])
-    return db_key
 
 
 def _registrant_rowid(reg, cur):
@@ -553,10 +552,10 @@ def _registrant_rowid(reg, cur):
 def _import_registrant(reg, id, filing, cur):
     """Import a registrant into the database.
 
-    Returns the database key of the imported registrant.
+    Returns nothing.
 
-    As a side effect, this function may insert rows into the
-    'registrant', 'country', 'org' and 'filing_registrant' tables.
+    Side-effects: may insert rows into the 'registrant', 'country',
+    'org' and 'filing_registrant' tables.
 
     reg - The parsed registrant dictionary.
 
@@ -585,7 +584,6 @@ def _import_registrant(reg, id, filing, cur):
                  db_key,
                  reg['address'],
                  reg['description']])
-    return db_key
 
 
 def _lobbyist_rowid(lobbyist, cur):
@@ -605,10 +603,10 @@ def _lobbyist_rowid(lobbyist, cur):
 def _import_lobbyist(lobbyist, id, filing, cur):
     """Import a lobbyist into the database.
 
-    Returns the database key of the imported lobbyist.
+    Returns nothing.
 
-    As a side effect, this function may insert rows into the
-    'lobbyist', 'person' and 'filing_lobbyists' tables.
+    Side-effects: may insert rows into the 'lobbyist', 'person' and
+    'filing_lobbyists' tables.
 
     lobbyist - The parsed lobbyist dictionary.
 
@@ -631,16 +629,15 @@ def _import_lobbyist(lobbyist, id, filing, cur):
         db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?, ?)',
                 [_filing_db_key(filing), db_key, lobbyist['status']])
-    return db_key
 
 
 def _import_govt_entity(entity, id, filing, cur):
     """Import a government entity into the database.
 
-    Returns the database key of the imported entry.
+    Returns nothing.
 
-    As a side effect, this function may insert rows into the
-    'govt_entity' and 'filing_govt_entities' tables.
+    Side-effects: may insert rows into the 'govt_entity' and
+    'filing_govt_entities' tables.
     
     entity - The parsed government entity dictionary.
 
@@ -656,16 +653,15 @@ def _import_govt_entity(entity, id, filing, cur):
     cur.execute('INSERT INTO govt_entity VALUES(:name)', entity)
     cur.execute('INSERT INTO filing_govt_entities VALUES(?, ?)',
                 [_filing_db_key(filing), db_key])
-    return db_key
 
 
 def _import_issue(issue, id, filing, cur):
     """Import an issue into the database.
 
-    Returns the database key of the imported issue.
+    Returns nothing.
 
-    As a side effect, this function may insert rows into the 'issue',
-    'issue_code' and 'filing_issues' tables.
+    Side-effects: may insert rows into the 'issue', 'issue_code' and
+    'filing_issues' tables.
 
     issue - The parsed issue dictionary.
 
@@ -683,7 +679,6 @@ def _import_issue(issue, id, filing, cur):
     db_key = cur.lastrowid
     cur.execute('INSERT INTO filing_issues VALUES(?, ?)',
                 [_filing_db_key(filing), db_key])
-    return db_key
 
 
 def _affiliated_org_rowid(org, cur):
@@ -703,11 +698,10 @@ def _affiliated_org_rowid(org, cur):
 def _import_affiliated_org(org, id, filing, cur):
     """Import an affiliated org into the database.
 
-    Returns the database key of the imported org.
-
-    As a side effect, this function may insert rows into the
-    'affiliated_org', 'country', 'org', 'filing_affiliated_orgs',
-    and 'url' tables.
+    Returns nothing.
+    
+    Side-effects: may insert rows into the 'affiliated_org',
+    'country', 'org', 'filing_affiliated_orgs', and 'url' tables.
 
     org - The parsed org dictionary.
 
@@ -732,16 +726,14 @@ def _import_affiliated_org(org, id, filing, cur):
     cur.execute('INSERT INTO url VALUES(?)', [url])
     cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?, ?)',
                 [_filing_db_key(filing), db_key, url])
-    return db_key
 
 
 def _import_filing(filing, cur):
     """Import a filing into the database.
 
-    Returns the key of the imported filing.
+    Returns nothing.
 
-    As a side effect, this function inserts a row into the 'filing'
-    table.
+    Side-effects: inserts a row into the 'filing' table.
     
     filing - The parsed filing dictionary.
 
@@ -754,7 +746,6 @@ def _import_filing(filing, cur):
     cur.execute('INSERT INTO filing VALUES('
                 ':id, :type, :year, :period, :filing_date, :amount)',
                 filing)
-    return _filing_db_key(filing)
 
 
 _list_importers = {'lobbyists': (_import_lobbyist, 'lobbyist'),
@@ -766,8 +757,10 @@ _list_importers = {'lobbyists': (_import_lobbyist, 'lobbyist'),
 def _import_list(entities, id, filing, cur):
     """Import a list of parsed entities into the database.
 
-    Returns a list of database keys for each of the entities.
+    Returns nothing.
 
+    Side-effects: inserts rows into the database.
+    
     entitites - The list of parsed entities.
 
     id - The name of the entity list (e.g., 'lobbyists').
@@ -779,10 +772,8 @@ def _import_list(entities, id, filing, cur):
 
     """
     importer, entity_id = _list_importers[id]
-    db_keys = list()
     for entity in entities:
-        db_keys.append(importer(entity[entity_id], entity_id, filing, cur))
-    return db_keys
+        importer(entity[entity_id], entity_id, filing, cur)
 
 
 _entity_importers = {'registrant': _import_registrant,
