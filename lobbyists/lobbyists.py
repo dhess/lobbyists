@@ -794,7 +794,7 @@ def import_filings(cur, parsed_filings):
 
     parsed_filings - A sequence of parsed filings.
 
-    Returns True.
+    Returns the cursor.
 
     """
     for record in parsed_filings:
@@ -803,7 +803,7 @@ def import_filings(cur, parsed_filings):
         for entity_name, entity_importer in _entity_importers.items():
             if entity_name in record:
                 entity_importer(record[entity_name], entity_name, filing, cur)
-    return True
+    return cur
 
 
 def create_db(con):
