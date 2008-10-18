@@ -37,8 +37,8 @@ class TestImportRegistrants(unittest.TestCase):
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT filing_registrant.filing AS filing_id, \
-                            registrant.address AS address, \
-                            registrant.description AS description, \
+                            filing_registrant.address AS address, \
+                            filing_registrant.description AS description, \
                             registrant.country AS country, \
                             registrant.senate_id AS senate_id, \
                             registrant.name AS name, \
@@ -119,10 +119,37 @@ class TestImportRegistrants(unittest.TestCase):
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
-        cur.execute('SELECT filing_registrant.registrant \
-                      FROM filing_registrant')
+        cur.execute('SELECT * FROM registrant')
         self.failUnlessEqual(len(cur.fetchall()), len(filings))
 
+    def test_import_registrant_different_description(self):
+        """Registrants with different description but otherwise identical should occupy same row."""
+        filings = list(lobbyists.parse_filings(util.testpath('registrants_different_description.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM registrant")
+        rows = [row for row in cur]
+        self.failUnlessEqual(len(rows), 1)
+        
+    def test_import_registrant_different_address(self):
+        """Registrants with different address but otherwise identical should occupy same row."""
+        filings = list(lobbyists.parse_filings(util.testpath('registrants_different_address.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM registrant")
+        rows = [row for row in cur]
+        self.failUnlessEqual(len(rows), 1)
+        
 
 if __name__ == '__main__':
     unittest.main()

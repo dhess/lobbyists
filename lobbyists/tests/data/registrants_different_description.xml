@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- These records have identical registrants save for their
+       descriptions, which are stored in the filing_registrant table,
+       hence all 3 should occupy the same registrant row. -->
+
+  <Filing ID="D97EF71E-9062-42A9-9510-00048B943421" Year="2000" Received="2000-10-25T00:00:00" Amount="35000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
+    <Registrant RegistrantID="285952" RegistrantName="Monfort-Lewis LLC" GeneralDescription="defense/energy/interior consulting" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <Filing ID="D3EEF6D2-FE0B-4A03-A633-AAA16C50BE89" Year="2001" Received="2002-02-12T00:00:00" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="285952" RegistrantName="Monfort-Lewis LLC" GeneralDescription="" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+  <Filing ID="C35AF239-B3BF-45A8-A5F0-11B73F8C7D64" Year="2005" Received="2007-04-11T10:17:21" Amount="45000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="285952" RegistrantName="Monfort-Lewis LLC" Address="517 Second Street NE&#xD;&#xA;Washington DC, DC 20002" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+  </Filing>
+
+</PublicFilings>

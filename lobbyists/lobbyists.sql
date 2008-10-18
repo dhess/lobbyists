@@ -62,8 +62,6 @@ CREATE TABLE state(
 
 CREATE TABLE registrant(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  address VARCHAR(256),
-  description VARCHAR(256),
   country REFERENCES country,
   senate_id INTEGER,
   name REFERENCES org,
@@ -73,6 +71,8 @@ CREATE TABLE registrant(
 CREATE TABLE filing_registrant(
   filing REFERENCES filing,
   registrant REFERENCES registrant,
+  address VARCHAR(256),
+  description VARCHAR(256),
   PRIMARY KEY(filing, registrant)
 );
 
@@ -200,8 +200,6 @@ CREATE UNIQUE INDEX client_index ON client(
 );
 
 CREATE UNIQUE INDEX registrant_index ON registrant(
-  address,
-  description,
   country,
   senate_id,
   name,

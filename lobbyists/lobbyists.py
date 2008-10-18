@@ -432,8 +432,6 @@ _where_stmt = {'client':
                    'state_or_local_gov=:state_or_local_gov',
                'registrant':
                    'registrant WHERE '
-                   'address=:address AND '
-                   'description=:description AND '
                    'country=:country AND '
                    'senate_id=:senate_id AND '
                    'name=:name AND '
@@ -580,12 +578,14 @@ def _import_registrant(reg, id, filing, cur):
         cur.execute('INSERT INTO org VALUES(?)',
                     [reg['name']])
         cur.execute('INSERT INTO registrant VALUES(NULL, '
-                    ':address, :description, :country, :senate_id, '
-                    ':name, :ppb_country)',
-                reg)
+                    ':country, :senate_id, :name, :ppb_country)',
+                    reg)
         db_key = cur.lastrowid
-    cur.execute('INSERT INTO filing_registrant VALUES(?, ?)',
-                [_filing_db_key(filing), db_key])
+    cur.execute('INSERT INTO filing_registrant VALUES(?, ?, ?, ?)',
+                [_filing_db_key(filing),
+                 db_key,
+                 reg['address'],
+                 reg['description']])
     return db_key
 
 
