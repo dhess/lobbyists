@@ -707,7 +707,7 @@ def _import_affiliated_org(org, id, filing, cur):
 
     As a side effect, this function may insert rows into the
     'affiliated_org', 'country', 'org', 'filing_affiliated_orgs',
-    'url' and 'affiliated_org_urls' tables.
+    and 'url' tables.
 
     org - The parsed org dictionary.
 
@@ -728,13 +728,10 @@ def _import_affiliated_org(org, id, filing, cur):
                     ':name, :country, :ppb_country)',
                     org)
         db_key = cur.lastrowid
-    cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?)',
-                [_filing_db_key(filing), db_key])
-    if 'affiliated_orgs_url' in filing:
-        url = filing['affiliated_orgs_url']
-        cur.execute('INSERT INTO url VALUES(?)', [url])
-        cur.execute('INSERT INTO affiliated_org_urls VALUES(?, ?)',
-                    [db_key, url])
+    url = filing['affiliated_orgs_url']
+    cur.execute('INSERT INTO url VALUES(?)', [url])
+    cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?, ?)',
+                [_filing_db_key(filing), db_key, url])
     return db_key
 
 

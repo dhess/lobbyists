@@ -21,7 +21,6 @@ DROP TABLE IF EXISTS issue_code;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS filing_issues;
 DROP TABLE IF EXISTS affiliated_org;
-DROP TABLE IF EXISTS affiliated_org_urls;
 DROP TABLE IF EXISTS filing_affiliated_orgs;
 
 DROP INDEX IF EXISTS lobbyist_index;
@@ -169,15 +168,10 @@ CREATE TABLE affiliated_org(
   ppb_country REFERENCES country
 );
 
-CREATE TABLE affiliated_org_urls(
-  org REFERENCES affiliated_org,
-  url REFERENCES url,
-  PRIMARY KEY(org, url) ON CONFLICT IGNORE
-);
-
 CREATE TABLE filing_affiliated_orgs(
   filing REFERENCES filing,
   org REFERENCES affiliated_org,
+  url REFERENCES url,
   PRIMARY KEY(filing, org) ON CONFLICT IGNORE
 );
 
