@@ -115,7 +115,6 @@ CREATE TABLE lobbyist_indicator(
 CREATE TABLE lobbyist(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name REFERENCES person,
-  status REFERENCES lobbyist_status,
   indicator REFERENCES lobbyist_indicator,
   official_position VARCHAR(256)
 );
@@ -129,7 +128,8 @@ CREATE TABLE lobbyist(
 CREATE TABLE filing_lobbyists(
   filing REFERENCES filing,
   lobbyist REFERENCES lobbyist,
-  PRIMARY KEY(filing, lobbyist) ON CONFLICT IGNORE
+  status REFERENCES lobbyist_status,
+  PRIMARY KEY(filing, lobbyist, status) ON CONFLICT IGNORE
 );
 
 CREATE TABLE govt_entity(
@@ -185,7 +185,6 @@ CREATE TABLE filing_affiliated_orgs(
 -- make a HUGE difference in import performance.
 CREATE UNIQUE INDEX lobbyist_index ON lobbyist(
   name,
-  status,
   indicator,
   official_position
 );

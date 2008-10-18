@@ -2,12 +2,14 @@
 
   <!-- Here's an actual record (with non-lobbyists elements removed)
        from the 1999_7.xml document. This filing lists the exactly
-       same lobbyist twice. -->
+       same lobbyist twice, except with different statuses. Status is
+       stored in the filing_lobbyists table, so there should be only
+       one lobbyist row after importing this file. -->
 
   <Filing ID="F53D8F90-BCFB-48B8-859A-4CCA40D8A55A" Year="1999" Received="1999-07-15T00:00:00" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
     <Lobbyists>
       <Lobbyist LobbyistName="WALDMANN, DANIEL ROBERT" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
-      <Lobbyist LobbyistName="WALDMANN, DANIEL ROBERT" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="WALDMANN, DANIEL ROBERT" LobbyistStatus="1" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
     </Lobbyists>
   </Filing>
 

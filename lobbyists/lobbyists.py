@@ -439,7 +439,6 @@ _where_stmt = {'client':
                'lobbyist':
                    'lobbyist WHERE '
                    'name=:name AND '
-                   'status=:status AND '
                    'indicator=:indicator AND '
                    'official_position=:official_position',
                'affiliated_org':
@@ -627,11 +626,11 @@ def _import_lobbyist(lobbyist, id, filing, cur):
         # lobbyist_status and lobbyist_indicator tables.
         cur.execute('INSERT INTO person VALUES(?)', [lobbyist['name']])
         cur.execute('INSERT INTO lobbyist VALUES(NULL, '
-                    ':name, :status, :indicator, :official_position)',
+                    ':name, :indicator, :official_position)',
                     lobbyist)
         db_key = cur.lastrowid
-    cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
-                [_filing_db_key(filing), db_key])
+    cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?, ?)',
+                [_filing_db_key(filing), db_key, lobbyist['status']])
     return db_key
 
 
