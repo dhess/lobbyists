@@ -496,32 +496,40 @@ def _client_rowid(client, cur):
     return _rowid('client', client, cur)
 
 
-def _insert_client(client, cur):
-    """Insert a client into the database.
+def _import_client(client, filing, cur):
+    """Import a client into the database.
 
-    Returns the row ID of the inserted client.
+    Returns the database key of the imported client.
 
-    As a side effect, this function also inserts rows into the
-    'country', 'state' and 'org' tables.
+    As a side effect, this function may insert rows into the 'client',
+    'country', 'state', 'org' and 'filing_client' tables.
 
     client - The parsed client dictionary.
+
+    filing - The parsed filing dictionary with which the client is
+    associated.
 
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    # Note - client status is pre-inserted into client_status table.
-    for key in ['country', 'ppb_country']:
-        cur.execute('INSERT INTO country VALUES(?)', [client[key]])
-    for key in ['state', 'ppb_state']:
-        cur.execute('INSERT INTO state VALUES(?)', [client[key]])
-    cur.execute('INSERT INTO person VALUES(?)', [client['contact_name']])
-    cur.execute('INSERT INTO org VALUES(?)', [client['name']])
-    cur.execute('INSERT INTO client VALUES(NULL, \
-                   :country, :senate_id, :name, :ppb_country, \
-                   :state, :ppb_state, :status, :description, \
-                   :state_or_local_gov, :contact_name)',
-                client)
-    return cur.lastrowid
+    db_key = _client_rowid(client, cur)
+    if db_key is None:
+        # Note - client status is pre-inserted into client_status table.
+        for key in ['country', 'ppb_country']:
+            cur.execute('INSERT INTO country VALUES(?)', [client[key]])
+        for key in ['state', 'ppb_state']:
+            cur.execute('INSERT INTO state VALUES(?)', [client[key]])
+        cur.execute('INSERT INTO person VALUES(?)', [client['contact_name']])
+        cur.execute('INSERT INTO org VALUES(?)', [client['name']])
+        cur.execute('INSERT INTO client VALUES(NULL, '
+                    ':country, :senate_id, :name, :ppb_country, '
+                    ':state, :ppb_state, :status, :description, '
+                    ':state_or_local_gov, :contact_name)',
+                    client)
+        db_key = cur.lastrowid
+    cur.execute('INSERT INTO filing_client VALUES(?, ?)',
+                [filing['id'], db_key])
+    return db_key
 
 
 def _registrant_rowid(reg, cur):
@@ -538,30 +546,38 @@ def _registrant_rowid(reg, cur):
     return _rowid('registrant', reg, cur)
 
 
-def _insert_registrant(reg, cur):
-    """Insert a registrant into the database.
+def _import_registrant(reg, filing, cur):
+    """Import a registrant into the database.
 
-    Returns the row ID of the inserted registrant.
+    Returns the database key of the imported registrant.
 
-    As a side effect, this function also inserts rows into the country
-    and org tables.
+    As a side effect, this function may insert rows into the
+    'registrant', 'country', 'org' and 'filing_registrant' tables.
 
     reg - The parsed registrant dictionary.
+
+    filing - The parsed filing dictionary with which the registrant is
+    associated.
 
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    cur.execute('INSERT INTO country VALUES(?)',
-                [reg['country']])
-    cur.execute('INSERT INTO country VALUES(?)',
-                [reg['ppb_country']])
-    cur.execute('INSERT INTO org VALUES(?)',
-                [reg['name']])
-    cur.execute('INSERT INTO registrant VALUES(NULL, \
-                           :address, :description, :country, :senate_id, \
-                           :name, :ppb_country)',
+    db_key = _registrant_rowid(reg, cur)
+    if db_key is None:
+        cur.execute('INSERT INTO country VALUES(?)',
+                    [reg['country']])
+        cur.execute('INSERT INTO country VALUES(?)',
+                    [reg['ppb_country']])
+        cur.execute('INSERT INTO org VALUES(?)',
+                    [reg['name']])
+        cur.execute('INSERT INTO registrant VALUES(NULL, '
+                    ':address, :description, :country, :senate_id, '
+                    ':name, :ppb_country)',
                 reg)
-    return cur.lastrowid
+        db_key = cur.lastrowid
+    cur.execute('INSERT INTO filing_registrant VALUES(?, ?)',
+                [filing['id'], db_key])
+    return db_key
 
 
 def _lobbyist_rowid(lobbyist, cur):
@@ -578,51 +594,71 @@ def _lobbyist_rowid(lobbyist, cur):
     return _rowid('lobbyist', lobbyist, cur)
 
 
-def _insert_lobbyist(lobbyist, cur):
-    """Insert a lobbyist into the database.
+def _import_lobbyist(lobbyist, filing, cur):
+    """Import a lobbyist into the database.
 
-    Returns the row ID of the inserted lobbyist.
+    Returns the database key of the imported lobbyist.
 
-    As a side effect, this function also inserts rows into the
-    'person' table.
+    As a side effect, this function may insert rows into the
+    'lobbyist', 'person' and 'filing_lobbyists' tables.
 
     lobbyist - The parsed lobbyist dictionary.
 
+    filing - The parsed filing dictionary with which the lobbyist is
+    associated.
+
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    # Note - lobbyist status and indicator are pre-inserted into the
-    # lobbyist_status and lobbyist_indicator tables.
-    cur.execute('INSERT INTO person VALUES(?)', [lobbyist['name']])
-    cur.execute('INSERT INTO lobbyist VALUES(NULL, \
-                   :name, :status, :indicator, :official_position)',
-                lobbyist)
-    return cur.lastrowid
+    db_key = _lobbyist_rowid(lobbyist, cur)
+    if db_key is None:
+        # Note - lobbyist status and indicator are pre-inserted into the
+        # lobbyist_status and lobbyist_indicator tables.
+        cur.execute('INSERT INTO person VALUES(?)', [lobbyist['name']])
+        cur.execute('INSERT INTO lobbyist VALUES(NULL, '
+                    ':name, :status, :indicator, :official_position)',
+                    lobbyist)
+        db_key = cur.lastrowid
+    cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
+                [filing['id'], db_key])
+    return db_key
 
 
-def _insert_govt_entity(entity, cur):
-    """Insert a government entity into the database.
+def _import_govt_entity(entity, filing, cur):
+    """Import a government entity into the database.
 
-    Returns the key (NOT the rowid!) of the inserted entry.
+    Returns the database key of the imported entry.
 
+    As a side effect, this function may insert rows into the
+    'govt_entity' and 'filing_govt_entities' tables.
+    
     entity - The parsed government entity dictionary.
 
+    filing - The parsed filing dictionary with which the government
+    entity is associated.
+
     cur - The DB API 2.0-compliant database cursor.
 
     """
+    db_key = entity['name']
     cur.execute('INSERT INTO govt_entity VALUES(:name)', entity)
-    return entity['name']
+    cur.execute('INSERT INTO filing_govt_entities VALUES(?, ?)',
+                [filing['id'], db_key])
+    return db_key
 
 
-def _insert_issue(issue, cur):
-    """Insert an issue into the database.
+def _import_issue(issue, filing, cur):
+    """Import an issue into the database.
 
-    Returns the row ID of the inserted issue.
+    Returns the database key of the imported issue.
 
-    As a side effect, this function also inserts rows into the
-    'issue_code' table.
+    As a side effect, this function may insert rows into the 'issue',
+    'issue_code' and 'filing_issues' tables.
 
     issue - The parsed issue dictionary.
+
+    filing - The parsed filing dictionary with which the issue is
+    associated.
 
     cur - The DB API 2.0-compliant database cursor.
 
@@ -630,7 +666,10 @@ def _insert_issue(issue, cur):
     cur.execute('INSERT INTO issue_code VALUES(?)', [issue['code']])
     cur.execute('INSERT INTO issue VALUES(NULL, :code, :specific_issue)',
                 issue)
-    return cur.lastrowid
+    db_key = cur.lastrowid
+    cur.execute('INSERT INTO filing_issues VALUES(?, ?)',
+                [filing['id'], db_key])
+    return db_key
 
 
 def _affiliated_org_rowid(org, cur):
@@ -647,171 +686,132 @@ def _affiliated_org_rowid(org, cur):
     return _rowid('affiliated_org', org, cur)
 
 
-def _insert_affiliated_org(org, cur):
-    """Insert an affiliated org into the database.
+def _import_affiliated_org(org, filing, cur):
+    """Import an affiliated org into the database.
 
-    Returns the row ID of the inserted org.
+    Returns the database key of the imported org.
 
-    As a side effect, this function also inserts rows into the
-    'country' and 'org' tables.
+    As a side effect, this function may insert rows into the
+    'affiliated_org', 'country', 'org', 'filing_affiliated_orgs',
+    'url' and 'affiliated_org_urls' tables.
 
     org - The parsed org dictionary.
+
+    filing - The parsed filing dictionary with which the org is
+    associated.
 
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    for key in ['country', 'ppb_country']:
-        cur.execute('INSERT INTO country VALUES(?)', [org[key]])
-    cur.execute('INSERT INTO org VALUES(?)', [org['name']])
-    cur.execute('INSERT INTO affiliated_org VALUES(NULL, \
-                   :name, :country, :ppb_country)',
-                org)
-    return cur.lastrowid
+    db_key = _affiliated_org_rowid(org, cur)
+    if db_key is None:
+        for key in ['country', 'ppb_country']:
+            cur.execute('INSERT INTO country VALUES(?)', [org[key]])
+        cur.execute('INSERT INTO org VALUES(?)', [org['name']])
+        cur.execute('INSERT INTO affiliated_org VALUES(NULL, '
+                    ':name, :country, :ppb_country)',
+                    org)
+        db_key = cur.lastrowid
+    cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?)',
+                [filing['id'], db_key])
+    if 'affiliated_orgs_url' in filing:
+        url = filing['affiliated_orgs_url']
+        cur.execute('INSERT INTO url VALUES(?)', [url])
+        cur.execute('INSERT INTO affiliated_org_urls VALUES(?, ?)',
+                    [db_key, url])
+    return db_key
 
 
-def _insert_filing(filing, cur):
-    """Insert a filing and its relationships into the database.
+def _import_filing(filing, cur):
+    """Import a filing into the database.
 
-    Returns the row ID of the inserted filing.
+    Returns the key of the imported filing.
+
+    As a side effect, this function inserts a row into the 'filing'
+    table.
+    
+    filing - The parsed filing dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    # The affiliated orgs URL is a special case. It's associated with
+    # each affiliated org in the record, so it's handled by the
+    # affiliated org importer, and we skip it here.
+    cur.execute('INSERT INTO filing VALUES(\
+                       :id, :type, :year, :period, :filing_date, :amount)',
+                filing)
+    return filing['id']
+
+
+def _import_list(entities, id, filing, entity_importer, cur):
+    db_keys = list()
+    for entity in entities:
+        db_keys.append(entity_importer(entity[id], filing, cur))
+    return db_keys
+
+
+def _import_lobbyists(lobbyists, filing, cur):
+    """Import a list of parsed lobbyists into the database.
+
+    Returns a list of database keys for each of the lobbyists.
+
+    record - The parsed filing dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return _import_list(lobbyists, 'lobbyist', filing, _import_lobbyist, cur)
+
+
+def _import_govt_entities(govt_entities, filing, cur):
+    """Import a list of parsed government entities into the database.
+
+    Returns a list of database keys for each of the government
+    entities.
+
+    govt_entities - The list of parsed government entity dictionaries.
+    
+    filing - The parsed filing dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return _import_list(govt_entities,
+                        'govt_entity',
+                        filing,
+                        _import_govt_entity,
+                        cur)
+
+
+def _import_issues(issues, filing, cur):
+    """Import a list of parsed issues into the database.
+
+    Returns a list of database keys for each of the issues.
+
+    issues - The list of parsed issue dictionaries.
+    
+    filing - The parsed filing dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return _import_list(issues, 'issue', filing, _import_issue, cur)
+
+
+def _import_affiliated_orgs(orgs, filing, cur):
+    """Import a list of parsed affiliated orgs into the database.
+
+    Returns a list of database keys for each of the affiliated orgs.
+
+    orgs - The list of parsed affiliated org dictionaries.
 
     filing - The parsed filing dictionary.
 
     cur - The DB API 2.0-compliant database cursor.
 
     """
-    # Insert the filing first, then its relationships.
-    cur.execute('INSERT INTO filing VALUES(\
-                       :id, :type, :year, :period, :filing_date, :amount, \
-                       :client)',
-                filing)
-    filing_rowid = cur.lastrowid
-    # The affiliated orgs URL is a special case. It should really be
-    # an attribute of the AffiliatedOrgs element, not the Filing
-    # element.
-    cur.execute('INSERT INTO url VALUES(:affiliated_orgs_url)', filing)
-    registrant_rowid = filing['registrant']
-    if registrant_rowid:
-        cur.execute('INSERT INTO filing_registrant VALUES(?, ?)',
-                    [filing['id'], registrant_rowid])
-    for id in filing['lobbyists']:
-        cur.execute('INSERT INTO filing_lobbyists VALUES(?, ?)',
-                    [filing['id'], id])
-    for id in filing['govt_entities']:
-        cur.execute('INSERT INTO filing_govt_entities VALUES(?, ?)',
-                    [filing['id'], id])
-    for id in filing['issues']:
-        cur.execute('INSERT INTO filing_issues VALUES(?, ?)',
-                    [filing['id'], id])
-    for id in filing['affiliated_orgs']:
-        cur.execute('INSERT INTO filing_affiliated_orgs VALUES(?, ?)',
-                    [filing['id'], id])
-        cur.execute('INSERT INTO affiliated_org_urls VALUES(?, ?)',
-                    [id, filing['affiliated_orgs_url']])
-    return filing_rowid
-
-
-def _import_entity(record, cur, name, findrow, insert):
-    if name in record:
-        entity = record[name]
-        rowid = findrow(entity, cur)
-        if rowid is None:
-            return insert(entity, cur)
-        else:
-            return rowid
-    else:
-        return None
-
-
-def _import_registrant(record, cur):
-    return _import_entity(record,
-                         cur,
-                         'registrant',
-                          _registrant_rowid,
-                         _insert_registrant)
-
-
-def _import_client(record, cur):
-    return _import_entity(record,
-                         cur,
-                         'client',
-                         _client_rowid,
-                         _insert_client)
-
-
-def _import_lobbyist(record, cur):
-    return _import_entity(record,
-                         cur,
-                         'lobbyist',
-                          _lobbyist_rowid,
-                         _insert_lobbyist)
-
-
-def _import_govt_entity(record, cur):
-    return _insert_govt_entity(record['govt_entity'], cur)
-
-
-def _import_issue(record, cur):
-    return _insert_issue(record['issue'], cur)
-
-
-def _import_affiliated_org(record, cur):
-    return _import_entity(record,
-                         cur,
-                         'org',
-                         _affiliated_org_rowid,
-                         _insert_affiliated_org)
-
-
-def _import_list(record, id, entity_importer, cur):
-    ids = list()
-    if id in record:
-        for entity in record[id]:
-            ids.append(entity_importer(entity, cur))
-    return ids
-
-
-def _import_lobbyists(record, cur):
-    """Returns a list of rowids for the lobbyists in a filing record.
-
-    record - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(record, 'lobbyists', _import_lobbyist, cur)
-
-
-def _import_govt_entities(record, cur):
-    """Returns a list of keys for the govt entities in a filing record.
-
-    record - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(record, 'govt_entities', _import_govt_entity, cur)
-
-
-def _import_issues(record, cur):
-    """Returns a list of rowids for the issues in a filing record.
-
-    record - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(record, 'issues', _import_issue, cur)
-
-
-def _import_affiliated_orgs(record, cur):
-    """Returns a list of rowids for the affiliated orgs in a filing record.
-
-    record - The parsed filing dictionary.
-
-    cur - The DB API 2.0-compliant database cursor.
-
-    """
-    return _import_list(record, 'affiliated_orgs', _import_affiliated_org, cur)
+    return _import_list(orgs, 'org', filing, _import_affiliated_org, cur)
 
 
 _entity_importers = {'registrant': _import_registrant,
@@ -837,9 +837,10 @@ def import_filings(cur, parsed_filings):
     """
     for record in parsed_filings:
         filing = record['filing']
+        _import_filing(filing, cur)
         for entity_name, entity_importer in _entity_importers.items():
-            filing[entity_name] = entity_importer(record, cur)
-        _insert_filing(filing, cur)
+            if entity_name in record:
+                entity_importer(record[entity_name], filing, cur)
     return True
 
 

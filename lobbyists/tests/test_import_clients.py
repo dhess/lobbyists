@@ -25,6 +25,48 @@ import sqlite3
 import util
 
 class TestImportClients(unittest.TestCase):
+    def test_import_clients(self):
+        """Import clients."""
+        filings = list(lobbyists.parse_filings(util.testpath('clients.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT filing_client.filing AS filing_id, \
+                            client.country AS country, \
+                            client.senate_id as senate_id, \
+                            client.name as name, \
+                            client.ppb_country as ppb_country, \
+                            client.state as state, \
+                            client.ppb_state as ppb_state, \
+                            client.status as status, \
+                            client.description as description, \
+                            client.state_or_local_gov as state_or_local_gov, \
+                            client.contact_name as contact_name \
+                     FROM filing_client INNER JOIN client ON \
+                            client.id=filing_client.client")
+        rows = [row for row in cur]
+        rows.sort(key=lambda x: x['filing_id'])
+        clients = [x for x in filings if 'client' in x]
+        clients.sort(key=lambda x: x['filing']['id'])
+        self.failUnlessEqual(len(rows), len(clients))
+        for (row, filing) in zip(rows, clients):
+            self.failUnlessEqual(row['filing_id'], filing['filing']['id'])
+            client = filing['client']
+            self.failUnlessEqual(row['country'], client['country'])
+            self.failUnlessEqual(row['senate_id'], client['senate_id'])
+            self.failUnlessEqual(row['name'], client['name'])
+            self.failUnlessEqual(row['ppb_country'], client['ppb_country'])
+            self.failUnlessEqual(row['state'], client['state'])
+            self.failUnlessEqual(row['ppb_state'], client['ppb_state'])
+            self.failUnlessEqual(row['status'], client['status'])
+            self.failUnlessEqual(row['description'], client['description'])
+            self.failUnlessEqual(row['state_or_local_gov'], client['state_or_local_gov'])
+            self.failUnlessEqual(row['contact_name'], client['contact_name'])
+
     def test_import_identical_clients(self):
         """Identical clients shouldn't be duplicated in the database."""
         filings = list(lobbyists.parse_filings(util.testpath('clients_dup.xml')))
@@ -33,7 +75,7 @@ class TestImportClients(unittest.TestCase):
         cur = con.cursor()
         self.failUnless(lobbyists.import_filings(cur, filings))
         cur = con.cursor()
-        cur.execute('SELECT client FROM filing')
+        cur.execute('SELECT client FROM filing_client')
         row1, row2 = cur.fetchall()
         self.failUnlessEqual(row1[0], row2[0])
 

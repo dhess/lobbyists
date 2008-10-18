@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS state;
 DROP TABLE IF EXISTS client_status;
 DROP TABLE IF EXISTS state_or_local_gov;
 DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS filing_client;
 DROP TABLE IF EXISTS lobbyist_status;
 DROP TABLE IF EXISTS lobbyist_indicator;
 DROP TABLE IF EXISTS lobbyist;
@@ -34,8 +35,7 @@ CREATE TABLE filing(
   year INTEGER,
   period VARCHAR(64),
   filing_date VARCHAR(20),      -- ISO 8601 extended date+time format
-  amount INTEGER,
-  client REFERENCES client -- optional
+  amount INTEGER
 );
 
 CREATE TABLE org(
@@ -96,6 +96,12 @@ CREATE TABLE client(
   description VARCHAR(256),
   state_or_local_gov REFERENCES state_or_local_gov,
   contact_name VARCHAR(256) REFERENCES person
+);
+
+CREATE TABLE filing_client(
+  filing REFERENCES filing,
+  client REFERENCES client,
+  PRIMARY KEY(filing, client)
 );
 
 CREATE TABLE lobbyist_status(
