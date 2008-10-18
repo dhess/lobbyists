@@ -17,26 +17,6 @@
     <Client ClientName="Puerto Rico Senators" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
   </Filing>
 
-  <!-- Different description. -->
-
-  <Filing ID="357D6040-8761-42CB-94C9-0A27C088091E" Year="2006" Received="2006-08-22T00:00:00" Amount="220000" Type="MID-YEAR REPORT" Period="Mid-Year (Jan 1 - Jun 30)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative" ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
-  <!-- Blank description. -->
-
-  <Filing ID="5A4F7B14-D143-4B57-A345-34296865C20D" Year="2007" Received="2008-02-14T15:29:00" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="" ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
-  <!-- Missing description. Note: different client name, too, to avoid
-       an alias with above (but same name as filing
-       296B5A74... above). -->
-  
-  <Filing ID="810A9431-7235-4FEB-9A33-08214322E37F" Year="2007" Received="2008-02-12T22:21:28.223" Type="YEAR-END TERMINATION" Period="Year-End (July 1 - Dec 31)">
-    <Client ClientName="Puerto Rico Senators" ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
   <!-- Different country. -->
 
   <Filing ID="028C0F4E-0B08-465F-BD86-0197F149A77E" Year="1999" Received="1999-02-08T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
@@ -47,12 +27,6 @@
   
   <Filing ID="77CC99B3-FFD7-435D-9507-010548438B6F" Year="1999" Received="1999-02-18T00:00:00" Type="REGISTRATION AMENDMENT" Period="UNDETERMINED">
     <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="36" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="UNDETERMINED" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
-  </Filing>
-
-  <!-- Different ID. -->
-
-  <Filing ID="539731C9-3393-4B0B-A6DB-1E1B613C641B" Year="2003" Received="2004-02-12T00:00:00" Amount="12500" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
-    <Client ClientName="Puerto Rico Senate" GeneralDescription="Legislative." ClientID="37" ClientStatus="0" ContactFullname="Robert Garcia" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="PUERTO RICO" ClientPPBState="PUERTO RICO" xmlns="" />
   </Filing>
 
   <!-- Different state. -->

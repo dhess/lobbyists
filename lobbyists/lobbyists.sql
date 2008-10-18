@@ -87,20 +87,20 @@ CREATE TABLE state_or_local_gov(
 CREATE TABLE client(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   country REFERENCES country,
-  senate_id INTEGER,
   name REFERENCES org,
   ppb_country REFERENCES country,
   state REFERENCES state,
   ppb_state REFERENCES state,
-  description VARCHAR(256),
   state_or_local_gov REFERENCES state_or_local_gov
 );
 
 CREATE TABLE filing_client(
   filing REFERENCES filing,
   client REFERENCES client,
+  senate_id INTEGER,
   status REFERENCES client_status,
   contact_name REFERENCES person,
+  description VARCHAR(256),
   PRIMARY KEY(filing, client)
 );
 
@@ -192,12 +192,10 @@ CREATE UNIQUE INDEX lobbyist_index ON lobbyist(
 
 CREATE UNIQUE INDEX client_index ON client(
   country,
-  senate_id,
   name,
   ppb_country,
   state,
   ppb_state,
-  description,
   state_or_local_gov
 );
 

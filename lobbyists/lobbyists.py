@@ -425,12 +425,10 @@ def parse_filings(doc):
 _where_stmt = {'client':
                    'client WHERE '
                    'country=:country AND '
-                   'senate_id=:senate_id AND '
                    'name=:name AND '
                    'ppb_country=:ppb_country AND '
                    'state=:state AND '
                    'ppb_state=:ppb_state AND '
-                   'description=:description AND '
                    'state_or_local_gov=:state_or_local_gov',
                'registrant':
                    'registrant WHERE '
@@ -527,15 +525,17 @@ def _import_client(client, id, filing, cur):
         cur.execute('INSERT INTO person VALUES(?)', [client['contact_name']])
         cur.execute('INSERT INTO org VALUES(?)', [client['name']])
         cur.execute('INSERT INTO client VALUES(NULL, '
-                    ':country, :senate_id, :name, :ppb_country, '
-                    ':state, :ppb_state, :description, :state_or_local_gov)',
+                    ':country, :name, :ppb_country, :state, :ppb_state, '
+                    ':state_or_local_gov)',
                     client)
         db_key = cur.lastrowid
-    cur.execute('INSERT INTO filing_client VALUES(?, ?, ?, ?)',
+    cur.execute('INSERT INTO filing_client VALUES(?, ?, ?, ?, ?, ?)',
                 [_filing_db_key(filing),
                  db_key,
+                 client['senate_id'],
                  client['status'],
-                 client['contact_name']])
+                 client['contact_name'],
+                 client['description']])
     return db_key
 
 

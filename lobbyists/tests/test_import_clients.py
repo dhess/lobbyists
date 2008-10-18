@@ -37,13 +37,13 @@ class TestImportClients(unittest.TestCase):
         cur = con.cursor()
         cur.execute("SELECT filing_client.filing AS filing_id, \
                             client.country AS country, \
-                            client.senate_id as senate_id, \
+                            filing_client.senate_id as senate_id, \
                             client.name as name, \
                             client.ppb_country as ppb_country, \
                             client.state as state, \
                             client.ppb_state as ppb_state, \
                             filing_client.status as status, \
-                            client.description as description, \
+                            filing_client.description as description, \
                             client.state_or_local_gov as state_or_local_gov, \
                             filing_client.contact_name as contact_name \
                      FROM filing_client INNER JOIN client ON \
@@ -217,6 +217,34 @@ class TestImportClients(unittest.TestCase):
     def test_import_client_different_contact_name(self):
         """Clients with different contact name but otherwise identical should occupy same row."""
         filings = list(lobbyists.parse_filings(util.testpath('clients_different_contact_name.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM client")
+        rows = [row for row in cur]
+        self.failUnlessEqual(len(rows), 1)
+
+    def test_import_client_different_senate_id(self):
+        """Clients with different Senate ID but otherwise identical should occupy same row."""
+        filings = list(lobbyists.parse_filings(util.testpath('clients_different_senate_id.xml')))
+        con = sqlite3.connect(':memory:')
+        con = lobbyists.create_db(con)
+        cur = con.cursor()
+        self.failUnless(lobbyists.import_filings(cur, filings))
+
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM client")
+        rows = [row for row in cur]
+        self.failUnlessEqual(len(rows), 1)
+
+    def test_import_client_different_description(self):
+        """Clients with different description but otherwise identical should occupy same row."""
+        filings = list(lobbyists.parse_filings(util.testpath('clients_different_description.xml')))
         con = sqlite3.connect(':memory:')
         con = lobbyists.create_db(con)
         cur = con.cursor()
