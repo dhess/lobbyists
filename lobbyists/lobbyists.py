@@ -785,7 +785,7 @@ def _import_list(entities, id, filing, cur):
     importer, entity_id = _list_importers[id]
     db_keys = list()
     for entity in entities:
-        db_keys.append(importer(entity[entity_id], id, filing, cur))
+        db_keys.append(importer(entity[entity_id], entity_id, filing, cur))
     return db_keys
 
 
