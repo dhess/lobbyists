@@ -819,6 +819,8 @@ def _import_list(entities, filing, cur):
         importer(entity[id], filing, cur)
 
 
+# Doesn't include an importer for 'filing'; that one is special.
+
 _entity_importers = [('registrant', _import_registrant),
                      ('client', _import_client),
                      ('lobbyists', _import_list),
