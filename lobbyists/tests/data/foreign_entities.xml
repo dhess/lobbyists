@@ -11,15 +11,6 @@
     </ForeignEntities>
   </Filing>
 
-  
-  <Filing ID="BECA0C94-4308-47E5-BF23-887D3954E254" Year="1999" Received="1999-03-10T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
-    <ForeignEntities>
-      <Entity ForeignEntityName="CITIZENS FOR DEMOCRACTIC RULE IN NIGERIA" ForeignEntityCountry="UNDETERMINED" ForeignEntityPPBcountry="UNDETERMINED" ForeignEntityStatus="3" xmlns="" />
-      <Entity ForeignEntityName="CITIZENS FOR DEMOCRACTIC RULE IN NIGERIA" ForeignEntityCountry="USA" ForeignEntityPPBcountry="USA" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
-      <Entity ForeignEntityName="WALLETTE, GERALD" ForeignEntityCountry="USA" ForeignEntityPPBcountry="USA" ForeignEntityContribution="0" ForeignEntityStatus="3" xmlns="" />
-    </ForeignEntities>
-  </Filing>
-  
   <Filing ID="ACD87507-EB78-4607-95E8-43871D9D1EF2" Year="2007" Received="2008-01-14T19:20:59" Type="REGISTRATION" Period="UNDETERMINED">
     <ForeignEntities>
       <Entity ForeignEntityName="EVONIK INDUSTRIES GMBH" ForeignEntityCountry="GERMANY" ForeignEntityPPBcountry="USA" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="3" xmlns="" />

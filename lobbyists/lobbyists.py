@@ -445,6 +445,11 @@ _where_stmt = {'client':
                    'affiliated_org WHERE '
                    'name=:name AND '
                    'country=:country AND '
+                   'ppb_country=:ppb_country',
+               'foreign_entity':
+                   'foreign_entity WHERE '
+                   'name=:name AND '
+                   'country=:country AND '
                    'ppb_country=:ppb_country'}
 
 
@@ -728,6 +733,55 @@ def _import_affiliated_org(org, id, filing, cur):
                 [_filing_db_key(filing), db_key, url])
 
 
+def _foreign_entity_rowid(entity, cur):
+    """Find a foreign entity in the database.
+
+    Returns the row ID of the matching entity, or None if there is no
+    match.
+
+    entity - The parsed foreign entity dictionary.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    return _rowid('foreign_entity', entity, cur)
+
+
+def _import_foreign_entity(entity, id, filing, cur):
+    """Import a foreign entity into the database.
+
+    Returns nothing.
+
+    Side-effects: may insert rows into the 'foreign_entity',
+    'country', 'org' and 'filing_foreign_entities' tables.
+
+    entity - The parsed foreign entity dictionary.
+
+    id - Unused.
+
+    filing - The parsed filing dictionary with which the foreign
+    entity is associated.
+
+    cur - The DB API 2.0-compliant database cursor.
+
+    """
+    db_key = _foreign_entity_rowid(entity, cur)
+    if db_key is None:
+        for key in ['country', 'ppb_country']:
+            cur.execute('INSERT INTO country VALUES(?)', [entity[key]])
+        cur.execute('INSERT INTO org VALUES(?)', [entity['name']])
+        cur.execute('INSERT INTO foreign_entity VALUES(NULL, '
+                    ':name, :country, :ppb_country)',
+                    entity)
+        db_key = cur.lastrowid
+    cur.execute('INSERT INTO filing_foreign_entities VALUES(?, ?, ?, ?, ?)',
+                [_filing_db_key(filing),
+                 db_key,
+                 entity['contribution'],
+                 entity['ownership_percentage'],
+                 entity['status']])
+                 
+
 def _import_filing(filing, cur):
     """Import a filing into the database.
 
@@ -751,7 +805,9 @@ def _import_filing(filing, cur):
 _list_importers = {'lobbyists': (_import_lobbyist, 'lobbyist'),
                    'govt_entities': (_import_govt_entity, 'govt_entity'),
                    'issues': (_import_issue, 'issue'),
-                   'affiliated_orgs': (_import_affiliated_org, 'org')}
+                   'affiliated_orgs': (_import_affiliated_org, 'org'),
+                   'foreign_entities':
+                       (_import_foreign_entity, 'foreign_entity')}
 
 
 def _import_list(entities, id, filing, cur):
@@ -781,7 +837,8 @@ _entity_importers = {'registrant': _import_registrant,
                      'lobbyists': _import_list,
                      'govt_entities': _import_list,
                      'issues': _import_list,
-                     'affiliated_orgs': _import_list}
+                     'affiliated_orgs': _import_list,
+                     'foreign_entities': _import_list}
 
 
 def import_filings(cur, parsed_filings):

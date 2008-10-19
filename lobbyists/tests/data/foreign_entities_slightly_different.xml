@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PublicFilings>
+
+  <!-- These records contain similar but slightly different foreign
+       entities.  Each should occupy a separate row in the
+       foreign_entity table. -->
+
+  <!-- Original record. -->
+  
+  <Filing ID="A9F81F8B-F0B0-440A-8564-051FF553CCA8" Year="1999" Received="1999-06-22T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="NORTH JAPAN MARITIME CORP" ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="JAPAN" ForeignEntityContribution="16500" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Different name. -->
+  
+  <Filing ID="ACD87507-EB78-4607-95E8-43871D9D1EF2" Year="2007" Received="2008-01-14T19:20:59" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="NORTH JAPAN MARITIME CORP." ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="JAPAN" ForeignEntityContribution="16500" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Different country. -->
+  
+  <Filing ID="EEDBB5F5-8BB4-4E0D-9F10-CD8FDD2A0D70" Year="2004" Received="2004-04-28T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="NORTH JAPAN MARITIME CORP" ForeignEntityCountry="USA" ForeignEntityPPBcountry="JAPAN" ForeignEntityContribution="16500" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+  <!-- Different PPB country. -->
+  
+  <Filing ID="E4382341-0E5D-4A31-8A7D-3CCB71E8EF6E" Year="2004" Received="2004-06-03T00:00:00" Type="REGISTRATION" Period="UNDETERMINED">
+    <ForeignEntities>
+      <Entity ForeignEntityName="NORTH JAPAN MARITIME CORP" ForeignEntityCountry="JAPAN" ForeignEntityPPBcountry="USA" ForeignEntityContribution="16500" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+  </Filing>
+
+</PublicFilings>

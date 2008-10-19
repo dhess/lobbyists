@@ -22,11 +22,15 @@ DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS filing_issues;
 DROP TABLE IF EXISTS affiliated_org;
 DROP TABLE IF EXISTS filing_affiliated_orgs;
+DROP TABLE IF EXISTS foreign_entity;
+DROP TABLE IF EXISTS foreign_entity_status;
+DROP TABLE IF EXISTS filing_foreign_entities;
 
 DROP INDEX IF EXISTS lobbyist_index;
 DROP INDEX IF EXISTS client_index;
 DROP INDEX IF EXISTS registrant_index;
 DROP INDEX IF EXISTS affiliated_org_index;
+DROP INDEX IF EXISTS foreign_entity_index;
 
 CREATE TABLE filing(
   id VARCHAR(36) PRIMARY KEY,
@@ -175,6 +179,26 @@ CREATE TABLE filing_affiliated_orgs(
   PRIMARY KEY(filing, org) ON CONFLICT IGNORE
 );
 
+CREATE TABLE foreign_entity(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name REFERENCES org,
+  country REFERENCES country,
+  ppb_country REFERENCES country
+);
+
+CREATE TABLE foreign_entity_status(
+  status VARCHAR(32) PRIMARY KEY
+);
+
+CREATE TABLE filing_foreign_entities(
+  filing REFERENCES filing,
+  foreign_entity REFERENCES foreign_entity,
+  contribution INTEGER,
+  ownership_percentage INTEGER,
+  status REFERENCES foreign_entity_status,
+  PRIMARY KEY(filing, foreign_entity) ON CONFLICT IGNORE
+);
+
 -- Create indexes for tables that get looked up during import. They
 -- make a HUGE difference in import performance.
 CREATE UNIQUE INDEX lobbyist_index ON lobbyist(
@@ -205,6 +229,12 @@ CREATE UNIQUE INDEX affiliated_org_index ON affiliated_org(
   ppb_country
 );
 
+CREATE UNIQUE INDEX foreign_entity_index ON foreign_entity(
+  name,
+  country,
+  ppb_country
+);
+
 -- 3 possible state/local govt values.
 INSERT INTO state_or_local_gov VALUES('unspecified');
 INSERT INTO state_or_local_gov VALUES('n');
@@ -224,3 +254,8 @@ INSERT INTO lobbyist_status VALUES('undetermined');
 INSERT INTO lobbyist_indicator VALUES('not covered');
 INSERT INTO lobbyist_indicator VALUES('covered');
 INSERT INTO lobbyist_indicator VALUES('undetermined');
+
+--3 possible foreign entity statuses.
+INSERT INTO foreign_entity_status VALUES('active');
+INSERT INTO foreign_entity_status VALUES('terminated');
+INSERT INTO foreign_entity_status VALUES('undetermined');
