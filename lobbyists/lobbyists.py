@@ -637,7 +637,7 @@ def _import_govt_entity(entity, filing, cur):
 
     Side-effects: may insert rows into the 'govt_entity' and
     'filing_govt_entities' tables.
-    
+
     entity - The parsed government entity dictionary.
 
     filing - The parsed filing dictionary with which the government
