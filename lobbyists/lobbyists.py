@@ -819,13 +819,13 @@ def _import_list(entities, filing, cur):
         importer(entity[id], filing, cur)
 
 
-_entity_importers = {'registrant': _import_registrant,
-                     'client': _import_client,
-                     'lobbyists': _import_list,
-                     'govt_entities': _import_list,
-                     'issues': _import_list,
-                     'affiliated_orgs': _import_list,
-                     'foreign_entities': _import_list}
+_entity_importers = [('registrant', _import_registrant),
+                     ('client', _import_client),
+                     ('lobbyists', _import_list),
+                     ('govt_entities', _import_list),
+                     ('issues', _import_list),
+                     ('affiliated_orgs', _import_list),
+                     ('foreign_entities', _import_list)]
 
 
 def import_filings(cur, parsed_filings):
@@ -844,7 +844,7 @@ def import_filings(cur, parsed_filings):
     for record in parsed_filings:
         filing = record['filing']
         _import_filing(filing, cur)
-        for entity_name, entity_importer in _entity_importers.items():
+        for entity_name, entity_importer in _entity_importers:
             if entity_name in record:
                 entity_importer(record[entity_name], filing, cur)
     return cur
