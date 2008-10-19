@@ -11,6 +11,7 @@ help:
 	@echo 'sdist - make a source distribution.'
 	@echo 'egg - make a setuptools egg binary distribution.'
 	@echo 'deb - make a Debian package.'
+	@echo 'pypi - upload the package to PyPI.'
 	@echo 'clean - remove build and dist subdirectories.'
 	@echo 'help - this message.'
 
@@ -37,6 +38,9 @@ deb:
 
 develop:
 	python setup.py develop
+
+pypi:
+	python setup --sign sdist bdist_egg upload
 
 clean:
 	rm -rf build dist
