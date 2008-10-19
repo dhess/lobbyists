@@ -10,6 +10,7 @@ help:
 	@echo 'develop - run "setup.py develop".'
 	@echo 'sdist - make a source distribution.'
 	@echo 'egg - make a setuptools egg binary distribution.'
+	@echo 'deb - make a Debian package.'
 	@echo 'clean - remove build and dist subdirectories.'
 	@echo 'help - this message.'
 
@@ -30,6 +31,9 @@ sdist:
 
 egg:
 	python setup.py bdist_egg
+
+deb:
+	debuild -i\.git -I\.git
 
 develop:
 	python setup.py develop
