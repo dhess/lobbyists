@@ -21,7 +21,7 @@ setup(
     author = 'Drew Hess',
     author_email = 'dhess-src@bothan.net',
     description = 'Parse Senate LD-1/LD-2 lobbying disclosure XML documents',
-    license = 'AGPLv3',
+    license = 'GPLv3',
     keywords = 'lobbyists government parser',
     url = 'http://github.com/dhess/lobbyists/',
     long_description = """
@@ -43,7 +43,7 @@ schema.
     classifiers = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Database',
