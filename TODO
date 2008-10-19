@@ -1,7 +1,7 @@
 TODO    -*- mode: org; -*-
 
 * DONE Add 'SELECT ONE' to tests for client country/ppb country.*
-* TODO Check all secondary tables in tests.
+* DONE Check all secondary tables in tests.
 * TODO Profile
 p.strip_dirs().sort_stats('cum', 'time').print_stats(.5,'lobbyists.py')
 * TODO logging hooks
