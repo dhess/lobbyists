@@ -1,4 +1,4 @@
-Summary
+SUMMARY
 -------
 
 This package provides a reference parser and database importer for the
@@ -20,7 +20,14 @@ For information on how to interpret the LD-1/LD-2 database, see here:
 
 http://watchdog.jottit.com/lobbying_database
 
-Scripts
+
+REQUIREMENTS
+------------
+
+This package requires Python 2.5.1 or later.
+
+
+SCRIPTS
 -------
 
 The lobbyists-load script loads one or more XML documents into a
