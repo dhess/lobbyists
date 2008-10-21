@@ -1,3 +1,9 @@
+python-lobbyists (0.10-2) unstable; urgency=low
+
+  * Install docs.
+
+ -- Drew Hess <dhess-src@bothan.net>  Tue, 21 Oct 2008 02:14:11 -0700
+
 python-lobbyists (0.10-1) unstable; urgency=low
 
   * Initial release.
