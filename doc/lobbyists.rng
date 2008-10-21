@@ -388,11 +388,10 @@
                    simply indicates whether the client is a U.S. state
                    or local government organization.
 
-                   Reliability: Appears to be mostly good, though
-                   there may be a few clients that are actually
-                   governments but not marked as such. Note that the
-                   value of this field is supplied by the lobbying
-                   firm and not the Senate. (Needs more analysis.) -->
+                   Reliability: Useless. There is not a single filing
+                   record as of Q3 2008 whose IsStateOrLocalGov
+                   attribute is 1, and there are definitely some state
+                   and local government clients. -->
               <optional>
                 <attribute name="IsStateOrLocalGov">
                   <data type="integer"/>
