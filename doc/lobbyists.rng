@@ -108,7 +108,12 @@
                to do with these filings.
 
                Note that this attribute is redundant: the period is
-               also stated in the Filing Type attribute. -
+               also stated in the Filing Type attribute.
+
+               Note also that filings of Type=REGISTRATION always have
+               UNDETERMINED period. For the purposes of tracking the
+               beginning of a client/registrant relationship, use the
+               Filing element Year attribute.
 
                Reliability: Good, though as stated there are a handful
                of filings whose period is UNDETERMINED. -->
