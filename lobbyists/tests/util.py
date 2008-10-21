@@ -37,3 +37,14 @@ def flatten(lst):
         else:
             result.append(x)
     return result
+
+
+def doc_file_tests():
+    """Return a sequence of non-Python files containing doctests."""
+    try:
+        # if packaged as a setuptools egg.
+        from pkg_resources import resource_string
+        yield resource_string(__name__, 'HOWTO.txt')
+    except:
+        yield os.path.join(os.path.dirname(__file__),
+                            '../../doc', 'HOWTO.txt')

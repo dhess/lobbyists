@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 3 filings chosen at random to illustrate how the API is
+     used. (See HOWTO.txt) -->
+
+<PublicFilings>
+
+  <Filing ID="6E80FA37-E98C-4CE7-B119-FF256B496D38" Year="2005" Received="2008-03-24T14:29:41" Amount="40000" Type="YEAR-END REPORT" Period="Year-End (July 1 - Dec 31)">
+    <Registrant RegistrantID="324296" RegistrantName="GLSEN" Address="1012 14TH STREET NW SUITE 1105&#xD;&#xA;WASHINGTON, DC 20005" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+    <Client ClientName="GLSEN" ClientID="12" ClientStatus="1" ContactFullname="ERIC MASTEN" ClientCountry="USA" ClientPPBCountry="USA" ClientState="UNDETERMINED" ClientPPBState="UNDETERMINED" xmlns="" />
+    <Lobbyists>
+      <Lobbyist LobbyistName="BOMBERG, NEIL" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+    </Lobbyists>
+    <GovernmentEntities>
+      <GovernmentEntity GovEntityName="UNDETERMINED" xmlns="" />
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+      <GovernmentEntity GovEntityName="Education, Dept of" xmlns="" />
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="HOUSE OF REPRESENTATIVES" xmlns="" />
+      <GovernmentEntity GovEntityName="SENATE" xmlns="" />
+    </GovernmentEntities>
+    <Issues>
+      <Issue Code="BUDGET/APPROPRIATIONS" SpecificIssue="Budget and Appropriations:  Safe and Drug Free Schools" xmlns="" />
+      <Issue Code="EDUCATION" SpecificIssue="Safe Schools Legislation - HR 284" xmlns="" />
+    </Issues>
+  </Filing>
+
+  <Filing ID="CCAB5672-F896-409A-93E8-1688FF16CBCA" Year="2008" Received="2008-03-01T19:03:19" Type="REGISTRATION" Period="UNDETERMINED" AffiliatedOrgsURL="http://www.environment.ok.gov">
+    <Registrant RegistrantID="310051" RegistrantName="McClintock Associates, Inc." GeneralDescription="Federal and State Government Affairs Consulting" Address="5909 NW Expressway&#xD;&#xA;Suite 113&#xD;&#xA;OKLAHOMA CITY, OK 73132" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+    <Client ClientName="Oklahoma Office of the Secretary of the Environment" GeneralDescription="State Agency" ClientID="1004176" ClientStatus="0" ContactFullname="Josh McClintock" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="OKLAHOMA" ClientPPBState="OKLAHOMA" xmlns="" />
+    <Lobbyists>
+      <Lobbyist LobbyistName="MCCLINTOCK, JOSHUA" LobbyistStatus="0" LobbyisteIndicator="0" xmlns="" />
+    </Lobbyists>
+    <AffiliatedOrgs>
+      <Org AffiliatedOrgName="Oklahoma Dept. of Enviro. Quality" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+      <Org AffiliatedOrgName="Oklahoma Water Resources Board" AffiliatedOrgCountry="USA" AffiliatedOrgPPBCcountry="USA" xmlns="" />
+    </AffiliatedOrgs>
+    <Issues>
+      <Issue Code="ENVIRONMENT/SUPERFUND" SpecificIssue="Water resources and environment authorizations and appropriations&#xA;Environmental regulations" xmlns="" />
+      <Issue Code="BUDGET/APPROPRIATIONS" SpecificIssue="Water resources and environment authorizations and appropriations&#xA;Environmental regulations" xmlns="" />
+      <Issue Code="NATURAL RESOURCES" SpecificIssue="Water resources and environment authorizations and appropriations&#xA;Environmental regulations" xmlns="" />
+    </Issues>
+  </Filing>
+
+  <Filing ID="FA2D2DC1-7882-427E-AECE-2283DB703FF9" Year="2008" Received="2008-03-05T18:24:11.377" Type="REGISTRATION" Period="UNDETERMINED">
+    <Registrant RegistrantID="15747" RegistrantName="The Gallatin Group" GeneralDescription="Lobbying, Public Affairs" Address="101 Constitution Avenue NW&#xD;&#xA;Suite L110&#xD;&#xA;Washington, DC 20001" RegistrantCountry="USA" RegistrantPPBCountry="USA" xmlns="" />
+    <Client ClientName="FORMATION CAPITAL CORPORATION US" GeneralDescription="Mining" ClientID="1005053" ClientStatus="0" ContactFullname="Sara Bartles" IsStateOrLocalGov="0" ClientCountry="USA" ClientPPBCountry="USA" ClientState="IDAHO" ClientPPBState="" xmlns="" />
+    <Lobbyists>
+      <Lobbyist LobbyistName="WILLIAMS, ERIC" LobbyistStatus="0" LobbyisteIndicator="0" OfficialPosition="N/A" xmlns="" />
+      <Lobbyist LobbyistName="HARDY, J JOSEPH" LobbyistStatus="0" LobbyisteIndicator="1" OfficialPosition="REP. SMITH, SEN. BOXER" xmlns="" />
+    </Lobbyists>
+    <ForeignEntities>
+      <Entity ForeignEntityName="FORMATION CAPITAL CORPORATION" ForeignEntityCountry="CANADA" ForeignEntityPPBcountry="CANADA" ForeignEntityOwnershipPercentage="100" ForeignEntityStatus="3" xmlns="" />
+    </ForeignEntities>
+    <Issues>
+      <Issue Code="NATURAL RESOURCES" SpecificIssue="Advancement of the Idaho Cobalt Project" xmlns="" />
+    </Issues>
+  </Filing>
+
+</PublicFilings>

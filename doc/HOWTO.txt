@@ -1,0 +1,270 @@
+Parsing a Senate LD-1/LD-2 XML document with the lobbyists module is
+easy. Here's an example that parses a short document identified by its
+filename.
+
+>>> from pprint import pprint
+>>> from lobbyists import parse_filings
+>>> filings = parse_filings('doc/example.xml')
+
+Besides a filename, parse_filings also accepts a string containing the
+XML, a file-like object, the URL of an XML document or anything else
+that xml.dom.pulldom.parse accepts.
+
+parse_filings is a generator. You can read the entire document at once
+by wrapping the call to parse_filings with a list, or you can iterate
+on the return value to parse each filing on-demand as it's encountered
+in the document. Usually you'd do this by iterating over it in a
+for-loop or a list comprehension, but for the sake of illustration in
+this example, we'll call the next() method explicitly.
+
+>>> pprint(filings.next())
+{'client': {'contact_name': u'ERIC MASTEN',
+            'country': u'USA',
+            'description': 'unspecified',
+            'name': u'GLSEN',
+            'ppb_country': u'USA',
+            'ppb_state': u'UNDETERMINED',
+            'senate_id': 12,
+            'state': u'UNDETERMINED',
+            'state_or_local_gov': 'unspecified',
+            'status': 'terminated'},
+ 'filing': {'affiliated_orgs_url': 'unspecified',
+            'amount': 40000,
+            'filing_date': u'2008-03-24T14:29:41',
+            'id': u'6E80FA37-E98C-4CE7-B119-FF256B496D38',
+            'period': 'H2',
+            'type': u'YEAR-END REPORT',
+            'year': 2005},
+ 'govt_entities': [{'govt_entity': {'name': u'UNDETERMINED'}},
+                   {'govt_entity': {'name': u'SENATE'}},
+                   {'govt_entity': {'name': u'Education, Dept of'}},
+                   {'govt_entity': {'name': u'HOUSE OF REPRESENTATIVES'}},
+                   {'govt_entity': {'name': u'HOUSE OF REPRESENTATIVES'}},
+                   {'govt_entity': {'name': u'SENATE'}}],
+ 'issues': [{'issue': {'code': u'BUDGET/APPROPRIATIONS',
+                       'specific_issue': u'Budget and Appropriations:  Safe and Drug Free Schools'}},
+            {'issue': {'code': u'EDUCATION',
+                       'specific_issue': u'Safe Schools Legislation - HR 284'}}],
+ 'lobbyists': [{'lobbyist': {'indicator': 'not covered',
+                             'name': u'BOMBERG, NEIL',
+                             'official_position': u'N/A',
+                             'status': 'active'}}],
+ 'registrant': {'address': u'1012 14TH STREET NW SUITE 1105\r\nWASHINGTON, DC 20005',
+                'country': u'USA',
+                'description': 'unspecified',
+                'name': u'GLSEN',
+                'ppb_country': u'USA',
+                'senate_id': 324296}}
+
+Each item yielded by the generator is a dictionary. Each element or
+sub-element in the XML corresponds to a key in the dictionary whose
+value is either another dictionary (for singleton elements) or a list
+of dictionaries (for list elements). Within each sub-dictionary are
+key-value pairs corresponding to that element's attribute names and
+their values.
+
+So, in our example, the first filing in the document is a year-end
+report from 2005. The filing was received in 2008 (this is the
+'filing_date'). This is not an amendment filing, so the registrant
+(i.e., the lobbying firm) is quite a bit late in filing this lobbying
+activity report. (The filings are due by the following quarter, or
+else the lobbying firm may pay hefty fines.) In this case, the
+registrant and the client are the same organization, GLSEN, meaning
+that this organization hires its own lobbyists. The amount of money
+spent on lobbying in the 2nd half of 2005, the period covered by this
+filing, was $40000 (rounded to the nearest $10k). There was only one
+active lobbyist during this period, Neil Bomberg. He lobbied, on
+behalf of his employer, the House, Senate and Department of Education
+on two issues: budget and appropriations for "safe and drug-free
+schools" and HR 284, a "safe schools" bill.
+
+This record also contains some "noisy" data: there's an "undetermined"
+government entity and the client status is said to be "terminated,"
+but that's difficult to believe since this is not a termination
+record. You'll find that many filing records have such noisy data, and
+the most difficult and frustrating part of interpreting the Senate
+lobbying records is trying to figure out which fields are
+reliable. (See the annotated RELAX NG schema in this directory for my
+thoughts on that.)
+
+Let's go to the next record:
+
+>>> pprint(filings.next())
+{'affiliated_orgs': [{'org': {'country': u'USA',
+                              'name': u'Oklahoma Dept. of Enviro. Quality',
+                              'ppb_country': u'USA'}},
+                     {'org': {'country': u'USA',
+                              'name': u'Oklahoma Water Resources Board',
+                              'ppb_country': u'USA'}}],
+ 'client': {'contact_name': u'Josh McClintock',
+            'country': u'USA',
+            'description': u'State Agency',
+            'name': u'Oklahoma Office of the Secretary of the Environment',
+            'ppb_country': u'USA',
+            'ppb_state': u'OKLAHOMA',
+            'senate_id': 1004176,
+            'state': u'OKLAHOMA',
+            'state_or_local_gov': 'n',
+            'status': 'active'},
+ 'filing': {'affiliated_orgs_url': u'http://www.environment.ok.gov',
+            'amount': None,
+            'filing_date': u'2008-03-01T19:03:19',
+            'id': u'CCAB5672-F896-409A-93E8-1688FF16CBCA',
+            'period': 'undetermined',
+            'type': u'REGISTRATION',
+            'year': 2008},
+ 'issues': [{'issue': {'code': u'ENVIRONMENT/SUPERFUND',
+                       'specific_issue': u'Water resources and environment authorizations and appropriations\nEnvironmental regulations'}},
+            {'issue': {'code': u'BUDGET/APPROPRIATIONS',
+                       'specific_issue': u'Water resources and environment authorizations and appropriations\nEnvironmental regulations'}},
+            {'issue': {'code': u'NATURAL RESOURCES',
+                       'specific_issue': u'Water resources and environment authorizations and appropriations\nEnvironmental regulations'}}],
+ 'lobbyists': [{'lobbyist': {'indicator': 'not covered',
+                             'name': u'MCCLINTOCK, JOSHUA',
+                             'official_position': 'unspecified',
+                             'status': 'active'}}],
+ 'registrant': {'address': u'5909 NW Expressway\r\nSuite 113\r\nOKLAHOMA CITY, OK 73132',
+                'country': u'USA',
+                'description': u'Federal and State Government Affairs Consulting',
+                'name': u'McClintock Associates, Inc.',
+                'ppb_country': u'USA',
+                'senate_id': 310051}}
+
+This record is a bit different than the previous one. This is a
+registration record, not a quarterly or semi-annual update, so it
+marks the beginning of a client/registrant relationship. Note that
+registration records always have a period of "undetermined," so only
+thing we can say is that the relationship began in 2008 (the value of
+the 'year' key in the 'filing' dictionary). No amount is given:
+amounts are reported only in non-registration filings (except for
+foreign entity contributions: see the RELAX NG schema for details).
+The lobbying firm, McClintock Associates, Inc., is different than the
+client, Oklahoma Office of the Secretary of the Environment, so this
+is a case of a client hiring an outside lobbyist. The contact name
+given in the 'client' dictionary is Josh McClintock. Based on the name
+of the lobbying firm, this is presumably the name of an employee of
+the lobbying firm and not the client, and the LD-1 registration form
+implies that the contact name should be a member of the lobbying firm
+and not the client, but the Senate's XML schema always gives the
+contact name in the client element. The parser doesn't attempt to fix
+up discrepancies like this, it just gives you a Python version of
+what's in the XML. The rest is up to you and your database schema.
+
+Of note in this record are the affiliated organizations. These are
+organizations who are contributing to, directing or controlling the
+lobbying activities of the client. Usually when one or more of these
+affiliated orgs are listed, the client is an association or consortium
+of organizations in a particular industry, and the affiliated orgs are
+working together under the umbrella of the client. The 'filing'
+dictionary's 'affiliated_orgs_url' key sometimes contains a valid URL
+that's supposed to describe the umbrella organization, but frequently
+this value contains multiple URLs separated by spaces, commas or
+semicolons; email addresses; or even arbitrary text that has nothing
+to do with the Internet at all. Probably the best you can hope to do
+with this value is to scan it for valid URLs and discard the rest. (If
+no value is given, the parser will set the value of this key to
+'unspecified'.)
+
+Also note that the 'client' dictionary has a 'state_or_local_gov' key
+whose value is 'n'. This means either that whoever submitted the LD-1
+registration form did not check the box that indicates the client is a
+state or local government organization, or that it was checked and
+didn't get captured correctly. Judging by the name of the client and
+the URL given, it sure sounds like a state government organization to
+me. In fact, there is not a single filing record in all of the
+published Senate documents as of Q3 2008 whose 'state_or_local_gov'
+value is 'y'. Don't trust this field!
+
+Finally, here's the last record in our example document.
+
+>>> pprint(filings.next())
+{'client': {'contact_name': u'Sara Bartles',
+            'country': u'USA',
+            'description': u'Mining',
+            'name': u'FORMATION CAPITAL CORPORATION US',
+            'ppb_country': u'USA',
+            'ppb_state': 'unspecified',
+            'senate_id': 1005053,
+            'state': u'IDAHO',
+            'state_or_local_gov': 'n',
+            'status': 'active'},
+ 'filing': {'affiliated_orgs_url': 'unspecified',
+            'amount': None,
+            'filing_date': u'2008-03-05T18:24:11.377',
+            'id': u'FA2D2DC1-7882-427E-AECE-2283DB703FF9',
+            'period': 'undetermined',
+            'type': u'REGISTRATION',
+            'year': 2008},
+ 'foreign_entities': [{'foreign_entity': {'contribution': None,
+                                          'country': u'CANADA',
+                                          'name': u'FORMATION CAPITAL CORPORATION',
+                                          'ownership_percentage': 100,
+                                          'ppb_country': u'CANADA',
+                                          'status': 'undetermined'}}],
+ 'issues': [{'issue': {'code': u'NATURAL RESOURCES',
+                       'specific_issue': u'Advancement of the Idaho Cobalt Project'}}],
+ 'lobbyists': [{'lobbyist': {'indicator': 'not covered',
+                             'name': u'WILLIAMS, ERIC',
+                             'official_position': u'N/A',
+                             'status': 'active'}},
+               {'lobbyist': {'indicator': 'covered',
+                             'name': u'HARDY, J JOSEPH',
+                             'official_position': u'REP. SMITH, SEN. BOXER',
+                             'status': 'active'}}],
+ 'registrant': {'address': u'101 Constitution Avenue NW\r\nSuite L110\r\nWashington, DC 20001',
+                'country': u'USA',
+                'description': u'Lobbying, Public Affairs',
+                'name': u'The Gallatin Group',
+                'ppb_country': u'USA',
+                'senate_id': 15747}}
+
+There are two items of note. First, one of the lobbyists, Joseph J
+Hardy, has an 'official_position' value of 'Rep. Smith, Sen. Boxer.'
+This means that this lobbyist has worked for both House Rep. Smith
+(which one?) and Senator Boxer sometime during the last 20
+years. These government jobs are known as "covered positions," and
+they must be reported by the lobbying firm. Note also that Mr. Hardy's
+'indicator' value is 'covered'. The 'indicator' key is supposed to
+have the value 'covered' whenever this lobbyist has held a covered
+position, but often you'll find that the value is 'covered' with no
+official position given; or an official position is given, but the
+value of 'indicator' is 'not covered'. In my experience, I'm not sure
+that either field is particularly accurate, but saying that the
+lobbyist is 'covered' without giving the position held isn't very
+useful, so I tend to ignore the 'covered' attribute and just look for
+official positions. (If there is no official position, it'll have the
+value 'N/A' or 'unspecified'.)
+
+Second, this record contains a 'foreign entity' dictionary. Lobbyists
+are required to report foreign entities under certain conditions. See
+the LD-1 and LD-2 forms for details. You can download the forms here:
+
+<http://lobbyingdisclosure.house.gov/mac/software.html>
+
+In this case, the client organization, Formation Capital Corporation
+U.S., is a wholly-owned subsidiary of Formation Capital Corporation, a
+Canadian firm. We can tell this by looking at the value of the
+'ownership_percentage' key in the 'foreign_entity' dictionary. If the
+ownership percentage were less than 100% and the entity were
+contributing some amount of money to the client's lobbying activities,
+this would also be reported as a dollar amount in the 'contribution'
+key of the 'foreign_entity' dictionary. (Presumably in this case all
+of the client's lobbying is funded by the foreign entity because the
+client is 100% owned by the foreign entity.)
+
+As with any iterator, when the end of the sequence is reached, the
+generator raises a StopIteration exception. That's what we get now
+that we've processed the last filing record in the example document.
+
+>>> pprint(filings.next())
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+This example has just scratched the surface of how to interpret the
+parsed filing dictionaries. See the RELAX NG schema that accompanies
+this how-to for more details, or go here to see how the Watchdog.net
+project interprets the Senate XML documents:
+
+http://watchdog.jottit.com/lobbying_database
+
