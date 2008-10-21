@@ -15,5 +15,5 @@ DEB_PYTHON_INSTALL_ARGS_ALL += --single-version-externally-managed
 
 binary-install/python-lobbyists::
 	# Install docs
-	install -d $(DEB_DESTDIR)/usr/share/doc/python-lobbyists/
-	install -m0644 doc/* $(DEB_DESTDIR)/usr/share/doc/python-lobbyists/
+	install -d $(DEB_DESTDIR)/usr/share/doc/python-lobbyists/doc/
+	install -m0644 doc/* $(DEB_DESTDIR)/usr/share/doc/python-lobbyists/doc/
