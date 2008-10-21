@@ -28,7 +28,7 @@ db:
 	sqlite3 lobbyists.db < lobbyists/lobbyists.sql
 
 sdist:
-	python setup.py sdist --formats=bztar
+	COPYFILE_DISABLE=true python setup.py sdist --formats=bztar
 
 egg:
 	python setup.py bdist_egg
@@ -40,7 +40,7 @@ develop:
 	python setup.py develop
 
 pypi:
-	python setup --sign sdist bdist_egg upload
+	COPYFILE_DISABLE=true python setup --sign sdist bdist_egg upload
 
 clean:
 	rm -rf build dist
