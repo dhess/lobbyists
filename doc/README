@@ -1,0 +1,20 @@
+lobbyists.rng
+-------------
+
+This file contains a RELAX NG schema for the Senate LD-1/LD-2 XML
+documents. The Senate doesn't provide a schema, so I generated one
+using Trang[1] with the following command line:
+
+java -jar trang.jar -I xml -O rng db/*.xml lobbyists.rng
+
+where the directory db/ contained all of the Senate XML documents from
+1999 until Q2 2008.
+
+I then added comments to the file in order to document what I've
+learned about each element and attribute while writing this parser.
+
+
+References
+----------
+
+[1] http://thaiopensource.com/relaxng/trang.html
