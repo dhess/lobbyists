@@ -13,6 +13,18 @@ where the directory db/ contained all of the Senate XML documents from
 I then added comments to the file in order to document what I've
 learned about each element and attribute while writing this parser.
 
+HOWTO.txt
+---------
+
+A simple how-to for using the lobbyists API, including some working
+Python code.
+
+
+example.xml
+-----------
+
+A very short but illustrative sample Senate LD-1/LD-2 XML document.
+
 
 References
 ----------
