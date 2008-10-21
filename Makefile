@@ -40,7 +40,7 @@ develop:
 	python setup.py develop
 
 pypi:
-	COPYFILE_DISABLE=true python setup.py --sign sdist bdist_egg upload
+	COPYFILE_DISABLE=true python setup.py sdist bdist_egg upload --sign
 
 clean:
 	rm -rf build dist
