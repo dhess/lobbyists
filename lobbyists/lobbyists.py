@@ -37,8 +37,8 @@ def _optional(x):
 
 
 def _amount(x):
-    if x is None:
-        return x
+    if x is None or x == ' ':
+        return None
     else:
         return int(x)
 
