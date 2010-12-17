@@ -20,7 +20,7 @@
 import xml.dom.pulldom
 
 
-VERSION = '0.10'
+VERSION = '0.11'
 
 
 # Attribute parsers.
