@@ -44,6 +44,8 @@ def _amount(x):
 
 
 def _period(x):
+    if x is None or x == ' ':
+        return None
     periods = {'1st Quarter (Jan 1 - Mar 31)': 'Q1',
                '2nd Quarter (Apr 1 - June 30)': 'Q2',
                '3rd Quarter (July 1 - Sep 30)': 'Q3',
