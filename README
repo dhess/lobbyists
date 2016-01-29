@@ -16,10 +16,12 @@ contain errors or anomalies. In any case, it shouldn't be too
 difficult to adapt the importing code in this package to a more useful
 schema.
 
-For information on how to interpret the LD-1/LD-2 database, see here:
+A document describing how to interpret the LD-1/LD-2 database used to
+be maintained at http://watchdog.jottit.com/lobbying_database.
+Unfortunately, that domain is no longer functioning. A cache of that
+document as of July 2, 2015 can be found here:
 
-http://watchdog.jottit.com/lobbying_database
-
+http://archive.is/Alo68
 
 REQUIREMENTS
 ------------
